@@ -1,51 +1,71 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Threading;
 using Tao.Sdl;
 
-namespace DoomSurvivors
+namespace MyGame
 {
-
     class Program
     {
-                    
-        static IntPtr image = Engine.LoadImage("assets/fondo.png");
-   
+
+        private static IntPtr image = Engine.LoadImage("assets/fondo.png");
+        public static Character player;
+        private static DateTime _startTime;
+        private static float _lastTimeFrame;
+        public static float DeltaTime;
+        public static List<Enemy> enemyList = new List<Enemy>();
 
         static void Main(string[] args)
         {
-            Engine.Initialize();
-     
+            Initialize();
+
             while (true)
             {
-                Update();
+                GameManager.Instance.Update();
 
-                Engine.Clear();
-
-                Engine.Draw(image, 0, 0);
-          
-                Engine.Show();
+                GameManager.Instance.Render();
 
                 Sdl.SDL_Delay(20);
             }
         }
 
-        private static void Update()
+        private static void Initialize()
         {
-            if (Engine.KeyPress(Engine.KEY_LEFT)) {  }
+            Engine.Initialize();
+            player = (new Character(new Vector2(0, 0), 100, "assets/player.png"));
+            _startTime = DateTime.Now;
+            enemyList.Add(new Enemy(400, 400, 1));
+            enemyList.Add(new Enemy(600, 400, 1));
+        }
 
-            if (Engine.KeyPress(Engine.KEY_RIGHT)) {  }
+        public static void Update()
+        {
 
-            if (Engine.KeyPress(Engine.KEY_UP)) { }
+            player.Update();
 
-            if (Engine.KeyPress(Engine.KEY_DOWN)) {  }
+            foreach (Enemy enemy in enemyList)
+            {
+                enemy.Update();
+            }
 
-            if (Engine.KeyPress(Engine.KEY_ESC)) { }
+        }
+
+        public static void Render()
+
+        {
+            float currentTime = (float)(DateTime.Now - _startTime).TotalSeconds;
+            DeltaTime = currentTime - _lastTimeFrame;
+            _lastTimeFrame = currentTime;
 
 
+            Engine.Draw(image, 0, 0);
+
+
+            player.Render();
+
+            foreach (Enemy enemy in enemyList)
+            {
+                enemy.Render();
+            }
 
 
         }

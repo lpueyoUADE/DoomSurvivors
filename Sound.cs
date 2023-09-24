@@ -31,5 +31,4 @@ public class Sound
     {
         SdlMixer.Mix_HaltMusic();
     }
-
 }
