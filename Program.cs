@@ -17,6 +17,7 @@ namespace MyGame
         static void Main(string[] args)
         {
             Initialize();
+            // amongus
 
             while (true)
             {
