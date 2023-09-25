@@ -1,9 +1,9 @@
 # Build results
 
-[Dd]ebug/
+*.exe
+*.exe.config
 [Rr]elease/
 x64/
-[Bb]in/
 [Oo]bj/
 
 #Visual Studio
