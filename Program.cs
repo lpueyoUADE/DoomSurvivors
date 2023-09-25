@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Tao.Sdl;
 
-namespace MyGame
+namespace DoomSurvivors
 {
     class Program
     {

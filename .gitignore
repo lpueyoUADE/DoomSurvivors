@@ -1,7 +1,8 @@
 # Build results
 
-*.exe
-*.exe.config
+[Dd]ebug/
+!*.dll
+![Dd]ebug/datos/
 [Rr]elease/
 x64/
 [Oo]bj/

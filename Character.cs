@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace MyGame
+namespace DoomSurvivors
 {
     public class Character
     {
