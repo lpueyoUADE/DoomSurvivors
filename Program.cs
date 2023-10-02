@@ -14,28 +14,65 @@ namespace DoomSurvivors
         public static float DeltaTime;
         public static List<Enemy> enemyList = new List<Enemy>();
 
+        public static Entity player1 = new Entity(new Sdl.SDL_Rect(100, 100, 50, 50), 12.0);
+        public static Entity enemy1 = new Entity(new Sdl.SDL_Rect(200, 200, 50, 50), 12.0);
         static void Main(string[] args)
         {
-            Initialize();
-            // amongus
+            Engine.Initialize();
+            Program.Initialize();
+
+            player1.ShowBoundingBox = true;
+            enemy1.ShowBoundingBox = true;
+            player1.PlayerControlled = true;
+            enemy1.PlayerControlled = false;
 
             while (true)
             {
-                GameManager.Instance.Update();
+                PollEvents();
 
-                GameManager.Instance.Render();
+                Engine.Clear();
+                Engine.Draw(image, 0, 0);
+                // GameManager.Instance.Update
+                // GameManager.Instance.Render();
 
-                Sdl.SDL_Delay(20);
+                Program.UpdateTime();
+
+                player1.Update();
+                enemy1.Update();
+                Engine.Show();
+
+                Sdl.SDL_Delay(16);
+            }
+        }
+
+        private static void PollEvents()
+        {
+            Sdl.SDL_PumpEvents();
+            Sdl.SDL_Event sdl_event;
+            Sdl.SDL_PollEvent(out sdl_event);
+
+            switch (sdl_event.type) {
+                case Sdl.SDL_QUIT:
+                    Environment.Exit(0);
+                    break;
+
+                case Sdl.SDL_KEYDOWN: // Single stroke keys
+                    switch (sdl_event.key.keysym.sym)
+                    {
+                        case Sdl.SDLK_ESCAPE:
+                            break;
+                    }
+                    break;
             }
         }
 
         private static void Initialize()
         {
-            Engine.Initialize();
-            player = (new Character(new Vector2(0, 0), 100, "assets/player.png"));
+            // Engine.Initialize();
+            // player = (new Character(new Vector2(0, 0), 100, "assets/player.png"));
             _startTime = DateTime.Now;
-            enemyList.Add(new Enemy(400, 400, 1));
-            enemyList.Add(new Enemy(600, 400, 1));
+            // enemyList.Add(new Enemy(400, 400, 1));
+            // enemyList.Add(new Enemy(600, 400, 1));
         }
 
         public static void Update()
@@ -50,6 +87,11 @@ namespace DoomSurvivors
 
         }
 
+        public static void UpdateTime() {
+            float currentTime = (float)(DateTime.Now - _startTime).TotalSeconds;
+            DeltaTime = currentTime - _lastTimeFrame;
+            _lastTimeFrame = currentTime;
+        }
         public static void Render()
 
         {

@@ -10,10 +10,10 @@ class Engine
     static IntPtr screen;
     static int ancho, alto;
 
-    public static void Initialize()
+    public static void Initialize(int width=1024, int height=768)
     {
-        ancho = 1024;
-        alto = 768;
+        ancho = width;
+        alto = height;
         int colores = 24;
 
         int flags = (Sdl.SDL_HWSURFACE | Sdl.SDL_DOUBLEBUF | Sdl.SDL_ANYFORMAT);
@@ -62,14 +62,14 @@ class Engine
         Sdl.SDL_FillRect(screen, ref origin, 0);
     }
 
-    public static void Draw(IntPtr imagen, float x, float y)
+    public static void Draw(IntPtr imagen, double x, double y)
     {
         Sdl.SDL_Rect origen = new Sdl.SDL_Rect(0, 0, (short)ancho, (short)alto);
         Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)ancho, (short)alto);
         Sdl.SDL_BlitSurface(imagen, ref origen, screen, ref dest);
     }
 
-    public static void Draw(string tempimage, float x, float y)
+    public static void Draw(string tempimage, double x, double y)
     {
         IntPtr image = LoadImage(tempimage);
 
@@ -78,7 +78,7 @@ class Engine
         Sdl.SDL_BlitSurface(image, ref origin, screen, ref dest);
     }
 
-    public static void Draw(string tempimage, float x, float y, float width, float height)
+    public static void Draw(string tempimage, double x, double y, double width, double height)
     {
         IntPtr image = LoadImage(tempimage);
 
@@ -87,13 +87,17 @@ class Engine
         Sdl.SDL_BlitSurface(image, ref origin, screen, ref dest);
     }
 
-    public static void Draw(IntPtr image, float x, float y, float width, float height)
+    public static void Draw(IntPtr image, double x, double y, double width, double height)
     {
         Sdl.SDL_Rect origin = new Sdl.SDL_Rect(0, 0, (short)width, (short)height);
         Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)width, (short)height);
         Sdl.SDL_BlitSurface(image, ref origin, screen, ref dest);
     }
 
+    public static void DrawRect(Sdl.SDL_Rect rect, int color)
+    {
+        Sdl.SDL_FillRect(screen, ref rect, color);
+    }
     public static void Show()
     {
         Sdl.SDL_Flip(screen);
@@ -106,8 +110,7 @@ class Engine
         imagen = SdlImage.IMG_Load(image);
         if (imagen == IntPtr.Zero)
         {
-            System.Console.WriteLine("Imagen inexistente: {0}", image);
-            Environment.Exit(4);
+            throw new Exception($"Imagen inexistente: {image}");
         }
         return imagen;
     }

@@ -26,9 +26,9 @@ namespace DoomSurvivors
         private void CreateAnimations()
         {
             List<IntPtr> idleTextures = new List<IntPtr>();
-            for (int i = 0; i < 4; i++)
+            for (int i = 1; i <= 1; i++)
             {
-                IntPtr frame = Engine.LoadImage($"assets/Ship/Idle/{i}.png");
+                IntPtr frame = Engine.LoadImage($"assets/Sprites/DoomGuy/DoomGuy_idle_{i}.png");
                 idleTextures.Add(frame);
             }
             idleAnimation = new Animation("Idle", idleTextures, 0.1f, true);
