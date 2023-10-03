@@ -8,22 +8,34 @@ namespace DoomSurvivors
 {
     public class Animation
     {
-        private string name;
-        private List<IntPtr> textures;
-        private int currentFrameIndex = 0;
-        private float speed = 0.5f;
+        
+        public static class Speed
+        {
+            public const float slow = 0.5f;
+            public const float regular = 0.35f;
+            public const float fast = 0.3f;
+            public const float fastest = 0.1f;
+        }
+        
+        private List<IntPtr> keyFrames;
+        private int currentFrameIndex;
+        private float speed;
         private float currentAnimationTime;
         private bool isLoopEnabled;
-        public int FramesCount => textures.Count;
+        public int keyFramesCount => keyFrames.Count;
         public int CurrentFrameIndex => currentFrameIndex;
-        public IntPtr CurrentFrame => textures[currentFrameIndex];
+        public IntPtr CurrentFrame => keyFrames[currentFrameIndex];
 
-        public Animation(string name, List<IntPtr> frames, float speed, bool isLoopEnabled)
+        public Animation(List<IntPtr> keyFrames, float speed, bool isLoopEnabled)
         {
-            this.name = name;
-            this.textures = frames;
+            this.keyFrames = keyFrames;
             this.speed = speed;
             this.isLoopEnabled = isLoopEnabled;
+        }
+
+        public void reset()
+        {
+            this.currentFrameIndex = 0;
         }
 
         public void Update()
@@ -35,7 +47,7 @@ namespace DoomSurvivors
                 currentFrameIndex++;
                 currentAnimationTime = 0;
 
-                if (currentFrameIndex >= textures.Count)
+                if (currentFrameIndex >= keyFrames.Count)
                 {
                     if (isLoopEnabled)
                     {
@@ -43,7 +55,7 @@ namespace DoomSurvivors
                     }
                     else
                     {
-                        currentFrameIndex = textures.Count - 1;
+                        currentFrameIndex = keyFrames.Count - 1;
                     }
                 }
             }

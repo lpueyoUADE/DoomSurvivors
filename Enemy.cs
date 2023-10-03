@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace DoomSurvivors
 {
+    /*
     public class Enemy
     {
         private Vector2 position;
@@ -39,7 +40,7 @@ namespace DoomSurvivors
                 IntPtr frame = Engine.LoadImage($"assets/Enemy/Idle/{i}.png");
                 idleTextures.Add(frame);
             }
-            idleAnimation = new Animation("Idle", idleTextures, 0.1f, true);
+            // idleAnimation = new Animation("Idle", idleTextures, 0.1f, true);
         }
 
         public void Update()
@@ -64,4 +65,5 @@ namespace DoomSurvivors
         }
 
     }
+    */
 }

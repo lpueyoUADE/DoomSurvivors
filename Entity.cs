@@ -8,17 +8,35 @@ using Tao.Sdl;
 
 namespace DoomSurvivors
 {
+    public enum State
+    {
+        Idle,
+        Moving,
+        Attacking,
+        Dying,
+        Gibbing,
+        Death,
+        GibDeath
+    }
+
     class Entity
     {
         private Sdl.SDL_Rect rect;
         private Vector velocity;
         private double speed;
         private double friction;
+        private double minVelocity;
 
+        private State state;
+        private bool isAttacking;
         private bool playerControlled;
         private bool showBoundingBox;
+        private bool showVisionRadius;
 
-        private IntPtr frame;
+        private AnimationController animationController;
+
+        private Entity target;
+        private double visionRadius;
 
         public Sdl.SDL_Rect Rect
         {
@@ -50,14 +68,29 @@ namespace DoomSurvivors
             set { this.showBoundingBox = value; }
         }
 
-        public Entity(Sdl.SDL_Rect rect, double speed)
+        public bool ShowVisionRadius
+        {
+            get { return this.showVisionRadius; }
+            set { this.showVisionRadius = value; }
+        }
+
+        public State State => this.state;
+        public bool IsAttacking => this.isAttacking;
+
+        // TODO Implement Monster and Player child classes
+        public Entity(Sdl.SDL_Rect rect, double speed, AnimationController animationController, Entity target=null, double visionRadius=0f)
         {
             this.rect = rect;
             this.velocity = new Vector(0, 0);
             this.speed = speed;
             this.friction = 0.2f;
-
-            frame = Engine.LoadImage($"assets/Sprites/Zombie/Zombie_idle_1.png");
+            this.minVelocity = 0.1f;
+            this.state = State.Idle;
+            this.isAttacking = false;
+            this.playerControlled = false;
+            this.animationController = animationController;
+            this.target = target;
+            this.visionRadius = visionRadius;
         }
         private void render()
         {
@@ -66,7 +99,13 @@ namespace DoomSurvivors
             {
                 Engine.DrawRect(this.rect, 0xff0000);
             }
-            Engine.Draw(frame, rect.x, rect.y);
+
+            if (showVisionRadius)
+            {
+                Engine.DrawCirle(this.rect.x + this.rect.w / 2, this.rect.y + this.rect.h / 2, (int)this.visionRadius, 0, 255, 0, 255);
+            }
+
+            Engine.Draw(animationController.getCurrentAnimationFrame(), rect.x, rect.y);
         }
 
         private void ApplyFriction()
@@ -74,19 +113,35 @@ namespace DoomSurvivors
             velocity.X *= (1 - friction);
             velocity.Y *= (1 - friction);
 
-            float minVelocity = 0.1f;
-            if (Math.Abs(rect.x) < minVelocity)
+            if (Math.Abs(rect.x) < this.minVelocity)
             {
                 velocity.X = 0;
             }
-            if (Math.Abs(Velocity.Y) < minVelocity)
+            if (Math.Abs(Velocity.Y) < this.minVelocity)
             {
                 velocity.Y = 0;
             }
         }
+
+        private void setState(Vector direction)
+        {
+            if (this.isAttacking)
+            {
+                this.state = State.Attacking;
+
+            } else if (direction == new Vector(0,0))
+            {
+                this.state = State.Idle;
+            } else
+            {
+                this.state = State.Moving;
+            }
+        }
+
         public void Update()
         {
             Vector direction = new Vector(0, 0);
+            this.isAttacking = false;
 
             if (playerControlled)
             {
@@ -106,14 +161,33 @@ namespace DoomSurvivors
                 {
                     direction.Y = 1;
                 }
-            }
 
-            if (direction.Length > 0)
+                if (Engine.MousePress(Engine.MOUSEBUTTON_LEFT))
+                {
+                    this.isAttacking = true;
+                }
+
+                if (Engine.MousePress(Engine.MOUSEBUTTON_RIGHT))
+                {
+                }
+            }
+            else
+            {
+                Vector distance = Vector.Subtract(new Vector(this.target.Rect.x, this.target.Rect.y), new Vector(this.rect.x, this.rect.y));
+                if(distance.Length <= this.visionRadius)
+                {
+                    direction = distance;
+                }
+            }
+                if (direction.Length > 0)
             {
                 direction.Normalize();
             }
 
             this.velocity += direction * speed * 10 *  Program.DeltaTime;
+
+            this.setState(direction);
+            this.animationController.Update(this.state);
 
             ApplyFriction();
 

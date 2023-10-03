@@ -1,6 +1,6 @@
 ﻿using System;
-
-public struct Vector2
+/*
+public struct Vector2_
 {
     public float x;
     public float y;
@@ -38,4 +38,4 @@ public struct Vector2
         newY = Math.Abs(newY);
         return new Vector2(newX, newY);
     }
-}
+}*/

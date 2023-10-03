@@ -6,42 +6,100 @@ namespace DoomSurvivors
 {
     class Program
     {
-
-        private static IntPtr image = Engine.LoadImage("assets/fondo.png");
-        public static Character player;
         private static DateTime _startTime;
         private static float _lastTimeFrame;
         public static float DeltaTime;
-        public static List<Enemy> enemyList = new List<Enemy>();
 
-        public static Entity player1 = new Entity(new Sdl.SDL_Rect(100, 100, 50, 50), 12.0);
-        public static Entity enemy1 = new Entity(new Sdl.SDL_Rect(200, 200, 50, 50), 12.0);
         static void Main(string[] args)
         {
             Engine.Initialize();
             Program.Initialize();
 
-            player1.ShowBoundingBox = true;
-            enemy1.ShowBoundingBox = true;
-            player1.PlayerControlled = true;
-            enemy1.PlayerControlled = false;
+            Entity player = new Entity( // Player
+                new Sdl.SDL_Rect(100, 100, 57, 59),
+                12.0f,
+                new AnimationController(
+                    new Animation(
+                        new List<IntPtr>{
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/DoomGuy_idle_1.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/DoomGuy_idle_2.png"),
+                        },
+                        Animation.Speed.regular,
+                        true
+                    ),
+                    new Animation(
+                        new List<IntPtr>{
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_moving_1.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_moving_2.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_moving_3.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_moving_4.png"),
+                        },
+                        Animation.Speed.fastest,
+                        true
+                    ),
+                    new Animation(
+                        new List<IntPtr>{
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_attacking_2.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_attacking_1.png"),
+                        },
+                        Animation.Speed.fast,
+                        true
+                    )
+                )
+            );
+
+            List<Entity> enemyList = new List<Entity> { // Enemy List
+                new Entity(
+                    new Sdl.SDL_Rect(500, 500, 37, 55),
+                    5.0f,
+                    new AnimationController(
+                        new Animation(
+                            new List<IntPtr>{
+                                Engine.LoadImage($"assets/Sprites/Zombie/Zombie_idle_1.png"),
+                                Engine.LoadImage($"assets/Sprites/Zombie/Zombie_idle_2.png"),
+                            },
+                            Animation.Speed.slow,
+                            true
+                        ),
+                        new Animation(
+                            new List<IntPtr>{
+                                Engine.LoadImage($"assets/Sprites/Zombie/Zombie_moving_1.png"),
+                                Engine.LoadImage($"assets/Sprites/Zombie/Zombie_moving_2.png"),
+                                Engine.LoadImage($"assets/Sprites/Zombie/Zombie_moving_3.png"),
+                                Engine.LoadImage($"assets/Sprites/Zombie/Zombie_moving_4.png"),
+                            },
+                            Animation.Speed.fast,
+                            true
+                        )
+                    ),
+                    player, // Chasing Target,
+                    250.0f  // Vision radius
+                ),
+            };
+            // TODO Crear Factories de Entities y Scenes
+            PlayableScene E1 = new PlayableScene(
+                enemyList,
+                player,
+                new Map("E1", Engine.LoadImage("assets/Maps/e1_test.png")),
+                false, // Show Bounding Boxes
+                true   // Show vision Radius
+            );
+
+            E1.Load();
 
             while (true)
             {
+                Program.UpdateTime();
+                
                 PollEvents();
 
                 Engine.Clear();
-                Engine.Draw(image, 0, 0);
-                // GameManager.Instance.Update
-                // GameManager.Instance.Render();
+                
+                E1.Update();
 
-                Program.UpdateTime();
-
-                player1.Update();
-                enemy1.Update();
                 Engine.Show();
 
-                Sdl.SDL_Delay(16);
+                Sdl.SDL_Delay(16); // aprox 60 FPS
             }
         }
 
@@ -78,12 +136,13 @@ namespace DoomSurvivors
         public static void Update()
         {
 
-            player.Update();
+            // player.Update();
 
-            foreach (Enemy enemy in enemyList)
+            /*foreach (Enemy enemy in enemyList)
             {
                 enemy.Update();
             }
+            */
 
         }
 
@@ -95,6 +154,8 @@ namespace DoomSurvivors
         public static void Render()
 
         {
+            /*
+            
             float currentTime = (float)(DateTime.Now - _startTime).TotalSeconds;
             DeltaTime = currentTime - _lastTimeFrame;
             _lastTimeFrame = currentTime;
@@ -110,7 +171,7 @@ namespace DoomSurvivors
                 enemy.Render();
             }
 
-
+            */
         }
 
     }

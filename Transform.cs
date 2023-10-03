@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DoomSurvivors
 {
+    /*
     public class Transform
     {
         private Vector2 position;
@@ -26,4 +27,5 @@ namespace DoomSurvivors
         }
 
     }
+    */
 }

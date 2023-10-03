@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace DoomSurvivors
 {
+    /*
     public class Character
     {
         private Transform transform;
@@ -31,7 +32,7 @@ namespace DoomSurvivors
                 IntPtr frame = Engine.LoadImage($"assets/Sprites/DoomGuy/DoomGuy_idle_{i}.png");
                 idleTextures.Add(frame);
             }
-            idleAnimation = new Animation("Idle", idleTextures, 0.1f, true);
+            // idleAnimation = new Animation("Idle", idleTextures, 0.1f, true);
         }
 
 
@@ -66,4 +67,5 @@ namespace DoomSurvivors
         }
 
     }
+    */
 }

@@ -10,11 +10,11 @@ alpha_colors = (
 original_folder = 'originals'
 processed_folder = 'processed'
 
-Path('originals').mkdir(parents=True, exist_ok=True)
-Path('processed').mkdir(parents=True, exist_ok=True)
+Path(original_folder).mkdir(parents=True, exist_ok=True)
+Path(processed_folder).mkdir(parents=True, exist_ok=True)
 
 # original_files = Path('originals').glob('*.png')
-original_files = Path('originals').glob('**/*')
+original_files = Path(original_folder).glob('**/*')
 
 for original_file in original_files:
     inner_folders = f"{original_file.parent}/{original_file.name}"

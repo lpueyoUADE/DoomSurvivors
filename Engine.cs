@@ -149,21 +149,20 @@ class Engine
         return font;
     }
 
-    public static bool KeyPress(int c)
+    public static void DrawCirle(int x, int y, int radius, int R, int G, int B, int A)
     {
-        bool press = false;
-        Sdl.SDL_PumpEvents();
-        Sdl.SDL_Event pressed;
-        Sdl.SDL_PollEvent(out pressed);
-        int numkeys;
-        byte[] keys = Tao.Sdl.Sdl.SDL_GetKeyState(out numkeys);
-        if (keys[c] == 1)
-            press = true;
-        return press;
+        SdlGfx.aacircleRGBA(screen, (short)x, (short)y, (short)radius, (byte)R, (byte)G, (byte)B, (byte)A);
     }
 
+    public static bool KeyPress(int keyCode)
+    {
+        return Sdl.SDL_GetKeyState(out _)[keyCode] == 1;
+    }
 
-
+    public static bool MousePress(int mouseButton)
+    {
+        return (Sdl.SDL_GetMouseState(out _,out _) & mouseButton) > 0;
+    }
     public static void ErrorFatal(string texto)
     {
         System.Console.WriteLine(texto);
@@ -214,4 +213,6 @@ class Engine
     public static int KEY_DOWN = Sdl.SDLK_DOWN;
     public static int KEY_RIGHT = Sdl.SDLK_RIGHT;
     public static int KEY_LEFT = Sdl.SDLK_LEFT;
+    public static int MOUSEBUTTON_LEFT = Sdl.SDL_BUTTON_LMASK;
+    public static int MOUSEBUTTON_RIGHT = Sdl.SDL_BUTTON_RMASK;
 }
