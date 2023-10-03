@@ -103,7 +103,6 @@ class Engine
         Sdl.SDL_Flip(screen);
     }
 
-
     public static IntPtr LoadImage(string image)
     {
         IntPtr imagen;
@@ -169,10 +168,10 @@ class Engine
         Environment.Exit(1);
     }
 
-
     // Definiciones de teclas
     public static int KEY_ESC = Sdl.SDLK_ESCAPE;
     public static int KEY_ESP = Sdl.SDLK_SPACE;
+    public static int KEY_ENTER = Sdl.SDLK_RETURN; 
     public static int KEY_A = Sdl.SDLK_a;
     public static int KEY_B = Sdl.SDLK_b;
     public static int KEY_C = Sdl.SDLK_c;

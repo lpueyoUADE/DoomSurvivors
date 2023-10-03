@@ -169,6 +169,7 @@ namespace DoomSurvivors
 
                 if (Engine.MousePress(Engine.MOUSEBUTTON_RIGHT))
                 {
+                    SceneController.Instance.changeScene(2);
                 }
             }
             else

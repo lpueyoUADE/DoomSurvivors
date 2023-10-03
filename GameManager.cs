@@ -8,7 +8,6 @@ namespace DoomSurvivors
 {
     public class GameManager
     {
-
         private static GameManager instance;
         private int gameStatus = 0; //0 inicio, 1 juego, 2 victoria, 3 derrota
         private IntPtr mainMenuScreen = Engine.LoadImage("assets/MainMenu.png");
@@ -39,7 +38,7 @@ namespace DoomSurvivors
                     }
                     break;
                 case 1:
-                    Program.Update();
+                    // Program.Update();
                     break;
                 case 2:
                     //  Program.Update();
@@ -65,7 +64,7 @@ namespace DoomSurvivors
                     Engine.Draw(mainMenuScreen, 0, 0);
                     break;
                 case 1:
-                    Program.Render();
+                    // Program.Render();
                     break;
                 case 2:
                     Engine.Draw(winScreen, 0, 0);

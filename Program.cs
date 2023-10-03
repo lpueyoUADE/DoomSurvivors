@@ -77,27 +77,44 @@ namespace DoomSurvivors
                 ),
             };
             // TODO Crear Factories de Entities y Scenes
-            PlayableScene E1 = new PlayableScene(
+            MenuScene MainMenuScene = new MenuScene(new Map("E1", Engine.LoadImage("assets/Maps/main_menu.png")));
+            MenuScene WinScene = new MenuScene(new Map("E1", Engine.LoadImage("assets/Maps/win.png")));
+            MenuScene LoseScene = new MenuScene(new Map("E1", Engine.LoadImage("assets/Maps/lose.png")));
+            PlayableScene E1Scene = new PlayableScene(
                 enemyList,
                 player,
                 new Map("E1", Engine.LoadImage("assets/Maps/e1_test.png")),
-                false, // Show Bounding Boxes
+                true, // Show Bounding Boxes
                 true   // Show vision Radius
             );
 
-            E1.Load();
+            // E1Scene.Load();
 
-            while (true)
+            SceneController.Instance.setScenes(
+                new List<Scene> {
+                    MainMenuScene,
+                    E1Scene,
+                    WinScene,
+                    LoseScene
+                }
+            );
+
+            SceneController.Instance.changeScene(0);
+
+            while (true) // Main loop
             {
                 Program.UpdateTime();
-                
+
+                SceneController.Instance.Load();
+
                 PollEvents();
 
-                Engine.Clear();
-                
-                E1.Update();
+                Engine.Clear(); // Clear to a black screen
 
-                Engine.Show();
+                SceneController.Instance.Update(); // Render current frame
+                //E1Scene.Update();    
+
+                Engine.Show();  // Show current frame
 
                 Sdl.SDL_Delay(16); // aprox 60 FPS
             }
@@ -123,27 +140,9 @@ namespace DoomSurvivors
                     break;
             }
         }
-
         private static void Initialize()
         {
-            // Engine.Initialize();
-            // player = (new Character(new Vector2(0, 0), 100, "assets/player.png"));
             _startTime = DateTime.Now;
-            // enemyList.Add(new Enemy(400, 400, 1));
-            // enemyList.Add(new Enemy(600, 400, 1));
-        }
-
-        public static void Update()
-        {
-
-            // player.Update();
-
-            /*foreach (Enemy enemy in enemyList)
-            {
-                enemy.Update();
-            }
-            */
-
         }
 
         public static void UpdateTime() {
@@ -151,29 +150,5 @@ namespace DoomSurvivors
             DeltaTime = currentTime - _lastTimeFrame;
             _lastTimeFrame = currentTime;
         }
-        public static void Render()
-
-        {
-            /*
-            
-            float currentTime = (float)(DateTime.Now - _startTime).TotalSeconds;
-            DeltaTime = currentTime - _lastTimeFrame;
-            _lastTimeFrame = currentTime;
-
-
-            Engine.Draw(image, 0, 0);
-
-
-            player.Render();
-
-            foreach (Enemy enemy in enemyList)
-            {
-                enemy.Render();
-            }
-
-            */
-        }
-
     }
-
 }

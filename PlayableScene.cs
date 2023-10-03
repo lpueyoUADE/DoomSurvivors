@@ -49,8 +49,9 @@ namespace DoomSurvivors
                 if(IsColliding(enemy, player))
                 {
                     Console.WriteLine("Colliding!");
+                    SceneController.Instance.changeScene(3);
+                    break;
                 }
-            
             }
         }
 
