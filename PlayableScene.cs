@@ -10,8 +10,8 @@ namespace DoomSurvivors
 {
     internal class PlayableScene : Scene
     {
-        private List<Entity> enemyList;
-        private Entity player;
+        private List<Monster> enemyList;
+        private Player player;
         private Map map;
         private bool showBoundingBox;
         private bool showVisionRadius;
@@ -27,7 +27,7 @@ namespace DoomSurvivors
         }
 
 
-        public PlayableScene(List<Entity> enemyList, Entity player, Map map, bool showBoundingBox=false, bool showVisionRadius=false)
+        public PlayableScene(List<Monster> enemyList, Player player, Map map, bool showBoundingBox=false, bool showVisionRadius=false)
         {
             this.enemyList = enemyList;
             this.player = player;
@@ -44,7 +44,7 @@ namespace DoomSurvivors
         }
         private void checkCollisions()
         {
-            foreach (Entity enemy in enemyList)
+            foreach (Monster enemy in enemyList)
             {
                 if(IsColliding(enemy, player))
                 {
@@ -57,15 +57,13 @@ namespace DoomSurvivors
 
         public override void Load()
         {
-            foreach (Entity enemy in enemyList)
+            foreach (Monster enemy in enemyList)
             {
                 enemy.ShowBoundingBox = showBoundingBox;
                 enemy.ShowVisionRadius = showVisionRadius;
-                enemy.PlayerControlled = false;
             }
 
             player.ShowBoundingBox = showBoundingBox;
-            player.PlayerControlled = true;
         }
 
         public override void Update()

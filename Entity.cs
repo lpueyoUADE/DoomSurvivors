@@ -19,24 +19,23 @@ namespace DoomSurvivors
         GibDeath
     }
 
-    class Entity
+    public abstract class Entity
     {
-        private Sdl.SDL_Rect rect;
-        private Vector velocity;
-        private double speed;
+        protected Sdl.SDL_Rect rect;
+        protected Vector velocity;
+        protected double speed;
         private double friction;
         private double minVelocity;
+        protected Vector direction;
 
-        private State state;
-        private bool isAttacking;
-        private bool playerControlled;
+        protected State state;
+        protected bool isAttacking;
         private bool showBoundingBox;
         private bool showVisionRadius;
 
         private AnimationController animationController;
 
-        private Entity target;
-        private double visionRadius;
+        
 
         public Sdl.SDL_Rect Rect
         {
@@ -56,29 +55,16 @@ namespace DoomSurvivors
             get { return this.speed; }
         }
 
-        public bool PlayerControlled
-        {
-            get { return this.playerControlled; }
-            set { this.playerControlled = value; }
-        }
-
         public bool ShowBoundingBox
         {
             get { return this.showBoundingBox; }
             set { this.showBoundingBox = value; }
         }
 
-        public bool ShowVisionRadius
-        {
-            get { return this.showVisionRadius; }
-            set { this.showVisionRadius = value; }
-        }
-
         public State State => this.state;
         public bool IsAttacking => this.isAttacking;
 
-        // TODO Implement Monster and Player child classes
-        public Entity(Sdl.SDL_Rect rect, double speed, AnimationController animationController, Entity target=null, double visionRadius=0f)
+        public Entity(Sdl.SDL_Rect rect, double speed, AnimationController animationController)
         {
             this.rect = rect;
             this.velocity = new Vector(0, 0);
@@ -87,24 +73,14 @@ namespace DoomSurvivors
             this.minVelocity = 0.1f;
             this.state = State.Idle;
             this.isAttacking = false;
-            this.playerControlled = false;
             this.animationController = animationController;
-            this.target = target;
-            this.visionRadius = visionRadius;
         }
-        private void render()
+        protected virtual void render()
         {
-
             if (showBoundingBox)
             {
                 Engine.DrawRect(this.rect, 0xff0000);
             }
-
-            if (showVisionRadius)
-            {
-                Engine.DrawCirle(this.rect.x + this.rect.w / 2, this.rect.y + this.rect.h / 2, (int)this.visionRadius, 0, 255, 0, 255);
-            }
-
             Engine.Draw(animationController.getCurrentAnimationFrame(), rect.x, rect.y);
         }
 
@@ -138,49 +114,16 @@ namespace DoomSurvivors
             }
         }
 
+        protected abstract void UpdateDirection();
+
         public void Update()
         {
-            Vector direction = new Vector(0, 0);
+            this.direction = new Vector(0, 0);
             this.isAttacking = false;
 
-            if (playerControlled)
-            {
-                if (Engine.KeyPress(Engine.KEY_D))
-                {
-                    direction.X = 1;
-                }
-                if (Engine.KeyPress(Engine.KEY_A))
-                {
-                    direction.X = -1;
-                }
-                if (Engine.KeyPress(Engine.KEY_W))
-                {
-                    direction.Y = -1;
-                }
-                if (Engine.KeyPress(Engine.KEY_S))
-                {
-                    direction.Y = 1;
-                }
+            this.UpdateDirection();
 
-                if (Engine.MousePress(Engine.MOUSEBUTTON_LEFT))
-                {
-                    this.isAttacking = true;
-                }
-
-                if (Engine.MousePress(Engine.MOUSEBUTTON_RIGHT))
-                {
-                    SceneController.Instance.changeScene(2);
-                }
-            }
-            else
-            {
-                Vector distance = Vector.Subtract(new Vector(this.target.Rect.x, this.target.Rect.y), new Vector(this.rect.x, this.rect.y));
-                if(distance.Length <= this.visionRadius)
-                {
-                    direction = distance;
-                }
-            }
-                if (direction.Length > 0)
+            if (direction.Length > 0)
             {
                 direction.Normalize();
             }

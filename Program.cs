@@ -15,7 +15,7 @@ namespace DoomSurvivors
             Engine.Initialize();
             Program.Initialize();
 
-            Entity player = new Entity( // Player
+            Player player = new Player( // Player
                 new Sdl.SDL_Rect(100, 100, 57, 59),
                 12.0f,
                 new AnimationController(
@@ -48,8 +48,8 @@ namespace DoomSurvivors
                 )
             );
 
-            List<Entity> enemyList = new List<Entity> { // Enemy List
-                new Entity(
+            List<Monster> enemyList = new List<Monster> { // Enemy List
+                new Monster(
                     new Sdl.SDL_Rect(500, 500, 37, 55),
                     5.0f,
                     new AnimationController(
