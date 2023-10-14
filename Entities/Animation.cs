@@ -15,6 +15,7 @@ namespace DoomSurvivors.Entities
             public const float slow = 0.5f;
             public const float regular = 0.35f;
             public const float fast = 0.3f;
+            public const float faster = 0.2f;
             public const float fastest = 0.1f;
         }
         
@@ -23,24 +24,40 @@ namespace DoomSurvivors.Entities
         private float speed;
         private float currentAnimationTime;
         private bool isLoopEnabled;
+        private bool isInterruptable;
+        private bool isLooping;
+
         public int keyFramesCount => keyFrames.Count;
         public int CurrentFrameIndex => currentFrameIndex;
         public IntPtr CurrentFrame => keyFrames[currentFrameIndex];
 
-        public Animation(List<IntPtr> keyFrames, float speed, bool isLoopEnabled)
+        public bool IsInterruptable => isInterruptable;
+
+        public bool IsLooping => isLooping;
+
+        public Animation(List<IntPtr> keyFrames, float speed, bool isLoopEnabled, bool isInterruptable)
         {
             this.keyFrames = keyFrames;
             this.speed = speed;
             this.isLoopEnabled = isLoopEnabled;
+            this.isInterruptable = isInterruptable;
+            this.isLooping = false;
         }
 
         public void reset()
         {
+            this.currentAnimationTime = 0;
             this.currentFrameIndex = 0;
         }
 
         public void Update()
         {
+            if (!isLooping && isLoopEnabled)
+            {
+                this.isLooping = true;
+                this.currentFrameIndex = 0;
+            }
+
             currentAnimationTime += Program.DeltaTime;
 
             if (currentAnimationTime >= speed)
@@ -48,16 +65,10 @@ namespace DoomSurvivors.Entities
                 currentFrameIndex++;
                 currentAnimationTime = 0;
 
-                if (currentFrameIndex >= keyFrames.Count)
+                if (currentFrameIndex == keyFrames.Count)
                 {
-                    if (isLoopEnabled)
-                    {
-                        currentFrameIndex = 0;
-                    }
-                    else
-                    {
-                        currentFrameIndex = keyFrames.Count - 1;
-                    }
+                    this.isLooping = false;
+                    currentFrameIndex = keyFrames.Count - 1;
                 }
             }
         }

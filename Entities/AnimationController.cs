@@ -41,17 +41,21 @@ namespace DoomSurvivors.Entities
         }
         public void SetCurrentAnimationState(State animationState)
         {
-            if (this.currentAnimationState != animationState)
+            if (this.AnimationList[(int)this.currentAnimationState].IsInterruptable || !this.AnimationList[(int)this.currentAnimationState].IsLooping)
             {
-                if (this.AnimationList[(int)animationState] is null)
+                if (this.currentAnimationState != animationState)
                 {
-                    this.currentAnimationState = State.Idle;
+                    if (this.AnimationList[(int)animationState] is null)
+                    {
+                        this.currentAnimationState = State.Idle;
+                    }
+                    else
+                    {
+                        this.currentAnimationState = animationState;
+                    }
+
+                    this.AnimationList[(int)this.currentAnimationState].reset();
                 }
-                else
-                {
-                    this.currentAnimationState = animationState;
-                }
-                this.AnimationList[(int)this.currentAnimationState].reset();
             }
         }
 

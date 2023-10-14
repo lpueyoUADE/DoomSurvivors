@@ -1,9 +1,6 @@
 ﻿using DoomSurvivors.Main;
+using DoomSurvivors.Viewport;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Tao.Sdl;
 
@@ -22,22 +19,26 @@ namespace DoomSurvivors.Entities
 
     public abstract class Entity
     {
-        protected Sdl.SDL_Rect rect;
+        protected Transform transform;
         protected Vector velocity;
         protected double speed;
-        private double friction;
+        private double movingFriction;
+        private double attackingFriction;
         private double minVelocity;
         protected Vector direction;
 
         protected State state;
         protected bool isAttacking;
         private bool showBoundingBox;
+        private bool drawShadow;
+
+        private Shadow shadow;
 
         private AnimationController animationController;
 
-        public Sdl.SDL_Rect Rect
+        public Transform Transform
         {
-            get { return this.rect; }
+            get { return this.transform; }
         }
 
         public Vector Velocity
@@ -59,36 +60,53 @@ namespace DoomSurvivors.Entities
             set { this.showBoundingBox = value; }
         }
 
+        public bool DrawShadow
+        {
+            get { return this.drawShadow; }
+            set { this.drawShadow = value; }
+        }
+
         public State State => this.state;
         public bool IsAttacking => this.isAttacking;
 
-        public Entity(Sdl.SDL_Rect rect, double speed, AnimationController animationController)
+        public Entity(Transform transform, double speed, AnimationController animationController)
         {
-            this.rect = rect;
+            this.transform = transform;
             this.velocity = new Vector(0, 0);
             this.speed = speed;
-            this.friction = 0.2f;
+            this.movingFriction = 0.2f;
+            this.attackingFriction = 0.9f;
             this.minVelocity = 0.1f;
             this.state = State.Idle;
             this.isAttacking = false;
             this.animationController = animationController;
+            this.drawShadow = true;
+            this.shadow = new Shadow(new Sdl.SDL_Color(0,0,0,128), this.transform.W / 3, this.transform.H / 10);
+        }
+
+        public bool IsColliding(Entity other)
+        {
+            return this.transform.isColliding(other.transform);
         }
 
         protected virtual void render()
         {
+            Vector newPosition = Camera.Instance.WorldToCameraPosition(this.transform.Position);
+
+            if (drawShadow)
+                this.shadow.Draw((int)newPosition.X + transform.W / 2, (int)newPosition.Y + transform.H);
+
             if (showBoundingBox)
-            {
-                Engine.DrawRect(this.rect, 0xff0000);
-            }
-            Engine.Draw(animationController.getCurrentAnimationFrame(), rect.x, rect.y);
+                Engine.DrawRect(newPosition, Transform.Size, 0xff0000);
+
+            Engine.Draw(animationController.getCurrentAnimationFrame(), (int)newPosition.X, (int)newPosition.Y);
         }
 
         private void ApplyFriction()
         {
-            velocity.X *= (1 - friction);
-            velocity.Y *= (1 - friction);
+            velocity *= 1 - (isAttacking ? attackingFriction : movingFriction);
 
-            if (Math.Abs(rect.x) < this.minVelocity)
+            if (Math.Abs(velocity.X) < this.minVelocity)
             {
                 velocity.X = 0;
             }
@@ -113,29 +131,27 @@ namespace DoomSurvivors.Entities
             }
         }
 
-        protected abstract void UpdateDirection();
+        protected abstract void InputEvents();
 
-        public void Update()
+        public virtual void Update()
         {
             this.direction = new Vector(0, 0);
-            this.isAttacking = false;
 
-            this.UpdateDirection();
+            this.InputEvents();
 
             if (direction.Length > 0)
-            {
                 direction.Normalize();
-            }
 
-            this.velocity += direction * speed * 10 *  Program.DeltaTime;
+            // Movement is reduced when attacking
+            this.velocity += direction * speed * 10  *  Program.DeltaTime;
 
             this.setState(direction);
             this.animationController.Update(this.state);
 
             ApplyFriction();
 
-            rect.x += (short)velocity.X;
-            rect.y += (short)velocity.Y;
+            transform.Position += velocity; 
+
             render();
         }
     }

@@ -9,12 +9,12 @@ namespace DoomSurvivors.Entities
 {
     public class Player : OffensiveEntity
     {
-        public Player(Sdl.SDL_Rect rect, double speed, AnimationController animationController, WeaponController weaponController) : 
-            base(rect, speed, animationController, weaponController)
+        public Player(Transform transform, double speed, AnimationController animationController, WeaponController weaponController) : 
+            base(transform, speed, animationController, weaponController)
         {
         }
 
-        protected override void UpdateDirection()
+        protected override void InputEvents()
         {
             if (Engine.KeyPress(Engine.KEY_D))
             {
@@ -35,8 +35,20 @@ namespace DoomSurvivors.Entities
 
             if (Engine.MousePress(Engine.MOUSEBUTTON_LEFT))
             {
-                this.isAttacking = true;
-                Attack();
+                if (weaponController.CurrentWeapon.IsReadyToShoot)
+                {
+                    this.isAttacking = true;
+                    Attack();
+                    weaponController.CurrentWeapon.IsHoldingTrigger = true;
+                }
+                else
+                {
+                    this.isAttacking = false;
+                }
+            } else
+            {
+                this.isAttacking = false;
+                weaponController.CurrentWeapon.IsHoldingTrigger = false;
             }
 
             if (Engine.MousePress(Engine.MOUSEBUTTON_RIGHT))

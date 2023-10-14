@@ -11,8 +11,8 @@ namespace DoomSurvivors.Entities
     {
         protected WeaponController weaponController;
 
-        public OffensiveEntity(Sdl.SDL_Rect rect, double speed, AnimationController animationController, WeaponController weaponController) : 
-            base(rect, speed, animationController)
+        public OffensiveEntity(Transform transform, double speed, AnimationController animationController, WeaponController weaponController) : 
+            base(transform, speed, animationController)
         {
             this.weaponController = weaponController;
         }

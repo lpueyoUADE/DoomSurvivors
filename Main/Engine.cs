@@ -1,31 +1,33 @@
-﻿using System;
-using System.Threading;
-using System.Drawing;
+﻿using DoomSurvivors.Entities;
+using System;
+using System.Windows;
 using Tao.Sdl;
-using static System.Net.Mime.MediaTypeNames;
 
 
 class Engine
 {
     static IntPtr screen;
-    static int ancho, alto;
+    static private Transform transform = new Transform(0,0,0,0);
 
+    public static Transform Transform {  
+        get { return transform; }
+    }
     public static void Initialize(int width=1024, int height=768)
     {
-        ancho = width;
-        alto = height;
+        Engine.transform.W = width;
+        Engine.transform.H = height;
         int colores = 24;
 
         int flags = (Sdl.SDL_HWSURFACE | Sdl.SDL_DOUBLEBUF | Sdl.SDL_ANYFORMAT);
         Sdl.SDL_Init(Sdl.SDL_INIT_EVERYTHING);
         screen = Sdl.SDL_SetVideoMode(
-            ancho,
-            alto,
+            width,
+            height,
             colores,
             flags);
 
         Sdl.SDL_Rect rect2 =
-            new Sdl.SDL_Rect(0, 0, (short)ancho, (short)alto);
+            new Sdl.SDL_Rect(0, 0, (short)width, (short)height);
         Sdl.SDL_SetClipRect(screen, ref rect2);
 
         SdlTtf.TTF_Init();
@@ -33,19 +35,19 @@ class Engine
 
     public static void Initialize(int an, int al, int colores)
     {
-        ancho = an;
-        alto = al;
+        transform.W = an;
+        transform.H = al;
 
         int flags = (Sdl.SDL_HWSURFACE | Sdl.SDL_DOUBLEBUF | Sdl.SDL_ANYFORMAT);
         Sdl.SDL_Init(Sdl.SDL_INIT_EVERYTHING);
         screen = Sdl.SDL_SetVideoMode(
-            ancho,
-            alto,
+            transform.W,
+            transform.H,
             colores,
             flags);
 
         Sdl.SDL_Rect rect2 =
-            new Sdl.SDL_Rect(0, 0, (short)ancho, (short)alto);
+            new Sdl.SDL_Rect(0, 0, (short)transform.W, (short)transform.H);
         Sdl.SDL_SetClipRect(screen, ref rect2);
 
         SdlTtf.TTF_Init();
@@ -58,14 +60,14 @@ class Engine
 
     public static void Clear()
     {
-        Sdl.SDL_Rect origin = new Sdl.SDL_Rect(0, 0, (short)ancho, (short)alto);
+        Sdl.SDL_Rect origin = new Sdl.SDL_Rect(0, 0, (short)transform.W, (short)transform.H);
         Sdl.SDL_FillRect(screen, ref origin, 0);
     }
 
     public static void Draw(IntPtr imagen, double x, double y)
     {
-        Sdl.SDL_Rect origen = new Sdl.SDL_Rect(0, 0, (short)ancho, (short)alto);
-        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)ancho, (short)alto);
+        Sdl.SDL_Rect origen = new Sdl.SDL_Rect(0, 0, (short)transform.W, (short)transform.H);
+        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)transform.W, (short)transform.H);
         Sdl.SDL_BlitSurface(imagen, ref origen, screen, ref dest);
     }
 
@@ -73,8 +75,8 @@ class Engine
     {
         IntPtr image = LoadImage(tempimage);
 
-        Sdl.SDL_Rect origin = new Sdl.SDL_Rect(0, 0, (short)ancho, (short)alto);
-        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)ancho, (short)alto);
+        Sdl.SDL_Rect origin = new Sdl.SDL_Rect(0, 0, (short)transform.W, (short)transform.H);
+        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)transform.W, (short)transform.H);
         Sdl.SDL_BlitSurface(image, ref origin, screen, ref dest);
     }
 
@@ -82,16 +84,27 @@ class Engine
     {
         IntPtr image = LoadImage(tempimage);
 
-        Sdl.SDL_Rect origin = new Sdl.SDL_Rect(0, 0, (short)width, (short)height);
-        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)width, (short)height);
+        Sdl.SDL_Rect origin = new Sdl.SDL_Rect(0, 0, (short)transform.W, (short)height);
+        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)transform.W, (short)height);
         Sdl.SDL_BlitSurface(image, ref origin, screen, ref dest);
     }
 
     public static void Draw(IntPtr image, double x, double y, double width, double height)
     {
-        Sdl.SDL_Rect origin = new Sdl.SDL_Rect(0, 0, (short)width, (short)height);
-        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)width, (short)height);
+        Sdl.SDL_Rect origin = new Sdl.SDL_Rect(0, 0, (short)transform.W, (short)height);
+        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)transform.W, (short)height);
         Sdl.SDL_BlitSurface(image, ref origin, screen, ref dest);
+    }
+
+    public static void DrawRect(int x, int y, int w, int h, int color)
+    {
+        Sdl.SDL_Rect rect = new Sdl.SDL_Rect((short)x, (short)y, (short)w, (short)h);
+        Sdl.SDL_FillRect(screen, ref rect, color);
+    }
+    public static void DrawRect(Vector position, Vector size, int color)
+    {
+        Sdl.SDL_Rect rect = new Sdl.SDL_Rect((short)position.X, (short)position.Y, (short)size.X, (short)size.Y);
+        Sdl.SDL_FillRect(screen, ref rect, color);
     }
 
     public static void DrawRect(Sdl.SDL_Rect rect, int color)
@@ -129,8 +142,8 @@ class Engine
         if (textAsImage == IntPtr.Zero)
             Environment.Exit(5);
 
-        Sdl.SDL_Rect origen = new Sdl.SDL_Rect(0, 0, (short)ancho, (short)alto);
-        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)ancho, (short)alto);
+        Sdl.SDL_Rect origen = new Sdl.SDL_Rect(0, 0, (short)transform.W, (short)transform.H);
+        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)transform.W, (short)transform.H);
 
         Sdl.SDL_BlitSurface(textAsImage, ref origen,
             screen, ref dest);
@@ -151,6 +164,11 @@ class Engine
     public static void DrawCirle(int x, int y, int radius, int R, int G, int B, int A)
     {
         SdlGfx.aacircleRGBA(screen, (short)x, (short)y, (short)radius, (byte)R, (byte)G, (byte)B, (byte)A);
+    }
+
+    public static void DrawFilledEllipse(int x, int y, int rx, int ry, int R, int G, int B, int A)
+    {
+        SdlGfx.filledEllipseRGBA(screen, (short)x, (short)y, (short)rx, (short)ry, (byte)R, (byte)G, (byte)B, (byte)A);
     }
 
     public static bool KeyPress(int keyCode)
