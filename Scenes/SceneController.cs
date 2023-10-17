@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DoomSurvivors
 {
@@ -39,7 +36,7 @@ namespace DoomSurvivors
         {
             this.scenes = sceneList;
         }
-        public void changeScene(int nextSceneIndex)
+        public void ChangeScene(int nextSceneIndex)
         {
             if (nextSceneIndex < 0 || nextSceneIndex > scenes.Count)
             {

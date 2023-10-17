@@ -66,6 +66,11 @@ namespace DoomSurvivors.Viewport
             return active ? other - (this.transform.Position - Engine.Transform.PositionCenter) : new Vector(0,0);
         }
 
+        public Vector CameraToWorldPosition(Vector other)
+        {
+            return active ? other + this.transform.Position - Engine.Transform.PositionCenter : new Vector(0, 0);
+        }
+
         public void Update()
         {
             PanToTarget();

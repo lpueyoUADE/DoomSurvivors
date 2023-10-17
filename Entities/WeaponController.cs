@@ -11,6 +11,12 @@ namespace DoomSurvivors.Entities
         private List<Weapon> weapons;
         private int selectedWeapon;
         public Weapon CurrentWeapon => weapons[selectedWeapon];
+        public WeaponController()
+        {
+            this.weapons = new List<Weapon>();
+            this.selectedWeapon = -1;
+        }
+
         public WeaponController(List<Weapon> weapons) {
             this.weapons = weapons;
             this.selectedWeapon = 0;
@@ -23,6 +29,12 @@ namespace DoomSurvivors.Entities
             }
 
             selectedWeapon = weaponID;
+        }
+
+        internal void AddWeapon(Weapon weapon)
+        {
+            this.weapons.Add(weapon);
+            this.selectedWeapon = this.weapons.Count - 1;
         }
     }
 }

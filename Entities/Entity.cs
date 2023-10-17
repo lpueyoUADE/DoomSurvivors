@@ -11,6 +11,7 @@ namespace DoomSurvivors.Entities
         Idle,
         Moving,
         Attacking,
+        Pain,
         Dying,
         Gibbing,
         Death,

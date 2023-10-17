@@ -1,18 +1,15 @@
-﻿using System;
+﻿using DoomSurvivors.Viewport;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using Tao.Sdl;
 
 namespace DoomSurvivors.Entities
 {
     public class Player : OffensiveEntity
     {
-        public Player(Transform transform, double speed, AnimationController animationController, WeaponController weaponController) : 
-            base(transform, speed, animationController, weaponController)
-        {
-        }
+        public Player(Transform transform, double speed, Vector WeaponOffset, AnimationController animationController, WeaponController weaponController=null) : 
+            base(transform, speed, WeaponOffset, animationController, weaponController)
+        {}
 
         protected override void InputEvents()
         {
@@ -37,23 +34,21 @@ namespace DoomSurvivors.Entities
             {
                 if (weaponController.CurrentWeapon.IsReadyToShoot)
                 {
-                    this.isAttacking = true;
-                    Attack();
                     weaponController.CurrentWeapon.IsHoldingTrigger = true;
-                }
-                else
-                {
-                    this.isAttacking = false;
+                    int x, y;
+                    Sdl.SDL_GetMouseState(out x, out y);
+                    // AddTracerEffect(this.transform.Position, Camera.Instance.CameraToWorldPosition(new Vector(x,y)));
+                    AttackAt(Camera.Instance.CameraToWorldPosition(new Vector(x, y)));
+
                 }
             } else
             {
-                this.isAttacking = false;
                 weaponController.CurrentWeapon.IsHoldingTrigger = false;
             }
 
             if (Engine.MousePress(Engine.MOUSEBUTTON_RIGHT))
             {
-                SceneController.Instance.changeScene(2);
+                SceneController.Instance.ChangeScene(2);
             }
         }
     }

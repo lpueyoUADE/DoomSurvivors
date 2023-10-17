@@ -4,6 +4,11 @@ namespace DoomSurvivors.Utilities
 {
     public static class Tools
     {
+        public static uint Lerp(uint begin, uint end, float by)
+        {
+            // Integer Lerp
+            return (uint)Lerp((double)begin, (double)end, by);
+        }
         public static double Lerp(double begin, double end, float by)
         {
             // Integer Lerp

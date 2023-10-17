@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace DoomSurvivors.Entities
 {
@@ -23,7 +20,7 @@ namespace DoomSurvivors.Entities
         SemiAutomatic,
         Automatic
     }
-    public class Weapon
+    public abstract class Weapon
     {
         private WeaponID weaponID;
         private Mechanism mechanism;
@@ -32,8 +29,9 @@ namespace DoomSurvivors.Entities
         private DateTime lastShotTime;
         private bool hasNeverBeenShot;
         private bool isHoldingTrigger;
+        private OffensiveEntity owner;
 
-    public Weapon(WeaponID weaponID, Mechanism mechanism, int ammo, float cooldown)
+        public Weapon(WeaponID weaponID, Mechanism mechanism, int ammo, float cooldown, OffensiveEntity owner)
         {
             this.weaponID = weaponID;
             this.mechanism = mechanism;
@@ -42,6 +40,7 @@ namespace DoomSurvivors.Entities
             this.lastShotTime = DateTime.Now;
             this.hasNeverBeenShot = true;
             this.isHoldingTrigger = false;
+            this.owner = owner;
         }
 
         public bool IsSemiAutomatic
@@ -64,16 +63,24 @@ namespace DoomSurvivors.Entities
         {
             get {
                 float elapsedTime = (float)(DateTime.Now - this.lastShotTime).TotalSeconds;
-                return this.hasNeverBeenShot || ((this.IsAutomatic || (this.IsSemiAutomatic && !this.IsHoldingTrigger)) && elapsedTime > this.cooldown); 
+                return this.hasNeverBeenShot || ((this.IsAutomatic || (this.IsSemiAutomatic && !this.IsHoldingTrigger)) && elapsedTime > this.cooldown);
             }
         }
 
-        public void Shoot() {
+        public OffensiveEntity Owner
+        {
+            get { return this.owner; }
+        }
+
+        protected abstract void ShootAction(Vector target);
+        public void Shoot(Vector target) {
             if(IsReadyToShoot)
             {
                 this.hasNeverBeenShot = false;
-                Console.WriteLine("PUM");
+                // Console.WriteLine("PUM");
                 this.lastShotTime = DateTime.Now;
+
+                ShootAction(target);
             }
         }
     }

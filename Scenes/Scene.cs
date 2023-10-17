@@ -9,6 +9,7 @@ namespace DoomSurvivors
     public abstract class Scene
     {
         public abstract void Load();
+        public abstract void UnLoad();
         public abstract void Update();
 
         public abstract void Reset();

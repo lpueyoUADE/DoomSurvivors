@@ -1,9 +1,5 @@
-﻿using DoomSurvivors.Viewport;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DoomSurvivors.Utilities;
+using DoomSurvivors.Viewport;
 using System.Windows;
 using Tao.Sdl;
 
@@ -20,8 +16,8 @@ namespace DoomSurvivors.Entities
             get { return this.showVisionRadius; }
             set { this.showVisionRadius = value; }
         }
-        public Monster(Transform transform, double speed, AnimationController animationController, WeaponController weaponController, Entity target = null, double visionRadius = 0) :
-            base(transform, speed, animationController, weaponController)
+        public Monster(Transform transform, double speed, Vector weaponPosition, AnimationController animationController, WeaponController weaponController=null, Entity target = null, double visionRadius = 0) :
+            base(transform, speed, weaponPosition, animationController, weaponController)
         {
             this.target = target;
             this.visionRadius = visionRadius;
@@ -34,6 +30,9 @@ namespace DoomSurvivors.Entities
             {
                 this.direction = distance;
             }
+
+            // Test
+            AttackAt(target.Transform.PositionCenter);
         }
 
         override protected void render()
@@ -41,7 +40,7 @@ namespace DoomSurvivors.Entities
             if (showVisionRadius)
             {
                 Vector newPosition = Camera.Instance.WorldToCameraPosition(this.Transform.Position);
-                Engine.DrawCirle((int)newPosition.X + transform.W / 2, (int)newPosition.Y + transform.H / 2, (int)this.visionRadius, 0, 255, 0, 255);
+                Engine.DrawCirle((int)newPosition.X + transform.W / 2, (int)newPosition.Y + transform.H / 2, (int)this.visionRadius, new Color(0, 255, 0, 255));
             }
 
             base.render();

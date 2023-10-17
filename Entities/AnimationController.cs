@@ -15,7 +15,8 @@ namespace DoomSurvivors.Entities
         public AnimationController(
             Animation idle, 
             Animation moving = null, 
-            Animation attacking = null, 
+            Animation attacking = null,
+            Animation pain = null,
             Animation dying = null, 
             Animation gibbing = null, 
             Animation death = null, 
@@ -26,6 +27,7 @@ namespace DoomSurvivors.Entities
                 idle,
                 moving,
                 attacking,
+                pain,
                 dying ,
                 gibbing,
                 death,

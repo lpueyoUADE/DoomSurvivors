@@ -1,9 +1,11 @@
 ﻿using DoomSurvivors.Entities;
 using DoomSurvivors.Scenes;
 using DoomSurvivors.Viewport;
+using DoomSurvivors.Utilities;
 using System;
 using System.Collections.Generic;
 using Tao.Sdl;
+using System.Windows;
 
 namespace DoomSurvivors.Main
 {
@@ -19,7 +21,7 @@ namespace DoomSurvivors.Main
         // TODOS
         /*
             . HUD 
-            . Camera movement
+            . Camera movement (OK)
             . Weapon system
             . Collisions (Walls and enemies)
             . Maps system
@@ -44,6 +46,7 @@ namespace DoomSurvivors.Main
             Player player = new Player( // Player
                 new Transform(0, 0, 57, 59),
                 8.0f,
+                new Vector(19, 25),
                 new AnimationController(
                     new Animation(
                         new List<IntPtr>{
@@ -73,49 +76,128 @@ namespace DoomSurvivors.Main
                         Animation.Speed.fastest,
                         true,
                         false
+                    ),
+                    new Animation(
+                        new List<IntPtr>{
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_pain_1.png"),
+                        },
+                        Animation.Speed.fast,
+                        true,
+                        false
+                    ),
+                    new Animation(
+                        new List<IntPtr>{
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_1.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_2.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_3.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_4.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_5.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_6.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_7.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_8.png"),
+                        },
+                        Animation.Speed.fastest,
+                        true,
+                        false
+                    ),
+                    new Animation(
+                        new List<IntPtr>{
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_1.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_2.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_3.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_4.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_5.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_6.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_7.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_8.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_9.png"),
+                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_10.png"),
+                        },
+                        Animation.Speed.fastest,
+                        true,
+                        false
                     )
-                ),
-                new WeaponController(
-                    new List<Weapon> {
-                        new Weapon(WeaponID.Pistol,Mechanism.SemiAutomatic, 10, 0.1f)
-                    }
                 )
             );
-            List<Monster> enemyList = new List<Monster> { // Enemy List
-                new Monster(
-                    new Transform(200, 200, 37, 55),
-                    5.0f,
-                    new AnimationController(
-                        new Animation(
-                            new List<IntPtr>{
-                                Engine.LoadImage($"assets/Sprites/Zombie/Zombie_idle_1.png"),
-                                Engine.LoadImage($"assets/Sprites/Zombie/Zombie_idle_2.png"),
-                            },
-                            Animation.Speed.slow,
-                            true,
-                            true
-                        ),
-                        new Animation(
-                            new List<IntPtr>{
-                                Engine.LoadImage("assets/Sprites/Zombie/Zombie_moving_1.png"),
-                                Engine.LoadImage("assets/Sprites/Zombie/Zombie_moving_2.png"),
-                                Engine.LoadImage("assets/Sprites/Zombie/Zombie_moving_3.png"),
-                                Engine.LoadImage("assets/Sprites/Zombie/Zombie_moving_4.png"),
-                            },
-                            Animation.Speed.faster,
-                            true,
-                            true
-                        )
+
+            player.AddWeapon(
+                new RayTracedWeapon(
+                    WeaponID.Pistol,
+                    Mechanism.Automatic,
+                    10,
+                    0.5f,
+                    player,
+                    new Tracer(
+                        new Vector(0, 0),
+                        new Vector(0, 0),
+                        20,
+                        new Color(0xff000000),
+                        new Color(0xffff00ff)
                     ),
-                    new WeaponController(
-                        new List<Weapon> {
-                            new Weapon(WeaponID.Pistol,Mechanism.SemiAutomatic, 10, 0.5f)
-                        }
-                    ),
-                    player, // Chasing Target,
-                    250.0f  // Vision radius
+                    100f
                 )
-            };
+            );
+
+            Monster testEnemy = new Monster(
+                new Transform(200, 200, 37, 55),
+                5.0f,
+                new Vector(0, 0),
+                new AnimationController(
+                    new Animation(
+                        new List<IntPtr>{
+                            Engine.LoadImage($"assets/Sprites/Zombie/Zombie_idle_1.png"),
+                            Engine.LoadImage($"assets/Sprites/Zombie/Zombie_idle_2.png"),
+                        },
+                        Animation.Speed.slow,
+                        true,
+                        true
+                    ),
+                    new Animation(
+                        new List<IntPtr>{
+                            Engine.LoadImage("assets/Sprites/Zombie/Zombie_moving_1.png"),
+                            Engine.LoadImage("assets/Sprites/Zombie/Zombie_moving_2.png"),
+                            Engine.LoadImage("assets/Sprites/Zombie/Zombie_moving_3.png"),
+                            Engine.LoadImage("assets/Sprites/Zombie/Zombie_moving_4.png"),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        true
+                    ),
+                    new Animation(
+                        new List<IntPtr>{
+                            Engine.LoadImage("assets/Sprites/Zombie/Zombie_attacking_1.png"),
+                            Engine.LoadImage("assets/Sprites/Zombie/Zombie_attacking_2.png"),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        true
+                    )
+                ),
+                null,
+                player, // Chasing Target,
+                250.0f  // Vision radius
+            );
+
+            testEnemy.AddWeapon(
+                new RayTracedWeapon(
+                    WeaponID.Pistol,
+                    Mechanism.Automatic,
+                    10,
+                    0.1f,
+                    testEnemy,
+                    new Tracer(
+                        new Vector(0, 0),
+                        new Vector(0, 0),
+                        20,
+                        new Color(0xff000000),
+                        new Color(0xff0000ff)
+                    ),
+                    100f
+                )
+            );
+
+            List<Monster> enemyList = new List<Monster> { testEnemy }; // Enemy List
+
             // TODO Crear Factories de Entities y Scenes
             MenuScene MainMenuScene = new MenuScene(new Map("E1", "assets/Maps/main_menu.png"));
             MenuScene WinScene = new MenuScene(new Map("E1","assets/Maps/win.png"));
@@ -139,7 +221,7 @@ namespace DoomSurvivors.Main
                 }
             );
 
-            SceneController.Instance.changeScene(0);
+            SceneController.Instance.ChangeScene(0);
 
             // Crosshair
             crosshair = new Crosshair(true);
@@ -166,7 +248,6 @@ namespace DoomSurvivors.Main
                     Engine.DrawRect(Engine.Transform.W / 2, 0, 1, Engine.Transform.H, 0xfff);
                     Engine.DrawRect(0, Engine.Transform.H / 2, Engine.Transform.W, 1, 0xfff);
                 }
-
 
                 Engine.Show();  // Show current frame
 

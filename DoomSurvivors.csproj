@@ -55,6 +55,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\BulletWeapon.cs" />
+    <Compile Include="Entities\RayTracedWeapon.cs" />
+    <Compile Include="Entities\Tracer.cs" />
     <Compile Include="Entities\Transform.cs" />
     <Compile Include="Entities\Crosshair.cs" />
     <Compile Include="Entities\Animation.cs" />
@@ -76,6 +79,7 @@
     <Compile Include="Scenes\Scene.cs" />
     <Compile Include="Scenes\SceneController.cs" />
     <Compile Include="Main\Sound.cs" />
+    <Compile Include="Utilities\Color.cs" />
     <Compile Include="Utilities\Tools.cs" />
     <Compile Include="Viewport\Camera.cs" />
   </ItemGroup>
@@ -115,6 +119,60 @@
     <Content Include="assets\Sprites\DoomGuy\Doomguy_attacking_2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_dying_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_dying_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_dying_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_dying_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_dying_5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_dying_6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_dying_7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_dying_8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_gibbing_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_gibbing_10.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_gibbing_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_gibbing_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_gibbing_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_gibbing_5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_gibbing_6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_gibbing_7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_gibbing_8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_gibbing_9.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="assets\Sprites\DoomGuy\Doomguy_idle_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -131,6 +189,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Sprites\DoomGuy\Doomguy_moving_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\DoomGuy\doomguy_pain_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_attacking_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_attacking_2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Sprites\Zombie\Zombie_idle_1.png">

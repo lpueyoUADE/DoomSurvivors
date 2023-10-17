@@ -21,7 +21,7 @@ namespace DoomSurvivors.Scenes
         {
             if (Engine.KeyPress(Engine.KEY_ENTER))
             {
-                SceneController.Instance.changeScene(1);
+                SceneController.Instance.ChangeScene(1);
             }
 
             background.Update();
@@ -30,6 +30,11 @@ namespace DoomSurvivors.Scenes
         public override void Reset()
         {
             throw new NotImplementedException();
+        }
+
+        public override void UnLoad()
+        {
+            Camera.Instance.Active = false;
         }
     }
 }

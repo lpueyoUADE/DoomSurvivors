@@ -1,5 +1,7 @@
 ﻿using DoomSurvivors.Entities;
+using DoomSurvivors.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using Tao.Sdl;
 
@@ -161,14 +163,64 @@ class Engine
         return font;
     }
 
-    public static void DrawCirle(int x, int y, int radius, int R, int G, int B, int A)
+    public static void DrawCirle(int x, int y, int radius, Color color)
     {
-        SdlGfx.aacircleRGBA(screen, (short)x, (short)y, (short)radius, (byte)R, (byte)G, (byte)B, (byte)A);
+        SdlGfx.aacircleRGBA(screen, (short)x, (short)y, (short)radius, color.R, color.G, color.B, color.A);
     }
 
     public static void DrawFilledEllipse(int x, int y, int rx, int ry, int R, int G, int B, int A)
     {
         SdlGfx.filledEllipseRGBA(screen, (short)x, (short)y, (short)rx, (short)ry, (byte)R, (byte)G, (byte)B, (byte)A);
+    }
+
+    public static void DrawLine(int x1, int y1, int x2, int y2, Color color)
+    {
+        SdlGfx.aalineRGBA(screen, (short)x1, (short)y1, (short)x2, (short)y2, color.R, color.G, color.B, color.A);
+    }
+
+    public static void DrawLine(Vector begin, Vector end, Color color)
+    {
+        SdlGfx.aalineRGBA(screen, (short)begin.X, (short)begin.Y, (short)end.X, (short)end.Y, color.R, color.G, color.B, color.A);
+    }
+
+    public static void DrawGradientLine(int x1, int y1, int x2, int y2, Color beginColor, Color endColor, int steps)
+    {
+        DrawGradientLine(new Vector(x1, y1), new Vector(x2, y2), beginColor, endColor, steps);
+    }
+
+    public static void DrawGradientLine(Vector begin, Vector end, Color beginColor, Color endColor, int steps)
+    {
+        List<Color> colorList = new List<Color>();
+        float step = 1f / steps;
+
+        for (int i= 0; i < steps; i++)
+        {
+            Color currentColor = new Color(Tools.Lerp((uint)beginColor, (uint)endColor, step * (i + 1)));
+            colorList.Add(currentColor);
+        }
+
+        DrawMultiColorLine(begin, end, colorList);
+    }
+
+        public static void DrawMultiColorLine(int x1, int y1, int x2, int y2, List<Color> colorList)
+    {
+        DrawMultiColorLine(new Vector(x1, y1), new Vector(x2,y2), colorList);
+    }
+        public static void DrawMultiColorLine(Vector begin, Vector end, List<Color> colorList)
+    {
+        float step = 1f / colorList.Count;
+
+        Vector current = begin;
+        Vector next;
+
+        for (int i = 0; i < colorList.Count ; i++)
+        {
+            next = Tools.Lerp(begin, end, step*(i+1));
+
+            DrawLine(current, next, colorList[i]);
+
+            current = next;            
+        }
     }
 
     public static bool KeyPress(int keyCode)
