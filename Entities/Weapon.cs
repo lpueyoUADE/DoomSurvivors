@@ -28,8 +28,10 @@ namespace DoomSurvivors.Entities
         private float cooldown;
         private DateTime lastShotTime;
         private bool hasNeverBeenShot;
-        private bool isHoldingTrigger;
         private OffensiveEntity owner;
+
+        private int chamberedBullets;
+        private const int MAX_CHAMBERED_BULLETS = 1;
 
         public Weapon(WeaponID weaponID, Mechanism mechanism, int ammo, float cooldown, OffensiveEntity owner)
         {
@@ -39,8 +41,8 @@ namespace DoomSurvivors.Entities
             this.cooldown = cooldown;
             this.lastShotTime = DateTime.Now;
             this.hasNeverBeenShot = true;
-            this.isHoldingTrigger = false;
             this.owner = owner;
+            this.chamberedBullets = MAX_CHAMBERED_BULLETS;
         }
 
         public bool IsSemiAutomatic
@@ -53,17 +55,21 @@ namespace DoomSurvivors.Entities
             get { return this.mechanism == Mechanism.Automatic; }
         }
 
-        public bool IsHoldingTrigger
+        public bool HasChamberedBullets
         {
-            get { return this.isHoldingTrigger; }
-            set { this.isHoldingTrigger = value; }
+            get { return chamberedBullets > 0; }
         }
 
+        public void ReleaseTrigger()
+        {
+            this.chamberedBullets = MAX_CHAMBERED_BULLETS;
+        }
         public virtual bool IsReadyToShoot
         {
             get {
                 float elapsedTime = (float)(DateTime.Now - this.lastShotTime).TotalSeconds;
-                return this.hasNeverBeenShot || ((this.IsAutomatic || (this.IsSemiAutomatic && !this.IsHoldingTrigger)) && elapsedTime > this.cooldown);
+                bool coolDownRestored = elapsedTime > this.cooldown;
+                return this.hasNeverBeenShot || ((this.IsAutomatic || (this.IsSemiAutomatic && HasChamberedBullets)) && coolDownRestored);
             }
         }
 
@@ -79,6 +85,7 @@ namespace DoomSurvivors.Entities
                 this.hasNeverBeenShot = false;
                 // Console.WriteLine("PUM");
                 this.lastShotTime = DateTime.Now;
+                this.chamberedBullets--;
 
                 ShootAction(target);
             }

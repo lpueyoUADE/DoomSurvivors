@@ -36,7 +36,8 @@ namespace DoomSurvivors.Main
             . Sounds
         */
 
-
+        public static event Action LeftMouseButtonReleasedAction;
+        public static event Action RightMouseButtonReleasedAction;
 
         static void Main(string[] args)
         {
@@ -170,7 +171,7 @@ namespace DoomSurvivors.Main
                         },
                         Animation.Speed.faster,
                         true,
-                        true
+                        false
                     )
                 ),
                 null,
@@ -273,6 +274,22 @@ namespace DoomSurvivors.Main
                         case Sdl.SDLK_ESCAPE:
                             break;
                     }
+                    break;
+
+                case Sdl.SDL_MOUSEBUTTONUP:
+                    switch(sdl_event.button.button)
+                    {
+                        case Sdl.SDL_BUTTON_LEFT:
+                            // Console.WriteLine("LEFT CLICK RELEASED");
+                            LeftMouseButtonReleasedAction?.Invoke();
+                            break;
+
+                        case Sdl.SDL_BUTTON_RIGHT:
+                            // Console.WriteLine("LEFT Right RELEASED");
+                            RightMouseButtonReleasedAction?.Invoke();
+                            break;
+                    }
+
                     break;
             }
         }

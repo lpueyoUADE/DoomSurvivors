@@ -10,6 +10,7 @@ namespace DoomSurvivors.Entities
         private Entity target;
         private double visionRadius;
         private bool showVisionRadius;
+        private int clock;
 
         public bool ShowVisionRadius
         {
@@ -21,6 +22,7 @@ namespace DoomSurvivors.Entities
         {
             this.target = target;
             this.visionRadius = visionRadius;
+            this.clock = 0;
         }
 
         protected override void InputEvents()
@@ -32,7 +34,12 @@ namespace DoomSurvivors.Entities
             }
 
             // Test
-            AttackAt(target.Transform.PositionCenter);
+            clock++;
+            if(clock == 50)
+            {
+                this.clock = 0;
+                AttackAt(target.Transform.PositionCenter);
+            }
         }
 
         override protected void render()

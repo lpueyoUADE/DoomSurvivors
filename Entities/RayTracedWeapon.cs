@@ -30,7 +30,7 @@ namespace DoomSurvivors.Entities
         {
             this.Tracer.Origin = this.Owner.WeaponPosition;
             this.Tracer.End = target;
-            RayTracedWeaponShotAction(this);
+            RayTracedWeaponShotAction?.Invoke(this);
         }
     }
 }

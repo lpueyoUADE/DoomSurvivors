@@ -1,4 +1,6 @@
-﻿using DoomSurvivors.Viewport;
+﻿using DoomSurvivors.Main;
+using DoomSurvivors.Viewport;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using Tao.Sdl;
@@ -10,6 +12,11 @@ namespace DoomSurvivors.Entities
         public Player(Transform transform, double speed, Vector WeaponOffset, AnimationController animationController, WeaponController weaponController=null) : 
             base(transform, speed, WeaponOffset, animationController, weaponController)
         {}
+
+        private void LeftMouseButtonReleasedActionHandler()
+        {
+            this.weaponController.CurrentWeapon.ReleaseTrigger();
+        }
 
         protected override void InputEvents()
         {
@@ -34,22 +41,28 @@ namespace DoomSurvivors.Entities
             {
                 if (weaponController.CurrentWeapon.IsReadyToShoot)
                 {
-                    weaponController.CurrentWeapon.IsHoldingTrigger = true;
                     int x, y;
                     Sdl.SDL_GetMouseState(out x, out y);
                     // AddTracerEffect(this.transform.Position, Camera.Instance.CameraToWorldPosition(new Vector(x,y)));
                     AttackAt(Camera.Instance.CameraToWorldPosition(new Vector(x, y)));
 
                 }
-            } else
-            {
-                weaponController.CurrentWeapon.IsHoldingTrigger = false;
             }
 
             if (Engine.MousePress(Engine.MOUSEBUTTON_RIGHT))
             {
                 SceneController.Instance.ChangeScene(2);
             }
+        }
+
+        public void Load()
+        {
+            Program.LeftMouseButtonReleasedAction += LeftMouseButtonReleasedActionHandler;
+        }
+
+        public void Unload()
+        {
+            Program.LeftMouseButtonReleasedAction -= LeftMouseButtonReleasedActionHandler;
         }
     }
 }

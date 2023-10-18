@@ -69,11 +69,14 @@ namespace DoomSurvivors
             player.ShowBoundingBox = showBoundingBox;
 
             RayTracedWeapon.RayTracedWeaponShotAction += RayTracedWeaponShotActionHandler;
+            player.Load();
+
         }
         public override void UnLoad()
         {
             Camera.Instance.Active = false;
             RayTracedWeapon.RayTracedWeaponShotAction -= RayTracedWeaponShotActionHandler;
+            player.Unload();
         }
 
         private void RayTracedWeaponShotActionHandler(RayTracedWeapon weapon)

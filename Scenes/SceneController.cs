@@ -43,6 +43,8 @@ namespace DoomSurvivors
                 throw new ArgumentOutOfRangeException("Scene index out of bounds");
             }
 
+            scenes[currentSceneIndex].UnLoad();
+
             currentSceneIndex = nextSceneIndex;
             reload = true;   
         }
