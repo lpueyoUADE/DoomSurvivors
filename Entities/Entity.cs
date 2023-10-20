@@ -67,8 +67,19 @@ namespace DoomSurvivors.Entities
             set { this.drawShadow = value; }
         }
 
+        public AnimationController AnimationController
+        {
+            get { return this.animationController;}
+        }
+
         public State State => this.state;
         public bool IsAttacking => this.isAttacking;
+
+        public double Friction
+        {
+            get { return this.movingFriction; }
+            set { this.movingFriction = value; }
+        }
 
         public Entity(Transform transform, double speed, AnimationController animationController)
         {
@@ -136,8 +147,6 @@ namespace DoomSurvivors.Entities
 
         public virtual void Update()
         {
-            this.direction = new Vector(0, 0);
-
             this.InputEvents();
 
             if (direction.Length > 0)

@@ -33,6 +33,7 @@ namespace DoomSurvivors.Main
             . Boosts
             
             . Factories (Monsters & Weapons)
+            . Interfaces
             . Sounds
         */
 
@@ -138,6 +139,34 @@ namespace DoomSurvivors.Main
                     100f
                 )
             );
+            player.AddWeapon(
+                new BulletWeapon(
+                    WeaponID.Pistol,
+                    Mechanism.Automatic,
+                    10,
+                    0.3f,
+                    player,
+                    new Bullet(
+                        new Transform(0, 0, 7, 7),
+                        30f,
+                        new AnimationController(
+                            new Animation(
+                                new List<IntPtr>{
+                                    Engine.LoadImage($"assets/Sprites/Bullets/Pistol/Pistol_1.png"),
+                                },
+                                Animation.Speed.fast,
+                                true,
+                                false
+                            )
+                        ),
+                        10,
+                        player,
+                        new Vector(0, 0),
+                        1f
+                    )
+                )
+            );
+           
 
             Monster testEnemy = new Monster(
                 new Transform(200, 200, 37, 55),

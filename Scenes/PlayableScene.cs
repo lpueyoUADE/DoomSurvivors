@@ -1,4 +1,5 @@
 ﻿using DoomSurvivors.Entities;
+using DoomSurvivors.Main;
 using DoomSurvivors.Scenes;
 using DoomSurvivors.Utilities;
 using DoomSurvivors.Viewport;
@@ -14,6 +15,7 @@ namespace DoomSurvivors
         private Player player;
         private Map map;
         private List<Tracer> tracerList;
+        private List<Bullet> bulletList;
         private bool showBoundingBox;
         private bool showVisionRadius;
 
@@ -33,6 +35,7 @@ namespace DoomSurvivors
             this.player = player;
             this.map = map;
             this.tracerList = new List<Tracer>();
+            this.bulletList = new List<Bullet>();
             this.showBoundingBox = showBoundingBox;
             this.showVisionRadius = showVisionRadius;
         }
@@ -45,14 +48,17 @@ namespace DoomSurvivors
 
         private void checkCollisions()
         {
+            
+            
+            
             // check-then-update approach
             foreach (Monster enemy in enemyList)
             {
                 if(player.IsColliding(enemy))
                 {
                     Console.WriteLine("Colliding!");
-                    SceneController.Instance.ChangeScene(3);
-                    break;
+                    Vector playerVelocity = player.Velocity;
+                    enemy.Transform.Position = new Vector(enemy.Transform.Position.X - enemy.Velocity.X, enemy.Transform.Position.Y - enemy.Velocity.Y);
                 }
             }
         }
@@ -69,6 +75,7 @@ namespace DoomSurvivors
             player.ShowBoundingBox = showBoundingBox;
 
             RayTracedWeapon.RayTracedWeaponShotAction += RayTracedWeaponShotActionHandler;
+            BulletWeapon.BulletWeaponShotAction += BulletWeaponShotActionHandler;
             player.Load();
 
         }
@@ -76,12 +83,18 @@ namespace DoomSurvivors
         {
             Camera.Instance.Active = false;
             RayTracedWeapon.RayTracedWeaponShotAction -= RayTracedWeaponShotActionHandler;
+            BulletWeapon.BulletWeaponShotAction -= BulletWeaponShotActionHandler;
             player.Unload();
         }
 
         private void RayTracedWeaponShotActionHandler(RayTracedWeapon weapon)
         {
             this.tracerList.Add(weapon.Tracer.Clone());
+        }
+
+        private void BulletWeaponShotActionHandler(BulletWeapon weapon)
+        {
+            this.bulletList.Add(weapon.SpawnBullet());
         }
 
         public override void Update()
@@ -115,6 +128,19 @@ namespace DoomSurvivors
             foreach (Tracer tracer in currentTracerList)
             {
                 tracer.Update();
+            }
+
+            // Bullets Update
+            List<Bullet> currentBulletList = new List<Bullet>();
+            foreach (Bullet bullet in bulletList)
+            {
+                if (!bullet.isDead)
+                    currentBulletList.Add(bullet);
+            }
+
+            foreach (Bullet bullet in currentBulletList)
+            {
+                bullet.Update();
             }
 
         }

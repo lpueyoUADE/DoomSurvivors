@@ -27,6 +27,7 @@ namespace DoomSurvivors.Entities
 
         protected override void InputEvents()
         {
+            this.direction = new Vector(0, 0);
             Vector distance = Vector.Subtract(new Vector(target.Transform.X, target.Transform.Y), new Vector(transform.X, transform.Y));
             if (distance.Length <= this.visionRadius)
             {

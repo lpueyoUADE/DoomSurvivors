@@ -58,6 +58,12 @@ namespace DoomSurvivors.Entities
             this.size = new Vector(w,h);
         }
 
+        public Transform(Vector position, Vector size)
+        {
+            this.position = position;
+            this.size = size;
+        }
+
         public bool isColliding(Transform other)
         {
             bool xAxisColliding = this.X < other.X + other.W && this.X + this.W > other.X;

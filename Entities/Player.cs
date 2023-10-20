@@ -20,6 +20,8 @@ namespace DoomSurvivors.Entities
 
         protected override void InputEvents()
         {
+            this.direction = new Vector(0, 0);
+
             if (Engine.KeyPress(Engine.KEY_D))
             {
                 direction.X = 1;
