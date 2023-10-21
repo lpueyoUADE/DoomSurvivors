@@ -13,7 +13,7 @@ namespace DoomSurvivors.Entities
 
         public Vector WeaponPosition => this.transform.Position + this.weaponOffset;
         public Vector AimingAt => this.aimingAt;
-
+        public Weapon CurrentWeapon => this.weaponController.CurrentWeapon;
         public OffensiveEntity(Transform transform, double speed, Vector weaponOffset, AnimationController animationController, WeaponController weaponController=null) : 
             base(transform, speed, animationController)
         {

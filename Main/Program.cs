@@ -144,11 +144,11 @@ namespace DoomSurvivors.Main
                     WeaponID.Pistol,
                     Mechanism.Automatic,
                     10,
-                    0.3f,
+                    0.1f,
                     player,
                     new Bullet(
                         new Transform(0, 0, 7, 7),
-                        30f,
+                        15f,
                         new AnimationController(
                             new Animation(
                                 new List<IntPtr>{
@@ -161,8 +161,7 @@ namespace DoomSurvivors.Main
                         ),
                         10,
                         player,
-                        new Vector(0, 0),
-                        1f
+                        0.7f
                     )
                 )
             );
@@ -226,18 +225,75 @@ namespace DoomSurvivors.Main
                 )
             );
 
-            List<Monster> enemyList = new List<Monster> { testEnemy }; // Enemy List
+            Monster testEnemy2 = new Monster(
+                new Transform(400, 300, 37, 55),
+                5.0f,
+                new Vector(0, 0),
+                new AnimationController(
+                    new Animation(
+                        new List<IntPtr>{
+                            Engine.LoadImage($"assets/Sprites/Zombie/Zombie_idle_1.png"),
+                            Engine.LoadImage($"assets/Sprites/Zombie/Zombie_idle_2.png"),
+                        },
+                        Animation.Speed.slow,
+                        true,
+                        true
+                    ),
+                    new Animation(
+                        new List<IntPtr>{
+                            Engine.LoadImage("assets/Sprites/Zombie/Zombie_moving_1.png"),
+                            Engine.LoadImage("assets/Sprites/Zombie/Zombie_moving_2.png"),
+                            Engine.LoadImage("assets/Sprites/Zombie/Zombie_moving_3.png"),
+                            Engine.LoadImage("assets/Sprites/Zombie/Zombie_moving_4.png"),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        true
+                    ),
+                    new Animation(
+                        new List<IntPtr>{
+                            Engine.LoadImage("assets/Sprites/Zombie/Zombie_attacking_1.png"),
+                            Engine.LoadImage("assets/Sprites/Zombie/Zombie_attacking_2.png"),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        false
+                    )
+                ),
+                null,
+                player, // Chasing Target,
+                250.0f  // Vision radius
+            );
+
+            testEnemy2.AddWeapon(
+                new RayTracedWeapon(
+                    WeaponID.Pistol,
+                    Mechanism.Automatic,
+                    10,
+                    0.1f,
+                    testEnemy2,
+                    new Tracer(
+                        new Vector(0, 0),
+                        new Vector(0, 0),
+                        20,
+                        new Color(0xff000000),
+                        new Color(0xff0000ff)
+                    ),
+                    100f
+                )
+            );
 
             // TODO Crear Factories de Entities y Scenes
             MenuScene MainMenuScene = new MenuScene(new Map("E1", "assets/Maps/main_menu.png"));
             MenuScene WinScene = new MenuScene(new Map("E1","assets/Maps/win.png"));
             MenuScene LoseScene = new MenuScene(new Map("E1", "assets/Maps/lose.png"));
             PlayableScene E1Scene = new PlayableScene(
-                enemyList,
-                player,
                 new Map("E1","assets/Maps/e1_test.png"),
                 DEBUG_MODE, // Show Bounding Boxes
-                DEBUG_MODE   // Show vision Radius
+                DEBUG_MODE,   // Show vision Radius
+                player, 
+                testEnemy,
+                testEnemy2
             );
 
             // E1Scene.Load();

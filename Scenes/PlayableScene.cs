@@ -5,17 +5,17 @@ using DoomSurvivors.Utilities;
 using DoomSurvivors.Viewport;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 
 namespace DoomSurvivors
 {
     internal class PlayableScene : Scene
     {
-        private List<Monster> enemyList;
-        private Player player;
         private Map map;
         private List<Tracer> tracerList;
-        private List<Bullet> bulletList;
+        private List<Entity> entityList;
         private bool showBoundingBox;
         private bool showVisionRadius;
 
@@ -29,13 +29,11 @@ namespace DoomSurvivors
             set { this.showVisionRadius = value; }
         }
 
-        public PlayableScene(List<Monster> enemyList, Player player, Map map, bool showBoundingBox = false, bool showVisionRadius = false)
+        public PlayableScene(Map map, bool showBoundingBox = false, bool showVisionRadius = false, params Entity[] entityList)
         {
-            this.enemyList = enemyList;
-            this.player = player;
+            this.entityList = entityList.ToList();
             this.map = map;
             this.tracerList = new List<Tracer>();
-            this.bulletList = new List<Bullet>();
             this.showBoundingBox = showBoundingBox;
             this.showVisionRadius = showVisionRadius;
         }
@@ -46,19 +44,49 @@ namespace DoomSurvivors
             tracerList.Add(new Tracer(begin, end, 20, new Color(0xff000000), new Color(0xffff00ff)));
         }
 
+        public void AddEntity(Entity entity)
+        {
+            this.entityList.Add(entity);
+        }
+
         private void checkCollisions()
         {
-            
-            
-            
             // check-then-update approach
-            foreach (Monster enemy in enemyList)
+            //foreach (Monster enemy in enemyList)
+            //{
+            //    if(player.IsColliding(enemy))
+            //    {
+            //        Console.WriteLine("Colliding!");
+            //        Vector playerVelocity = player.Velocity;
+            //        enemy.Transform.Position = new Vector(enemy.Transform.Position.X - enemy.Velocity.X, enemy.Transform.Position.Y - enemy.Velocity.Y);
+            //    }
+            //}
+
+            // TODO: Implement either Quadtress or Fixed Grid.
+            // O(n**2)
+            for (int i = 0; i < entityList.Count; i++)
             {
-                if(player.IsColliding(enemy))
+                for (int j = 0; j < entityList.Count; j++)
                 {
-                    Console.WriteLine("Colliding!");
-                    Vector playerVelocity = player.Velocity;
-                    enemy.Transform.Position = new Vector(enemy.Transform.Position.X - enemy.Velocity.X, enemy.Transform.Position.Y - enemy.Velocity.Y);
+                    if (i == j)
+                        continue;
+                    
+                    Entity entity = entityList[i];
+                    Entity other = entityList[j];
+
+
+                    bool bulletHitTest = entity is Bullet || other is Bullet;
+
+                    bool ownBullet = 
+                        entity is Bullet && other is OffensiveEntity && ((Bullet)entity).IsownedBy((OffensiveEntity)other) ||
+                        other is Bullet && entity is OffensiveEntity && ((Bullet)other).IsownedBy((OffensiveEntity) entity);
+  
+                    if (!bulletHitTest && !ownBullet && entity.IsColliding(other))
+                    {
+                        Vector distance = other.Transform.PositionCenter - entity.Transform.PositionCenter;
+                        other.Velocity += new Vector(distance.X/3, distance.Y/3);
+                        entity.Velocity -= new Vector(distance.X/3, distance.Y/3);
+                    }
                 }
             }
         }
@@ -66,17 +94,19 @@ namespace DoomSurvivors
         public override void Load()
         {
             Camera.Instance.Active = true;
-            foreach (Monster enemy in enemyList)
+            foreach (Entity entity in entityList)
             {
-                enemy.ShowBoundingBox = showBoundingBox;
-                enemy.ShowVisionRadius = showVisionRadius;
-            }
+                entity.ShowBoundingBox = showBoundingBox;
+                
+                if (entity is Monster) 
+                   ((Monster)entity).ShowVisionRadius = showVisionRadius;
 
-            player.ShowBoundingBox = showBoundingBox;
+                if (entity is Player)
+                    ((Player)entity).Load();
+            }
 
             RayTracedWeapon.RayTracedWeaponShotAction += RayTracedWeaponShotActionHandler;
             BulletWeapon.BulletWeaponShotAction += BulletWeaponShotActionHandler;
-            player.Load();
 
         }
         public override void UnLoad()
@@ -84,7 +114,9 @@ namespace DoomSurvivors
             Camera.Instance.Active = false;
             RayTracedWeapon.RayTracedWeaponShotAction -= RayTracedWeaponShotActionHandler;
             BulletWeapon.BulletWeaponShotAction -= BulletWeaponShotActionHandler;
-            player.Unload();
+
+            Player player = entityList.OfType<Player>().FirstOrDefault();
+            player?.Unload();
         }
 
         private void RayTracedWeaponShotActionHandler(RayTracedWeapon weapon)
@@ -94,7 +126,7 @@ namespace DoomSurvivors
 
         private void BulletWeaponShotActionHandler(BulletWeapon weapon)
         {
-            this.bulletList.Add(weapon.SpawnBullet());
+            this.entityList.Add(weapon.SpawnBullet());
         }
 
         public override void Update()
@@ -105,43 +137,25 @@ namespace DoomSurvivors
             // Map Update
             map.Update();
 
+            // Add newly spawn entites
+
             // Collisions
             checkCollisions();
 
-            // Enemies Update
-            foreach (Entity enemy in enemyList)
+            // Entities Update
+            for (int i = 0; i < entityList.Count; i++)
             {
-                enemy.Update();
+                entityList[i].Update();
             }
-
-            // Player Update
-            player.Update();
 
             // Tracer Effects Update
-            List<Tracer> currentTracerList = new List<Tracer>();
             foreach (Tracer tracer in tracerList)
-            {
-                if (!tracer.hasFinished)
-                    currentTracerList.Add(tracer);
-            }
-
-            foreach (Tracer tracer in currentTracerList)
             {
                 tracer.Update();
             }
 
-            // Bullets Update
-            List<Bullet> currentBulletList = new List<Bullet>();
-            foreach (Bullet bullet in bulletList)
-            {
-                if (!bullet.isDead)
-                    currentBulletList.Add(bullet);
-            }
-
-            foreach (Bullet bullet in currentBulletList)
-            {
-                bullet.Update();
-            }
+            tracerList.RemoveAll(tracer => tracer.hasFinished);
+            entityList.RemoveAll(entity => entity is Bullet && ((Bullet)entity).isDead);
 
         }
         public override void Reset()
