@@ -18,6 +18,8 @@ namespace DoomSurvivors.Entities
 
         public bool isDead => remainingLife <= 0;
 
+        public int Damage => damage;
+
         public Bullet(Transform transform, double speed, AnimationController animationController, int damage, OffensiveEntity owner, float lifespan) : 
             this (transform, speed, animationController, damage, owner, new Vector(0,0), lifespan)
         {}
@@ -73,9 +75,15 @@ namespace DoomSurvivors.Entities
             return new Bullet(new Transform(position, transform.Size), speed, AnimationController, damage, owner, aimingAt - position, lifespan);
         }
 
-        public bool IsownedBy(OffensiveEntity entity)
+        public bool IsownedBy(Entity entity)
         {
             return ReferenceEquals(this.owner, entity);
+        }
+
+        public void Destroy()
+        {
+            this.remainingLife = 0;
+            this.state = State.Dying;
         }
     }
 }

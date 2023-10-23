@@ -200,6 +200,25 @@ namespace DoomSurvivors.Main
                         Animation.Speed.faster,
                         true,
                         false
+                    ),
+                    null,
+                    new Animation(
+                        new List<IntPtr>{
+                            Engine.LoadImage("assets/Sprites/Zombie/Zombie_Dying_1.png"),
+                            Engine.LoadImage("assets/Sprites/Zombie/Zombie_Dying_1.png"),
+                        },
+                        Animation.Speed.slow,
+                        false,
+                        false
+                    ),
+                    null,
+                    new Animation(
+                        new List<IntPtr>{
+                            Engine.LoadImage("assets/Sprites/Zombie/Zombie_Dying_1.png"),
+                        },
+                        Animation.Speed.slow,
+                        false,
+                        false
                     )
                 ),
                 null,
@@ -292,8 +311,8 @@ namespace DoomSurvivors.Main
                 DEBUG_MODE, // Show Bounding Boxes
                 DEBUG_MODE,   // Show vision Radius
                 player, 
-                testEnemy,
-                testEnemy2
+                testEnemy
+                //testEnemy2
             );
 
             // E1Scene.Load();

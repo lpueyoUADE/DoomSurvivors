@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Entities\BulletWeapon.cs" />
     <Compile Include="Entities\Bullet.cs" />
+    <Compile Include="Entities\CollisionController.cs" />
     <Compile Include="Entities\RayTracedWeapon.cs" />
     <Compile Include="Entities\Tracer.cs" />
     <Compile Include="Entities\Transform.cs" />
@@ -203,6 +204,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Sprites\Zombie\Zombie_attacking_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_Dying_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Sprites\Zombie\Zombie_idle_1.png">

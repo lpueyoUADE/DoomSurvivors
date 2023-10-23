@@ -128,7 +128,7 @@ namespace DoomSurvivors.Entities
             }
         }
 
-        private void setState(Vector direction)
+        protected virtual void setState(Vector direction)
         {
             if (this.isAttacking)
             {

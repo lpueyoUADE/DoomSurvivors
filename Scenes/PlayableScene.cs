@@ -66,7 +66,7 @@ namespace DoomSurvivors
             // O(n**2)
             for (int i = 0; i < entityList.Count; i++)
             {
-                for (int j = 0; j < entityList.Count; j++)
+                for (int j = i + 1; j < entityList.Count; j++) // j = i + 1 Para no checkear A con B y despues B con A
                 {
                     if (i == j)
                         continue;
@@ -74,7 +74,9 @@ namespace DoomSurvivors
                     Entity entity = entityList[i];
                     Entity other = entityList[j];
 
-
+                    CollisionController.HandleCollision(entity, other);
+                    
+                    /*
                     bool bulletHitTest = entity is Bullet || other is Bullet;
 
                     bool ownBullet = 
@@ -84,9 +86,10 @@ namespace DoomSurvivors
                     if (!bulletHitTest && !ownBullet && entity.IsColliding(other))
                     {
                         Vector distance = other.Transform.PositionCenter - entity.Transform.PositionCenter;
-                        other.Velocity += new Vector(distance.X/3, distance.Y/3);
-                        entity.Velocity -= new Vector(distance.X/3, distance.Y/3);
+                        other.Velocity += distance / 3;
+                        entity.Velocity -= distance / 3;
                     }
+                    */
                 }
             }
         }

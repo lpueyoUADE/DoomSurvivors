@@ -1,4 +1,5 @@
 ﻿using DoomSurvivors.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -11,6 +12,8 @@ namespace DoomSurvivors.Entities
         private Vector aimingAt;
         protected Vector WeaponOffset => weaponOffset;
 
+        private int life;
+
         public Vector WeaponPosition => this.transform.Position + this.weaponOffset;
         public Vector AimingAt => this.aimingAt;
         public Weapon CurrentWeapon => this.weaponController.CurrentWeapon;
@@ -20,6 +23,27 @@ namespace DoomSurvivors.Entities
             this.weaponOffset = weaponOffset;
             this.weaponController = weaponController == null? new WeaponController() : weaponController;
             this.aimingAt = new Vector(-2,-2);
+            this.life = 10;
+        }
+
+        override protected void setState(Vector direction)
+        {
+            Console.WriteLine(life);
+            Console.WriteLine(state);
+            if (state != State.Death)
+            {
+                if (life <= 0)
+                {
+                    if (!(this.AnimationController.DeathAnimation is null) && this.AnimationController.DeathAnimation.IsLooping)
+                        this.state = State.Dying;
+                    else
+                        this.state = State.Death;
+                }
+                else
+                {
+                    base.setState(direction);
+                }
+            }
         }
 
         override public void Update()
@@ -37,6 +61,11 @@ namespace DoomSurvivors.Entities
         public void AddWeapon(Weapon weapon)
         {
             this.weaponController.AddWeapon(weapon);
+        }
+
+        public void ApplyDamage(int damage)
+        {
+            this.life = 0;
         }
     }
 }
