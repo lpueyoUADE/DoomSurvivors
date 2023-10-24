@@ -33,6 +33,8 @@ namespace DoomSurvivors.Entities
             get { return end; }
             set { end = value; }
         }
+        public Tracer(int lifespan, Color beginColor, Color endColor) : this(new Vector(0,0), new Vector(0,0), lifespan, beginColor, endColor)
+        {}
 
         public Tracer(Vector origin, Vector end, int lifespan, Color beginColor, Color endColor) {
             this.origin = origin;

@@ -18,29 +18,18 @@ namespace DoomSurvivors.Entities
         GibDeath
     }
 
-    public abstract class Entity
+    public abstract class Entity: GameObject
     {
-        protected Transform transform;
         protected Vector velocity;
         protected double speed;
-        private double movingFriction;
-        private double attackingFriction;
-        private double minVelocity;
+        protected const float MovingFriction = 0.2f;
+        private float applyingFriction;
+        private double minVelocity = 0.1f;
         protected Vector direction;
 
-        protected State state;
-        protected bool isAttacking;
-        private bool showBoundingBox;
-        private bool drawShadow;
-
-        private Shadow shadow;
+        private State state;
 
         private AnimationController animationController;
-
-        public Transform Transform
-        {
-            get { return this.transform; }
-        }
 
         public Vector Velocity
         {
@@ -51,72 +40,61 @@ namespace DoomSurvivors.Entities
                 this.velocity *= speed;
             }
         }
-        public double Speed {
-            get { return this.speed; }
-        }
-
-        public bool ShowBoundingBox
-        {
-            get { return this.showBoundingBox; }
-            set { this.showBoundingBox = value; }
-        }
-
-        public bool DrawShadow
-        {
-            get { return this.drawShadow; }
-            set { this.drawShadow = value; }
-        }
 
         public AnimationController AnimationController
         {
             get { return this.animationController;}
         }
 
-        public State State => this.state;
-        public bool IsAttacking => this.isAttacking;
-
-        public double Friction
+        public State State { 
+            get { return this.state; } 
+            set { this.state = value; } 
+        }
+        public float ApplyingFriction
         {
-            get { return this.movingFriction; }
-            set { this.movingFriction = value; }
+            get { return this.applyingFriction; }
+            set { this.applyingFriction = value; }
         }
 
-        public Entity(Transform transform, double speed, AnimationController animationController)
+        public bool IsMoving => this.velocity.Length > 0; 
+
+        public Entity(Transform transform, double speed, AnimationController animationController) : base(transform)
         {
-            this.transform = transform;
             this.velocity = new Vector(0, 0);
             this.speed = speed;
-            this.movingFriction = 0.2f;
-            this.attackingFriction = 0.9f;
-            this.minVelocity = 0.1f;
             this.state = State.Idle;
-            this.isAttacking = false;
+            this.applyingFriction = MovingFriction;
+
             this.animationController = animationController;
-            this.drawShadow = true;
-            this.shadow = new Shadow(new Sdl.SDL_Color(0,0,0,128), this.transform.W / 3, this.transform.H / 10);
+
+            this.CollisionType = CollisionType.Kinematic;
         }
 
-        public bool IsColliding(Entity other)
+        override public void OnCollision(GameObject other)
         {
-            return this.transform.isColliding(other.transform);
+            if (other is Entity)
+            { 
+                Vector distance = other.Transform.PositionCenter - this.Transform.PositionCenter;
+                if (this.CollisionType == CollisionType.Kinematic)
+                    this.Velocity -= distance / 3;
+
+                if(other.CollisionType == CollisionType.Kinematic)
+                    ((Entity)other).Velocity += distance / 3;
+            }
+            
+            base.OnCollision(other);
         }
 
-        protected virtual void render()
+        override public void Render()
         {
-            Vector newPosition = Camera.Instance.WorldToCameraPosition(this.transform.Position);
-
-            if (drawShadow)
-                this.shadow.Draw((int)newPosition.X + transform.W / 2, (int)newPosition.Y + transform.H);
-
-            if (showBoundingBox)
-                Engine.DrawRect(newPosition, Transform.Size, 0xff0000);
-
-            Engine.Draw(animationController.getCurrentAnimationFrame(), (int)newPosition.X, (int)newPosition.Y);
+            base.Render();
+            Vector position = Camera.Instance.WorldToCameraPosition(this.transform.Position);
+            Engine.Draw(animationController.getCurrentAnimationFrame(), (int)position.X, (int)position.Y);
         }
 
-        private void ApplyFriction()
+        protected void ApplyFriction()
         {
-            velocity *= 1 - (isAttacking ? attackingFriction : movingFriction);
+            velocity *= 1 - applyingFriction;
 
             if (Math.Abs(velocity.X) < this.minVelocity)
             {
@@ -129,12 +107,8 @@ namespace DoomSurvivors.Entities
         }
 
         protected virtual void setState(Vector direction)
-        {
-            if (this.isAttacking)
-            {
-                this.state = State.Attacking;
-
-            } else if (direction == new Vector(0,0))
+        {           
+            if (direction == new Vector(0,0))
             {
                 this.state = State.Idle;
             } else
@@ -145,24 +119,23 @@ namespace DoomSurvivors.Entities
 
         protected abstract void InputEvents();
 
-        public virtual void Update()
+        public new virtual void Update()
         {
             this.InputEvents();
 
             if (direction.Length > 0)
                 direction.Normalize();
 
-            // Movement is reduced when attacking
-            this.velocity += direction * speed * 10  *  Program.DeltaTime;
+            this.velocity += direction * speed * 10  * Program.DeltaTime;
 
             this.setState(direction);
             this.animationController.Update(this.state);
 
             ApplyFriction();
 
-            transform.Position += velocity; 
+            transform.Position += velocity;
 
-            render();
+            base.Update();
         }
     }
 }

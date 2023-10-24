@@ -14,7 +14,7 @@ namespace DoomSurvivors.Entities
         private float remainingLife;
         public Vector origin;
         public Vector offset;
-        public float maxHaloLength = 200f;
+        public float maxHaloLength = 100f;
 
         public bool isDead => remainingLife <= 0;
 
@@ -34,6 +34,31 @@ namespace DoomSurvivors.Entities
 
             this.origin = Transform.Position;
             this.offset = new Vector(0, 0);
+
+            this.CollisionType = CollisionType.Static;
+        }
+
+        override public void OnCollision(GameObject other)
+        {
+            if (other is Bullet)
+                return;
+
+            if (other is OffensiveEntity)
+            {
+                bool ownBullet = other is OffensiveEntity && IsOwnedBy((OffensiveEntity)other);
+                if (ownBullet)
+                    return;
+
+                ((OffensiveEntity)other).ApplyDamage(this.damage);
+                this.Destroy();
+            }
+
+            if (other is Entity)
+            {
+                this.Destroy();
+            }
+
+            base.OnCollision(other);
         }
 
         protected override void InputEvents()
@@ -43,24 +68,19 @@ namespace DoomSurvivors.Entities
         {
             remainingLife -= Program.DeltaTime;
 
-            Vector dir = direction;
-            dir.Normalize();
-
-            dir *= maxHaloLength;
-            Vector distance = Transform.PositionCenter - origin;
             
+            Vector distance = Transform.PositionCenter - origin;
+            Vector dir = direction;
             Vector begin = origin;
 
+            // TODO: Implement it properly!
             // Keep the line to a max length
-            //if (distance.Length > maxHaloLength)
-            //{
-            //    Console.WriteLine(distance.Length);
-            //    double t = distance.Length / (distance.Length  - (double)maxHaloLength);
-            //    begin = new Vector(
-            //        (1 - maxHaloLength) * origin.X + t * Transform.PositionCenter.X, 
-            //        (1 - maxHaloLength) * origin.Y + t * Transform.PositionCenter.Y);
-            //}
-
+            if (distance.Length > maxHaloLength)
+            {
+                dir.Normalize();
+                begin = origin + dir * maxHaloLength;
+            } 
+            Console.WriteLine(begin);
             Engine.DrawGradientLine(Camera.Instance.WorldToCameraPosition(begin), Camera.Instance.WorldToCameraPosition(Transform.PositionCenter), new Color(0xff000011), new Color(0xffff00ff), 15);
             base.Update();
         }
@@ -75,7 +95,7 @@ namespace DoomSurvivors.Entities
             return new Bullet(new Transform(position, transform.Size), speed, AnimationController, damage, owner, aimingAt - position, lifespan);
         }
 
-        public bool IsownedBy(Entity entity)
+        public bool IsOwnedBy(OffensiveEntity entity)
         {
             return ReferenceEquals(this.owner, entity);
         }
@@ -83,7 +103,7 @@ namespace DoomSurvivors.Entities
         public void Destroy()
         {
             this.remainingLife = 0;
-            this.state = State.Dying;
+            this.State = State.Dying;
         }
     }
 }

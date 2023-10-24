@@ -9,9 +9,11 @@ namespace DoomSurvivors.Entities
 {
     public class Player : OffensiveEntity
     {
-        public Player(Transform transform, double speed, Vector WeaponOffset, AnimationController animationController, WeaponController weaponController=null) : 
-            base(transform, speed, WeaponOffset, animationController, weaponController)
-        {}
+        public Player(Transform transform, double speed, int life, Vector WeaponOffset, AnimationController animationController, WeaponController weaponController=null) : 
+            base(transform, speed, life, WeaponOffset, animationController, weaponController)
+        {
+            this.CollisionType = CollisionType.Static;
+        }
 
         private void LeftMouseButtonReleasedActionHandler()
         {
@@ -21,6 +23,9 @@ namespace DoomSurvivors.Entities
         protected override void InputEvents()
         {
             this.direction = new Vector(0, 0);
+
+            if (this.IsDeath || this.IsDying)
+                return;
 
             if (Engine.KeyPress(Engine.KEY_D))
             {
@@ -45,7 +50,6 @@ namespace DoomSurvivors.Entities
                 {
                     int x, y;
                     Sdl.SDL_GetMouseState(out x, out y);
-                    // AddTracerEffect(this.transform.Position, Camera.Instance.CameraToWorldPosition(new Vector(x,y)));
                     AttackAt(Camera.Instance.CameraToWorldPosition(new Vector(x, y)));
 
                 }

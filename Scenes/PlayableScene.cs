@@ -16,26 +16,28 @@ namespace DoomSurvivors
         private Map map;
         private List<Tracer> tracerList;
         private List<Entity> entityList;
-        private bool showBoundingBox;
-        private bool showVisionRadius;
+        private List<Entity> deadEntityList;
+        private bool drawBoundingBox;
+        private bool drawVisionRadius;
 
-        public bool ShowBoundingBox {
-            get { return this.showBoundingBox; }
-            set { this.showBoundingBox = value; }
+        public bool DrawBoundingBox {
+            get { return this.drawBoundingBox; }
+            set { this.drawBoundingBox = value; }
         }
-        public bool ShowVisionRadius
+        public bool DrawVisionRadius
         {
-            get { return this.showVisionRadius; }
-            set { this.showVisionRadius = value; }
+            get { return this.drawVisionRadius; }
+            set { this.drawVisionRadius = value; }
         }
 
-        public PlayableScene(Map map, bool showBoundingBox = false, bool showVisionRadius = false, params Entity[] entityList)
+        public PlayableScene(Map map, bool drawBoundingBox = false, bool drawVisionRadius = false, params Entity[] entityList)
         {
             this.entityList = entityList.ToList();
+            this.deadEntityList = new List<Entity>();
             this.map = map;
             this.tracerList = new List<Tracer>();
-            this.showBoundingBox = showBoundingBox;
-            this.showVisionRadius = showVisionRadius;
+            this.drawBoundingBox = drawBoundingBox;
+            this.drawVisionRadius = drawVisionRadius;
         }
 
 
@@ -62,20 +64,26 @@ namespace DoomSurvivors
             //    }
             //}
 
-            // TODO: Implement either Quadtress or Fixed Grid.
+            // TODO: Implement either Quadtrees or Fixed Grid.
             // O(n**2)
             for (int i = 0; i < entityList.Count; i++)
             {
+                Entity entity = entityList[i];
+                if (entity.CollisionType == CollisionType.Disabled)
+                    continue;
+
                 for (int j = i + 1; j < entityList.Count; j++) // j = i + 1 Para no checkear A con B y despues B con A
                 {
                     if (i == j)
                         continue;
-                    
-                    Entity entity = entityList[i];
-                    Entity other = entityList[j];
 
-                    CollisionController.HandleCollision(entity, other);
-                    
+                    Entity other = entityList[j];
+                    if (other.CollisionType == CollisionType.Disabled)
+                        continue;
+
+                    if (entity.Transform.isColliding(other.Transform))
+                        CollisionController.HandleCollision(entity, other);
+
                     /*
                     bool bulletHitTest = entity is Bullet || other is Bullet;
 
@@ -99,10 +107,10 @@ namespace DoomSurvivors
             Camera.Instance.Active = true;
             foreach (Entity entity in entityList)
             {
-                entity.ShowBoundingBox = showBoundingBox;
+                entity.DrawBoundingBox = drawBoundingBox;
                 
                 if (entity is Monster) 
-                   ((Monster)entity).ShowVisionRadius = showVisionRadius;
+                   ((Monster)entity).ShowVisionRadius = drawVisionRadius;
 
                 if (entity is Player)
                     ((Player)entity).Load();
@@ -145,6 +153,12 @@ namespace DoomSurvivors
             // Collisions
             checkCollisions();
 
+            // Dead Entities Update
+            for (int i = 0; i < deadEntityList.Count; i++)
+            {
+                deadEntityList[i].Update();
+            }
+
             // Entities Update
             for (int i = 0; i < entityList.Count; i++)
             {
@@ -159,7 +173,9 @@ namespace DoomSurvivors
 
             tracerList.RemoveAll(tracer => tracer.hasFinished);
             entityList.RemoveAll(entity => entity is Bullet && ((Bullet)entity).isDead);
-
+            
+            deadEntityList.AddRange(entityList.FindAll(entity => entity is OffensiveEntity && ((OffensiveEntity)entity).State == State.Death));
+            entityList.RemoveAll(entity => entity is OffensiveEntity && ((OffensiveEntity)entity).State == State.Death);
         }
         public override void Reset()
         {

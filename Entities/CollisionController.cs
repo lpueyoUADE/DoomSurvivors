@@ -10,49 +10,38 @@ namespace DoomSurvivors.Entities
     public static class CollisionController
     {
         public static void HandleCollision(Entity entity, Entity other)
-        {           
-            if(entity.IsColliding(other))
-            {
-                if (entity is Bullet && other is Bullet)
-                    HandleConcreteCollision((Bullet)entity, (Bullet)other);
-
-                if (!(entity is Bullet) && !(other is Bullet))
-                    HandleConcreteCollision(entity, other);
-
-                if (entity is Bullet && other is OffensiveEntity)
-                    HandleConcreteCollision((Bullet)entity, (OffensiveEntity)other);
-
-                if (entity is OffensiveEntity && other is Bullet)
-                    HandleConcreteCollision((Bullet)other, (OffensiveEntity)entity);
-            }
-        }
-
-        private static void Push(Entity entity, Entity other)
         {
-            Vector distance = other.Transform.PositionCenter - entity.Transform.PositionCenter;
-            other.Velocity += distance / 3;
-            entity.Velocity -= distance / 3;
-        }
+            if(entity is Bullet)
+                ((Bullet)entity).OnCollision(other);
 
-        private static void HandleConcreteCollision(Entity entity, Entity other)
-        {
-            Push(entity, other);
-        }
+            else if (other is Bullet)
+                ((Bullet)other).OnCollision(entity);
 
-        private static void HandleConcreteCollision(Bullet entity, Bullet other)
-        {}
+            else
+                entity.OnCollision(other);
 
-        private static void HandleConcreteCollision(Bullet entity, OffensiveEntity other)
-        {
-            bool ownBullet =
-                other is OffensiveEntity && entity.IsownedBy(other);
+            //if (entity is Bullet)
+            //    ((Bullet)entity).HandleCollision(other);
 
-            if (!ownBullet)
-            {
-                other.ApplyDamage(entity.Damage);
-                Push(entity, other);
-                entity.Destroy();
-            }
+            //else if (entity is OffensiveEntity)
+            //    ((OffensiveEntity)entity).HandleCollision(other);
+
+            //else
+            //    entity.HandleCollision(other);
+
+            //if (entity is Bullet && other is Bullet)
+            //    HandleConcreteCollision((Bullet)entity, (Bullet)other);
+
+            //if (!(entity is Bullet) && !(other is Bullet))
+            //    HandleConcreteCollision(entity, other);
+
+            //if (entity is Bullet && other is OffensiveEntity)
+            //    HandleConcreteCollision((Bullet)entity, (OffensiveEntity)other);
+
+            //if (entity is OffensiveEntity && other is Bullet)
+            //    HandleConcreteCollision((Bullet)other, (OffensiveEntity)entity);
+
         }
     }
 }
+

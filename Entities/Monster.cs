@@ -17,18 +17,36 @@ namespace DoomSurvivors.Entities
             get { return this.showVisionRadius; }
             set { this.showVisionRadius = value; }
         }
-        public Monster(Transform transform, double speed, Vector weaponPosition, AnimationController animationController, WeaponController weaponController=null, Entity target = null, double visionRadius = 0) :
-            base(transform, speed, weaponPosition, animationController, weaponController)
+
+        public Entity Target
+        {
+            get => target; 
+            set => target = value;
+        }
+        public Monster(Transform transform, double speed, int life, Vector weaponPosition, AnimationController animationController, WeaponController weaponController=null, Entity target = null, double visionRadius = 0) :
+            base(transform, speed, life, weaponPosition, animationController, weaponController)
         {
             this.target = target;
             this.visionRadius = visionRadius;
             this.clock = 0;
-        }
 
+            this.CollisionType = CollisionType.Kinematic;
+        }
+   
         protected override void InputEvents()
         {
+            if (this.IsDeath || this.IsDying)
+                return;
+
+            if (target is null)
+                return;
+
             this.direction = new Vector(0, 0);
-            Vector distance = Vector.Subtract(new Vector(target.Transform.X, target.Transform.Y), new Vector(transform.X, transform.Y));
+
+            if (((OffensiveEntity)target).IsDeath || ((OffensiveEntity)target).IsDying)
+                return;
+
+            Vector distance = target.Transform.Position - transform.Position;
             if (distance.Length <= this.visionRadius)
             {
                 this.direction = distance;
@@ -43,7 +61,7 @@ namespace DoomSurvivors.Entities
             }
         }
 
-        override protected void render()
+        override public void Render()
         {
             if (showVisionRadius)
             {
@@ -51,7 +69,7 @@ namespace DoomSurvivors.Entities
                 Engine.DrawCirle((int)newPosition.X + transform.W / 2, (int)newPosition.Y + transform.H / 2, (int)this.visionRadius, new Color(0, 255, 0, 255));
             }
 
-            base.render();
+            base.Render();
         }
     }
 }

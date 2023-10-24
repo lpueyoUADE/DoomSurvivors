@@ -58,6 +58,13 @@
     <Compile Include="Entities\BulletWeapon.cs" />
     <Compile Include="Entities\Bullet.cs" />
     <Compile Include="Entities\CollisionController.cs" />
+    <Compile Include="Entities\Factories\PlayerFactory.cs" />
+    <Compile Include="Entities\Factories\TracerFactory.cs" />
+    <Compile Include="Entities\Factories\WeaponFactory.cs" />
+    <Compile Include="Entities\GameObject.cs" />
+    <Compile Include="Entities\ICollidable.cs" />
+    <Compile Include="Entities\IRenderizable.cs" />
+    <Compile Include="Entities\Factories\MonsterFactory.cs" />
     <Compile Include="Entities\RayTracedWeapon.cs" />
     <Compile Include="Entities\Tracer.cs" />
     <Compile Include="Entities\Transform.cs" />
@@ -206,7 +213,46 @@
     <Content Include="assets\Sprites\Zombie\Zombie_attacking_2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\Sprites\Zombie\Zombie_Dying_1.png">
+    <Content Include="assets\Sprites\Zombie\Zombie_dying_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_dying_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_dying_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_dying_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_dying_5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_gibbing_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_gibbing_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_gibbing_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_gibbing_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_gibbing_5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_gibbing_6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_gibbing_7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_gibbing_8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_gibbing_9.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Sprites\Zombie\Zombie_idle_1.png">
@@ -225,6 +271,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Sprites\Zombie\Zombie_moving_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Zombie\Zombie_pain_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="logo.ico" />

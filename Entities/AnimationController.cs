@@ -12,8 +12,8 @@ namespace DoomSurvivors.Entities
         private List<Animation> AnimationList;
 
         public State CurrentAnimationState => currentAnimationState;
-
-        public Animation DeathAnimation => AnimationList[(int)State.Death];
+        public Animation DyingAnimation => AnimationList[(int)State.Dying];
+        public Animation AttackingAnimation => AnimationList[(int)State.Attacking];
         public AnimationController(
             Animation idle, 
             Animation moving = null, 
