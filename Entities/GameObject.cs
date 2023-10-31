@@ -1,4 +1,5 @@
-﻿using DoomSurvivors.Viewport;
+﻿using DoomSurvivors.Utilities;
+using DoomSurvivors.Viewport;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace DoomSurvivors.Entities
     public abstract class GameObject : IRenderizable, ICollidable
     {
         protected Transform transform; 
-        private Shadow shadow;
+        protected Shadow shadow;
         private CollisionType collisionType;
 
         private bool drawShadow;
@@ -46,10 +47,12 @@ namespace DoomSurvivors.Entities
             this.collisionType = collisionType;
             this.drawShadow = drawShadow;
             this.drawBoundingBox = drawBoundingBox;
-            this.shadow = new Shadow(new Sdl.SDL_Color(0, 0, 0, 128), this.transform.W / 3, this.transform.H / 10);
+            this.shadow = new Shadow(new Color(0,0,0,128), this.transform.W / 3, this.transform.H / 10);
         }
         public virtual void OnCollision(GameObject other)
         {}
+
+        protected abstract IntPtr GetCurrentSprite();
 
         public virtual void Render()
         {
@@ -59,10 +62,9 @@ namespace DoomSurvivors.Entities
 
             if (drawBoundingBox)
                 Engine.DrawRect(position, Transform.Size, 0xff0000);
+
+            Engine.Draw(GetCurrentSprite(), (int)position.X, (int)position.Y, transform.W, transform.H);
         }
-        public virtual void Update()
-        {
-            Render();
-        }
+        public abstract void Update();
     }
 }

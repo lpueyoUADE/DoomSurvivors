@@ -7,6 +7,39 @@ namespace DoomSurvivors.Entities
 {
     public class Monster : OffensiveEntity
     {
+        public enum MonsterType
+        {
+            Zombie,
+            Shotguner,
+            Chainguner,
+            Wolfenstein,
+            Imp,
+            Pinky,
+            BaronOfHell,
+            HellKnight,
+            CacoDemon,
+            LostSoul,
+            PainElemental,
+            Mancubus,
+            Arachnotron,
+            Reventant,
+            ArchVile,
+            SpiderMasterMind,
+            CyberDemon
+        }
+        
+        public struct MonsterPlacer
+        {
+            public MonsterType monsterType;
+            public Vector position;
+
+            public MonsterPlacer(MonsterType monsterType, int x, int y) : this()
+            {
+                this.monsterType = monsterType;
+                this.position = new Vector(x, y);
+            }
+        }
+
         private Entity target;
         private double visionRadius;
         private bool showVisionRadius;

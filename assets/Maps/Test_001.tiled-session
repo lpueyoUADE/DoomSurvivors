@@ -1,0 +1,70 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "Test_map_001.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "Floor Tiles.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Test_map_001.json": {
+            "scale": 0.44135416666666666,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 960.6797262213832,
+                "y": 376.11517583195655
+            }
+        },
+        "Test_map_001.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1093.9393939393938,
+                "y": 957.5757575757575
+            }
+        },
+        "Wall Tiles.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tileset.tsx": {
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "C:/projects/C#/DoomSurvivors/assets/Maps",
+    "last.externalTilesetPath": "C:/projects/C#/DoomSurvivors/assets/Maps",
+    "last.imagePath": "C:/projects/C#/DoomSurvivors/scripts/maps",
+    "map.height": 30,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 64,
+    "map.tileWidth": 64,
+    "openFiles": [
+        "Test_map_001.tmx",
+        "Wall Tiles.tsx",
+        "Floor Tiles.tsx"
+    ],
+    "project": "Test_001.tiled-project",
+    "recentFiles": [
+        "Floor Tiles.tsx",
+        "Wall Tiles.tsx",
+        "Test_map_001.tmx",
+        "tileset.tsx",
+        "Test_map_001.json"
+    ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.margin": 0,
+    "tileset.spacing": 0,
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    }
+}

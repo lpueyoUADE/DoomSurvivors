@@ -9,38 +9,22 @@ namespace DoomSurvivors.Entities
 {
     public static class CollisionController
     {
-        public static void HandleCollision(Entity entity, Entity other)
+        public static void HandleCollision(GameObject gameObject, GameObject other)
         {
-            if(entity is Bullet)
-                ((Bullet)entity).OnCollision(other);
+            if(gameObject is Bullet)
+                ((Bullet)gameObject).OnCollision(other);
 
             else if (other is Bullet)
-                ((Bullet)other).OnCollision(entity);
+                ((Bullet)other).OnCollision(gameObject);
+
+            else if(gameObject is Wall)
+                ((Wall)gameObject).OnCollision(other);
+
+            else if (other is Wall)
+                ((Wall)other).OnCollision(gameObject);
 
             else
-                entity.OnCollision(other);
-
-            //if (entity is Bullet)
-            //    ((Bullet)entity).HandleCollision(other);
-
-            //else if (entity is OffensiveEntity)
-            //    ((OffensiveEntity)entity).HandleCollision(other);
-
-            //else
-            //    entity.HandleCollision(other);
-
-            //if (entity is Bullet && other is Bullet)
-            //    HandleConcreteCollision((Bullet)entity, (Bullet)other);
-
-            //if (!(entity is Bullet) && !(other is Bullet))
-            //    HandleConcreteCollision(entity, other);
-
-            //if (entity is Bullet && other is OffensiveEntity)
-            //    HandleConcreteCollision((Bullet)entity, (OffensiveEntity)other);
-
-            //if (entity is OffensiveEntity && other is Bullet)
-            //    HandleConcreteCollision((Bullet)other, (OffensiveEntity)entity);
-
+                gameObject.OnCollision(other);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoomSurvivors.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,19 +9,48 @@ namespace DoomSurvivors.Entities
 {
     public class Shadow
     {
-        private Sdl.SDL_Color color;
+        public enum Shape
+        {
+            Ellipse,
+            Rectangle
+        }
+        
+        private Color color;
         private int rx;
         private int ry;
 
-        public Shadow(Sdl.SDL_Color color, int rx, int ry) {
+        private Action<int, int> drawFunction;
+
+        private void DrawEllipse(int x, int y)
+        {
+            Engine.DrawFilledEllipse(x, y, rx, ry, color);
+        }
+
+        private void DrawRectangle(int x, int y)
+        {
+            Engine.DrawRect(x-rx,y-ry,rx*2,ry*2, color);
+        }
+        public Shadow(Color color, int rx, int ry, Shape shape=Shape.Ellipse) {
             this.color = color;
             this.rx = rx;
             this.ry = ry;
+
+            switch (shape)
+            {
+                case Shape.Ellipse:
+                    this.drawFunction = DrawEllipse; 
+                    break;
+
+                case Shape.Rectangle:
+                    this.drawFunction = DrawRectangle;
+                    break;
+            }
+
         }
 
         public void Draw(int x, int y)
         {
-            Engine.DrawFilledEllipse(x,y, rx, ry, color.r, color.g, color.b, 128);
+            this.drawFunction(x, y);
         }
     }
 }

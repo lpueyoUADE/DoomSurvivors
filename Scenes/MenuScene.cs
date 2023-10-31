@@ -1,21 +1,30 @@
-﻿using DoomSurvivors.Viewport;
+﻿using DoomSurvivors.Entities;
+using DoomSurvivors.Viewport;
 using System;
 
 
 namespace DoomSurvivors.Scenes
 {
-    public class MenuScene : Scene
+    public class MenuScene : Scene, IRenderizable
     {
-        private Map background;
-        
-        public MenuScene(Map background)
+        private IntPtr backgroundImage;
+        private int width;
+        private int height;
+        public MenuScene(IntPtr backgroundImage, int width, int height)
         {
-            this.background = background;
+            this.backgroundImage = backgroundImage;
+            this.width = width;
+            this.height = height;
         }
 
         public override void Load()
         {
             Camera.Instance.Active = false;
+        }
+
+        public void Render()
+        {
+            Engine.Draw(this.backgroundImage, 0, 0, width, height);
         }
         public override void Update()
         {
@@ -24,7 +33,8 @@ namespace DoomSurvivors.Scenes
                 SceneController.Instance.ChangeScene(1);
             }
 
-            background.Update();
+            this.Render();
+            // background.Update();
         }
 
         public override void Reset()

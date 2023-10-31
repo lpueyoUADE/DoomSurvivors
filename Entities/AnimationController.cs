@@ -45,7 +45,10 @@ namespace DoomSurvivors.Entities
         }
         public void SetCurrentAnimationState(State animationState)
         {
-            if (this.AnimationList[(int)this.currentAnimationState].IsInterruptable || !this.AnimationList[(int)this.currentAnimationState].IsLooping)
+            bool isInterruptable = this.AnimationList[(int)this.currentAnimationState].IsInterruptable;
+            bool isNotLooping = !this.AnimationList[(int)this.currentAnimationState].IsLooping;
+            bool isDyingOrGibbing = animationState == State.Dying || animationState == State.Gibbing;
+            if (isInterruptable || isNotLooping || isDyingOrGibbing)
             {
                 if (this.currentAnimationState != animationState)
                 {

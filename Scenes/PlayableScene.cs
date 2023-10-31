@@ -1,4 +1,5 @@
 ﻿using DoomSurvivors.Entities;
+using DoomSurvivors.Entities.Factories;
 using DoomSurvivors.Main;
 using DoomSurvivors.Scenes;
 using DoomSurvivors.Utilities;
@@ -7,7 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Windows;
+using static DoomSurvivors.Entities.Monster;
+using static DoomSurvivors.Entities.Wall;
 
 namespace DoomSurvivors
 {
@@ -15,8 +19,8 @@ namespace DoomSurvivors
     {
         private Map map;
         private List<Tracer> tracerList;
-        private List<Entity> entityList;
-        private List<Entity> deadEntityList;
+        private List<GameObject> gameObjectList;
+        private List<GameObject> deadEntityList;
         private bool drawBoundingBox;
         private bool drawVisionRadius;
 
@@ -30,74 +34,44 @@ namespace DoomSurvivors
             set { this.drawVisionRadius = value; }
         }
 
-        public PlayableScene(Map map, bool drawBoundingBox = false, bool drawVisionRadius = false, params Entity[] entityList)
+        public PlayableScene(Map map, bool drawBoundingBox = false, bool drawVisionRadius = false)
         {
-            this.entityList = entityList.ToList();
-            this.deadEntityList = new List<Entity>();
+            this.gameObjectList = new List<GameObject>();
+            this.deadEntityList = new List<GameObject>();
             this.map = map;
+
             this.tracerList = new List<Tracer>();
             this.drawBoundingBox = drawBoundingBox;
             this.drawVisionRadius = drawVisionRadius;
         }
 
-
-        public void AddTracerEffect(Vector begin, Vector end)
+        public void AddGameObject(GameObject gameObject)
         {
-            tracerList.Add(new Tracer(begin, end, 20, new Color(0xff000000), new Color(0xffff00ff)));
-        }
-
-        public void AddEntity(Entity entity)
-        {
-            this.entityList.Add(entity);
+            this.gameObjectList.Add(gameObject);
         }
 
         private void checkCollisions()
         {
             // check-then-update approach
-            //foreach (Monster enemy in enemyList)
-            //{
-            //    if(player.IsColliding(enemy))
-            //    {
-            //        Console.WriteLine("Colliding!");
-            //        Vector playerVelocity = player.Velocity;
-            //        enemy.Transform.Position = new Vector(enemy.Transform.Position.X - enemy.Velocity.X, enemy.Transform.Position.Y - enemy.Velocity.Y);
-            //    }
-            //}
-
             // TODO: Implement either Quadtrees or Fixed Grid.
             // O(n**2)
-            for (int i = 0; i < entityList.Count; i++)
+            for (int i = 0; i < gameObjectList.Count; i++)
             {
-                Entity entity = entityList[i];
-                if (entity.CollisionType == CollisionType.Disabled)
+                GameObject gameObject = gameObjectList[i];
+                if (gameObject.CollisionType == CollisionType.Disabled)
                     continue;
 
-                for (int j = i + 1; j < entityList.Count; j++) // j = i + 1 Para no checkear A con B y despues B con A
+                for (int j = i + 1; j < gameObjectList.Count; j++) // j = i + 1 Para no checkear A con B y despues B con A
                 {
                     if (i == j)
                         continue;
 
-                    Entity other = entityList[j];
+                    GameObject other = gameObjectList[j];
                     if (other.CollisionType == CollisionType.Disabled)
                         continue;
 
-                    if (entity.Transform.isColliding(other.Transform))
-                        CollisionController.HandleCollision(entity, other);
-
-                    /*
-                    bool bulletHitTest = entity is Bullet || other is Bullet;
-
-                    bool ownBullet = 
-                        entity is Bullet && other is OffensiveEntity && ((Bullet)entity).IsownedBy((OffensiveEntity)other) ||
-                        other is Bullet && entity is OffensiveEntity && ((Bullet)other).IsownedBy((OffensiveEntity) entity);
-  
-                    if (!bulletHitTest && !ownBullet && entity.IsColliding(other))
-                    {
-                        Vector distance = other.Transform.PositionCenter - entity.Transform.PositionCenter;
-                        other.Velocity += distance / 3;
-                        entity.Velocity -= distance / 3;
-                    }
-                    */
+                    if (gameObject.Transform.isColliding(other.Transform))
+                        CollisionController.HandleCollision(gameObject, other);
                 }
             }
         }
@@ -105,17 +79,38 @@ namespace DoomSurvivors
         public override void Load()
         {
             Camera.Instance.Active = true;
-            foreach (Entity entity in entityList)
-            {
-                entity.DrawBoundingBox = drawBoundingBox;
-                
-                if (entity is Monster) 
-                   ((Monster)entity).ShowVisionRadius = drawVisionRadius;
 
-                if (entity is Player)
-                    ((Player)entity).Load();
+            // Load Player
+            Player player = PlayerFactory.Player((int)map.SpawnPoint.X, (int)map.SpawnPoint.Y);
+            player.DrawBoundingBox = drawBoundingBox;
+            player.Load();
+            AddGameObject(player);
+
+            // Load Monsters
+            foreach (MonsterPlacer monsterPlacer in map.MonsterList)
+            {
+                Monster monster = MonsterFactory.CreateMonster(monsterPlacer);
+                monster.DrawBoundingBox = drawBoundingBox;
+                monster.ShowVisionRadius = drawVisionRadius;
+                monster.Target = player;
+                AddGameObject(monster);
             }
 
+            // Load Walls
+            foreach (WallPlacer wallPlacer in map.WallList)
+            {
+                Wall wall = WallFactory.CreateWall(wallPlacer);
+                wall.DrawBoundingBox = drawBoundingBox;
+                AddGameObject(wall);
+            }
+            // Load Items
+
+            // Load Decor
+
+            // Set Camera
+            Camera.Instance.setCamera(player, new Transform(0, 0));
+
+            // Add Event Handlers
             RayTracedWeapon.RayTracedWeaponShotAction += RayTracedWeaponShotActionHandler;
             BulletWeapon.BulletWeaponShotAction += BulletWeaponShotActionHandler;
 
@@ -123,10 +118,12 @@ namespace DoomSurvivors
         public override void UnLoad()
         {
             Camera.Instance.Active = false;
+
+            // Remove Event Handlers
             RayTracedWeapon.RayTracedWeaponShotAction -= RayTracedWeaponShotActionHandler;
             BulletWeapon.BulletWeaponShotAction -= BulletWeaponShotActionHandler;
 
-            Player player = entityList.OfType<Player>().FirstOrDefault();
+            Player player = gameObjectList.OfType<Player>().FirstOrDefault();
             player?.Unload();
         }
 
@@ -137,7 +134,7 @@ namespace DoomSurvivors
 
         private void BulletWeaponShotActionHandler(BulletWeapon weapon)
         {
-            this.entityList.Add(weapon.SpawnBullet());
+            this.gameObjectList.Add(weapon.SpawnBullet());
         }
 
         public override void Update()
@@ -159,10 +156,11 @@ namespace DoomSurvivors
                 deadEntityList[i].Update();
             }
 
-            // Entities Update
-            for (int i = 0; i < entityList.Count; i++)
+            // GameObject Update
+            for (int i = 0; i < gameObjectList.Count; i++)
             {
-                entityList[i].Update();
+                gameObjectList[i].Update();
+                gameObjectList[i].Render();
             }
 
             // Tracer Effects Update
@@ -172,10 +170,10 @@ namespace DoomSurvivors
             }
 
             tracerList.RemoveAll(tracer => tracer.hasFinished);
-            entityList.RemoveAll(entity => entity is Bullet && ((Bullet)entity).isDead);
+            gameObjectList.RemoveAll(gameObject => gameObject is Bullet && ((Bullet)gameObject).isDead);
             
-            deadEntityList.AddRange(entityList.FindAll(entity => entity is OffensiveEntity && ((OffensiveEntity)entity).State == State.Death));
-            entityList.RemoveAll(entity => entity is OffensiveEntity && ((OffensiveEntity)entity).State == State.Death);
+            deadEntityList.AddRange(gameObjectList.FindAll(gameObject => gameObject is OffensiveEntity && ((OffensiveEntity)gameObject).State == State.Death));
+            gameObjectList.RemoveAll(gameObject => gameObject is OffensiveEntity && ((OffensiveEntity)gameObject).State == State.Death);
         }
         public override void Reset()
         {

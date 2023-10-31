@@ -66,9 +66,9 @@ class Engine
         Sdl.SDL_FillRect(screen, ref origin, 0);
     }
 
-    public static void Draw(IntPtr imagen, double x, double y)
+    public static void Draw(IntPtr imagen, double x, double y, int width, int height)
     {
-        Sdl.SDL_Rect origen = new Sdl.SDL_Rect(0, 0, (short)transform.W, (short)transform.H);
+        Sdl.SDL_Rect origen = new Sdl.SDL_Rect(0, 0, (short)width, (short)height);
         Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)transform.W, (short)transform.H);
         Sdl.SDL_BlitSurface(imagen, ref origen, screen, ref dest);
     }
@@ -103,6 +103,12 @@ class Engine
         Sdl.SDL_Rect rect = new Sdl.SDL_Rect((short)x, (short)y, (short)w, (short)h);
         Sdl.SDL_FillRect(screen, ref rect, color);
     }
+
+    public static void DrawRect(int x, int y, int w, int h, Color color)
+    {
+        SdlGfx.boxRGBA(screen, (short)x, (short)y, (short)(x + w - 1), (short)(y + h - 1), color.R, color.G, color.B, color.A);
+    }
+
     public static void DrawRect(Vector position, Vector size, int color)
     {
         Sdl.SDL_Rect rect = new Sdl.SDL_Rect((short)position.X, (short)position.Y, (short)size.X, (short)size.Y);
@@ -168,9 +174,9 @@ class Engine
         SdlGfx.aacircleRGBA(screen, (short)x, (short)y, (short)radius, color.R, color.G, color.B, color.A);
     }
 
-    public static void DrawFilledEllipse(int x, int y, int rx, int ry, int R, int G, int B, int A)
+    public static void DrawFilledEllipse(int x, int y, int rx, int ry, Color color)
     {
-        SdlGfx.filledEllipseRGBA(screen, (short)x, (short)y, (short)rx, (short)ry, (byte)R, (byte)G, (byte)B, (byte)A);
+        SdlGfx.filledEllipseRGBA(screen, (short)x, (short)y, (short)rx, (short)ry, color.R, color.G, color.R, color.A);
     }
 
     public static void DrawLine(int x1, int y1, int x2, int y2, Color color)

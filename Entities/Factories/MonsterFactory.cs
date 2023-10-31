@@ -1,15 +1,161 @@
 ﻿using DoomSurvivors.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using System.Windows;
+using static DoomSurvivors.Entities.Monster;
 
 namespace DoomSurvivors.Entities.Factories
 {
     public static class MonsterFactory
     {
-        public static Monster ZombieMan(int x, int y, Entity target=null)
+        public static Monster CreateMonster(MonsterPlacer monsterPlacer, Entity target = null)
         {
-            Monster zombieMan = new Monster(
+            Monster newMonster;
+            switch (monsterPlacer.monsterType)
+            {
+                case MonsterType.Zombie:
+                    newMonster = Zombie((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target); 
+                    break;
+
+                case MonsterType.Shotguner:
+                    newMonster = Shotguner((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    break;
+                case MonsterType.Chainguner:
+                    newMonster = Chainguner((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    break;
+                case MonsterType.Wolfenstein:
+                    newMonster = Wolfenstein((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    break;
+                case MonsterType.Imp:
+                    newMonster = Imp((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    break;
+                case MonsterType.Pinky:
+                    newMonster = Pinky((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    break;
+                case MonsterType.BaronOfHell:
+                    newMonster = BaronOfHell((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    break;
+                case MonsterType.HellKnight:
+                    newMonster = HellKnight((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    break;
+                case MonsterType.CacoDemon:
+                    newMonster = CacoDemon((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    break;
+                case MonsterType.LostSoul:
+                    newMonster = LostSoul((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    break;
+                case MonsterType.PainElemental:
+                    newMonster = PainElemental((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    break;
+                case MonsterType.Mancubus:
+                    newMonster = Mancubus((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    break;
+                case MonsterType.Arachnotron:
+                    newMonster = Arachnotron((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    break;
+                case MonsterType.Reventant:
+                    newMonster = Reventant((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    break;
+                case MonsterType.ArchVile:
+                    newMonster = Archvile((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    break;
+                case MonsterType.SpiderMasterMind:
+                    newMonster = SpiderMasterMind((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    break;
+                case MonsterType.CyberDemon:
+                    newMonster = CyberDemon((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    break;
+
+                default: throw new ArgumentException("Inexistent Monster Type");
+            }
+
+            return newMonster;
+        }
+
+        private static Monster Wolfenstein(int x, int y, Entity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Monster CyberDemon(int x, int y, Entity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Monster SpiderMasterMind(int x, int y, Entity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Monster Archvile(int x, int y, Entity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Monster Reventant(int x, int y, Entity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Monster Arachnotron(int x, int y, Entity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Monster Mancubus(int x, int y, Entity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Monster PainElemental(int x, int y, Entity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Monster LostSoul(int x, int y, Entity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Monster CacoDemon(int x, int y, Entity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Monster HellKnight(int x, int y, Entity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Monster BaronOfHell(int x, int y, Entity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Monster Pinky(int x, int y, Entity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Monster Imp(int x, int y, Entity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Monster Chainguner(int x, int y, Entity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Monster Shotguner(int x, int y, Entity target)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Monster Zombie(int x, int y, Entity target=null)
+        {
+            Monster zombie = new Monster(
                 new Transform(x, y, 57, 59),
                 5.0f,
                 10,
@@ -102,15 +248,15 @@ namespace DoomSurvivors.Entities.Factories
                 250.0f  // Vision radius
             );
 
-            zombieMan.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(zombieMan)
+            zombie.AddWeapon(
+                WeaponFactory.RayTracedPistolRed(zombie)
             );
 
-            zombieMan.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(zombieMan)
+            zombie.AddWeapon(
+                WeaponFactory.BulletPistolAutomatic(zombie)
             );
 
-            return zombieMan;
+            return zombie;
         }
     }
 }

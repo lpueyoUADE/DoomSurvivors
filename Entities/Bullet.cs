@@ -53,7 +53,7 @@ namespace DoomSurvivors.Entities
                 this.Destroy();
             }
 
-            if (other is Entity)
+            if (other is Entity || other is Wall)
             {
                 this.Destroy();
             }
@@ -80,7 +80,7 @@ namespace DoomSurvivors.Entities
                 dir.Normalize();
                 begin = origin + dir * maxHaloLength;
             } 
-            Console.WriteLine(begin);
+
             Engine.DrawGradientLine(Camera.Instance.WorldToCameraPosition(begin), Camera.Instance.WorldToCameraPosition(Transform.PositionCenter), new Color(0xff000011), new Color(0xffff00ff), 15);
             base.Update();
         }

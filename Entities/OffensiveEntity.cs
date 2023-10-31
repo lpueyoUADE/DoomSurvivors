@@ -33,7 +33,7 @@ namespace DoomSurvivors.Entities
             this.aimingAt = new Vector(0, 0);
             this.life = life;
 
-            this.attackingFriction = 0.5f;
+            this.attackingFriction = 0.3f;
         }
 
         override protected void setState(Vector direction)

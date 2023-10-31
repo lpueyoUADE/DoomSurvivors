@@ -26,7 +26,7 @@ namespace DoomSurvivors.Entities
         {
             int x, y;
             Sdl.SDL_GetMouseState(out x, out y);
-            Engine.Draw(this.sprite, x - this.x / 2, y - this.y / 2);
+            Engine.Draw(this.sprite, x - this.x / 2, y - this.y / 2, this.x, this.y);
         }
     }
 }

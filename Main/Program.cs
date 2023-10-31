@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using Tao.Sdl;
 using System.Windows;
 using DoomSurvivors.Entities.Factories;
+using static DoomSurvivors.Entities.Monster;
+using static DoomSurvivors.Entities.Wall;
 
 namespace DoomSurvivors.Main
 {
@@ -19,6 +21,7 @@ namespace DoomSurvivors.Main
         public static Crosshair crosshair;
 
         public static bool DEBUG_MODE = false;
+        public static Action DebugActions;
         // TODOS
         /*
             . HUD 
@@ -32,6 +35,8 @@ namespace DoomSurvivors.Main
             . Stats (health, xp)
             . Items
             . Boosts
+            . Lvl
+            . Skill tree
             
             . Factories (Monsters & Weapons)
             . Interfaces
@@ -41,26 +46,43 @@ namespace DoomSurvivors.Main
         public static event Action LeftMouseButtonReleasedAction;
         public static event Action RightMouseButtonReleasedAction;
 
+        public static void DebugModeActions()
+        {
+            Engine.DrawRect(Engine.Transform.W / 2, 0, 1, Engine.Transform.H, 0xfff);
+            Engine.DrawRect(0, Engine.Transform.H / 2, Engine.Transform.W, 1, 0xfff);
+        }
         static void Main(string[] args)
         {
             Engine.Initialize();
             Program.Initialize();
 
-            Player player = PlayerFactory.Player(0, 0);
-            Monster testEnemy = MonsterFactory.ZombieMan(200, 200, player);
-            Monster testEnemy2 = MonsterFactory.ZombieMan(400, 300, player);
-
-            // TODO Crear Factories de Entities y Scenes
-            MenuScene MainMenuScene = new MenuScene(new Map("E1", "assets/Maps/main_menu.png"));
-            MenuScene WinScene = new MenuScene(new Map("E1","assets/Maps/win.png"));
-            MenuScene LoseScene = new MenuScene(new Map("E1", "assets/Maps/lose.png"));
+            // TODO Crear Factories de Scenes
+            MenuScene MainMenuScene = new MenuScene(Engine.LoadImage("assets/Maps/main_menu.png"), 640, 640);
+            MenuScene WinScene = new MenuScene(Engine.LoadImage("assets/Maps/win.png"), 640, 640);
+            MenuScene LoseScene = new MenuScene(Engine.LoadImage("assets/Maps/lose.png"), 640, 640);
             PlayableScene E1Scene = new PlayableScene(
-                new Map("E1","assets/Maps/e1_test.png"),
+                /*new Map(
+                    "E1",
+                    "assets/Maps/Test_map_001.png",
+                    1920,
+                    1920,
+                    new Vector(800, 800),
+                    new Vector(1500, 1500),
+                    new List<MonsterPlacer> {
+                        new MonsterPlacer(MonsterType.Zombie, 200, 200),
+                        new MonsterPlacer(MonsterType.Zombie, 400, 300),
+                    },
+                    new List<WallPlacer> {
+                         new WallPlacer(WallType.TestWall, 500, 500),
+                         new WallPlacer(WallType.TestWall, 564, 500),
+                         new WallPlacer(WallType.TestWall, 628, 500)
+                    },
+                    new List<Decoration> { },
+                    new List<Item> { }
+                */
+                Map.CreateMap("E1_Test"),
                 DEBUG_MODE, // Show Bounding Boxes
-                DEBUG_MODE,   // Show vision Radius
-                player,
-                testEnemy,
-                testEnemy2
+                DEBUG_MODE   // Show vision Radius
             );
 
             // E1Scene.Load();
@@ -79,8 +101,11 @@ namespace DoomSurvivors.Main
             // Crosshair
             crosshair = new Crosshair(true);
 
-            // Camera
-            Camera.Instance.setCamera(player, new Transform(0, 0));
+            // Set Debug Actions
+            if (DEBUG_MODE)
+                DebugActions = DebugModeActions;
+            else
+                DebugActions = () => { };
 
             while (true) // Main loop
             {
@@ -96,11 +121,7 @@ namespace DoomSurvivors.Main
 
                 crosshair.Update();
 
-                if (DEBUG_MODE)
-                {
-                    Engine.DrawRect(Engine.Transform.W / 2, 0, 1, Engine.Transform.H, 0xfff);
-                    Engine.DrawRect(0, Engine.Transform.H / 2, Engine.Transform.W, 1, 0xfff);
-                }
+                DebugActions();
 
                 Engine.Show();  // Show current frame
 

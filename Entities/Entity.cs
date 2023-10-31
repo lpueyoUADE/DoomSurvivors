@@ -85,11 +85,9 @@ namespace DoomSurvivors.Entities
             base.OnCollision(other);
         }
 
-        override public void Render()
+        protected override IntPtr GetCurrentSprite()
         {
-            base.Render();
-            Vector position = Camera.Instance.WorldToCameraPosition(this.transform.Position);
-            Engine.Draw(animationController.getCurrentAnimationFrame(), (int)position.X, (int)position.Y);
+            return animationController.getCurrentAnimationFrame();
         }
 
         protected void ApplyFriction()
@@ -119,7 +117,7 @@ namespace DoomSurvivors.Entities
 
         protected abstract void InputEvents();
 
-        public new virtual void Update()
+        override public void Update()
         {
             this.InputEvents();
 
@@ -134,8 +132,6 @@ namespace DoomSurvivors.Entities
             ApplyFriction();
 
             transform.Position += velocity;
-
-            base.Update();
         }
     }
 }
