@@ -73,9 +73,11 @@ namespace DoomSurvivors.Scenes
 
         public static Map CreateMap(string name)
         {
-            string fileName = "assets/Maps/Test_map_001.json";
+            string fileName = "assets/Maps/Test Map/Test_map_001.json";
             string jsonString = File.ReadAllText(fileName);
+            
             JSONMap jsonMap = JsonSerializer.Deserialize<JSONMap>(jsonString);
+            
             JSONMapLayer floorLayer = jsonMap.layers.Find(layer => layer.name == "Floor");
             JSONMapLayer monstersLayer = jsonMap.layers.Find(layer => layer.name == "Monsters");
             JSONMapLayer wallsLayer = jsonMap.layers.Find(layer => layer.name == "Walls");
@@ -83,7 +85,14 @@ namespace DoomSurvivors.Scenes
             JSONMapLayer itemsLayer = jsonMap.layers.Find(layer => layer.name == "Items");
             JSONMapLayer spawnPointLayer = jsonMap.layers.Find(layer => layer.name == "SpawnPoint");
             JSONMapLayer exitPointLayer = jsonMap.layers.Find(layer => layer.name == "ExitPoint");
-            
+
+            JSONTileset monsterTileset = jsonMap.tilesets.Find(tilset => tilset.name == "monster_tiles");
+            JSONTileset wallTileset = jsonMap.tilesets.Find(tilset => tilset.name == "wall_tiles");
+            JSONTileset decorationTileset = jsonMap.tilesets.Find(tilset => tilset.name == "decoration_tiles");
+            JSONTileset itemTileset = jsonMap.tilesets.Find(tilset => tilset.name == "item_tiles");
+            JSONTileset spawnPointTileset = jsonMap.tilesets.Find(tilset => tilset.name == "spawn_point_tiles");
+            JSONTileset exitPointTileset = jsonMap.tilesets.Find(tilset => tilset.name == "exit_point_tiles");
+
             List<MonsterPlacer> monsterPlacers = new List<MonsterPlacer>
             {
                 new MonsterPlacer(MonsterType.Zombie, 200, 200),  // Hardcoded
@@ -99,7 +108,20 @@ namespace DoomSurvivors.Scenes
             int index;
             int tileID;
             int tileSize = 64; // Hardcoded
+            
+            // Monsters
+            for (int i = 0; i < monstersLayer.height; i++)
+            {
+                for (int j = 0; j < monstersLayer.width; j++)
+                {
+                    index = j + (monstersLayer.width * i); // Matrix to Array index
+                    tileID = monstersLayer.data[index];
+                    if (tileID > 0)
+                        monsterPlacers.Add(new MonsterPlacer((MonsterType)tileID - monsterTileset.firstgid, j * tileSize, i * tileSize));
+                }
+            }
 
+            // Walls
             for (int i = 0; i < wallsLayer.height; i++)
             {
                 for (int j = 0; j < wallsLayer.width; j++)
@@ -107,14 +129,14 @@ namespace DoomSurvivors.Scenes
                     index = j + (wallsLayer.width * i); // Matrix to Array index
                     tileID = wallsLayer.data[index];
                     if (tileID > 0)
-                        wallPlacers.Add(new WallPlacer(WallType.TestWall/*Type Hardcoded*/, j * tileSize, i*tileSize));
+                        wallPlacers.Add(new WallPlacer((WallType)tileID - wallTileset.firstgid, j * tileSize, i * tileSize));
                 }
             }
 
             return new Map
             (
                 name,
-                "assets/Maps/Test_map_001.png", // Hardcoded
+                "assets/Maps/Test Map/Test_map_Floor.png", // Hardcoded
                 floorLayer.width * jsonMap.tilewidth,
                 floorLayer.height * jsonMap.tileheight,
                 spawnPoint,

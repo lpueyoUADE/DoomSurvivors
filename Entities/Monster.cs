@@ -22,7 +22,7 @@ namespace DoomSurvivors.Entities
             PainElemental,
             Mancubus,
             Arachnotron,
-            Reventant,
+            Revenant,
             ArchVile,
             SpiderMasterMind,
             CyberDemon

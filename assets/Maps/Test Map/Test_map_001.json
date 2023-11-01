@@ -298,15 +298,18 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"..\/Map Editor\/Wall Tiles.tsx"
+         "source": "..\/Map Editor\/Wall Tiles.tsx",
+         "name": "wall_tiles"
         }, 
         {
          "firstgid":2,
-         "source":"..\/Map Editor\/Floor Tiles.tsx"
-        }, 
+         "source":"..\/Map Editor\/Floor Tiles.tsx",
+         "name": "floor_tiles"
+        },
         {
-         "firstgid":149,
-         "source":"..\/Map Editor\/Monsters Tiles.tsx"
+          "firstgid": 149,
+          "source": "..\/Map Editor\/Monsters Tiles.tsx",
+          "name": "monster_tiles"
         }],
  "tilewidth":64,
  "type":"map",

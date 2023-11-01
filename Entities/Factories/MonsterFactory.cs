@@ -54,8 +54,8 @@ namespace DoomSurvivors.Entities.Factories
                 case MonsterType.Arachnotron:
                     newMonster = Arachnotron((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
                     break;
-                case MonsterType.Reventant:
-                    newMonster = Reventant((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                case MonsterType.Revenant:
+                    newMonster = Revenant((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
                     break;
                 case MonsterType.ArchVile:
                     newMonster = Archvile((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
@@ -93,7 +93,7 @@ namespace DoomSurvivors.Entities.Factories
             throw new NotImplementedException();
         }
 
-        private static Monster Reventant(int x, int y, Entity target)
+        private static Monster Revenant(int x, int y, Entity target)
         {
             throw new NotImplementedException();
         }
