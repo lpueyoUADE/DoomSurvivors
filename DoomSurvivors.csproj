@@ -125,13 +125,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="assets\Maps\Test_map_001.json">
+    <None Include="assets\Maps\Test Map\Test_map_001.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="assets\Crosshair\crosshair_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -157,10 +156,10 @@
     <Content Include="assets\Maps\main_menu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\Maps\Test_map_001.png">
+    <Content Include="assets\Maps\Map Editor\wall_001.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\Maps\wall_001.png">
+    <Content Include="assets\Maps\Test Map\Test_map_Floor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Maps\win.png">
