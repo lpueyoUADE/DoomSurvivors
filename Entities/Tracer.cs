@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace DoomSurvivors.Entities
 {
-    public class Tracer
+    public class Tracer : IRenderizable
     {
         private Vector origin;
         private Vector end;
@@ -56,6 +56,12 @@ namespace DoomSurvivors.Entities
             if (cycles == lifespan)
                 return;
 
+            Render();
+            cycles++;
+        }
+
+        public void Render()
+        {
             Color nextBeginColor = beginColor.Clone();
             Color nextEndColor = endColor.Clone();
 
@@ -65,11 +71,9 @@ namespace DoomSurvivors.Entities
             Engine.DrawGradientLine(
                 Camera.Instance.WorldToCameraPosition(origin),
                 Camera.Instance.WorldToCameraPosition(end),
-                nextBeginColor, 
-                nextEndColor, 
+                nextBeginColor,
+                nextEndColor,
                 15);
-
-            cycles++;
         }
     }
 }

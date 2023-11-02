@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Tao.Sdl;
 
 namespace DoomSurvivors.Entities
@@ -70,6 +71,11 @@ namespace DoomSurvivors.Entities
             bool yAxisColliding = this.Y < other.Y + other.H && this.Y + this.H> other.Y;
 
             return xAxisColliding && yAxisColliding;
+        }
+
+        internal Transform Clone()
+        {
+            return new Transform(this.Position, this.size);
         }
     }
 }

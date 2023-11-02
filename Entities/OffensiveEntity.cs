@@ -1,4 +1,5 @@
 ﻿using DoomSurvivors.Utilities;
+using DoomSurvivors.Viewport;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -19,7 +20,11 @@ namespace DoomSurvivors.Entities
 
         public Vector WeaponPosition => this.transform.Position + this.weaponOffset;
         public Vector AimingAt => this.aimingAt;
-        public int Life => this.life;
+        public int Life
+        {
+            get => this.life;
+            set => this.life = value;
+        } 
 
         public bool IsDying => this.State == State.Dying || this.State == State.Gibbing;
         public bool IsDeath => this.State == State.Death || this.State == State.GibDeath;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace DoomSurvivors.Utilities
 {
@@ -59,6 +60,11 @@ namespace DoomSurvivors.Utilities
         public Color Clone()
         {
             return new Color(this.r, this.g, this.b, this.a);
+        }
+
+        public override string ToString()
+        {
+            return $"{this.r} {this.g} {this.b} {this.a}";
         }
     }
 }

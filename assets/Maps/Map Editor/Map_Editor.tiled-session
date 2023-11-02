@@ -4,6 +4,10 @@
         "."
     ],
     "fileStates": {
+        "": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "Floor Tiles.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
@@ -13,12 +17,36 @@
             "scaleInEditor": 1
         },
         "Map_editor.tmx": {
-            "scale": 0.44135416666666666,
-            "selectedLayer": 2,
+            "scale": 0.4240364583333333,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 958.4139721501062,
-                "y": 958.4139721501061
+                "x": 956.2856967389303,
+                "y": 952.7482650617208
             }
+        },
+        "Map_editor.tmx#Floor Tiles": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Map_editor.tmx#Item Tiles": {
+            "scaleInDock": 1
+        },
+        "Map_editor.tmx#Items Tiles": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Map_editor.tmx#Monster Tiles": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Map_editor.tmx#Monsters Tiles": {
+            "scaleInDock": 1
+        },
+        "Map_editor.tmx#Spawn Point Tiles": {
+            "scaleInDock": 1
+        },
+        "Map_editor.tmx#Wall Tiles": {
+            "scaleInDock": 1
         },
         "Monsters Tiles.tsx": {
             "scaleInDock": 1,
@@ -33,20 +61,17 @@
     "last.imagePath": "C:/projects/C#/DoomSurvivors/assets/Maps/Map Editor",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "openFiles": [
+        "Map_editor.tmx"
+    ],
+    "project": "Map_Editor.tiled-project",
+    "recentFiles": [
         "Map_editor.tmx",
         "Monsters Tiles.tsx",
         "Wall Tiles.tsx",
         "Floor Tiles.tsx",
         "Items Tiles.tsx"
     ],
-    "project": "Map_Editor.tiled-project",
-    "recentFiles": [
-        "Items Tiles.tsx",
-        "Floor Tiles.tsx",
-        "Wall Tiles.tsx",
-        "Monsters Tiles.tsx",
-        "Map_editor.tmx"
-    ],
+    "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 64,

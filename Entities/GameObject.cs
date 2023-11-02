@@ -20,23 +20,32 @@ namespace DoomSurvivors.Entities
     public abstract class GameObject : IRenderizable, ICollidable
     {
         protected Transform transform; 
+        protected Vector previousPosition;
         protected Shadow shadow;
         private CollisionType collisionType;
 
+        private Vector drawingOffset;
         private bool drawShadow;
         private bool drawBoundingBox;
 
-        public Transform Transform { get { return transform; } }
+        public Transform Transform => transform;
+        public Vector PreviousPosition => previousPosition;
 
-        public bool DrawShadow { 
-            get { return drawShadow; }
-            set { drawShadow = value;  }
+        public Vector DrawingOffset
+        {
+            get => drawingOffset;
+            set => drawingOffset = value;
+        }
+        public bool DrawShadow 
+        { 
+            get => drawShadow;
+            set => drawShadow = value;
         }
 
         public bool DrawBoundingBox
         {
-            get { return drawBoundingBox; }
-            set { drawBoundingBox = value; }
+            get => drawBoundingBox;
+            set => drawBoundingBox = value;
         }
 
         public CollisionType CollisionType { get => collisionType; set => collisionType = value; }
@@ -44,6 +53,7 @@ namespace DoomSurvivors.Entities
         public GameObject(Transform transform, CollisionType collisionType=CollisionType.Static, bool drawShadow=true, bool drawBoundingBox=false)
         {
             this.transform = transform;
+            this.previousPosition = transform.Position;
             this.collisionType = collisionType;
             this.drawShadow = drawShadow;
             this.drawBoundingBox = drawBoundingBox;
@@ -63,8 +73,11 @@ namespace DoomSurvivors.Entities
             if (drawBoundingBox)
                 Engine.DrawRect(position, Transform.Size, 0xff0000);
 
-            Engine.Draw(GetCurrentSprite(), (int)position.X, (int)position.Y, transform.W, transform.H);
+            Engine.Draw(GetCurrentSprite(), (int)position.X + DrawingOffset.X, (int)position.Y + DrawingOffset.Y, transform.W, transform.H);
         }
-        public abstract void Update();
+        public virtual void Update()
+        {
+            this.previousPosition = transform.Position;
+        }
     }
 }

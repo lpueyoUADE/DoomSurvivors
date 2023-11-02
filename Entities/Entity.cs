@@ -119,6 +119,7 @@ namespace DoomSurvivors.Entities
 
         override public void Update()
         {
+            base.Update();
             this.InputEvents();
 
             if (direction.Length > 0)

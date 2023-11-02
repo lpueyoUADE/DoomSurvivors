@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows;
+using static DoomSurvivors.Entities.Item;
 using static DoomSurvivors.Entities.Monster;
 using static DoomSurvivors.Entities.Wall;
 
@@ -103,7 +104,14 @@ namespace DoomSurvivors
                 wall.DrawBoundingBox = drawBoundingBox;
                 AddGameObject(wall);
             }
+
             // Load Items
+            foreach (ItemPlacer itemPlacer in map.ItemList)
+            {
+                Item item = ItemFactory.CreateItem(itemPlacer);
+                item.DrawBoundingBox = drawBoundingBox;
+                AddGameObject(item);
+            }
 
             // Load Decor
 
@@ -145,11 +153,10 @@ namespace DoomSurvivors
             // Map Update
             map.Update();
 
-            // Add newly spawn entites
-
             // Collisions
             checkCollisions();
 
+            // Add newly spawn 
             // Dead Entities Update
             for (int i = 0; i < deadEntityList.Count; i++)
             {

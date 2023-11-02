@@ -179,6 +179,20 @@ class Engine
         SdlGfx.filledEllipseRGBA(screen, (short)x, (short)y, (short)rx, (short)ry, color.R, color.G, color.R, color.A);
     }
 
+    public static void DrawGradientEllipse(int x, int y, int beginRx, int beginRy, int endRx, int endRy, Color beginColor, Color endColor, int steps)
+    {
+        float step = 1f / steps;
+        int rx, ry;
+        Color color;
+        for (int i = 0; i <= steps; i++)
+        {
+            rx = (int)Tools.Lerp(beginRx, endRx, step * i);
+            ry = (int)Tools.Lerp(beginRy, endRy, step * i);
+            color = new Color(Tools.Lerp((uint)beginColor, (uint)endColor, step * i));
+            SdlGfx.filledEllipseRGBA(screen, (short)x, (short)y, (short)rx, (short)ry, color.R, color.G, color.B, color.A);
+        }
+    }
+
     public static void DrawLine(int x1, int y1, int x2, int y2, Color color)
     {
         SdlGfx.aalineRGBA(screen, (short)x1, (short)y1, (short)x2, (short)y2, color.R, color.G, color.B, color.A);
@@ -199,9 +213,9 @@ class Engine
         List<Color> colorList = new List<Color>();
         float step = 1f / steps;
 
-        for (int i= 0; i < steps; i++)
+        for (int i= 0; i <= steps; i++)
         {
-            Color currentColor = new Color(Tools.Lerp((uint)beginColor, (uint)endColor, step * (i + 1)));
+            Color currentColor = new Color(Tools.Lerp((uint)beginColor, (uint)endColor, step * i));
             colorList.Add(currentColor);
         }
 

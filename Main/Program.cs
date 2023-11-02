@@ -96,7 +96,7 @@ namespace DoomSurvivors.Main
                 }
             );
 
-            SceneController.Instance.ChangeScene(0);
+            SceneController.Instance.ChangeScene(1);
 
             // Crosshair
             crosshair = new Crosshair(true);
@@ -107,9 +107,18 @@ namespace DoomSurvivors.Main
             else
                 DebugActions = () => { };
 
+            int currentTicks = 0;
+            int oldTicks;
+            float fps;
+
+            IntPtr DoomFont = Engine.LoadFont("assets/Fonts/DooM.ttf", 14);
+
             while (true) // Main loop
             {
                 Program.UpdateTime();
+
+                oldTicks = currentTicks;
+                currentTicks = Sdl.SDL_GetTicks();
 
                 SceneController.Instance.Load();
 
@@ -123,9 +132,12 @@ namespace DoomSurvivors.Main
 
                 DebugActions();
 
+                fps = 1000 / (currentTicks - oldTicks);
+                Engine.DrawText(fps.ToString(), 0, 0, 255, 255, 255, DoomFont);
+
                 Engine.Show();  // Show current frame
 
-                Sdl.SDL_Delay(16); // aprox 60 FPS
+                Sdl.SDL_Delay(2);
             }
         }
 

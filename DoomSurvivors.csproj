@@ -83,11 +83,13 @@
     <Compile Include="Entities\Bullet.cs" />
     <Compile Include="Entities\CollisionController.cs" />
     <Compile Include="Entities\Decoration.cs" />
+    <Compile Include="Entities\Factories\ItemFactory.cs" />
     <Compile Include="Entities\Factories\PlayerFactory.cs" />
     <Compile Include="Entities\Factories\TracerFactory.cs" />
     <Compile Include="Entities\Factories\WallFactory.cs" />
     <Compile Include="Entities\Factories\WeaponFactory.cs" />
     <Compile Include="Entities\GameObject.cs" />
+    <Compile Include="Entities\Halo.cs" />
     <Compile Include="Entities\ICollidable.cs" />
     <Compile Include="Entities\IRenderizable.cs" />
     <Compile Include="Entities\Factories\MonsterFactory.cs" />
@@ -125,6 +127,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="assets\Fonts\DooM.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="assets\Maps\Test Map\Test_map_001.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -247,6 +252,54 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Sprites\DoomGuy\doomguy_pain_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Items\Invicibility\Idle_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Items\Invicibility\Idle_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Items\Invicibility\Idle_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Items\Invicibility\Idle_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Items\Invulnerability\Idle_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Items\Invulnerability\Idle_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Items\Invulnerability\Idle_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Items\Invulnerability\Idle_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Items\MegaSphere\Idle_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Items\MegaSphere\Idle_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Items\MegaSphere\Idle_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Items\MegaSphere\Idle_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Items\SoulSphere\Idle_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Items\SoulSphere\Idle_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Items\SoulSphere\Idle_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Items\SoulSphere\Idle_4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Sprites\Zombie\Zombie_attacking_1.png">

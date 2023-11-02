@@ -38,7 +38,6 @@ namespace DoomSurvivors.Viewport
                 return instance;
             }
         }
-
         public void setCamera(Entity target, Transform transform)
         {
             if (instance == null)
@@ -59,6 +58,7 @@ namespace DoomSurvivors.Viewport
         private void PanToTarget()
         {
             this.transform.Position = Tools.Lerp(this.transform.Position, target.Transform.PositionCenter, panSpeed);
+            //this.transform.Position = target.Transform.PositionCenter;
         }
 
         public Vector WorldToCameraPosition(Vector other)

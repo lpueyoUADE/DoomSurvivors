@@ -13,6 +13,7 @@ namespace DoomSurvivors.Entities
             base(transform, speed, life, WeaponOffset, animationController, weaponController)
         {
             this.CollisionType = CollisionType.Static;
+            this.Life = 100000;
         }
 
         private void LeftMouseButtonReleasedActionHandler()

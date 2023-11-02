@@ -25,27 +25,13 @@ namespace DoomSurvivors.Scenes
         private List<DecorationPlacer> decorList;
         private List<ItemPlacer> itemList;
 
-        public Transform Transform { get { return this.transform; } }
+        public Transform Transform => transform;
+        public Vector SpawnPoint => spawnPoint;
+        public List<MonsterPlacer> MonsterList => monsterList;
+        public List<WallPlacer> WallList => wallList;
+        public List<DecorationPlacer> DecorList => decorList;
+        public List<ItemPlacer> ItemList => itemList;
 
-        public Vector SpawnPoint
-        {
-            get { return spawnPoint; }
-        }
-
-        public List<MonsterPlacer> MonsterList
-        {
-            get { return this.monsterList; }
-        }
-
-        public List<WallPlacer> WallList
-        {
-            get { return this.wallList; }
-        }
-
-        public List<DecorationPlacer> DecorList
-        {
-            get { return this.decorList; }
-        }
         public Map(
                 string name, 
                 string floorTexture,
@@ -86,23 +72,19 @@ namespace DoomSurvivors.Scenes
             JSONMapLayer spawnPointLayer = jsonMap.layers.Find(layer => layer.name == "SpawnPoint");
             JSONMapLayer exitPointLayer = jsonMap.layers.Find(layer => layer.name == "ExitPoint");
 
-            JSONTileset monsterTileset = jsonMap.tilesets.Find(tilset => tilset.name == "monster_tiles");
-            JSONTileset wallTileset = jsonMap.tilesets.Find(tilset => tilset.name == "wall_tiles");
-            JSONTileset decorationTileset = jsonMap.tilesets.Find(tilset => tilset.name == "decoration_tiles");
-            JSONTileset itemTileset = jsonMap.tilesets.Find(tilset => tilset.name == "item_tiles");
-            JSONTileset spawnPointTileset = jsonMap.tilesets.Find(tilset => tilset.name == "spawn_point_tiles");
-            JSONTileset exitPointTileset = jsonMap.tilesets.Find(tilset => tilset.name == "exit_point_tiles");
+            JSONTileset monsterTileset = jsonMap.tilesets.Find(tilset => tilset.name == "Monster Tiles");
+            JSONTileset wallTileset = jsonMap.tilesets.Find(tilset => tilset.name == "Wall Tiles");
+            JSONTileset decorationTileset = jsonMap.tilesets.Find(tilset => tilset.name == "Decoration Tiles");
+            JSONTileset itemTileset = jsonMap.tilesets.Find(tilset => tilset.name == "Item Tiles");
+            JSONTileset spawnPointTileset = jsonMap.tilesets.Find(tilset => tilset.name == "Spawn Point Tiles");
+            JSONTileset exitPointTileset = jsonMap.tilesets.Find(tilset => tilset.name == "Exit Point Tiles");
 
-            List<MonsterPlacer> monsterPlacers = new List<MonsterPlacer>
-            {
-                new MonsterPlacer(MonsterType.Zombie, 200, 200),  // Hardcoded
-                new MonsterPlacer(MonsterType.Zombie, 400, 300),  // Hardcoded
-            };
+            List<MonsterPlacer> monsterPlacers = new List<MonsterPlacer>();
             List <WallPlacer> wallPlacers = new List<WallPlacer>();
             List<DecorationPlacer> decorationPlacers = new List<DecorationPlacer>();
             List<ItemPlacer> itemPlacers = new List<ItemPlacer>();
 
-            Vector spawnPoint = new Vector(800, 800); // Hardcoded
+            Vector spawnPoint = new Vector(0,0);
             Vector exitPoint = new Vector(1500, 1500); // Hardcoded
 
             int index;
@@ -133,6 +115,29 @@ namespace DoomSurvivors.Scenes
                 }
             }
 
+            // Items
+            for (int i = 0; i < itemsLayer.height; i++)
+            {
+                for (int j = 0; j < itemsLayer.width; j++)
+                {
+                    index = j + (itemsLayer.width * i); // Matrix to Array index
+                    tileID = itemsLayer.data[index];
+                    if (tileID > 0)
+                        itemPlacers.Add(new ItemPlacer((ItemType)tileID - itemTileset.firstgid, j * tileSize, i * tileSize));
+                }
+            }
+
+            // Spawn Point
+            for (int i = 0; i < spawnPointLayer.height; i++)
+            {
+                for (int j = 0; j < spawnPointLayer.width; j++)
+                {
+                    index = j + (spawnPointLayer.width * i); // Matrix to Array index
+                    tileID = spawnPointLayer.data[index];
+                    if (tileID > 0)
+                        spawnPoint = new Vector (j * tileSize, i * tileSize);
+                }
+            }
             return new Map
             (
                 name,

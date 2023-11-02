@@ -39,11 +39,13 @@ namespace DoomSurvivors.Entities
 
         override public void OnCollision(GameObject other)
         {
-            if (other is Entity)
-            {
-                Vector distance = other.Transform.PositionCenter - this.Transform.PositionCenter;
-                ((Entity)other).Velocity += distance / 5;
-            }
+            //if (other is Entity)
+            //{
+            //    Vector distance = other.Transform.PositionCenter - this.Transform.PositionCenter;
+            //    ((Entity)other).Velocity += distance / 5;
+            //}
+
+            other.Transform.Position = other.PreviousPosition;                
 
             base.OnCollision(other);
         }
