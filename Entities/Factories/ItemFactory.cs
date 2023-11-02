@@ -133,32 +133,116 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item YellowSkullKey(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = new Transform(x, y, 13, 16);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/YellowSkullKey/Idle_1.png"),
+                        Engine.LoadImage("assets/Sprites/Items/YellowSkullKey/Idle_2.png")
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0xFF7F1B00), new Color(0xFF7F1B80), 5)
+            );
         }
 
         private static Item RedSkullKey(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = new Transform(x, y, 13, 16);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/RedSkullKey/Idle_1.png"),
+                        Engine.LoadImage("assets/Sprites/Items/RedSkullKey/Idle_2.png")
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0xFF000000), new Color(0xFF000080), 5)
+            );
         }
 
         private static Item BlueSkullKey(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = new Transform(x, y, 13, 16);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/BlueSkullKey/Idle_1.png"),
+                        Engine.LoadImage("assets/Sprites/Items/BlueSkullKey/Idle_2.png")
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x0000CB00), new Color(0x0000CB80), 5)
+            );
         }
 
         private static Item YellowKey(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = new Transform(x, y, 14, 16);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/YellowKey/Idle_1.png"),
+                        Engine.LoadImage("assets/Sprites/Items/YellowKey/Idle_2.png")
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0xD7BB4300), new Color(0xD7BB4380), 5)
+            );
         }
 
         private static Item RedKey(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = new Transform(x, y, 14, 16);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/RedKey/Idle_1.png"),
+                        Engine.LoadImage("assets/Sprites/Items/RedKey/Idle_2.png")
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0xE3000000), new Color(0xE3000080), 5)
+            );
         }
 
         private static Item BlueKey(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = new Transform(x, y, 14, 16);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/BlueKey/Idle_1.png"),
+                        Engine.LoadImage("assets/Sprites/Items/BlueKey/Idle_2.png")
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x0000E300), new Color(0x0000E380), 5)
+            );
         }
 
         private static Item Berserk(int x, int y)
@@ -168,12 +252,42 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Map(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = new Transform(x, y, 28, 27);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Map/Idle_1.png"),
+                        Engine.LoadImage("assets/Sprites/Items/Map/Idle_2.png"),
+                        Engine.LoadImage("assets/Sprites/Items/Map/Idle_3.png"),
+                        Engine.LoadImage("assets/Sprites/Items/Map/Idle_4.png"),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static Item Goggles(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = new Transform(x, y, 28, 13);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Goggles/Idle_1.png"),
+                        Engine.LoadImage("assets/Sprites/Items/Goggles/Idle_2.png")
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0xFF1F1F00), new Color(0xFF1F1F60), 5)
+            );
         }
 
         private static Item Invulnerability(int x, int y)
@@ -284,12 +398,44 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Helmet(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = new Transform(x, y, 16, 15);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Helmet/Idle_1.png"),
+                        Engine.LoadImage("assets/Sprites/Items/Helmet/Idle_2.png"),
+                        Engine.LoadImage("assets/Sprites/Items/Helmet/Idle_3.png"),
+                        Engine.LoadImage("assets/Sprites/Items/Helmet/Idle_4.png"),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static Item HealthPotion(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = new Transform(x, y, 14, 18);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/HealthPotion/Idle_1.png"),
+                        Engine.LoadImage("assets/Sprites/Items/HealthPotion/Idle_2.png"),
+                        Engine.LoadImage("assets/Sprites/Items/HealthPotion/Idle_3.png"),
+                        Engine.LoadImage("assets/Sprites/Items/HealthPotion/Idle_4.png"),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x3737FF00), new Color(0x0000FF60), 5)
+            );
         }
 
         private static Item Backpack(int x, int y)
