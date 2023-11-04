@@ -79,7 +79,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Animation2.cs" />
     <Compile Include="Entities\BulletWeapon.cs" />
     <Compile Include="Entities\Bullet.cs" />
     <Compile Include="Entities\CollisionController.cs" />

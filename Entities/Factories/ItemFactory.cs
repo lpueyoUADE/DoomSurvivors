@@ -264,7 +264,7 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0x73000000), new Color(0x73000080), 5)
             );
         }
 
@@ -285,7 +285,7 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0x53AF4700), new Color(0x53AF4780), 5)
             );
         }
 
@@ -363,7 +363,7 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x00FF0000), new Color(0x00FF0080), 5)
+                new Halo(transform.Clone(), new Color(0x00FF0000), new Color(0x00FF0050), 5)
             );
         }
 
@@ -418,11 +418,11 @@ namespace DoomSurvivors.Entities.Factories
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(325,110,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(357,110,transform.W, transform.H))
                     },
-                    Animation.Speed.faster,
+                    Animation.Speed.slow,
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0x0000E300), new Color(0x0000E350), 5)
             );
         }
 
@@ -437,11 +437,11 @@ namespace DoomSurvivors.Entities.Factories
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(261,110,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(293,110,transform.W, transform.H))
                     },
-                    Animation.Speed.faster,
+                    Animation.Speed.slow,
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0x67DF5F00), new Color(0x67DF5F80), 5)
             );
         }
 
@@ -459,7 +459,7 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
 
@@ -477,7 +477,7 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
 
@@ -537,7 +537,7 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0x775F4B00), new Color(0x775F4B80), 5)
             );
         }
 
@@ -555,7 +555,7 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
 
@@ -573,7 +573,7 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
 
@@ -591,7 +591,7 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
 
@@ -609,7 +609,7 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
 
@@ -627,7 +627,7 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
 
@@ -645,7 +645,7 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
 
@@ -663,7 +663,7 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
 
@@ -681,7 +681,7 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
 
@@ -699,7 +699,7 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0xAAFF0000), new Color(0xAAFF0080), 5)
             );
         }
 
@@ -717,7 +717,7 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0x00FFAA00), new Color(0x00FFAA80), 5)
             );
         }
 

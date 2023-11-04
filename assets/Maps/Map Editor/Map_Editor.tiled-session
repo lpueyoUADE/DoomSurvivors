@@ -17,11 +17,11 @@
             "scaleInEditor": 1
         },
         "Map_editor.tmx": {
-            "scale": 0.4240364583333333,
-            "selectedLayer": 4,
+            "scale": 0.44135416666666666,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 958.6439845237365,
-                "y": 955.106552846527
+                "x": 915.3646447958461,
+                "y": 960.679726221383
             }
         },
         "Map_editor.tmx#Floor Tiles": {
