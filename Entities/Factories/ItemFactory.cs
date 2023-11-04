@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using static DoomSurvivors.Entities.Item;
@@ -131,16 +132,20 @@ namespace DoomSurvivors.Entities.Factories
             return newItem;
         }
 
+        private static Transform tileCenteredTransform(int x, int y, int width, int height, int tileSize)
+        {
+            return new Transform(x + (tileSize - width)/2, y + (tileSize - height) / 2, width, height);
+        }
         private static Item YellowSkullKey(int x, int y)
         {
-            Transform transform = new Transform(x, y, 13, 16);
+            Transform transform = tileCenteredTransform(x, y, 13, 16, Scenes.Map.TileSize);
 
             return new Item(
                 transform,
                 new Animation(
                     new List<IntPtr> {
-                        Engine.LoadImage("assets/Sprites/Items/YellowSkullKey/Idle_1.png"),
-                        Engine.LoadImage("assets/Sprites/Items/YellowSkullKey/Idle_2.png")
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(147,212,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(161,212,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
                     true,
@@ -152,14 +157,14 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item RedSkullKey(int x, int y)
         {
-            Transform transform = new Transform(x, y, 13, 16);
+            Transform transform = tileCenteredTransform(x, y, 13, 16, Scenes.Map.TileSize);
 
             return new Item(
                 transform,
                 new Animation(
                     new List<IntPtr> {
-                        Engine.LoadImage("assets/Sprites/Items/RedSkullKey/Idle_1.png"),
-                        Engine.LoadImage("assets/Sprites/Items/RedSkullKey/Idle_2.png")
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(119,212,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(133,212,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
                     true,
@@ -171,14 +176,14 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item BlueSkullKey(int x, int y)
         {
-            Transform transform = new Transform(x, y, 13, 16);
+            Transform transform = tileCenteredTransform(x, y, 13, 16, Scenes.Map.TileSize);
 
             return new Item(
                 transform,
                 new Animation(
                     new List<IntPtr> {
-                        Engine.LoadImage("assets/Sprites/Items/BlueSkullKey/Idle_1.png"),
-                        Engine.LoadImage("assets/Sprites/Items/BlueSkullKey/Idle_2.png")
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(91,212, transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(105,212, transform.W, transform.H)),
                     },
                     Animation.Speed.faster,
                     true,
@@ -190,14 +195,14 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item YellowKey(int x, int y)
         {
-            Transform transform = new Transform(x, y, 14, 16);
+            Transform transform = tileCenteredTransform(x, y, 14, 16, Scenes.Map.TileSize);
 
             return new Item(
                 transform,
                 new Animation(
                     new List<IntPtr> {
-                        Engine.LoadImage("assets/Sprites/Items/YellowKey/Idle_1.png"),
-                        Engine.LoadImage("assets/Sprites/Items/YellowKey/Idle_2.png")
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(61,212, transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(76,212, transform.W, transform.H)),
                     },
                     Animation.Speed.faster,
                     true,
@@ -209,14 +214,14 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item RedKey(int x, int y)
         {
-            Transform transform = new Transform(x, y, 14, 16);
+            Transform transform = tileCenteredTransform(x, y, 14, 16, Scenes.Map.TileSize);
 
             return new Item(
                 transform,
                 new Animation(
                     new List<IntPtr> {
-                        Engine.LoadImage("assets/Sprites/Items/RedKey/Idle_1.png"),
-                        Engine.LoadImage("assets/Sprites/Items/RedKey/Idle_2.png")
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(31,212, transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(46,212, transform.W, transform.H)),
                     },
                     Animation.Speed.faster,
                     true,
@@ -228,14 +233,14 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item BlueKey(int x, int y)
         {
-            Transform transform = new Transform(x, y, 14, 16);
+            Transform transform = tileCenteredTransform(x, y, 14, 16, Scenes.Map.TileSize);
 
             return new Item(
                 transform,
                 new Animation(
                     new List<IntPtr> {
-                        Engine.LoadImage("assets/Sprites/Items/BlueKey/Idle_1.png"),
-                        Engine.LoadImage("assets/Sprites/Items/BlueKey/Idle_2.png")
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(1,212, transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(16,212, transform.W, transform.H)),
                     },
                     Animation.Speed.faster,
                     true,
@@ -247,21 +252,34 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Berserk(int x, int y)
         {
-            throw new NotImplementedException();
-        }
-
-        private static Item Map(int x, int y)
-        {
-            Transform transform = new Transform(x, y, 28, 27);
+            Transform transform = tileCenteredTransform(x, y, 28, 19, Scenes.Map.TileSize);
 
             return new Item(
                 transform,
                 new Animation(
                     new List<IntPtr> {
-                        Engine.LoadImage("assets/Sprites/Items/Map/Idle_1.png"),
-                        Engine.LoadImage("assets/Sprites/Items/Map/Idle_2.png"),
-                        Engine.LoadImage("assets/Sprites/Items/Map/Idle_3.png"),
-                        Engine.LoadImage("assets/Sprites/Items/Map/Idle_4.png"),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(408,150, transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
+        }
+
+        private static Item Map(int x, int y)
+        {
+            Transform transform = tileCenteredTransform(x, y, 28, 27, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(292,150,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(321,150,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(350,150,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(379,150,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
                     true,
@@ -273,14 +291,14 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Goggles(int x, int y)
         {
-            Transform transform = new Transform(x, y, 28, 13);
+            Transform transform = tileCenteredTransform(x, y, 28, 13, Scenes.Map.TileSize);
 
             return new Item(
                 transform,
                 new Animation(
                     new List<IntPtr> {
-                        Engine.LoadImage("assets/Sprites/Items/Goggles/Idle_1.png"),
-                        Engine.LoadImage("assets/Sprites/Items/Goggles/Idle_2.png")
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(234,150,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(263,150,transform.W, transform.H)),
                     },
                     Animation.Speed.faster,
                     true,
@@ -292,16 +310,16 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Invulnerability(int x, int y)
         {
-            Transform transform = new Transform(x, y, 25, 25);
+            Transform transform = tileCenteredTransform(x, y, 25, 25, Scenes.Map.TileSize);
 
             return new Item(
                 transform,
                 new Animation(
                     new List<IntPtr> {
-                        Engine.LoadImage("assets/Sprites/Items/Invulnerability/Idle_1.png"),
-                        Engine.LoadImage("assets/Sprites/Items/Invulnerability/Idle_2.png"),
-                        Engine.LoadImage("assets/Sprites/Items/Invulnerability/Idle_3.png"),
-                        Engine.LoadImage("assets/Sprites/Items/Invulnerability/Idle_4.png"),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(130,150,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(156,150,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(182,150,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(208,150,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
                     true,
@@ -313,15 +331,15 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Invicibility(int x, int y)
         {
-            Transform transform = new Transform(x, y, 25, 25);
+            Transform transform = tileCenteredTransform(x, y, 25, 25, Scenes.Map.TileSize);
             return new Item(
                 transform,
                 new Animation(
                     new List<IntPtr> {
-                        Engine.LoadImage("assets/Sprites/Items/Invicibility/Idle_1.png"),
-                        Engine.LoadImage("assets/Sprites/Items/Invicibility/Idle_2.png"),
-                        Engine.LoadImage("assets/Sprites/Items/Invicibility/Idle_3.png"),
-                        Engine.LoadImage("assets/Sprites/Items/Invicibility/Idle_4.png")
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(26,150,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(52,150,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(78,150,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(104,150,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
                     true,
@@ -333,20 +351,33 @@ namespace DoomSurvivors.Entities.Factories
 
         private static  Item RadiationSuit(int x, int y)
         {
-            throw new NotImplementedException();
-        }
+            Transform transform = tileCenteredTransform(x, y, 24, 47, Scenes.Map.TileSize);
 
-        private static Item MegaSphere(int x, int y)
-        {
-            Transform transform = new Transform(x, y, 25, 25);
             return new Item(
                 transform,
                 new Animation(
                     new List<IntPtr> {
-                        Engine.LoadImage("assets/Sprites/Items/MegaSphere/Idle_1.png"),
-                        Engine.LoadImage("assets/Sprites/Items/MegaSphere/Idle_2.png"),
-                        Engine.LoadImage("assets/Sprites/Items/MegaSphere/Idle_3.png"),
-                        Engine.LoadImage("assets/Sprites/Items/MegaSphere/Idle_4.png")
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(1,150,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x00FF0000), new Color(0x00FF0080), 5)
+            );
+        }
+
+        private static Item MegaSphere(int x, int y)
+        {
+            Transform transform = tileCenteredTransform(x, y, 25, 25, Scenes.Map.TileSize);
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(493,110,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(519,110,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(545,110,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(571,110,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
                     true,
@@ -358,15 +389,15 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item SoulSphere(int x, int y)
         {
-            Transform transform = new Transform(x, y, 25, 25);
+            Transform transform = tileCenteredTransform(x, y, 25, 25, Scenes.Map.TileSize);
             return new Item(
                 transform,
                 new Animation(
                     new List<IntPtr> {
-                        Engine.LoadImage("assets/Sprites/Items/SoulSphere/Idle_1.png"),
-                        Engine.LoadImage("assets/Sprites/Items/SoulSphere/Idle_2.png"),
-                        Engine.LoadImage("assets/Sprites/Items/SoulSphere/Idle_3.png"),
-                        Engine.LoadImage("assets/Sprites/Items/SoulSphere/Idle_4.png")
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(389,110,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(415,110,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(441,110,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(467,110,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
                     true,
@@ -378,36 +409,90 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item ArmorBlue(int x, int y)
         {
-            throw new NotImplementedException();
-        }
-
-        private static Item ArmorGreen(int x, int y)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static Item BigMedkit(int x, int y)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static Item SmallMedKit(int x, int y)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static Item Helmet(int x, int y)
-        {
-            Transform transform = new Transform(x, y, 16, 15);
+            Transform transform = tileCenteredTransform(x, y, 31, 17, Scenes.Map.TileSize);
 
             return new Item(
                 transform,
                 new Animation(
                     new List<IntPtr> {
-                        Engine.LoadImage("assets/Sprites/Items/Helmet/Idle_1.png"),
-                        Engine.LoadImage("assets/Sprites/Items/Helmet/Idle_2.png"),
-                        Engine.LoadImage("assets/Sprites/Items/Helmet/Idle_3.png"),
-                        Engine.LoadImage("assets/Sprites/Items/Helmet/Idle_4.png"),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(325,110,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(357,110,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
+        }
+
+        private static Item ArmorGreen(int x, int y)
+        {
+            Transform transform = tileCenteredTransform(x, y, 31, 17, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(261,110,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(293,110,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
+        }
+
+        private static Item BigMedkit(int x, int y)
+        {
+            Transform transform = tileCenteredTransform(x, y, 28, 19, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(174,110,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
+        }
+
+        private static Item SmallMedKit(int x, int y)
+        {
+            Transform transform = tileCenteredTransform(x, y, 14, 15, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(129,110,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
+        }
+
+        private static Item Helmet(int x, int y)
+        {
+            Transform transform = tileCenteredTransform(x, y, 16, 15, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(61,110,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(78,110,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(95,110,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(112,110,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
                     true,
@@ -419,16 +504,16 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item HealthPotion(int x, int y)
         {
-            Transform transform = new Transform(x, y, 14, 18);
+            Transform transform = tileCenteredTransform(x, y, 14, 18, Scenes.Map.TileSize);
 
             return new Item(
                 transform,
                 new Animation(
                     new List<IntPtr> {
-                        Engine.LoadImage("assets/Sprites/Items/HealthPotion/Idle_1.png"),
-                        Engine.LoadImage("assets/Sprites/Items/HealthPotion/Idle_2.png"),
-                        Engine.LoadImage("assets/Sprites/Items/HealthPotion/Idle_3.png"),
-                        Engine.LoadImage("assets/Sprites/Items/HealthPotion/Idle_4.png"),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(1,110,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(16,110,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(31,110,transform.W, transform.H)),
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(46,110,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
                     true,
@@ -440,82 +525,290 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Backpack(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = tileCenteredTransform(x, y, 22, 29, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(208,66,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static Item PlasmaBox(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = tileCenteredTransform(x, y, 32, 21, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(175,66,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static Item PlasmaCell(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = tileCenteredTransform(x, y, 17, 12, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(157,66,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static Item RocketBox(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = tileCenteredTransform(x, y, 54, 21, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(102,66,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static Item Rocket(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = tileCenteredTransform(x, y, 12, 27, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(89,66,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static Item ShellsBox(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = tileCenteredTransform(x, y, 32, 12, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(56,66,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static  Item Shells(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = tileCenteredTransform(x, y, 15, 7, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(40,66,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static Item Clip(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = tileCenteredTransform(x, y, 9, 11, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(1,66,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static Item AmmoBox(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = tileCenteredTransform(x, y, 28, 16, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(11,66,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static Item BFG9000(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = tileCenteredTransform(x, y, 61, 36, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(356,15,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static Item PlasmaRifle(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = tileCenteredTransform(x, y, 54, 16, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(301,15,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static Item RocketLauncher(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = tileCenteredTransform(x, y, 62, 16, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(238,15,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static Item Chaingun(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = tileCenteredTransform(x, y, 54, 16, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(183,15,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static Item SuperShotgun(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = tileCenteredTransform(x, y, 54, 14, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(128,15,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static Item Shotgun(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = tileCenteredTransform(x, y, 63, 12, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(64,15,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
 
         private static Item Chainsaw(int x, int y)
         {
-            throw new NotImplementedException();
+            Transform transform = tileCenteredTransform(x, y, 63, 24, Scenes.Map.TileSize);
+
+            return new Item(
+                transform,
+                new Animation(
+                    new List<IntPtr> {
+                        Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(1,15,transform.W, transform.H))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                ),
+                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+            );
         }
     }
 }

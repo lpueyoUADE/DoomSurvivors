@@ -2,8 +2,10 @@
 using DoomSurvivors.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Windows;
 using Tao.Sdl;
+using static Tao.Sdl.Sdl;
 
 
 class Engine
@@ -18,7 +20,7 @@ class Engine
     {
         Engine.transform.W = width;
         Engine.transform.H = height;
-        int colores = 24;
+        int colores = 32;
 
         int flags = (Sdl.SDL_HWSURFACE | Sdl.SDL_DOUBLEBUF | Sdl.SDL_ANYFORMAT);
         Sdl.SDL_Init(Sdl.SDL_INIT_EVERYTHING);
@@ -69,33 +71,21 @@ class Engine
     public static void Draw(IntPtr imagen, double x, double y, int width, int height)
     {
         Sdl.SDL_Rect origen = new Sdl.SDL_Rect(0, 0, (short)width, (short)height);
-        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)transform.W, (short)transform.H);
+        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)width, (short)height);
         Sdl.SDL_BlitSurface(imagen, ref origen, screen, ref dest);
     }
 
-    public static void Draw(string tempimage, double x, double y)
+    public static IntPtr DrawSrpite(IntPtr imagen, int spriteX, int spriteY, int screenX, int screenY, int width, int height)
     {
-        IntPtr image = LoadImage(tempimage);
+        Sdl.SDL_Rect origen = new Sdl.SDL_Rect((short)spriteX, (short)spriteY, (short)width, (short)height);
+        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)screenX, (short)screenY, (short)width, (short)height);
+        Sdl.SDL_BlitSurface(imagen, ref origen, screen, ref dest);
 
-        Sdl.SDL_Rect origin = new Sdl.SDL_Rect(0, 0, (short)transform.W, (short)transform.H);
-        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)transform.W, (short)transform.H);
-        Sdl.SDL_BlitSurface(image, ref origin, screen, ref dest);
-    }
+        IntPtr croppedSurfacePtr = Sdl.SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
 
-    public static void Draw(string tempimage, double x, double y, double width, double height)
-    {
-        IntPtr image = LoadImage(tempimage);
+        Sdl.SDL_BlitSurface(screen, ref dest, croppedSurfacePtr, ref origen);
 
-        Sdl.SDL_Rect origin = new Sdl.SDL_Rect(0, 0, (short)transform.W, (short)height);
-        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)transform.W, (short)height);
-        Sdl.SDL_BlitSurface(image, ref origin, screen, ref dest);
-    }
-
-    public static void Draw(IntPtr image, double x, double y, double width, double height)
-    {
-        Sdl.SDL_Rect origin = new Sdl.SDL_Rect(0, 0, (short)transform.W, (short)height);
-        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)transform.W, (short)height);
-        Sdl.SDL_BlitSurface(image, ref origin, screen, ref dest);
+        return croppedSurfacePtr;
     }
 
     public static void DrawRect(int x, int y, int w, int h, int color)
@@ -133,6 +123,27 @@ class Engine
             throw new Exception($"Imagen inexistente: {image}");
         }
         return imagen;
+    }
+
+    public static IntPtr LoadImage(string image, Transform transform)
+    { 
+        IntPtr originalSurfacePtr = LoadImage(image);
+        Sdl.SDL_SetAlpha(originalSurfacePtr, 0, 0);
+
+        IntPtr croppedSurfacePtr = Sdl.SDL_CreateRGBSurface(0, transform.W, transform.H, 32, 0,0,0,0);
+        if (croppedSurfacePtr == IntPtr.Zero)
+            throw new Exception($"Error while loading image: {image}");
+
+        Sdl.SDL_Rect srcRect = new Sdl.SDL_Rect { x = (short)transform.X, y = (short)transform.Y, w = (short)transform.W, h = (short)transform.H };
+        Sdl.SDL_Rect destRect = new Sdl.SDL_Rect { x = 0, y = 0, w = (short)transform.W, h = (short)transform.H };
+
+        Sdl.SDL_Surface croppedSurface = Marshal.PtrToStructure<Sdl.SDL_Surface>(croppedSurfacePtr);
+
+        Sdl.SDL_SetColorKey(croppedSurfacePtr, SDL_SRCCOLORKEY, Sdl.SDL_MapRGB(croppedSurface.format, 0, 255, 255));
+
+        Sdl.SDL_BlitSurface(originalSurfacePtr, ref srcRect, croppedSurfacePtr, ref destRect);
+
+        return croppedSurfacePtr;
     }
 
     public static void DrawText(string text,

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DoomSurvivors.Entities
 {
-    public class Animation
+    public class Animation : IRenderizable
     {
         
         public static class Speed
@@ -72,6 +72,9 @@ namespace DoomSurvivors.Entities
                 }
             }
         }
+
+        public void Render()
+        {}
     }
 }
 

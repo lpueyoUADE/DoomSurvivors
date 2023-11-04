@@ -32,6 +32,9 @@ namespace DoomSurvivors.Scenes
         public List<DecorationPlacer> DecorList => decorList;
         public List<ItemPlacer> ItemList => itemList;
 
+        private static int tileSize = 64;
+        public static int TileSize => tileSize;
+
         public Map(
                 string name, 
                 string floorTexture,
@@ -89,7 +92,6 @@ namespace DoomSurvivors.Scenes
 
             int index;
             int tileID;
-            int tileSize = 64; // Hardcoded
             
             // Monsters
             for (int i = 0; i < monstersLayer.height; i++)

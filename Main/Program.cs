@@ -135,6 +135,9 @@ namespace DoomSurvivors.Main
                 fps = 1000 / (currentTicks - oldTicks);
                 Engine.DrawText(fps.ToString(), 0, 0, 255, 255, 255, DoomFont);
 
+                // TEST
+                // Engine.LoadImage("assets/test2.png", new Transform(147, 212, 13, 16));
+
                 Engine.Show();  // Show current frame
 
                 Sdl.SDL_Delay(2);
