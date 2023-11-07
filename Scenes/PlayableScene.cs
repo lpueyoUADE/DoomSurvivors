@@ -161,6 +161,7 @@ namespace DoomSurvivors
             for (int i = 0; i < deadEntityList.Count; i++)
             {
                 deadEntityList[i].Update();
+                deadEntityList[i].Render();
             }
 
             // GameObject Update
@@ -178,9 +179,10 @@ namespace DoomSurvivors
 
             tracerList.RemoveAll(tracer => tracer.hasFinished);
             gameObjectList.RemoveAll(gameObject => gameObject is Bullet && ((Bullet)gameObject).isDead);
-            
-            deadEntityList.AddRange(gameObjectList.FindAll(gameObject => gameObject is OffensiveEntity && ((OffensiveEntity)gameObject).State == State.Death));
-            gameObjectList.RemoveAll(gameObject => gameObject is OffensiveEntity && ((OffensiveEntity)gameObject).State == State.Death);
+            gameObjectList.RemoveAll(gameObject => gameObject is Item && ((Item)gameObject).Collected);
+
+            deadEntityList.AddRange(gameObjectList.FindAll(gameObject => gameObject is OffensiveEntity && ((OffensiveEntity)gameObject).IsDeath));
+            gameObjectList.RemoveAll(gameObject => gameObject is OffensiveEntity && ((OffensiveEntity)gameObject).IsDeath);
         }
         public override void Reset()
         {

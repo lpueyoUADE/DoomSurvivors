@@ -1,5 +1,4 @@
-﻿using DoomSurvivors.Utilities;
-using System;
+﻿using DoomSurvivors.Entities.Animations;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -15,86 +14,86 @@ namespace DoomSurvivors.Entities.Factories
                 10,
                 new Vector(19, 25),
                 new AnimationController(
-                    new Animation(
-                        new List<IntPtr>{
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/DoomGuy_idle_1.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/DoomGuy_idle_2.png"),
+                    idle: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,51,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(59,51,57,59)),
                         },
                         Animation.Speed.regular,
                         true,
                         true
                     ),
-                    new Animation(
-                        new List<IntPtr>{
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_moving_1.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_moving_2.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_moving_3.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_moving_4.png"),
+                    moving: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,51,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(59,51,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(117,51,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(175,51,57,59)),
                         },
                         Animation.Speed.fastest,
                         true,
                         true
                     ),
-                    new Animation(
-                        new List<IntPtr>{
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_attacking_2.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_attacking_1.png"),
+                    attacking: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(59,366,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,366,57,59)),
                         },
                         Animation.Speed.fastest,
                         true,
                         false
                     ),
-                    new Animation(
-                        new List<IntPtr>{
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_pain_1.png"),
+                    pain: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,681,57,59)),
                         },
                         Animation.Speed.fast,
                         true,
                         false
                     ),
-                    new Animation(
-                        new List<IntPtr>{
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_1.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_2.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_3.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_4.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_5.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_6.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_7.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_8.png"),
+                    dying: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,681,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,741,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(59,741,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(117,741,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(175,741,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(233,741,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,801,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(59,801,57,59)),
                         },
                         Animation.Speed.faster,
                         true,
                         false
                     ),
-                    new Animation(
-                        new List<IntPtr>{
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_1.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_2.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_3.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_4.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_5.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_6.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_7.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_8.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_9.png"),
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_10.png"),
-                        },
-                        Animation.Speed.fastest,
-                        true,
-                        false
-                    ),
-                    new Animation(
-                        new List<IntPtr>{
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_dying_8.png"),
+                    gibbing: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,681,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,876,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(59,876,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(117,876,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(175,876,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(233,876,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,936,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(59,936,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(117,936,57,59)),
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(175,936,57,59)),
                         },
                         Animation.Speed.fastest,
                         false,
                         false
                     ),
-                     new Animation(
-                        new List<IntPtr>{
-                            Engine.LoadImage($"assets/Sprites/DoomGuy/Doomguy_gibbing_10.png"),
+                    death: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(59,801,57,59)),
+                        },
+                        Animation.Speed.fastest,
+                        false,
+                        false
+                    ),
+                    gibDeath: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(175,936,57,59)),
                         },
                         Animation.Speed.fastest,
                         false,

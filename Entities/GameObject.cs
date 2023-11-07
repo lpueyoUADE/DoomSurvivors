@@ -1,4 +1,5 @@
-﻿using DoomSurvivors.Utilities;
+﻿using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Utilities;
 using DoomSurvivors.Viewport;
 using System;
 using System.Collections.Generic;
@@ -53,7 +54,7 @@ namespace DoomSurvivors.Entities
         public GameObject(Transform transform, CollisionType collisionType=CollisionType.Static, bool drawShadow=true, bool drawBoundingBox=false)
         {
             this.transform = transform;
-            this.previousPosition = transform.Position;
+            this.previousPosition = this.transform.Position;
             this.collisionType = collisionType;
             this.drawShadow = drawShadow;
             this.drawBoundingBox = drawBoundingBox;
@@ -62,7 +63,7 @@ namespace DoomSurvivors.Entities
         public virtual void OnCollision(GameObject other)
         {}
 
-        protected abstract IntPtr GetCurrentSprite();
+        protected abstract Sprite GetCurrentSprite();
 
         public virtual void Render()
         {
@@ -73,7 +74,13 @@ namespace DoomSurvivors.Entities
             if (drawBoundingBox)
                 Engine.DrawRect(position, Transform.Size, 0xff0000);
 
-            Engine.Draw(GetCurrentSprite(), (int)position.X + DrawingOffset.X, (int)position.Y + DrawingOffset.Y, transform.W, transform.H);
+            Engine.Draw(
+                GetCurrentSprite().Image, 
+                (int)position.X + DrawingOffset.X, 
+                (int)position.Y + DrawingOffset.Y, 
+                transform.W,
+                transform.H
+            );
         }
         public virtual void Update()
         {

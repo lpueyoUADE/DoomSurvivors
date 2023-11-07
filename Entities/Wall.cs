@@ -1,4 +1,5 @@
-﻿using DoomSurvivors.Utilities;
+﻿using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Utilities;
 using DoomSurvivors.Viewport;
 using System;
 using System.Collections.Generic;
@@ -28,9 +29,9 @@ namespace DoomSurvivors.Entities
             }
         }
 
-        private IntPtr sprite;
+        private Sprite sprite;
 
-        public Wall(Transform transform, IntPtr sprite, CollisionType collisionType = CollisionType.Static, bool drawShadow = true, bool drawBoundingBox = false) :
+        public Wall(Transform transform, Sprite sprite, CollisionType collisionType = CollisionType.Static, bool drawShadow = true, bool drawBoundingBox = false) :
             base(transform, collisionType, drawShadow, drawBoundingBox)
         {
             this.sprite = sprite;
@@ -50,7 +51,7 @@ namespace DoomSurvivors.Entities
             base.OnCollision(other);
         }
 
-        protected override IntPtr GetCurrentSprite()
+        protected override Sprite GetCurrentSprite()
         {
             return this.sprite;
         }

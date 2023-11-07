@@ -1,8 +1,7 @@
-﻿using DoomSurvivors.Main;
-using DoomSurvivors.Viewport;
+﻿using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Main;
 using System;
 using System.Windows;
-using Tao.Sdl;
 
 namespace DoomSurvivors.Entities
 {
@@ -46,6 +45,8 @@ namespace DoomSurvivors.Entities
             get { return this.animationController;}
         }
 
+
+
         public State State { 
             get { return this.state; } 
             set { this.state = value; } 
@@ -85,9 +86,9 @@ namespace DoomSurvivors.Entities
             base.OnCollision(other);
         }
 
-        protected override IntPtr GetCurrentSprite()
+        protected override Sprite GetCurrentSprite()
         {
-            return animationController.getCurrentAnimationFrame();
+            return animationController.CurrentAnimationSprite;
         }
 
         protected void ApplyFriction()
@@ -129,6 +130,11 @@ namespace DoomSurvivors.Entities
 
             this.setState(direction);
             this.animationController.Update(this.state);
+            this.transform.Size = new Vector(
+                this.animationController.CurrentAnimationSprite.Transform.Size.X,
+                this.animationController.CurrentAnimationSprite.Transform.Size.Y + this.animationController.VerticalOffset);
+            // this.transform.Y = this.transform.Y + this.animationController.VerticalOffset;
+            DrawingOffset = new Vector(DrawingOffset.X, this.animationController.VerticalOffset);
 
             ApplyFriction();
 

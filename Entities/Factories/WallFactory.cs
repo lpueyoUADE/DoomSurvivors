@@ -28,7 +28,8 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Wall TestWall(int x, int y)
         {
-            return new Wall(new Transform(x, y, 64, 64), Engine.LoadImage("assets/Maps/Map Editor/wall_001.png"));
+            Transform transform = new Transform(x, y, 64, 64);
+            return new Wall(transform, Engine.LoadImage("assets/Sprites/Walls/wall_001.png", new Transform(0,0,transform.W, transform.H)));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DoomSurvivors.Entities;
+using DoomSurvivors.Entities.Animations;
 using DoomSurvivors.Utilities;
 using System;
 using System.Collections.Generic;
@@ -75,19 +76,6 @@ class Engine
         Sdl.SDL_BlitSurface(imagen, ref origen, screen, ref dest);
     }
 
-    public static IntPtr DrawSrpite(IntPtr imagen, int spriteX, int spriteY, int screenX, int screenY, int width, int height)
-    {
-        Sdl.SDL_Rect origen = new Sdl.SDL_Rect((short)spriteX, (short)spriteY, (short)width, (short)height);
-        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)screenX, (short)screenY, (short)width, (short)height);
-        Sdl.SDL_BlitSurface(imagen, ref origen, screen, ref dest);
-
-        IntPtr croppedSurfacePtr = Sdl.SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
-
-        Sdl.SDL_BlitSurface(screen, ref dest, croppedSurfacePtr, ref origen);
-
-        return croppedSurfacePtr;
-    }
-
     public static void DrawRect(int x, int y, int w, int h, int color)
     {
         Sdl.SDL_Rect rect = new Sdl.SDL_Rect((short)x, (short)y, (short)w, (short)h);
@@ -125,8 +113,14 @@ class Engine
         return imagen;
     }
 
-    public static IntPtr LoadImage(string image, Transform transform)
-    { 
+    public static Sprite LoadImage(string image, Transform transform, bool cyanColorKey=true)
+    {
+        Color colorKey;
+        if (cyanColorKey)
+            colorKey = new Color(0, 255, 255, 255);
+        else
+            colorKey = new Color(255, 0, 255, 255);
+
         IntPtr originalSurfacePtr = LoadImage(image);
         Sdl.SDL_SetAlpha(originalSurfacePtr, 0, 0);
 
@@ -139,11 +133,11 @@ class Engine
 
         Sdl.SDL_Surface croppedSurface = Marshal.PtrToStructure<Sdl.SDL_Surface>(croppedSurfacePtr);
 
-        Sdl.SDL_SetColorKey(croppedSurfacePtr, SDL_SRCCOLORKEY, Sdl.SDL_MapRGB(croppedSurface.format, 0, 255, 255));
+        Sdl.SDL_SetColorKey(croppedSurfacePtr, SDL_SRCCOLORKEY, Sdl.SDL_MapRGB(croppedSurface.format, colorKey.R, colorKey.G, colorKey.B));
 
         Sdl.SDL_BlitSurface(originalSurfacePtr, ref srcRect, croppedSurfacePtr, ref destRect);
 
-        return croppedSurfacePtr;
+        return new Sprite(croppedSurfacePtr, transform);
     }
 
     public static void DrawText(string text,

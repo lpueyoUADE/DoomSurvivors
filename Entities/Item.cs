@@ -1,6 +1,5 @@
-﻿using DoomSurvivors.Main;
-using DoomSurvivors.Utilities;
-using DoomSurvivors.Viewport;
+﻿using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Main;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -26,6 +25,8 @@ namespace DoomSurvivors.Entities
         };
 
         private Halo halo;
+
+        private bool collected;
 
         public enum ItemType
         {
@@ -77,6 +78,8 @@ namespace DoomSurvivors.Entities
                 this.position = new Vector(x, y);
             }
         }
+
+        public bool Collected => this.collected;
         public Item(Transform transform, Animation idleAnimation, Halo halo=null, bool drawShadow = true, bool drawBoundingBox = false) : base(transform, CollisionType.Static, drawShadow, drawBoundingBox)
         {
             Random rnd = new Random();
@@ -86,6 +89,13 @@ namespace DoomSurvivors.Entities
             this.halo = halo;
         }
 
+        override public void OnCollision(GameObject other)
+        {
+            if (other is Player)
+            {
+                this.collected = true;
+            }
+        }
         private void Hovering()
         {
             hoveringOffsetStepTime += Program.DeltaTime;
@@ -97,7 +107,7 @@ namespace DoomSurvivors.Entities
             }
         }
 
-        protected override IntPtr GetCurrentSprite()
+        protected override Sprite GetCurrentSprite()
         {
             return idleAnimation.CurrentFrame;
         }

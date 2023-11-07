@@ -1,14 +1,8 @@
 ﻿using DoomSurvivors.Entities;
 using DoomSurvivors.Scenes;
-using DoomSurvivors.Viewport;
-using DoomSurvivors.Utilities;
 using System;
 using System.Collections.Generic;
 using Tao.Sdl;
-using System.Windows;
-using DoomSurvivors.Entities.Factories;
-using static DoomSurvivors.Entities.Monster;
-using static DoomSurvivors.Entities.Wall;
 
 namespace DoomSurvivors.Main
 {
@@ -20,27 +14,27 @@ namespace DoomSurvivors.Main
 
         public static Crosshair crosshair;
 
-        public static bool DEBUG_MODE = false;
+        public static bool DEBUG_MODE = true;
         public static Action DebugActions;
         // TODOS
         /*
             . HUD 
-            . Camera movement (OK)
-            . Weapon system
-            . Collisions (Walls and enemies)
-            . Maps system
+            . Weapon system (50% - Falta cambiar de armas - implementar armas faltantes - RayCasted Bullets)
             . MenuScenes (menu items)
+            . Camera movement (OK)
+            . Collisions (Walls and enemies) (OK - Falta corregir Bug con Walls)
+            . Maps system (OK - Falta cargar Decors - Exit Point)
 
-            . Dying
-            . Stats (health, xp)
-            . Items
             . Boosts
             . Lvl
             . Skill tree
+            . Stats (health, xp)
+            . Items (OK - Falta agregar efectos)
+            . Dying (OK)
             
-            . Factories (Monsters & Weapons)
-            . Interfaces
             . Sounds
+            . Factories (Monsters & Weapons) (OK)
+            . Interfaces (OK)
         */
 
         public static event Action LeftMouseButtonReleasedAction;
@@ -61,31 +55,10 @@ namespace DoomSurvivors.Main
             MenuScene WinScene = new MenuScene(Engine.LoadImage("assets/Maps/win.png"), 640, 640);
             MenuScene LoseScene = new MenuScene(Engine.LoadImage("assets/Maps/lose.png"), 640, 640);
             PlayableScene E1Scene = new PlayableScene(
-                /*new Map(
-                    "E1",
-                    "assets/Maps/Test_map_001.png",
-                    1920,
-                    1920,
-                    new Vector(800, 800),
-                    new Vector(1500, 1500),
-                    new List<MonsterPlacer> {
-                        new MonsterPlacer(MonsterType.Zombie, 200, 200),
-                        new MonsterPlacer(MonsterType.Zombie, 400, 300),
-                    },
-                    new List<WallPlacer> {
-                         new WallPlacer(WallType.TestWall, 500, 500),
-                         new WallPlacer(WallType.TestWall, 564, 500),
-                         new WallPlacer(WallType.TestWall, 628, 500)
-                    },
-                    new List<Decoration> { },
-                    new List<Item> { }
-                */
                 Map.CreateMap("E1_Test"),
                 DEBUG_MODE, // Show Bounding Boxes
                 DEBUG_MODE   // Show vision Radius
             );
-
-            // E1Scene.Load();
 
             SceneController.Instance.setScenes(
                 new List<Scene> {
@@ -135,11 +108,7 @@ namespace DoomSurvivors.Main
                 fps = 1000 / (currentTicks - oldTicks);
                 Engine.DrawText(fps.ToString(), 0, 0, 255, 255, 255, DoomFont);
 
-                // TEST
-                // Engine.LoadImage("assets/test2.png", new Transform(147, 212, 13, 16));
-
                 Engine.Show();  // Show current frame
-
                 Sdl.SDL_Delay(2);
             }
         }

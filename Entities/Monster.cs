@@ -1,7 +1,7 @@
-﻿using DoomSurvivors.Utilities;
+﻿using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Utilities;
 using DoomSurvivors.Viewport;
 using System.Windows;
-using Tao.Sdl;
 
 namespace DoomSurvivors.Entities
 {
@@ -56,6 +56,9 @@ namespace DoomSurvivors.Entities
             get => target; 
             set => target = value;
         }
+
+        public bool TargetOnSight => (target.Transform.Position - transform.Position).Length <= this.visionRadius;
+
         public Monster(Transform transform, double speed, int life, Vector weaponPosition, AnimationController animationController, WeaponController weaponController=null, Entity target = null, double visionRadius = 0) :
             base(transform, speed, life, weaponPosition, animationController, weaponController)
         {
@@ -67,30 +70,25 @@ namespace DoomSurvivors.Entities
         }
    
         protected override void InputEvents()
-        {
-            if (this.IsDeath || this.IsDying)
+        {           
+            if (this.IsDying || this.IsDeath || target is null || ((OffensiveEntity)target).IsDeath || ((OffensiveEntity)target).IsDying)
+            {
+                this.direction = new Vector(0, 0);
                 return;
-
-            if (target is null)
-                return;
-
-            this.direction = new Vector(0, 0);
-
-            if (((OffensiveEntity)target).IsDeath || ((OffensiveEntity)target).IsDying)
-                return;
+            }
 
             Vector distance = target.Transform.Position - transform.Position;
             if (distance.Length <= this.visionRadius)
-            {
                 this.direction = distance;
-            }
 
             // Test
             clock++;
             if(clock == 50)
             {
                 this.clock = 0;
-                AttackAt(target.Transform.PositionCenter);
+                
+                if(TargetOnSight)
+                    AttackAt(target.Transform.PositionCenter);
             }
         }
 

@@ -94,6 +94,7 @@ namespace DoomSurvivors.Scenes
             int tileID;
             
             // Monsters
+
             for (int i = 0; i < monstersLayer.height; i++)
             {
                 for (int j = 0; j < monstersLayer.width; j++)
@@ -118,6 +119,7 @@ namespace DoomSurvivors.Scenes
             }
 
             // Items
+ 
             for (int i = 0; i < itemsLayer.height; i++)
             {
                 for (int j = 0; j < itemsLayer.width; j++)

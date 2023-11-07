@@ -1,10 +1,7 @@
-﻿using DoomSurvivors.Utilities;
+﻿using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using static DoomSurvivors.Entities.Item;
 
 namespace DoomSurvivors.Entities.Factories
@@ -143,7 +140,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(147,212,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(161,212,transform.W, transform.H))
                     },
@@ -162,7 +159,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(119,212,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(133,212,transform.W, transform.H))
                     },
@@ -181,7 +178,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(91,212, transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(105,212, transform.W, transform.H)),
                     },
@@ -200,7 +197,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(61,212, transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(76,212, transform.W, transform.H)),
                     },
@@ -219,7 +216,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(31,212, transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(46,212, transform.W, transform.H)),
                     },
@@ -238,7 +235,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(1,212, transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(16,212, transform.W, transform.H)),
                     },
@@ -257,7 +254,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(408,150, transform.W, transform.H))
                     },
                     Animation.Speed.faster,
@@ -275,7 +272,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(292,150,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(321,150,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(350,150,transform.W, transform.H)),
@@ -296,7 +293,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(234,150,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(263,150,transform.W, transform.H)),
                     },
@@ -315,7 +312,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(130,150,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(156,150,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(182,150,transform.W, transform.H)),
@@ -335,7 +332,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(26,150,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(52,150,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(78,150,transform.W, transform.H)),
@@ -356,7 +353,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(1,150,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
@@ -373,7 +370,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(493,110,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(519,110,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(545,110,transform.W, transform.H)),
@@ -393,7 +390,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(389,110,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(415,110,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(441,110,transform.W, transform.H)),
@@ -414,7 +411,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(325,110,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(357,110,transform.W, transform.H))
                     },
@@ -433,7 +430,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(261,110,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(293,110,transform.W, transform.H))
                     },
@@ -452,7 +449,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(174,110,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
@@ -470,7 +467,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(129,110,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
@@ -488,7 +485,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(61,110,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(78,110,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(95,110,transform.W, transform.H)),
@@ -509,7 +506,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(1,110,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(16,110,transform.W, transform.H)),
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(31,110,transform.W, transform.H)),
@@ -530,7 +527,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(208,66,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
@@ -548,7 +545,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(175,66,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
@@ -566,7 +563,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(157,66,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
@@ -584,7 +581,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(102,66,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
@@ -602,7 +599,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(89,66,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
@@ -620,7 +617,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(56,66,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
@@ -638,7 +635,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(40,66,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
@@ -656,7 +653,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(1,66,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
@@ -674,7 +671,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(11,66,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
@@ -692,7 +689,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(356,15,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
@@ -710,7 +707,7 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(301,15,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
@@ -728,14 +725,14 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(238,15,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
 
@@ -746,14 +743,14 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(183,15,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
 
@@ -764,14 +761,14 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(128,15,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
 
@@ -782,32 +779,32 @@ namespace DoomSurvivors.Entities.Factories
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(64,15,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
 
         private static Item Chainsaw(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 63, 24, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 62, 24, Scenes.Map.TileSize);
 
             return new Item(
                 transform,
                 new Animation(
-                    new List<IntPtr> {
+                    new List<Sprite> {
                         Engine.LoadImage("assets/Sprites/Items/Items.png", new Transform(1,15,transform.W, transform.H))
                     },
                     Animation.Speed.faster,
                     true,
                     false
                 ),
-                new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
+                new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
     }

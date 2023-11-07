@@ -1,8 +1,5 @@
-﻿using DoomSurvivors.Utilities;
-using System.Collections.Generic;
-using System.Numerics;
-using System;
-using System.Windows;
+﻿using System.Collections.Generic;
+using DoomSurvivors.Entities.Animations;
 
 namespace DoomSurvivors.Entities.Factories
 {
@@ -47,8 +44,8 @@ namespace DoomSurvivors.Entities.Factories
                     15f,
                     new AnimationController(
                         new Animation(
-                            new List<IntPtr>{
-                                Engine.LoadImage($"assets/Sprites/Bullets/Pistol/Pistol_1.png"),
+                            new List<Sprite>{
+                                Engine.LoadImage("assets/Sprites/Proyectiles&Effects/Proyectiles&Effects.png", new Transform(114,27,7,7), false),
                             },
                             Animation.Speed.fast,
                             true,
@@ -75,8 +72,8 @@ namespace DoomSurvivors.Entities.Factories
                     15f,
                     new AnimationController(
                         new Animation(
-                            new List<IntPtr>{
-                                Engine.LoadImage($"assets/Sprites/Bullets/Pistol/Pistol_1.png"),
+                            new List<Sprite>{
+                                Engine.LoadImage("assets/Sprites/Proyectiles&Effects/Proyectiles&Effects.png", new Transform(114,27,7,7), false),
                             },
                             Animation.Speed.fast,
                             true,

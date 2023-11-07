@@ -1,7 +1,4 @@
-﻿using DoomSurvivors.Utilities;
-using DoomSurvivors.Viewport;
-using System;
-using System.Collections.Generic;
+﻿using DoomSurvivors.Entities.Animations;
 using System.Windows;
 
 namespace DoomSurvivors.Entities
@@ -29,6 +26,7 @@ namespace DoomSurvivors.Entities
         public bool IsDying => this.State == State.Dying || this.State == State.Gibbing;
         public bool IsDeath => this.State == State.Death || this.State == State.GibDeath;
 
+        public bool GibCondition => true;
         public Weapon CurrentWeapon => this.weaponController.CurrentWeapon;
         public OffensiveEntity(Transform transform, double speed, int life, Vector weaponOffset, AnimationController animationController, WeaponController weaponController = null) :
             base(transform, speed, animationController)
@@ -48,10 +46,22 @@ namespace DoomSurvivors.Entities
 
             if (life <= 0)
             {
-                if (this.State != State.Dying || !(this.AnimationController.DyingAnimation is null) && this.AnimationController.DyingAnimation.IsLooping)
-                    this.State = State.Dying;
-                else
+                if (!this.IsDying)
+                {
+                    if (AnimationController.CanGib && GibCondition)
+                        this.State = State.Gibbing;
+                    else
+                        this.State = State.Dying;
+                }
+                else if (this.State == State.Gibbing && !this.AnimationController.GibbingAnimation.IsLooping)
+                {
+                    this.State = State.GibDeath;
+                }
+
+                else if (this.State == State.Dying && !this.AnimationController.DyingAnimation.IsLooping)
+                {
                     this.State = State.Death;
+                }
             }
             else
             {
@@ -69,7 +79,6 @@ namespace DoomSurvivors.Entities
         {
             if (this.IsDeath)
             {
-                Render();
                 return;
             }
 
@@ -104,7 +113,7 @@ namespace DoomSurvivors.Entities
         public void ApplyDamage(int damage)
         {
             this.life -= damage;
-            if (this.life < 0)
+            if (this.life <= 0)
                 Die();
         }
     }

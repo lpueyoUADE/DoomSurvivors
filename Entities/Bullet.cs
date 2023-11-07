@@ -1,7 +1,7 @@
-﻿using DoomSurvivors.Main;
+﻿using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Main;
 using DoomSurvivors.Utilities;
 using DoomSurvivors.Viewport;
-using System;
 using System.Windows;
 
 namespace DoomSurvivors.Entities
@@ -51,9 +51,8 @@ namespace DoomSurvivors.Entities
 
                 ((OffensiveEntity)other).ApplyDamage(this.damage);
                 this.Destroy();
-            }
 
-            if (other is Entity || other is Wall)
+            } else if (other is Entity || other is Wall)
             {
                 this.Destroy();
             }

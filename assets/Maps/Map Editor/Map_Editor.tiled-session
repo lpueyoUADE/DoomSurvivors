@@ -6,7 +6,7 @@
     "fileStates": {
         "": {
             "scaleInDock": 1,
-            "scaleInEditor": 1
+            "scaleInEditor": 0.5
         },
         "Floor Tiles.tsx": {
             "scaleInDock": 1,
@@ -17,14 +17,18 @@
             "scaleInEditor": 1
         },
         "Map_editor.tmx": {
-            "scale": 0.44135416666666666,
+            "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 915.3646447958461,
-                "y": 960.679726221383
+                "x": 964.5,
+                "y": 467
             }
         },
+        "Map_editor.tmx#AASHITTY": {
+            "dynamicWrapping": true
+        },
         "Map_editor.tmx#Floor Tiles": {
+            "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
@@ -46,6 +50,7 @@
             "scaleInDock": 1
         },
         "Map_editor.tmx#Wall Tiles": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "Monsters Tiles.tsx": {
@@ -58,7 +63,7 @@
         }
     },
     "last.exportedFilePath": "C:/projects/C#/DoomSurvivors/assets/Maps/Test Map",
-    "last.imagePath": "C:/projects/C#/DoomSurvivors/assets/Maps/Map Editor",
+    "last.imagePath": "C:/projects/C#/DoomSurvivors/assets/Maps/Map Editor/Walls",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "openFiles": [
         "Map_editor.tmx"
@@ -78,5 +83,6 @@
         "width": 64
     },
     "tileset.transparentColor": "#00ffff",
+    "tileset.type": 1,
     "tileset.useTransparentColor": true
 }
