@@ -70,12 +70,11 @@ namespace DoomSurvivors.Entities
         }
    
         protected override void InputEvents()
-        {           
+        {
+            this.direction = new Vector(0, 0);
+            
             if (this.IsDying || this.IsDeath || target is null || ((OffensiveEntity)target).IsDeath || ((OffensiveEntity)target).IsDying)
-            {
-                this.direction = new Vector(0, 0);
                 return;
-            }
 
             Vector distance = target.Transform.Position - transform.Position;
             if (distance.Length <= this.visionRadius)

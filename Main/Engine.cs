@@ -136,7 +136,7 @@ class Engine
         Sdl.SDL_SetColorKey(croppedSurfacePtr, SDL_SRCCOLORKEY, Sdl.SDL_MapRGB(croppedSurface.format, colorKey.R, colorKey.G, colorKey.B));
 
         Sdl.SDL_BlitSurface(originalSurfacePtr, ref srcRect, croppedSurfacePtr, ref destRect);
-
+        Sdl.SDL_FreeSurface(originalSurfacePtr);
         return new Sprite(croppedSurfacePtr, transform);
     }
 

@@ -184,7 +184,7 @@ namespace DoomSurvivors.Entities.Factories
                             Engine.LoadImage("assets/Sprites/Monsters/BaronOfHell.png", new Transform(542,878,60,31)),
                             Engine.LoadImage("assets/Sprites/Monsters/BaronOfHell.png", new Transform(646,878,60,31)),
                         },
-                        Animation.Speed.faster,
+                        Animation.Speed.fastest,
                         false,
                         false
                     ),
@@ -222,12 +222,217 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Monster Chainguner(int x, int y, Entity target)
         {
-            throw new NotImplementedException();
+            Monster chainguner = new Monster(
+                new Transform(x, y, 36, 55),
+                5.0f,
+                10,
+                new Vector(4, 21),
+                new AnimationController(
+                    idle: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(44,33,42,59)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(44,125,45,60)),
+                        },
+                        Animation.Speed.slow,
+                        true,
+                        true
+                    ),
+                    moving: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(44,33,42,59)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(44,125,45,60)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(44,218,40,59)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(44,310,45,60)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        true
+                    ),
+                    attacking: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(44,494,43,58)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(44,403,43,58)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        false
+                    ),
+                    pain: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(44,585,43,58)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        false
+                    ),
+                    dying: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(44,585,43,58)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(44,676,43,61)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(131,676,48,64)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(223,676,59,59)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(326,676,65,49)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(435,676,64,38)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(543,676,65,25)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(652,676,65,21)),
+                        },
+                        Animation.Speed.fastest,
+                        true,
+                        false
+                    ),
+                    gibbing: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(44,585,43,58)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(44,773,53,59)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(141,773,58,60)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(243,773,64,49)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(351,773,70,41)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(465,773,70,32)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(579,773,72,20)),
+                        },
+                        Animation.Speed.fastest,
+                        false,
+                        false
+                    ),
+                    death: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(652,676,65,21)),
+                        },
+                        Animation.Speed.slow,
+                        false,
+                        false
+                    ),
+                    gibDeath: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Chainguner.png", new Transform(579,773,72,20)),
+                        },
+                        Animation.Speed.slow,
+                        false,
+                        false
+                    )
+                ),
+                null,
+                target, // Chasing Target,
+                250.0f  // Vision radius
+            );
+
+            chainguner.AddWeapon(
+                WeaponFactory.RayTracedPistolRed(chainguner)
+            );
+
+            chainguner.AddWeapon(
+                WeaponFactory.BulletPistolAutomatic(chainguner)
+            );
+
+            return chainguner;
         }
 
         private static Monster Shotguner(int x, int y, Entity target)
         {
-            throw new NotImplementedException();
+            Monster shotguner = new Monster(
+                new Transform(x, y, 36, 55),
+                5.0f,
+                10,
+                new Vector(4, 21),
+                new AnimationController(
+                    idle: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(44,33,36,55)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(44,130,35,55)),
+                        },
+                        Animation.Speed.slow,
+                        true,
+                        true
+                    ),
+                    moving: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(44,33,36,55)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(44,130,35,55)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(44,227,32,55)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(44,324,34,55)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        true
+                    ),
+                    attacking: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(44,510,27,55)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(44,421,26,55)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        false
+                    ),
+                    pain: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(44,599,31,55)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        false
+                    ),
+                    dying: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(44,599,31,55)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(44,688,33,60)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(121,688,35,50)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(200,688,42,35)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(286,688,48,27)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(378,688,52,17)),
+                        },
+                        Animation.Speed.fastest,
+                        true,
+                        false
+                    ),
+                    gibbing: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(44,599,31,55)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(44,781,36,59)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(124,781,43,62)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(211,781,48,61)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(303,781,53,55)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(400,781,55,51)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(499,781,57,43)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(600,781,57,36)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(44,876,57,26)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(145,876,57,21)),
+                        },
+                        Animation.Speed.fastest,
+                        false,
+                        false
+                    ),
+                    death: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(378,688,52,17)),
+                        },
+                        Animation.Speed.slow,
+                        false,
+                        false
+                    ),
+                    gibDeath: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Shotguner.png", new Transform(145,876,57,21)),
+                        },
+                        Animation.Speed.slow,
+                        false,
+                        false
+                    )
+                ),
+                null,
+                target, // Chasing Target,
+                250.0f  // Vision radius
+            );
+
+            shotguner.AddWeapon(
+                WeaponFactory.RayTracedPistolRed(shotguner)
+            );
+
+            shotguner.AddWeapon(
+                WeaponFactory.BulletPistolAutomatic(shotguner)
+            );
+
+            return shotguner;
         }
 
         public static Monster Zombie(int x, int y, Entity target=null)
