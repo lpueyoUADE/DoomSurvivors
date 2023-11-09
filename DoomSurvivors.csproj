@@ -180,7 +180,7 @@
     <Content Include="assets\Sprites\Monsters\ArchVile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\Sprites\Monsters\Cacodemon.png">
+    <Content Include="assets\Sprites\Monsters\CacoDemon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Sprites\Monsters\Cyberdemon.png">

@@ -23,7 +23,7 @@ namespace DoomSurvivors.Entities
 
         private void DrawEllipse(int x, int y)
         {
-            Engine.DrawFilledEllipse(x, y, rx, ry, color);
+            Engine.DrawGradientEllipse(x, y, rx, ry, rx/2, ry/2, new Color(color.R, color.G,color.B,20), color, 3);
         }
 
         private void DrawRectangle(int x, int y)
@@ -45,7 +45,6 @@ namespace DoomSurvivors.Entities
                     this.drawFunction = DrawRectangle;
                     break;
             }
-
         }
 
         public void Draw(int x, int y)

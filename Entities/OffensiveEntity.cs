@@ -26,7 +26,7 @@ namespace DoomSurvivors.Entities
         public bool IsDying => this.State == State.Dying || this.State == State.Gibbing;
         public bool IsDeath => this.State == State.Death || this.State == State.GibDeath;
 
-        public bool GibCondition => false; // TODO Define a proper condition
+        public bool GibCondition => true; // TODO Define a proper condition
         public Weapon CurrentWeapon => this.weaponController.CurrentWeapon;
         public OffensiveEntity(Transform transform, double speed, int life, Vector weaponOffset, AnimationController animationController, WeaponController weaponController = null) :
             base(transform, speed, animationController)

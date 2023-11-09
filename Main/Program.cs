@@ -14,27 +14,42 @@ namespace DoomSurvivors.Main
 
         public static Crosshair crosshair;
 
-        public static bool DEBUG_MODE = true;
+        public static bool DEBUG_MODE = false;
         public static Action DebugActions;
         // TODOS
         /*
-            . HUD 
-            . Weapon system (50% - Falta cambiar de armas - implementar armas faltantes - RayCasted Bullets)
+            (In proress)
+            . Weapon system (
+                Falta cambiar de armas
+                implementar armas faltantes
+                RayCasted Bullets
+                Melee
+             )
             . MenuScenes (menu items)
-            . Camera movement (OK)
             . Collisions (Walls and enemies) (OK - Falta corregir Bug con Walls)
+            . Items (OK - Falta agregar efectos)
             . Maps system (OK - Falta cargar Decors - Exit Point)
 
+            (Pending)
+            . HUD 
+            . Decorations
             . Boosts
             . Lvl
             . Skill tree
             . Stats (health, xp)
-            . Items (OK - Falta agregar efectos)
-            . Dying (OK)
-            
             . Sounds
+
+            (Nice to Have)
+            . Doors
+            . Switches
+            . Particle effects
+            . Explosive Barrels
+
+            (Done)
             . Factories (Monsters & Weapons) (OK)
             . Interfaces (OK)
+            . Dying (OK)
+            . Camera movement (OK)
         */
 
         public static event Action LeftMouseButtonReleasedAction;

@@ -156,7 +156,6 @@ namespace DoomSurvivors
             // Collisions
             checkCollisions();
 
-            // Add newly spawn 
             // Dead Entities Update
             for (int i = 0; i < deadEntityList.Count; i++)
             {

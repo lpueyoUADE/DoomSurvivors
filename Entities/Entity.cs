@@ -104,7 +104,6 @@ namespace DoomSurvivors.Entities
                 velocity.Y = 0;
             }
         }
-
         protected virtual void setState(Vector direction)
         {           
             if (direction == new Vector(0,0))

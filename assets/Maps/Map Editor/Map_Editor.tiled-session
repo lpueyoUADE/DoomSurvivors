@@ -21,11 +21,11 @@
             "scaleInEditor": 1
         },
         "Map_editor.tmx": {
-            "scale": 0.4240364583333333,
+            "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 961.0022723085426,
-                "y": 962.1814162009457
+                "x": 895.5,
+                "y": 329
             }
         },
         "Map_editor.tmx#AASHITTY": {
