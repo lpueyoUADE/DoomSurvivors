@@ -180,7 +180,7 @@ namespace DoomSurvivors
             gameObjectList.RemoveAll(gameObject => gameObject is Bullet && ((Bullet)gameObject).isDead);
             gameObjectList.RemoveAll(gameObject => gameObject is Item && ((Item)gameObject).Collected);
 
-            deadEntityList.AddRange(gameObjectList.FindAll(gameObject => gameObject is OffensiveEntity && ((OffensiveEntity)gameObject).IsDeath));
+            deadEntityList.AddRange(gameObjectList.FindAll(gameObject => gameObject is Monster && ((Monster)gameObject).IsDeath && ((Monster)gameObject).LeaveCorpse));
             gameObjectList.RemoveAll(gameObject => gameObject is OffensiveEntity && ((OffensiveEntity)gameObject).IsDeath);
         }
         public override void Reset()

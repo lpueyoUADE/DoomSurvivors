@@ -14,7 +14,8 @@ namespace DoomSurvivors.Entities
         Dying,
         Gibbing,
         Death,
-        GibDeath
+        GibDeath,
+        Special // ArchVile resurrecting | Revenant Missile
     }
 
     public abstract class Entity: GameObject
@@ -44,8 +45,6 @@ namespace DoomSurvivors.Entities
         {
             get { return this.animationController;}
         }
-
-
 
         public State State { 
             get { return this.state; } 

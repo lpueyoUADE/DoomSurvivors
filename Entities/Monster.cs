@@ -43,6 +43,7 @@ namespace DoomSurvivors.Entities
         private Entity target;
         private double visionRadius;
         private bool showVisionRadius;
+        private bool leaveCorpse;
         private int clock;
 
         public bool ShowVisionRadius
@@ -51,6 +52,11 @@ namespace DoomSurvivors.Entities
             set { this.showVisionRadius = value; }
         }
 
+        public bool LeaveCorpse
+        {
+            get => this.leaveCorpse;
+            set => this.leaveCorpse = value;
+        }
         public Entity Target
         {
             get => target; 
@@ -59,13 +65,14 @@ namespace DoomSurvivors.Entities
 
         public bool TargetOnSight => (target.Transform.Position - transform.Position).Length <= this.visionRadius;
 
-        public Monster(Transform transform, double speed, int life, Vector weaponPosition, AnimationController animationController, WeaponController weaponController=null, Entity target = null, double visionRadius = 0) :
+        public Monster(Transform transform, double speed, int life, Vector weaponPosition, AnimationController animationController, WeaponController weaponController=null, Entity target = null, double visionRadius = 0, bool leaveCorpse=true) :
             base(transform, speed, life, weaponPosition, animationController, weaponController)
         {
             this.target = target;
             this.visionRadius = visionRadius;
-            this.clock = 0;
+            this.leaveCorpse = leaveCorpse;
 
+            this.clock = 0;
             this.CollisionType = CollisionType.Kinematic;
         }
    

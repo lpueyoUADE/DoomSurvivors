@@ -24,7 +24,8 @@ namespace DoomSurvivors.Entities.Animations
             Animation dying = null, 
             Animation gibbing = null, 
             Animation death = null, 
-            Animation gibDeath = null
+            Animation gibDeath = null,
+            Animation special = null
             ) {
 
             this.AnimationList = new List<Animation> {
@@ -35,7 +36,8 @@ namespace DoomSurvivors.Entities.Animations
                 dying ,
                 gibbing,
                 death,
-                gibDeath
+                gibDeath,
+                special
             };
 
             this.currentAnimationState = State.Idle;

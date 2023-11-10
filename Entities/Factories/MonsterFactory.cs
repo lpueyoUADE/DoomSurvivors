@@ -440,7 +440,17 @@ namespace DoomSurvivors.Entities.Factories
                         false,
                         false
                     ),
-                    gibDeath: null
+                    gibDeath: null,
+                    special: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/ArchVile.png", new Transform(44,1744,108,73)),
+                            Engine.LoadImage("assets/Sprites/Monsters/ArchVile.png", new Transform(44,1854,107,72)),
+                            Engine.LoadImage("assets/Sprites/Monsters/ArchVile.png", new Transform(44,1963,107,72)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        false
+                    )
                 ),
                 null,
                 target, // Chasing Target,
@@ -460,27 +470,454 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Monster Revenant(int x, int y, Entity target)
         {
-            throw new NotImplementedException();
+            Monster archVile = new Monster(
+                new Transform(x, y, 41, 79),
+                5.0f,
+                10,
+                new Vector(4, 21),
+                new AnimationController(
+                    idle: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,33,41,79)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,147,56,85)),
+                        },
+                        Animation.Speed.slow,
+                        true,
+                        true
+                    ),
+                    moving: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,33,41,79)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,147,56,85)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(150,266,41,79)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,266,68,87)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        true
+                    ),
+                    attacking: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,391,56,72)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,500,61,83)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,616,47,66)),
+                        },
+                        Animation.Speed.fastest,
+                        true,
+                        false
+                    ),
+                    pain: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,933,66,72)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        false
+                    ),
+                    dying: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,933,66,72)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,1040,56,78)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(144,1040,74,70)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(262,1040,65,55)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(371,1040,62,38)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(477,1040,62,22)),
+                        },
+                        Animation.Speed.fastest,
+                        true,
+                        false
+                    ),
+                    gibbing: null,
+
+                    death: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(477,1040,62,22)),
+                        },
+                        Animation.Speed.slow,
+                        false,
+                        false
+                    ),
+                    gibDeath: null,
+                    special: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/ArchVile.png", new Transform(44,716,49,71)),
+                            Engine.LoadImage("assets/Sprites/Monsters/ArchVile.png", new Transform(44,820,49,79)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        false
+                    )
+                ),
+                null,
+                target, // Chasing Target,
+                250.0f  // Vision radius
+            );
+
+            archVile.AddWeapon(
+                WeaponFactory.RayTracedPistolRed(archVile)
+            );
+
+            archVile.AddWeapon(
+                WeaponFactory.BulletPistolAutomatic(archVile)
+            );
+
+            return archVile;
         }
 
         private static Monster Arachnotron(int x, int y, Entity target)
         {
-            throw new NotImplementedException();
+            Monster arachnotron = new Monster(
+                new Transform(x, y, 98, 55),
+                5.0f,
+                10,
+                new Vector(4, 21),
+                new AnimationController(
+                    idle: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,33,98,55)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,123,108,54)),
+                        },
+                        Animation.Speed.slow,
+                        true,
+                        true
+                    ),
+                    moving: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,33,98,55)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,123,108,54)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,211,96,54)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,301,108,54)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        true
+                    ),
+                    attacking: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,567,96,53)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,657,96,53)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        false
+                    ),
+                    pain: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,747,98,52)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        false
+                    ),
+                    dying: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,747,98,52)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,926,98,55)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(186,926,96,58)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(326,926,90,53)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(460,926,95,45)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(599,926,94,45)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,1017,95,33)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(183,1017,101,31)),
+                        },
+                        Animation.Speed.fastest,
+                        true,
+                        false
+                    ),
+                    gibbing: null,
+
+                    death: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(183,1017,101,31)),
+                        },
+                        Animation.Speed.slow,
+                        false,
+                        false
+                    ),
+                    gibDeath: null
+                ),
+                null,
+                target, // Chasing Target,
+                250.0f  // Vision radius
+            );
+
+            arachnotron.AddWeapon(
+                WeaponFactory.RayTracedPistolRed(arachnotron)
+            );
+
+            arachnotron.AddWeapon(
+                WeaponFactory.BulletPistolAutomatic(arachnotron)
+            );
+
+            return arachnotron;
         }
 
         private static Monster Mancubus(int x, int y, Entity target)
         {
-            throw new NotImplementedException();
+            Monster mancubus = new Monster(
+                new Transform(x, y, 73, 65),
+                5.0f,
+                10,
+                new Vector(4, 21),
+                new AnimationController(
+                    idle: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,33,73,65)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,132,88,70)),
+                        },
+                        Animation.Speed.slow,
+                        true,
+                        true
+                    ),
+                    moving: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,33,73,65)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,132,88,70)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,235,82,70)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,338,73,65)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,439,88,70)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,542,82,70)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        true
+                    ),
+                    attacking: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,645,87,65)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,745,83,65)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,844,84,68)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        false
+                    ),
+                    pain: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,946,74,67)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        false
+                    ),
+                    dying: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,946,74,67)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,1122,103,75)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(191,1122,101,76)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(336,1122,95,70)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(475,1122,85,52)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(604,1122,84,44)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,1208,86,43)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(174,1208,86,43)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(304,1208,86,43)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(434,1208,86,42)),
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(564,1208,86,41)),
+                        },
+                        Animation.Speed.fastest,
+                        true,
+                        false
+                    ),
+                    gibbing: null,
+
+                    death: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(564,1208,86,41)),
+                        },
+                        Animation.Speed.slow,
+                        false,
+                        false
+                    ),
+                    gibDeath: null
+                ),
+                null,
+                target, // Chasing Target,
+                250.0f  // Vision radius
+            );
+
+            mancubus.AddWeapon(
+                WeaponFactory.RayTracedPistolRed(mancubus)
+            );
+
+            mancubus.AddWeapon(
+                WeaponFactory.BulletPistolAutomatic(mancubus)
+            );
+
+            return mancubus;
         }
 
         private static Monster PainElemental(int x, int y, Entity target)
         {
-            throw new NotImplementedException();
+            Monster painElemental = new Monster(
+                new Transform(x, y, 77, 57),
+                5.0f,
+                10,
+                new Vector(4, 21),
+                new AnimationController(
+                    idle: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,33,77,57)),
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,123,77,57)),
+                        },
+                        Animation.Speed.slow,
+                        true,
+                        true
+                    ),
+                    moving: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,33,77,57)),
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,123,77,57)),
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,213,75,57)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        true
+                    ),
+                    attacking: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,303,89,55)),
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,393,88,58)),
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,487,77,60)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        false
+                    ),
+                    pain: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,584,82,57)),
+                        },
+                        Animation.Speed.faster,
+                        true,
+                        false
+                    ),
+                    dying: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,584,82,57)),
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,674,82,57)),
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(170,674,76,56)),
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(290,674,84,56)),
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(418,674,97,70)),
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,754,87,72)),
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(175,754,102,86)),
+                        },
+                        Animation.Speed.fastest,
+                        true,
+                        false
+                    ),
+                    gibbing: null,
+
+                    death: new Animation(
+                        new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(175,754,102,86)),
+                        },
+                        Animation.Speed.slow,
+                        false,
+                        false
+                    ),
+                    gibDeath: null
+                ),
+                null,
+                target, // Chasing Target,
+                250.0f,  // Vision radius,
+                leaveCorpse: false
+            );
+
+            painElemental.AddWeapon(
+                WeaponFactory.RayTracedPistolRed(painElemental)
+            );
+
+            painElemental.AddWeapon(
+                WeaponFactory.BulletPistolAutomatic(painElemental)
+            );
+
+            return painElemental;
         }
 
         private static Monster LostSoul(int x, int y, Entity target)
         {
-            throw new NotImplementedException();
+            Monster lostSoul = new Monster(
+                 new Transform(x, y, 73, 65),
+                 5.0f,
+                 10,
+                 new Vector(4, 21),
+                 new AnimationController(
+                     idle: new Animation(
+                         new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,33,44,47)),
+                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,120,44,46)),
+                         },
+                         Animation.Speed.slow,
+                         true,
+                         true
+                     ),
+                     moving: new Animation(
+                         new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,33,44,47)),
+                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,120,44,46)),
+                         },
+                         Animation.Speed.faster,
+                         true,
+                         true
+                     ),
+                     attacking: new Animation(
+                         new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,207,44,44)),
+                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,284,44,44)),
+                         },
+                         Animation.Speed.faster,
+                         true,
+                         false
+                     ),
+                     pain: new Animation(
+                         new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,361,31,51)),
+                         },
+                         Animation.Speed.faster,
+                         true,
+                         false
+                     ),
+                     dying: new Animation(
+                         new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,284,44,44)),
+                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,448,31,51)),
+                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(122,448,36,53)),
+                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(202,448,45,48)),
+                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(291,448,68,59)),
+                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(403,448,88,72)),
+                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(535,448,103,90)),
+                         },
+                         Animation.Speed.fastest,
+                         true,
+                         false
+                     ),
+                     gibbing: null,
+
+                     death: new Animation(
+                         new List<Sprite>{
+                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(535,448,103,90)),
+                         },
+                         Animation.Speed.slow,
+                         false,
+                         false
+                     ),
+                     gibDeath: null
+                 ),
+                 null,
+                 target, // Chasing Target,
+                 250.0f,  // Vision radius
+                 leaveCorpse: false
+             );
+
+            lostSoul.AddWeapon(
+                WeaponFactory.RayTracedPistolRed(lostSoul)
+            );
+
+            lostSoul.AddWeapon(
+                WeaponFactory.BulletPistolAutomatic(lostSoul)
+            );
+
+            return lostSoul;
         }
 
         private static Monster CacoDemon(int x, int y, Entity target)
