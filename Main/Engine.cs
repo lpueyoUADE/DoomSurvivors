@@ -4,8 +4,10 @@ using DoomSurvivors.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Windows;
 using Tao.Sdl;
+using static System.Net.Mime.MediaTypeNames;
 using static Tao.Sdl.Sdl;
 
 
@@ -76,6 +78,18 @@ class Engine
         Sdl.SDL_BlitSurface(imagen, ref origen, screen, ref dest);
     }
 
+    public static void Draw(Sprite sprite, double x, double y, int width, int height)
+    {
+        IntPtr reference = Sprite.References[sprite.ImageName].Surface;
+        // Color colorKey = Sprite.References[sprite.ImageName].ColorKey;
+        // IntPtr format = Sprite.References[sprite.ImageName].SurfaceFormat;
+        //Sdl.SDL_SetAlpha(screen, 0, 0);
+        //Sdl.SDL_SetColorKey(reference, SDL_SRCCOLORKEY, Sdl.SDL_MapRGB(format, colorKey.R, colorKey.G, colorKey.B));
+
+        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)width, (short)height);
+        Sdl.SDL_BlitSurface(reference, ref sprite.rect, screen, ref dest);
+    }
+
     public static void DrawRect(int x, int y, int w, int h, int color)
     {
         Sdl.SDL_Rect rect = new Sdl.SDL_Rect((short)x, (short)y, (short)w, (short)h);
@@ -113,6 +127,7 @@ class Engine
         return imagen;
     }
 
+    /*
     public static Sprite LoadImage(string image, Transform transform, bool cyanColorKey=true)
     {
         Color colorKey;
@@ -139,6 +154,7 @@ class Engine
         Sdl.SDL_FreeSurface(originalSurfacePtr);
         return new Sprite(croppedSurfacePtr, transform);
     }
+    */
 
     public static void DrawText(string text,
         int x, int y, byte r, byte g, byte b, Font f)
