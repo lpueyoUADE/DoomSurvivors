@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Animations\Sprite.cs" />
+    <Compile Include="Entities\Animations\SpriteReference.cs" />
     <Compile Include="Entities\Weapons\BulletWeapon.cs" />
     <Compile Include="Entities\Weapons\Bullet.cs" />
     <Compile Include="Entities\CollisionController.cs" />

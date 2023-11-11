@@ -443,9 +443,9 @@ namespace DoomSurvivors.Entities.Factories
                     gibDeath: null,
                     special: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/ArchVile.png", new Transform(44,1744,108,73)),
-                            Engine.LoadImage("assets/Sprites/Monsters/ArchVile.png", new Transform(44,1854,107,72)),
-                            Engine.LoadImage("assets/Sprites/Monsters/ArchVile.png", new Transform(44,1963,107,72)),
+                            new Sprite("ArchVile", new Transform(44,1744,108,73)),
+                            new Sprite("ArchVile", new Transform(44,1854,107,72)),
+                            new Sprite("ArchVile", new Transform(44,1963,107,72)),
                         },
                         Animation.Speed.faster,
                         true,
@@ -478,8 +478,8 @@ namespace DoomSurvivors.Entities.Factories
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,33,41,79)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,147,56,85)),
+                            new Sprite("Revenant", new Transform(44,33,41,79)),
+                            new Sprite("Revenant", new Transform(44,147,56,85)),
                         },
                         Animation.Speed.slow,
                         true,
@@ -487,10 +487,10 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     moving: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,33,41,79)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,147,56,85)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(150,266,41,79)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,266,68,87)),
+                            new Sprite("Revenant", new Transform(44,33,41,79)),
+                            new Sprite("Revenant", new Transform(44,147,56,85)),
+                            new Sprite("Revenant", new Transform(150,266,41,79)),
+                            new Sprite("Revenant", new Transform(44,266,68,87)),
                         },
                         Animation.Speed.faster,
                         true,
@@ -498,9 +498,9 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     attacking: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,391,56,72)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,500,61,83)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,616,47,66)),
+                            new Sprite("Revenant", new Transform(44,391,56,72)),
+                            new Sprite("Revenant", new Transform(44,500,61,83)),
+                            new Sprite("Revenant", new Transform(44,616,47,66)),
                         },
                         Animation.Speed.fastest,
                         true,
@@ -508,7 +508,7 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     pain: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,933,66,72)),
+                            new Sprite("Revenant", new Transform(44,933,66,72)),
                         },
                         Animation.Speed.faster,
                         true,
@@ -516,12 +516,12 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     dying: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,933,66,72)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(44,1040,56,78)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(144,1040,74,70)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(262,1040,65,55)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(371,1040,62,38)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(477,1040,62,22)),
+                            new Sprite("Revenant", new Transform(44,933,66,72)),
+                            new Sprite("Revenant", new Transform(44,1040,56,78)),
+                            new Sprite("Revenant", new Transform(144,1040,74,70)),
+                            new Sprite("Revenant", new Transform(262,1040,65,55)),
+                            new Sprite("Revenant", new Transform(371,1040,62,38)),
+                            new Sprite("Revenant", new Transform(477,1040,62,22)),
                         },
                         Animation.Speed.fastest,
                         true,
@@ -531,7 +531,7 @@ namespace DoomSurvivors.Entities.Factories
 
                     death: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Revenant.png", new Transform(477,1040,62,22)),
+                            new Sprite("Revenant", new Transform(477,1040,62,22)),
                         },
                         Animation.Speed.slow,
                         false,
@@ -540,8 +540,8 @@ namespace DoomSurvivors.Entities.Factories
                     gibDeath: null,
                     special: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/ArchVile.png", new Transform(44,716,49,71)),
-                            Engine.LoadImage("assets/Sprites/Monsters/ArchVile.png", new Transform(44,820,49,79)),
+                            new Sprite("ArchVile", new Transform(44,716,49,71)),
+                            new Sprite("ArchVile", new Transform(44,820,49,79)),
                         },
                         Animation.Speed.faster,
                         true,
@@ -574,8 +574,8 @@ namespace DoomSurvivors.Entities.Factories
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,33,98,55)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,123,108,54)),
+                            new Sprite("Arachnotron", new Transform(44,33,98,55)),
+                            new Sprite("Arachnotron", new Transform(44,123,108,54)),
                         },
                         Animation.Speed.slow,
                         true,
@@ -583,10 +583,10 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     moving: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,33,98,55)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,123,108,54)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,211,96,54)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,301,108,54)),
+                            new Sprite("Arachnotron", new Transform(44,33,98,55)),
+                            new Sprite("Arachnotron", new Transform(44,123,108,54)),
+                            new Sprite("Arachnotron", new Transform(44,211,96,54)),
+                            new Sprite("Arachnotron", new Transform(44,301,108,54)),
                         },
                         Animation.Speed.faster,
                         true,
@@ -594,8 +594,8 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     attacking: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,567,96,53)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,657,96,53)),
+                            new Sprite("Arachnotron", new Transform(44,567,96,53)),
+                            new Sprite("Arachnotron", new Transform(44,657,96,53)),
                         },
                         Animation.Speed.faster,
                         true,
@@ -603,7 +603,7 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     pain: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,747,98,52)),
+                            new Sprite("Arachnotron", new Transform(44,747,98,52)),
                         },
                         Animation.Speed.faster,
                         true,
@@ -611,14 +611,14 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     dying: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,747,98,52)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,926,98,55)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(186,926,96,58)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(326,926,90,53)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(460,926,95,45)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(599,926,94,45)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(44,1017,95,33)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(183,1017,101,31)),
+                            new Sprite("Arachnotron", new Transform(44,747,98,52)),
+                            new Sprite("Arachnotron", new Transform(44,926,98,55)),
+                            new Sprite("Arachnotron", new Transform(186,926,96,58)),
+                            new Sprite("Arachnotron", new Transform(326,926,90,53)),
+                            new Sprite("Arachnotron", new Transform(460,926,95,45)),
+                            new Sprite("Arachnotron", new Transform(599,926,94,45)),
+                            new Sprite("Arachnotron", new Transform(44,1017,95,33)),
+                            new Sprite("Arachnotron", new Transform(183,1017,101,31)),
                         },
                         Animation.Speed.fastest,
                         true,
@@ -628,7 +628,7 @@ namespace DoomSurvivors.Entities.Factories
 
                     death: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Arachnotron.png", new Transform(183,1017,101,31)),
+                            new Sprite("Arachnotron", new Transform(183,1017,101,31)),
                         },
                         Animation.Speed.slow,
                         false,
@@ -662,8 +662,8 @@ namespace DoomSurvivors.Entities.Factories
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,33,73,65)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,132,88,70)),
+                            new Sprite("Mancubus", new Transform(44,33,73,65)),
+                            new Sprite("Mancubus", new Transform(44,132,88,70)),
                         },
                         Animation.Speed.slow,
                         true,
@@ -671,12 +671,12 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     moving: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,33,73,65)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,132,88,70)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,235,82,70)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,338,73,65)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,439,88,70)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,542,82,70)),
+                            new Sprite("Mancubus", new Transform(44,33,73,65)),
+                            new Sprite("Mancubus", new Transform(44,132,88,70)),
+                            new Sprite("Mancubus", new Transform(44,235,82,70)),
+                            new Sprite("Mancubus", new Transform(44,338,73,65)),
+                            new Sprite("Mancubus", new Transform(44,439,88,70)),
+                            new Sprite("Mancubus", new Transform(44,542,82,70)),
                         },
                         Animation.Speed.faster,
                         true,
@@ -684,9 +684,9 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     attacking: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,645,87,65)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,745,83,65)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,844,84,68)),
+                            new Sprite("Mancubus", new Transform(44,645,87,65)),
+                            new Sprite("Mancubus", new Transform(44,745,83,65)),
+                            new Sprite("Mancubus", new Transform(44,844,84,68)),
                         },
                         Animation.Speed.faster,
                         true,
@@ -694,7 +694,7 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     pain: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,946,74,67)),
+                            new Sprite("Mancubus", new Transform(44,946,74,67)),
                         },
                         Animation.Speed.faster,
                         true,
@@ -702,17 +702,17 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     dying: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,946,74,67)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,1122,103,75)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(191,1122,101,76)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(336,1122,95,70)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(475,1122,85,52)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(604,1122,84,44)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(44,1208,86,43)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(174,1208,86,43)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(304,1208,86,43)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(434,1208,86,42)),
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(564,1208,86,41)),
+                            new Sprite("Mancubus", new Transform(44,946,74,67)),
+                            new Sprite("Mancubus", new Transform(44,1122,103,75)),
+                            new Sprite("Mancubus", new Transform(191,1122,101,76)),
+                            new Sprite("Mancubus", new Transform(336,1122,95,70)),
+                            new Sprite("Mancubus", new Transform(475,1122,85,52)),
+                            new Sprite("Mancubus", new Transform(604,1122,84,44)),
+                            new Sprite("Mancubus", new Transform(44,1208,86,43)),
+                            new Sprite("Mancubus", new Transform(174,1208,86,43)),
+                            new Sprite("Mancubus", new Transform(304,1208,86,43)),
+                            new Sprite("Mancubus", new Transform(434,1208,86,42)),
+                            new Sprite("Mancubus", new Transform(564,1208,86,41)),
                         },
                         Animation.Speed.fastest,
                         true,
@@ -722,7 +722,7 @@ namespace DoomSurvivors.Entities.Factories
 
                     death: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/Mancubus.png", new Transform(564,1208,86,41)),
+                            new Sprite("Mancubus", new Transform(564,1208,86,41)),
                         },
                         Animation.Speed.slow,
                         false,
@@ -756,8 +756,8 @@ namespace DoomSurvivors.Entities.Factories
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,33,77,57)),
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,123,77,57)),
+                            new Sprite("PainElemental", new Transform(44,33,77,57)),
+                            new Sprite("PainElemental", new Transform(44,123,77,57)),
                         },
                         Animation.Speed.slow,
                         true,
@@ -765,9 +765,9 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     moving: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,33,77,57)),
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,123,77,57)),
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,213,75,57)),
+                            new Sprite("PainElemental", new Transform(44,33,77,57)),
+                            new Sprite("PainElemental", new Transform(44,123,77,57)),
+                            new Sprite("PainElemental", new Transform(44,213,75,57)),
                         },
                         Animation.Speed.faster,
                         true,
@@ -775,9 +775,9 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     attacking: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,303,89,55)),
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,393,88,58)),
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,487,77,60)),
+                            new Sprite("PainElemental", new Transform(44,303,89,55)),
+                            new Sprite("PainElemental", new Transform(44,393,88,58)),
+                            new Sprite("PainElemental", new Transform(44,487,77,60)),
                         },
                         Animation.Speed.faster,
                         true,
@@ -785,7 +785,7 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     pain: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,584,82,57)),
+                            new Sprite("PainElemental", new Transform(44,584,82,57)),
                         },
                         Animation.Speed.faster,
                         true,
@@ -793,13 +793,13 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     dying: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,584,82,57)),
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,674,82,57)),
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(170,674,76,56)),
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(290,674,84,56)),
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(418,674,97,70)),
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(44,754,87,72)),
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(175,754,102,86)),
+                            new Sprite("PainElemental", new Transform(44,584,82,57)),
+                            new Sprite("PainElemental", new Transform(44,674,82,57)),
+                            new Sprite("PainElemental", new Transform(170,674,76,56)),
+                            new Sprite("PainElemental", new Transform(290,674,84,56)),
+                            new Sprite("PainElemental", new Transform(418,674,97,70)),
+                            new Sprite("PainElemental", new Transform(44,754,87,72)),
+                            new Sprite("PainElemental", new Transform(175,754,102,86)),
                         },
                         Animation.Speed.fastest,
                         true,
@@ -809,7 +809,7 @@ namespace DoomSurvivors.Entities.Factories
 
                     death: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/PainElemental.png", new Transform(175,754,102,86)),
+                            new Sprite("PainElemental", new Transform(175,754,102,86)),
                         },
                         Animation.Speed.slow,
                         false,
@@ -844,8 +844,8 @@ namespace DoomSurvivors.Entities.Factories
                  new AnimationController(
                      idle: new Animation(
                          new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,33,44,47)),
-                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,120,44,46)),
+                            new Sprite("LostSoul", new Transform(44,33,44,47)),
+                            new Sprite("LostSoul", new Transform(44,120,44,46)),
                          },
                          Animation.Speed.slow,
                          true,
@@ -853,8 +853,8 @@ namespace DoomSurvivors.Entities.Factories
                      ),
                      moving: new Animation(
                          new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,33,44,47)),
-                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,120,44,46)),
+                            new Sprite("LostSoul", new Transform(44,33,44,47)),
+                            new Sprite("LostSoul", new Transform(44,120,44,46)),
                          },
                          Animation.Speed.faster,
                          true,
@@ -862,8 +862,8 @@ namespace DoomSurvivors.Entities.Factories
                      ),
                      attacking: new Animation(
                          new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,207,44,44)),
-                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,284,44,44)),
+                            new Sprite("LostSoul", new Transform(44,207,44,44)),
+                            new Sprite("LostSoul", new Transform(44,284,44,44)),
                          },
                          Animation.Speed.faster,
                          true,
@@ -871,7 +871,7 @@ namespace DoomSurvivors.Entities.Factories
                      ),
                      pain: new Animation(
                          new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,361,31,51)),
+                            new Sprite("LostSoul", new Transform(44,361,31,51)),
                          },
                          Animation.Speed.faster,
                          true,
@@ -879,13 +879,13 @@ namespace DoomSurvivors.Entities.Factories
                      ),
                      dying: new Animation(
                          new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,284,44,44)),
-                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(44,448,31,51)),
-                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(122,448,36,53)),
-                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(202,448,45,48)),
-                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(291,448,68,59)),
-                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(403,448,88,72)),
-                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(535,448,103,90)),
+                            new Sprite("LostSoul", new Transform(44,284,44,44)),
+                            new Sprite("LostSoul", new Transform(44,448,31,51)),
+                            new Sprite("LostSoul", new Transform(122,448,36,53)),
+                            new Sprite("LostSoul", new Transform(202,448,45,48)),
+                            new Sprite("LostSoul", new Transform(291,448,68,59)),
+                            new Sprite("LostSoul", new Transform(403,448,88,72)),
+                            new Sprite("LostSoul", new Transform(535,448,103,90)),
                          },
                          Animation.Speed.fastest,
                          true,
@@ -895,7 +895,7 @@ namespace DoomSurvivors.Entities.Factories
 
                      death: new Animation(
                          new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Monsters/LostSoul.png", new Transform(535,448,103,90)),
+                            new Sprite("LostSoul", new Transform(535,448,103,90)),
                          },
                          Animation.Speed.slow,
                          false,
