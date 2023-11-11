@@ -84,7 +84,7 @@ namespace DoomSurvivors.Entities
                 Engine.DrawRect(position, Transform.Size, 0xff0000);
 
             Engine.Draw(
-                GetCurrentSprite().Image, 
+                GetCurrentSprite(), 
                 (int)position.X + DrawingOffset.X, 
                 (int)position.Y + DrawingOffset.Y, 
                 transform.W,

@@ -48,7 +48,7 @@ namespace DoomSurvivors.Entities.Factories
                     new AnimationController(
                         new Animation(
                             new List<Sprite>{
-                                Engine.LoadImage("assets/Sprites/Proyectiles&Effects/Proyectiles&Effects.png", new Transform(114,27,7,7), false),
+                                new Sprite("Proyectiles&Effects", new Transform(114,27,7,7)),
                             },
                             Animation.Speed.fast,
                             true,
@@ -76,7 +76,7 @@ namespace DoomSurvivors.Entities.Factories
                     new AnimationController(
                         new Animation(
                             new List<Sprite>{
-                                Engine.LoadImage("assets/Sprites/Proyectiles&Effects/Proyectiles&Effects.png", new Transform(114,27,7,7), false),
+                                new Sprite("Proyectiles&Effects", new Transform(114,27,7,7)),
                             },
                             Animation.Speed.fast,
                             true,

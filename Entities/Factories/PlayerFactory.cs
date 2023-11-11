@@ -16,8 +16,8 @@ namespace DoomSurvivors.Entities.Factories
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,51,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(59,51,57,59)),
+                            new Sprite("Player", new Transform(1,51,57,59)),
+                            new Sprite("Player", new Transform(59,51,57,59)),
                         },
                         Animation.Speed.regular,
                         true,
@@ -25,10 +25,10 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     moving: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,51,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(59,51,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(117,51,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(175,51,57,59)),
+                            new Sprite("Player", new Transform(1,51,57,59)),
+                            new Sprite("Player", new Transform(59,51,57,59)),
+                            new Sprite("Player", new Transform(117,51,57,59)),
+                            new Sprite("Player", new Transform(175,51,57,59)),
                         },
                         Animation.Speed.fastest,
                         true,
@@ -36,8 +36,8 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     attacking: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(59,366,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,366,57,59)),
+                            new Sprite("Player", new Transform(59,366,57,59)),
+                            new Sprite("Player", new Transform(1,366,57,59)),
                         },
                         Animation.Speed.fastest,
                         true,
@@ -45,7 +45,7 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     pain: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,681,57,59)),
+                            new Sprite("Player", new Transform(1,681,57,59)),
                         },
                         Animation.Speed.fast,
                         true,
@@ -53,14 +53,14 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     dying: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,681,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,741,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(59,741,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(117,741,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(175,741,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(233,741,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,801,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(59,801,57,59)),
+                            new Sprite("Player", new Transform(1,681,57,59)),
+                            new Sprite("Player", new Transform(1,741,57,59)),
+                            new Sprite("Player", new Transform(59,741,57,59)),
+                            new Sprite("Player", new Transform(117,741,57,59)),
+                            new Sprite("Player", new Transform(175,741,57,59)),
+                            new Sprite("Player", new Transform(233,741,57,59)),
+                            new Sprite("Player", new Transform(1,801,57,59)),
+                            new Sprite("Player", new Transform(59,801,57,59)),
                         },
                         Animation.Speed.faster,
                         true,
@@ -68,16 +68,16 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     gibbing: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,681,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,876,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(59,876,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(117,876,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(175,876,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(233,876,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(1,936,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(59,936,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(117,936,57,59)),
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(175,936,57,59)),
+                            new Sprite("Player", new Transform(1,681,57,59)),
+                            new Sprite("Player", new Transform(1,876,57,59)),
+                            new Sprite("Player", new Transform(59,876,57,59)),
+                            new Sprite("Player", new Transform(117,876,57,59)),
+                            new Sprite("Player", new Transform(175,876,57,59)),
+                            new Sprite("Player", new Transform(233,876,57,59)),
+                            new Sprite("Player", new Transform(1,936,57,59)),
+                            new Sprite("Player", new Transform(59,936,57,59)),
+                            new Sprite("Player", new Transform(117,936,57,59)),
+                            new Sprite("Player", new Transform(175,936,57,59)),
                         },
                         Animation.Speed.fastest,
                         false,
@@ -85,7 +85,7 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     death: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(59,801,57,59)),
+                            new Sprite("Player", new Transform(59,801,57,59)),
                         },
                         Animation.Speed.fastest,
                         false,
@@ -93,7 +93,7 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     gibDeath: new Animation(
                         new List<Sprite>{
-                            Engine.LoadImage("assets/Sprites/Player/DoomGuy.png", new Transform(175,936,57,59)),
+                            new Sprite("Player", new Transform(175,936,57,59)),
                         },
                         Animation.Speed.fastest,
                         false,
