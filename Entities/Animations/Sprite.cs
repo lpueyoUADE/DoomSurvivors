@@ -14,7 +14,7 @@ namespace DoomSurvivors.Entities.Animations
             Value: Surface Loaded from the assets folder and the ColorKey (Cyan or magenta).
         */
         private static Color cyanColorKey = new Color(0, 255, 255, 255);
-        private static Color magentgaColorKey = new Color(0, 255, 255, 255);
+        private static Color magentaColorKey = new Color(255, 0, 110, 255);
         public static Dictionary<string, SpriteReference > References = new Dictionary<string, SpriteReference>{
             { "Crosshair", new SpriteReference("assets/Crosshair/crosshair_3.png", cyanColorKey)},
             /*-------------------------------------------------------------------------------------*/
@@ -42,7 +42,7 @@ namespace DoomSurvivors.Entities.Animations
             /*-------------------------------------------------------------------------------------*/
             { "Player", new SpriteReference("assets/Sprites/Player/DoomGuy.png", cyanColorKey)},
             /*-------------------------------------------------------------------------------------*/
-            { "Proyectiles&Effects", new SpriteReference("assets/Sprites/Proyectiles&Effects/Proyectiles&Effects.png", magentgaColorKey)},
+            { "Proyectiles&Effects", new SpriteReference("assets/Sprites/Proyectiles&Effects/Proyectiles&Effects.png", magentaColorKey)},
             /*-------------------------------------------------------------------------------------*/
             { "Walls", new SpriteReference("assets/Sprites/Walls/wall_001.png", cyanColorKey)},
         };

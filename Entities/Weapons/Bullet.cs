@@ -1,7 +1,9 @@
 ﻿using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Entities.Factories;
 using DoomSurvivors.Main;
 using DoomSurvivors.Utilities;
 using DoomSurvivors.Viewport;
+using System;
 using System.Windows;
 
 namespace DoomSurvivors.Entities.Weapons
@@ -19,6 +21,8 @@ namespace DoomSurvivors.Entities.Weapons
         public bool isDead => remainingLife <= 0;
 
         public int Damage => damage;
+
+        public static event Action<Particle> BulletHitAction;
 
         public Bullet(Transform transform, double speed, AnimationController animationController, int damage, OffensiveEntity owner, float lifespan) : 
             this (transform, speed, animationController, damage, owner, new Vector(0,0), lifespan)
@@ -50,9 +54,15 @@ namespace DoomSurvivors.Entities.Weapons
                     return;
 
                 ((OffensiveEntity)other).ApplyDamage(this.damage);
+                BulletHitAction?.Invoke(ParticleFactory.CreateParticle(Particle.ParticleType.Blood, transform.PositionCenter));
                 this.Destroy();
-
-            } else if (other is Entity || other is Wall)
+            }
+            else if (other is Wall)
+            {
+                BulletHitAction?.Invoke(ParticleFactory.CreateParticle(Particle.ParticleType.WallHit, transform.PositionCenter));
+                this.Destroy();
+            }
+            else if (other is Entity)
             {
                 this.Destroy();
             }

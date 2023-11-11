@@ -9,6 +9,7 @@ using System.Linq;
 using System.Windows;
 using static DoomSurvivors.Entities.Item;
 using static DoomSurvivors.Entities.Monster;
+using static DoomSurvivors.Entities.Particle;
 using static DoomSurvivors.Entities.Wall;
 
 namespace DoomSurvivors
@@ -18,6 +19,7 @@ namespace DoomSurvivors
         private Map map;
         private List<Tracer> tracerList;
         private List<Ray> rayList;
+        private List<Particle> particleList;
         private List<GameObject> gameObjectList;
         private List<GameObject> deadEntityList;
         private bool drawBoundingBox;
@@ -33,10 +35,20 @@ namespace DoomSurvivors
             set { this.drawVisionRadius = value; }
         }
 
+        private void ClearLists()
+        {
+            gameObjectList.Clear();
+            deadEntityList.Clear();
+            particleList.Clear();
+            rayList.Clear();
+            tracerList.Clear();
+        }
+
         public PlayableScene(Map map, bool drawBoundingBox = false, bool drawVisionRadius = false)
         {
             this.gameObjectList = new List<GameObject>();
             this.deadEntityList = new List<GameObject>();
+            this.particleList = new List<Particle>();
             this.rayList = new List<Ray>();
             this.tracerList = new List<Tracer>();
             this.map = map;
@@ -75,7 +87,54 @@ namespace DoomSurvivors
                 }
             }
         }
+        public void CheckRayCollisions()
+        {
+            GameObject target = null;
+            double targetDistance = float.MaxValue;
+            double distance;
+            double x, y;
+            Vector hitPoint = new Vector(0, 0);
+            for (int i = 0; i < rayList.Count; i++)
+            {
+                Vector end = rayList[i].Origin + rayList[i].Direction * rayList[i].MaxDistance;
 
+                for (int j = 0; j < gameObjectList.Count; j++)
+                {
+                    if (gameObjectList[j].IsRayCastCollidable)
+                    {
+                        if ((!(gameObjectList[j] is OffensiveEntity) || !rayList[i].IsOwnedBy((OffensiveEntity)gameObjectList[j])) && rayList[i].Intersects(gameObjectList[j].Transform, out x, out y))
+                        {
+                            distance = (gameObjectList[j].Transform.PositionCenter - rayList[i].Origin).Length;
+                            if (distance < targetDistance)
+                            {
+                                target = gameObjectList[j];
+                                targetDistance = distance;
+                                hitPoint.X = x;
+                                hitPoint.Y = y;
+                            }
+                        }
+                    }
+                }
+
+                if (target != null)
+                {
+                    end = hitPoint;
+                    if (target is OffensiveEntity)
+                    {
+                        ((OffensiveEntity)target).ApplyDamage(((RayTracedWeapon)rayList[i].Owner.CurrentWeapon).Damage);
+                        particleList.Add(ParticleFactory.CreateParticle(ParticleType.Blood, hitPoint));
+                    }
+                    else if (target is Wall)
+                        particleList.Add(ParticleFactory.CreateParticle(ParticleType.WallHit, hitPoint));
+
+                }
+
+                Tracer tracer = rayList[i].Tracer.Clone();
+                tracer.Origin = rayList[i].Origin;
+                tracer.End = end;
+                this.tracerList.Add(tracer);
+            }
+        }
         public override void Load()
         {
             Camera.Instance.Active = true;
@@ -120,6 +179,7 @@ namespace DoomSurvivors
             // Add Event Handlers
             RayTracedWeapon.RayTracedWeaponShotAction += RayTracedWeaponShotActionHandler;
             BulletWeapon.BulletWeaponShotAction += BulletWeaponShotActionHandler;
+            Bullet.BulletHitAction += BulletHitActionHandler;
 
         }
         public override void UnLoad()
@@ -129,20 +189,27 @@ namespace DoomSurvivors
             // Remove Event Handlers
             RayTracedWeapon.RayTracedWeaponShotAction -= RayTracedWeaponShotActionHandler;
             BulletWeapon.BulletWeaponShotAction -= BulletWeaponShotActionHandler;
+            Bullet.BulletHitAction -= BulletHitActionHandler;
 
             Player player = gameObjectList.OfType<Player>().FirstOrDefault();
             player?.Unload();
+
+            ClearLists();
         }
 
         private void RayTracedWeaponShotActionHandler(RayTracedWeapon weapon, Ray ray)
         {
-            //this.tracerList.Add(weapon.Tracer.Clone());
             this.rayList.Add(ray);
         }
 
         private void BulletWeaponShotActionHandler(BulletWeapon weapon)
         {
             this.gameObjectList.Add(weapon.SpawnBullet());
+        }
+
+        private void BulletHitActionHandler(Particle particle)
+        {
+            this.particleList.Add(particle);
         }
 
         public override void Update()
@@ -171,51 +238,19 @@ namespace DoomSurvivors
             }
 
             // Check casted rays
-            GameObject target = null;
-            double targetDistance = float.MaxValue;
-            double distance;
-            double x, y;
-            Vector hitPoint = new Vector(0,0);
-            for (int i = 0; i < rayList.Count; i++)
-            {
-                Vector end = rayList[i].Origin + rayList[i].Direction * rayList[i].MaxDistance;
-
-                for (int j = 0; j < gameObjectList.Count; j++)
-                {
-                    if(gameObjectList[j].IsRayCastCollidable)
-                    {
-                        if ((!(gameObjectList[j] is OffensiveEntity) || !rayList[i].IsOwnedBy((OffensiveEntity)gameObjectList[j])) && rayList[i].Intersects(gameObjectList[j].Transform, out x, out y))
-                        {
-                            distance = (gameObjectList[j].Transform.PositionCenter - rayList[i].Origin).Length;
-                            if (distance < targetDistance)
-                            {
-                                target = gameObjectList[j];
-                                targetDistance = distance;
-                                hitPoint.X = x;
-                                hitPoint.Y = y;
-                            }
-                        }
-                    }
-                }
-
-                if (target != null)
-                {
-                    end = hitPoint;
-                    if (target is OffensiveEntity)
-                        ((OffensiveEntity)target).ApplyDamage(((RayTracedWeapon)rayList[i].Owner.CurrentWeapon).Damage);
-                }
-
-                Tracer tracer = rayList[i].Tracer.Clone();
-                tracer.Origin = rayList[i].Origin;
-                tracer.End = end;
-                this.tracerList.Add(tracer);
-            }
+            CheckRayCollisions();
 
             // Tracer Effects Update
             foreach (Tracer tracer in tracerList)
-            {
                 tracer.Update();
+
+
+            foreach (Particle particle in particleList)
+            {
+                particle.Update();
+                particle.Render();
             }
+
 
             tracerList.RemoveAll(tracer => tracer.hasFinished);
             gameObjectList.RemoveAll(gameObject => gameObject is Bullet && ((Bullet)gameObject).isDead);
@@ -223,6 +258,8 @@ namespace DoomSurvivors
 
             deadEntityList.AddRange(gameObjectList.FindAll(gameObject => (gameObject is Monster && ((Monster)gameObject).IsDeath && ((Monster)gameObject).LeaveCorpse) || gameObject is Player && ((Player)gameObject).IsDeath));
             gameObjectList.RemoveAll(gameObject => gameObject is OffensiveEntity && ((OffensiveEntity)gameObject).IsDeath);
+
+            particleList.RemoveAll(particle => particle.HasEnded);
 
             rayList.Clear();
         }

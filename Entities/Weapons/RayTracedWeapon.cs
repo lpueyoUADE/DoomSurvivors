@@ -37,7 +37,9 @@ namespace DoomSurvivors.Entities.Weapons
             this.Tracer.Origin = this.Owner.WeaponPosition;
             this.Tracer.End = target;
 
-            Vector direction = target - this.Owner.WeaponPosition;
+            Random rnd = new Random();
+            Vector direction = target - this.Owner.WeaponPosition + new Vector(rnd.Next(-10,10), rnd.Next(-10, 10));
+
             if (direction.Length > 0)
                 direction.Normalize();
 

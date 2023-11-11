@@ -27,6 +27,7 @@ namespace DoomSurvivors.Entities.Animations
         private bool isInterruptable;
         private bool isLooping;
         private bool hasBeenReseted;
+        private bool hasEnded;
 
         private int maxHeight;
 
@@ -37,8 +38,9 @@ namespace DoomSurvivors.Entities.Animations
         public bool IsInterruptable => isInterruptable;
 
         public bool IsLooping => isLooping;
-
         public bool HasBeenReseted => hasBeenReseted;
+        public bool HasEnded => hasEnded;
+
         public int MaxHeight => maxHeight;
 
         public Animation(List<Sprite> keyFrames, float speed, bool isLoopEnabled, bool isInterruptable)
@@ -49,6 +51,7 @@ namespace DoomSurvivors.Entities.Animations
             this.isInterruptable = isInterruptable;
             this.isLooping = false;
             this.hasBeenReseted = false;
+            this.hasEnded = false;
 
             this.maxHeight = this.keyFrames.Max(frame => frame.Transform.H);
         }
@@ -58,6 +61,7 @@ namespace DoomSurvivors.Entities.Animations
             this.currentAnimationTime = 0;
             this.currentSpriteIndex = 0;
             this.hasBeenReseted = true;
+            this.hasEnded = false;
         }
 
         public void Update()
@@ -66,6 +70,7 @@ namespace DoomSurvivors.Entities.Animations
             {
                 this.isLooping = true;
                 this.hasBeenReseted = false;
+                this.hasEnded = false;
                 this.currentSpriteIndex = 0;
             }
 
@@ -79,6 +84,7 @@ namespace DoomSurvivors.Entities.Animations
                 if (currentSpriteIndex == keyFrames.Count)
                 {
                     this.isLooping = false;
+                    this.hasEnded = true;
                     currentSpriteIndex = keyFrames.Count - 1;
                 }
             }

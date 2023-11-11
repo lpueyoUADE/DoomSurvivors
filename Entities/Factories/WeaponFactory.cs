@@ -26,7 +26,7 @@ namespace DoomSurvivors.Entities.Factories
                 WeaponID.Pistol,
                 Mechanism.Automatic,
                 ammo:10,
-                cooldown: 0.3f,
+                cooldown: 0.2f,
                 damage: 5,
                 owner,
                 TracerFactory.YellowTracer(),
