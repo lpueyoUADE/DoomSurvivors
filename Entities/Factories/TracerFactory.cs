@@ -21,7 +21,7 @@ namespace DoomSurvivors.Entities.Factories
         {
             return new Tracer(
                 20,
-                new Color(0xff000000),
+                new Color(0xff000080),
                 new Color(0xffff00ff)
             );
         }

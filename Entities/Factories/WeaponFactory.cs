@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Entities.Weapons;
 
 namespace DoomSurvivors.Entities.Factories
 {
@@ -11,10 +12,11 @@ namespace DoomSurvivors.Entities.Factories
                 WeaponID.Pistol,
                 Mechanism.Automatic,
                 10,
-                0.1f,
+                0.5f,
+                damage: 5,
                 owner,
                 TracerFactory.RedTracer(),
-                100f
+                200f
             );
         }
 
@@ -23,11 +25,12 @@ namespace DoomSurvivors.Entities.Factories
             return new RayTracedWeapon(
                 WeaponID.Pistol,
                 Mechanism.Automatic,
-                10,
-                0.1f,
+                ammo:10,
+                cooldown: 0.3f,
+                damage: 5,
                 owner,
                 TracerFactory.YellowTracer(),
-                100f
+                300f
             );
         }
 

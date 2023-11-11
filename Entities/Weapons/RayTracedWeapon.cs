@@ -1,16 +1,21 @@
-﻿using System;
+﻿using DoomSurvivors.Viewport;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Tao.Sdl;
 
-namespace DoomSurvivors.Entities
+namespace DoomSurvivors.Entities.Weapons
 {
     public class RayTracedWeapon : Weapon
     {
+        private int damage;
         private Tracer tracer;
         private float reach;
+
+        public int Damage => damage;
         public Tracer Tracer { get { return this.tracer; } }
 
         public float Reach
@@ -18,10 +23,11 @@ namespace DoomSurvivors.Entities
             get { return this.reach; }
         }
 
-        public static event Action<RayTracedWeapon> RayTracedWeaponShotAction;
-        public RayTracedWeapon(WeaponID weaponID, Mechanism mechanism, int ammo, float cooldown, OffensiveEntity owner, Tracer tracer, float reach) :
+        public static event Action<RayTracedWeapon, Ray> RayTracedWeaponShotAction;
+        public RayTracedWeapon(WeaponID weaponID, Mechanism mechanism, int ammo, float cooldown, int damage, OffensiveEntity owner, Tracer tracer, float reach) :
             base(weaponID, mechanism, ammo, cooldown, owner)
         {
+            this.damage = damage;
             this.tracer = tracer;
             this.reach = reach;
         }
@@ -30,7 +36,12 @@ namespace DoomSurvivors.Entities
         {
             this.Tracer.Origin = this.Owner.WeaponPosition;
             this.Tracer.End = target;
-            RayTracedWeaponShotAction?.Invoke(this);
+
+            Vector direction = target - this.Owner.WeaponPosition;
+            if (direction.Length > 0)
+                direction.Normalize();
+
+            RayTracedWeaponShotAction?.Invoke(this, new Ray(this.Owner, direction, this.tracer, reach));
         }
     }
 }

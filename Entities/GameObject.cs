@@ -24,6 +24,7 @@ namespace DoomSurvivors.Entities
         protected Vector previousPosition;
         protected Shadow shadow;
         private CollisionType collisionType;
+        private bool rayCastCollidable;
 
         private Vector drawingOffset;
         private bool drawShadow;
@@ -31,6 +32,12 @@ namespace DoomSurvivors.Entities
 
         public Transform Transform => transform;
         public Vector PreviousPosition => previousPosition;
+
+        public bool IsRayCastCollidable
+        {
+            get => rayCastCollidable;
+            set => rayCastCollidable = value;
+        }
 
         public Vector DrawingOffset
         {
@@ -59,6 +66,8 @@ namespace DoomSurvivors.Entities
             this.drawShadow = drawShadow;
             this.drawBoundingBox = drawBoundingBox;
             this.shadow = new Shadow(new Color(0,0,0,128), this.transform.W / 3, this.transform.H / 10);
+
+            this.rayCastCollidable = false;
         }
         public virtual void OnCollision(GameObject other)
         {}

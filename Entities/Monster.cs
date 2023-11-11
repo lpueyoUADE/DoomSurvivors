@@ -1,4 +1,5 @@
 ﻿using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Entities.Weapons;
 using DoomSurvivors.Utilities;
 using DoomSurvivors.Viewport;
 using System.Windows;

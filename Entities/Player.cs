@@ -1,4 +1,5 @@
 ﻿using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Entities.Weapons;
 using DoomSurvivors.Main;
 using DoomSurvivors.Viewport;
 using System.Windows;
@@ -12,7 +13,7 @@ namespace DoomSurvivors.Entities
             base(transform, speed, life, WeaponOffset, animationController, weaponController)
         {
             this.CollisionType = CollisionType.Static;
-            this.Life = 1000;
+            this.Life = 20;
         }
 
         private void LeftMouseButtonReleasedActionHandler()
@@ -51,7 +52,6 @@ namespace DoomSurvivors.Entities
                     int x, y;
                     Sdl.SDL_GetMouseState(out x, out y);
                     AttackAt(Camera.Instance.CameraToWorldPosition(new Vector(x, y)));
-
                 }
             }
 

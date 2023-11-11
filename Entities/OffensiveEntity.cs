@@ -1,4 +1,5 @@
 ﻿using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Entities.Weapons;
 using System.Windows;
 
 namespace DoomSurvivors.Entities
@@ -37,6 +38,8 @@ namespace DoomSurvivors.Entities
             this.life = life;
 
             this.attackingFriction = 0.3f;
+
+            this.IsRayCastCollidable = true;
         }
 
         override protected void setState(Vector direction)

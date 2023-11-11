@@ -1473,9 +1473,9 @@ namespace DoomSurvivors.Entities.Factories
                 WeaponFactory.RayTracedPistolRed(chainguner)
             );
 
-            chainguner.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(chainguner)
-            );
+            //chainguner.AddWeapon(
+            //    WeaponFactory.BulletPistolAutomatic(chainguner)
+            //);
 
             return chainguner;
         }
@@ -1581,9 +1581,9 @@ namespace DoomSurvivors.Entities.Factories
                 WeaponFactory.RayTracedPistolRed(shotguner)
             );
 
-            shotguner.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(shotguner)
-            );
+            //shotguner.AddWeapon(
+            //    WeaponFactory.BulletPistolAutomatic(shotguner)
+            //);
 
             return shotguner;
         }
@@ -1689,9 +1689,9 @@ namespace DoomSurvivors.Entities.Factories
                 WeaponFactory.RayTracedPistolRed(zombie)
             );
 
-            zombie.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(zombie)
-            );
+            //zombie.AddWeapon(
+            //    WeaponFactory.BulletPistolAutomatic(zombie)
+            //);
 
             return zombie;
         }

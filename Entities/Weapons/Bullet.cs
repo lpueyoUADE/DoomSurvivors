@@ -4,7 +4,7 @@ using DoomSurvivors.Utilities;
 using DoomSurvivors.Viewport;
 using System.Windows;
 
-namespace DoomSurvivors.Entities
+namespace DoomSurvivors.Entities.Weapons
 {
     public class Bullet : Entity
     {

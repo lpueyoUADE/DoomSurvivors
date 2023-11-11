@@ -80,8 +80,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Animations\Sprite.cs" />
-    <Compile Include="Entities\BulletWeapon.cs" />
-    <Compile Include="Entities\Bullet.cs" />
+    <Compile Include="Entities\Weapons\BulletWeapon.cs" />
+    <Compile Include="Entities\Weapons\Bullet.cs" />
     <Compile Include="Entities\CollisionController.cs" />
     <Compile Include="Entities\Decoration.cs" />
     <Compile Include="Entities\Factories\ItemFactory.cs" />
@@ -95,7 +95,8 @@
     <Compile Include="Entities\IRenderizable.cs" />
     <Compile Include="Entities\Factories\MonsterFactory.cs" />
     <Compile Include="Entities\Item.cs" />
-    <Compile Include="Entities\RayTracedWeapon.cs" />
+    <Compile Include="Entities\Weapons\Ray.cs" />
+    <Compile Include="Entities\Weapons\RayTracedWeapon.cs" />
     <Compile Include="Entities\Tracer.cs" />
     <Compile Include="Entities\Transform.cs" />
     <Compile Include="Entities\Crosshair.cs" />
@@ -105,8 +106,8 @@
     <Compile Include="Entities\OffensiveEntity.cs" />
     <Compile Include="Entities\Shadow.cs" />
     <Compile Include="Entities\Wall.cs" />
-    <Compile Include="Entities\Weapon.cs" />
-    <Compile Include="Entities\WeaponController.cs" />
+    <Compile Include="Entities\Weapons\Weapon.cs" />
+    <Compile Include="Entities\Weapons\WeaponController.cs" />
     <Compile Include="Main\Font.cs" />
     <Compile Include="Main\Engine.cs" />
     <Compile Include="Scenes\JSONMap.cs" />

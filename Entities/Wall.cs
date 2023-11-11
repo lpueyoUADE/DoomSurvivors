@@ -36,6 +36,8 @@ namespace DoomSurvivors.Entities
         {
             this.sprite = sprite;
             this.shadow = new Shadow(new Color(0, 0, 0, 128), this.transform.W / 2, this.transform.H / 10, Shadow.Shape.Rectangle);
+
+            this.IsRayCastCollidable = true;
         }
 
         override public void OnCollision(GameObject other)

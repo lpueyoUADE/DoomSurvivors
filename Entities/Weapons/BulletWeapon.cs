@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace DoomSurvivors.Entities
+namespace DoomSurvivors.Entities.Weapons
 {
     internal class BulletWeapon : Weapon
     {
