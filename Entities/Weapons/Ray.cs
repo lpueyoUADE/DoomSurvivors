@@ -29,6 +29,8 @@ namespace DoomSurvivors.Entities.Weapons
         }
         public bool Intersects(Transform transform, out double x, out double y)
         {
+            // https://tavianator.com/2022/ray_box_boundary.html#fast-branchless-raybounding-box-intersections-part-3-boundaries
+
             Vector origin = this.owner.WeaponPosition;
 
             // Perform ray-box intersection test with limited reach

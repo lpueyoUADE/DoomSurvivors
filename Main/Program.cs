@@ -22,7 +22,7 @@ namespace DoomSurvivors.Main
             . Weapon system (
                 Falta cambiar de armas
                 implementar armas faltantes
-                RayCasted Bullets
+
                 Melee
              )
             . MenuScenes (menu items)
@@ -42,10 +42,11 @@ namespace DoomSurvivors.Main
             (Nice to Have)
             . Doors
             . Switches
-            . Particle effects
             . Explosive Barrels
 
             (Done)
+            . Particle effects (OK)
+            . RayCasted Bullets (OK)
             . Factories (Monsters & Weapons) (OK)
             . Interfaces (OK)
             . Dying (OK)
