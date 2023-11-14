@@ -107,6 +107,11 @@ class Engine
         Sdl.SDL_FillRect(screen, ref rect, color);
     }
 
+    public static void DrawRect(Transform transform, Color color)
+    {
+        DrawRect(transform.Position, transform.Size, (int)color);
+    }
+
     public static void DrawRect(Sdl.SDL_Rect rect, int color)
     {
         Sdl.SDL_FillRect(screen, ref rect, color);
@@ -155,27 +160,20 @@ class Engine
         return new Sprite(croppedSurfacePtr, transform);
     }
     */
-
-    public static void DrawText(string text,
-        int x, int y, byte r, byte g, byte b, Font f)
+    public static void DrawText(string texto, int x, int y, int padding, Color color, Color backgroundColor, IntPtr fuente)
     {
-        DrawText(text, x, y, r, g, b, f.ReadPointer());
-    }
+        Sdl.SDL_Color sdlColor = new Sdl.SDL_Color(color.R, color.G, color.B);
+        IntPtr textAsImage = SdlTtf.TTF_RenderUTF8_Solid(fuente, texto, sdlColor);
 
-    public static void DrawText(string texto,
-        int x, int y, byte r, byte g, byte b, IntPtr fuente)
-    {
-        Sdl.SDL_Color color = new Sdl.SDL_Color(r, g, b);
-        IntPtr textAsImage = SdlTtf.TTF_RenderText_Solid(
-            fuente, texto, color);
-        if (textAsImage == IntPtr.Zero)
-            Environment.Exit(5);
+        SdlTtf.TTF_SizeUNICODE(fuente, texto , out int w, out int h);
+
+        if (backgroundColor != null)
+            Engine.DrawRect(x, y, w + padding*2, h + padding*2, (int)backgroundColor);
 
         Sdl.SDL_Rect origen = new Sdl.SDL_Rect(0, 0, (short)transform.W, (short)transform.H);
-        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)transform.W, (short)transform.H);
+        Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)(x+padding), (short)(y+padding), (short)transform.W, (short)transform.H);
 
-        Sdl.SDL_BlitSurface(textAsImage, ref origen,
-            screen, ref dest);
+        Sdl.SDL_BlitSurface(textAsImage, ref origen, screen, ref dest);
         Sdl.SDL_FreeSurface(textAsImage);
     }
 
@@ -183,10 +181,8 @@ class Engine
     {
         IntPtr font = SdlTtf.TTF_OpenFont(file, size);
         if (font == IntPtr.Zero)
-        {
             System.Console.WriteLine("Fuente inexistente: {0}", file);
-            Environment.Exit(6);
-        }
+
         return font;
     }
 

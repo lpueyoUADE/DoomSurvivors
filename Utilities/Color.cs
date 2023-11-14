@@ -9,6 +9,21 @@ namespace DoomSurvivors.Utilities
 {
     public class Color
     {
+        
+        public static Color White
+        {
+            get => new Color(255,255,255,255);
+        }
+        public static Color Black
+        {
+            get => new Color(0, 0, 0, 255);
+        }
+
+        public static Color Transparent
+        {
+            get => new Color(0, 0, 0, 0);
+        }
+
         private byte r;
         private byte g;
         private byte b;
@@ -41,6 +56,11 @@ namespace DoomSurvivors.Utilities
         public static explicit operator uint(Color color)
         {
             return (uint)((color.r << 24) + (color.g << 16) + (color.b << 8) + color.a);
+        }
+        public static explicit operator int(Color color)
+        {
+            return (int)((color.r <<  16) + (color.g << 8) + (color.b));
+
         }
         public Color(byte r, byte g, byte b, byte a) {
             this.r = r;

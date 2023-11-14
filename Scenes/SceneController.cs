@@ -9,6 +9,7 @@ namespace DoomSurvivors
 
         private List<Scene> scenes;
         private int currentSceneIndex;
+        private int nextSceneIndex;
         private bool reload;
 
         public Scene CurrentScene => scenes[currentSceneIndex];
@@ -39,13 +40,11 @@ namespace DoomSurvivors
         public void ChangeScene(int nextSceneIndex)
         {
             if (nextSceneIndex < 0 || nextSceneIndex > scenes.Count)
-            {
                 throw new ArgumentOutOfRangeException("Scene index out of bounds");
-            }
 
             scenes[currentSceneIndex].UnLoad();
 
-            currentSceneIndex = nextSceneIndex;
+            this.nextSceneIndex = nextSceneIndex;
             reload = true;   
         }
 
@@ -53,6 +52,7 @@ namespace DoomSurvivors
         {
             if (reload)
             {
+                currentSceneIndex = nextSceneIndex;
                 scenes[currentSceneIndex].Load();
                 reload = false;
             }

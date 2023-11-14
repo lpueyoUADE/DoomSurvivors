@@ -111,8 +111,8 @@
     <Compile Include="Entities\Wall.cs" />
     <Compile Include="Entities\Weapons\Weapon.cs" />
     <Compile Include="Entities\Weapons\WeaponController.cs" />
-    <Compile Include="Main\Font.cs" />
     <Compile Include="Main\Engine.cs" />
+    <Compile Include="Scenes\UI\Button.cs" />
     <Compile Include="Scenes\JSONMap.cs" />
     <Compile Include="Scenes\JSONMapLayer.cs" />
     <Compile Include="Scenes\JSONTileset.cs" />
@@ -126,6 +126,10 @@
     <Compile Include="Scenes\Scene.cs" />
     <Compile Include="Scenes\SceneController.cs" />
     <Compile Include="Main\Sound.cs" />
+    <Compile Include="Scenes\UI\Canvas.cs" />
+    <Compile Include="Scenes\UI\Font.cs" />
+    <Compile Include="Scenes\UI\Text.cs" />
+    <Compile Include="Scenes\UI\UIElement.cs" />
     <Compile Include="Utilities\Color.cs" />
     <Compile Include="Utilities\Tools.cs" />
     <Compile Include="Viewport\Camera.cs" />

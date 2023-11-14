@@ -1,5 +1,6 @@
 ﻿using DoomSurvivors.Entities;
 using DoomSurvivors.Scenes;
+using DoomSurvivors.Utilities;
 using System;
 using System.Collections.Generic;
 using Tao.Sdl;
@@ -55,7 +56,9 @@ namespace DoomSurvivors.Main
 
         public static event Action LeftMouseButtonReleasedAction;
         public static event Action RightMouseButtonReleasedAction;
-
+        public static event Action DownArrowPressedAction;
+        public static event Action UpArrowPressedAction;
+        public static event Action EnterPressedAction;
         public static void DebugModeActions()
         {
             Engine.DrawRect(Engine.Transform.W / 2, 0, 1, Engine.Transform.H, 0xfff);
@@ -85,7 +88,7 @@ namespace DoomSurvivors.Main
                 }
             );
 
-            SceneController.Instance.ChangeScene(1);
+            SceneController.Instance.ChangeScene(0);
 
             // Crosshair
             crosshair = new Crosshair(true);
@@ -122,7 +125,7 @@ namespace DoomSurvivors.Main
                 DebugActions();
 
                 fps = 1000 / (currentTicks - oldTicks);
-                Engine.DrawText(fps.ToString(), 0, 0, 255, 255, 255, DoomFont);
+                Engine.DrawText(fps.ToString(), 0, 0, 15, Color.White, null, DoomFont);
 
                 Engine.Show();  // Show current frame
                 Sdl.SDL_Delay(2);
@@ -144,7 +147,16 @@ namespace DoomSurvivors.Main
                 case Sdl.SDL_KEYDOWN: // Single stroke keys
                     switch (sdl_event.key.keysym.sym)
                     {
-                        case Sdl.SDLK_ESCAPE:
+                        case Sdl.SDLK_DOWN:
+                            DownArrowPressedAction?.Invoke();
+                            break;
+
+                        case Sdl.SDLK_UP:
+                            UpArrowPressedAction?.Invoke();
+                            break;
+
+                        case Sdl.SDLK_RETURN:
+                            EnterPressedAction?.Invoke();
                             break;
                     }
                     break;
@@ -153,12 +165,10 @@ namespace DoomSurvivors.Main
                     switch(sdl_event.button.button)
                     {
                         case Sdl.SDL_BUTTON_LEFT:
-                            // Console.WriteLine("LEFT CLICK RELEASED");
                             LeftMouseButtonReleasedAction?.Invoke();
                             break;
 
                         case Sdl.SDL_BUTTON_RIGHT:
-                            // Console.WriteLine("LEFT Right RELEASED");
                             RightMouseButtonReleasedAction?.Invoke();
                             break;
                     }

@@ -244,13 +244,11 @@ namespace DoomSurvivors
             foreach (Tracer tracer in tracerList)
                 tracer.Update();
 
-
             foreach (Particle particle in particleList)
             {
                 particle.Update();
                 particle.Render();
             }
-
 
             tracerList.RemoveAll(tracer => tracer.hasFinished);
             gameObjectList.RemoveAll(gameObject => gameObject is Bullet && ((Bullet)gameObject).isDead);
