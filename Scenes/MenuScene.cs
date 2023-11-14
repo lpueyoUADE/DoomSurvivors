@@ -22,7 +22,7 @@ namespace DoomSurvivors.Scenes
             this.height = height;
             this.canvas = new Canvas
             (
-                new Transform(0,0, Engine.Transform.W, Engine.Transform.H),
+                new Transform(0, Engine.Transform.H / 2, Engine.Transform.W, Engine.Transform.H / 2),
                 new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => SceneController.Instance.ChangeScene(1), "JUEGO NUEVO"),
                 new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => Environment.Exit(0), "SALIR")
             );

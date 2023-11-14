@@ -53,6 +53,9 @@ namespace DoomSurvivors.Entities.Weapons
                 if (ownBullet)
                     return;
 
+                if (other is OffensiveEntity && ((OffensiveEntity)other).IsDying)
+                    return;
+
                 ((OffensiveEntity)other).ApplyDamage(this.damage);
                 BulletHitAction?.Invoke(ParticleFactory.CreateParticle(Particle.ParticleType.Blood, transform.PositionCenter));
                 this.Destroy();

@@ -102,7 +102,10 @@ namespace DoomSurvivors
                 {
                     if (gameObjectList[j].IsRayCastCollidable)
                     {
-                        if ((!(gameObjectList[j] is OffensiveEntity) || !rayList[i].IsOwnedBy((OffensiveEntity)gameObjectList[j])) && rayList[i].Intersects(gameObjectList[j].Transform, out x, out y))
+                        if (
+                            (!(gameObjectList[j] is OffensiveEntity) || !rayList[i].IsOwnedBy((OffensiveEntity)gameObjectList[j])) && 
+                            (!(gameObjectList[j] is OffensiveEntity) || !((OffensiveEntity)gameObjectList[j]).IsDying) && 
+                            rayList[i].Intersects(gameObjectList[j].Transform, out x, out y))
                         {
                             distance = (gameObjectList[j].Transform.PositionCenter - rayList[i].Origin).Length;
                             if (distance < targetDistance)

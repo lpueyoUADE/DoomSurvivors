@@ -37,6 +37,8 @@ class Engine
             new Sdl.SDL_Rect(0, 0, (short)width, (short)height);
         Sdl.SDL_SetClipRect(screen, ref rect2);
 
+        Sdl.SDL_WM_SetCaption("DooM Survivors", "assets/Icon/logo.ico");
+
         SdlTtf.TTF_Init();
     }
 
@@ -81,11 +83,6 @@ class Engine
     public static void Draw(Sprite sprite, double x, double y, int width, int height)
     {
         IntPtr reference = Sprite.References[sprite.ImageName].Surface;
-        // Color colorKey = Sprite.References[sprite.ImageName].ColorKey;
-        // IntPtr format = Sprite.References[sprite.ImageName].SurfaceFormat;
-        //Sdl.SDL_SetAlpha(screen, 0, 0);
-        //Sdl.SDL_SetColorKey(reference, SDL_SRCCOLORKEY, Sdl.SDL_MapRGB(format, colorKey.R, colorKey.G, colorKey.B));
-
         Sdl.SDL_Rect dest = new Sdl.SDL_Rect((short)x, (short)y, (short)width, (short)height);
         Sdl.SDL_BlitSurface(reference, ref sprite.rect, screen, ref dest);
     }
@@ -132,34 +129,6 @@ class Engine
         return imagen;
     }
 
-    /*
-    public static Sprite LoadImage(string image, Transform transform, bool cyanColorKey=true)
-    {
-        Color colorKey;
-        if (cyanColorKey)
-            colorKey = new Color(0, 255, 255, 255);
-        else
-            colorKey = new Color(255, 0, 255, 255);
-
-        IntPtr originalSurfacePtr = LoadImage(image);
-        Sdl.SDL_SetAlpha(originalSurfacePtr, 0, 0);
-
-        IntPtr croppedSurfacePtr = Sdl.SDL_CreateRGBSurface(0, transform.W, transform.H, 32, 0,0,0,0);
-        if (croppedSurfacePtr == IntPtr.Zero)
-            throw new Exception($"Error while loading image: {image}");
-
-        Sdl.SDL_Rect srcRect = new Sdl.SDL_Rect { x = (short)transform.X, y = (short)transform.Y, w = (short)transform.W, h = (short)transform.H };
-        Sdl.SDL_Rect destRect = new Sdl.SDL_Rect { x = 0, y = 0, w = (short)transform.W, h = (short)transform.H };
-
-        Sdl.SDL_Surface croppedSurface = Marshal.PtrToStructure<Sdl.SDL_Surface>(croppedSurfacePtr);
-
-        Sdl.SDL_SetColorKey(croppedSurfacePtr, SDL_SRCCOLORKEY, Sdl.SDL_MapRGB(croppedSurface.format, colorKey.R, colorKey.G, colorKey.B));
-
-        Sdl.SDL_BlitSurface(originalSurfacePtr, ref srcRect, croppedSurfacePtr, ref destRect);
-        Sdl.SDL_FreeSurface(originalSurfacePtr);
-        return new Sprite(croppedSurfacePtr, transform);
-    }
-    */
     public static void DrawText(string texto, int x, int y, int padding, Color color, Color backgroundColor, IntPtr fuente)
     {
         Sdl.SDL_Color sdlColor = new Sdl.SDL_Color(color.R, color.G, color.B);
