@@ -2,10 +2,13 @@
 using DoomSurvivors.Entities.Factories;
 using DoomSurvivors.Entities.Weapons;
 using DoomSurvivors.Scenes;
+using DoomSurvivors.Scenes.Maps;
+using DoomSurvivors.Scenes.Maps.Placers;
 using DoomSurvivors.Viewport;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using static DoomSurvivors.Entities.Item;
 using static DoomSurvivors.Entities.Monster;
@@ -129,7 +132,6 @@ namespace DoomSurvivors
                     }
                     else if (target is Wall)
                         particleList.Add(ParticleFactory.CreateParticle(ParticleType.WallHit, hitPoint));
-
                 }
 
                 Tracer tracer = rayList[i].Tracer.Clone();
@@ -147,6 +149,11 @@ namespace DoomSurvivors
             player.DrawBoundingBox = drawBoundingBox;
             player.Load();
             AddGameObject(player);
+
+            // Load Exit Point
+            ExitSwitch exitSwitch = ExitSwitchFactory.CreateExitSwitch(map.ExitPoint);
+            exitSwitch.DrawBoundingBox = drawBoundingBox;
+            AddGameObject(exitSwitch);
 
             // Load Monsters
             foreach (MonsterPlacer monsterPlacer in map.MonsterList)

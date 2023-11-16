@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DoomSurvivors.Scenes
+namespace DoomSurvivors.Scenes.Maps
 {
     public class JSONMapLayer
     {

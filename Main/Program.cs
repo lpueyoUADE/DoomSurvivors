@@ -1,5 +1,6 @@
 ﻿using DoomSurvivors.Entities;
 using DoomSurvivors.Scenes;
+using DoomSurvivors.Scenes.Maps;
 using DoomSurvivors.Utilities;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace DoomSurvivors.Main
             . MenuScenes (menu items)
             . Collisions (Walls and enemies) (OK - Falta corregir Bug con Walls)
             . Items (OK - Falta agregar efectos)
-            . Maps system (OK - Falta cargar Decors - Exit Point)
+            . Maps system (OK - Falta cargar Decors - Exit Point - Crear mapas)
 
             (Pending)
             . HUD 
@@ -44,6 +45,8 @@ namespace DoomSurvivors.Main
             . Doors
             . Switches
             . Explosive Barrels
+            . History Mode
+            . Survivors Mode
 
             (Done)
             . Particle effects (OK)
@@ -70,9 +73,9 @@ namespace DoomSurvivors.Main
             Program.Initialize();
 
             // TODO Crear Factories de Scenes
-            MenuScene MainMenuScene = new MenuScene(Engine.LoadImage("assets/Maps/main_menu.png"), 640, 640);
-            MenuScene WinScene = new MenuScene(Engine.LoadImage("assets/Maps/win.png"), 640, 640);
-            MenuScene LoseScene = new MenuScene(Engine.LoadImage("assets/Maps/lose.png"), 640, 640);
+            MenuScene MainMenuScene = new MenuScene(Engine.LoadImage("assets/Icon/DoomSurvivorsLogo.png"));
+            MenuScene WinScene = new MenuScene(Engine.LoadImage("assets/Maps/win.png"));
+            MenuScene LoseScene = new MenuScene(Engine.LoadImage("assets/Maps/lose.png"));
             PlayableScene E1Scene = new PlayableScene(
                 Map.CreateMap("E1_Test"),
                 DEBUG_MODE, // Show Bounding Boxes

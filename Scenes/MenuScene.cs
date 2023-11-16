@@ -12,14 +12,10 @@ namespace DoomSurvivors.Scenes
     public class MenuScene : Scene, IRenderizable
     {
         private IntPtr backgroundImage;
-        private int width;
-        private int height;
         private Canvas canvas;
-        public MenuScene(IntPtr backgroundImage, int width, int height)
+        public MenuScene(IntPtr backgroundImage)
         {
             this.backgroundImage = backgroundImage;
-            this.width = width;
-            this.height = height;
             this.canvas = new Canvas
             (
                 new Transform(0, Engine.Transform.H / 2, Engine.Transform.W, Engine.Transform.H / 2),
@@ -30,7 +26,7 @@ namespace DoomSurvivors.Scenes
 
         public void Render()
         {
-            // Engine.Draw(this.backgroundImage, 0, 0, width, height);
+            Engine.Draw(this.backgroundImage, 0, 0, Engine.Transform.W, Engine.Transform.H);
             canvas.Render();
             
         }

@@ -1,4 +1,5 @@
 ﻿using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Scenes.Maps.Placers;
 using DoomSurvivors.Utilities;
 using System;
 using System.Collections.Generic;
@@ -12,114 +13,114 @@ namespace DoomSurvivors.Entities.Factories
         {
             Item newItem;
 
-            switch (itemPlacer.itemType) {
+            switch (itemPlacer.PlacerType) {
                 case ItemType.Chainsaw:
-                    newItem = Chainsaw((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = Chainsaw((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.Shotgun:
-                    newItem = Shotgun((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = Shotgun((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.SuperShotgun:
-                    newItem = SuperShotgun((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = SuperShotgun((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.Chaingun:
-                    newItem = Chaingun((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = Chaingun((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.RocketLauncher:
-                    newItem = RocketLauncher((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = RocketLauncher((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.PlasmaRifle:
-                    newItem = PlasmaRifle((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = PlasmaRifle((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.BFG9000:
-                    newItem = BFG9000((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = BFG9000((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.Clip:
-                    newItem = Clip((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = Clip((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.AmmoBox:
-                    newItem = AmmoBox((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = AmmoBox((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.Shells:
-                    newItem = Shells((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = Shells((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.ShellsBox:
-                    newItem = ShellsBox((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = ShellsBox((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.Rocket:
-                    newItem = Rocket((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = Rocket((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.RocketBox:
-                    newItem = RocketBox((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = RocketBox((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.PlasmaCell:
-                    newItem = PlasmaCell((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = PlasmaCell((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.PlasmaBox:
-                    newItem = PlasmaBox((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = PlasmaBox((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.Backpack:
-                    newItem = Backpack((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = Backpack((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.HealthPotion:
-                    newItem = HealthPotion((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = HealthPotion((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.Helmet:
-                    newItem = Helmet((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = Helmet((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.SmallMedKit:
-                    newItem = SmallMedKit((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = SmallMedKit((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.BigMedkit:
-                    newItem = BigMedkit((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = BigMedkit((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.ArmorGreen:
-                    newItem = ArmorGreen((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = ArmorGreen((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.ArmorBlue:
-                    newItem = ArmorBlue((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = ArmorBlue((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.SoulSphere:
-                    newItem = SoulSphere((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = SoulSphere((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.MegaSphere:
-                    newItem = MegaSphere((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = MegaSphere((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.RadiationSuit:
-                    newItem = RadiationSuit((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = RadiationSuit((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.Invicibility:
-                    newItem = Invicibility((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = Invicibility((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.Invulnerability:
-                    newItem = Invulnerability((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = Invulnerability((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.Goggles:
-                    newItem = Goggles((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = Goggles((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.Map:
-                    newItem = Map((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = Map((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.Berserk:
-                    newItem = Berserk((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = Berserk((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.BlueKey:
-                    newItem = BlueKey((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = BlueKey((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.RedKey:
-                    newItem = RedKey((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = RedKey((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.YellowKey:
-                    newItem = YellowKey((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = YellowKey((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.BlueSkullKey:
-                    newItem = BlueSkullKey((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = BlueSkullKey((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.RedSkullKey:
-                    newItem = RedSkullKey((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = RedSkullKey((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
                 case ItemType.YellowSkullKey:
-                    newItem = YellowSkullKey((int)itemPlacer.position.X, (int)itemPlacer.position.Y);
+                    newItem = YellowSkullKey((int)itemPlacer.Position.X, (int)itemPlacer.Position.Y);
                     break;
 
                 default:
@@ -135,7 +136,7 @@ namespace DoomSurvivors.Entities.Factories
         }
         private static Item YellowSkullKey(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 13, 16, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 13, 16, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -154,7 +155,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item RedSkullKey(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 13, 16, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 13, 16, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -173,7 +174,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item BlueSkullKey(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 13, 16, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 13, 16, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -192,7 +193,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item YellowKey(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 14, 16, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 14, 16, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -211,7 +212,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item RedKey(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 14, 16, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 14, 16, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -230,7 +231,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item BlueKey(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 14, 16, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 14, 16, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -249,7 +250,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Berserk(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 28, 19, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 28, 19, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -267,7 +268,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Map(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 28, 27, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 28, 27, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -288,7 +289,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Goggles(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 28, 13, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 28, 13, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -307,7 +308,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Invulnerability(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 25, 25, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 25, 25, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -328,7 +329,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Invicibility(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 25, 25, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 25, 25, Scenes.Maps.Map.TileSize);
             return new Item(
                 transform,
                 new Animation(
@@ -348,7 +349,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static  Item RadiationSuit(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 24, 47, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 24, 47, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -366,7 +367,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item MegaSphere(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 25, 25, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 25, 25, Scenes.Maps.Map.TileSize);
             return new Item(
                 transform,
                 new Animation(
@@ -386,7 +387,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item SoulSphere(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 25, 25, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 25, 25, Scenes.Maps.Map.TileSize);
             return new Item(
                 transform,
                 new Animation(
@@ -406,7 +407,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item ArmorBlue(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 31, 17, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 31, 17, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -425,7 +426,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item ArmorGreen(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 31, 17, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 31, 17, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -444,7 +445,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item BigMedkit(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 28, 19, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 28, 19, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -462,7 +463,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item SmallMedKit(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 14, 15, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 14, 15, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -480,7 +481,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Helmet(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 16, 15, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 16, 15, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -501,7 +502,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item HealthPotion(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 14, 18, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 14, 18, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -522,7 +523,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Backpack(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 22, 29, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 22, 29, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -540,7 +541,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item PlasmaBox(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 32, 21, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 32, 21, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -558,7 +559,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item PlasmaCell(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 17, 12, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 17, 12, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -576,7 +577,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item RocketBox(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 54, 21, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 54, 21, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -594,7 +595,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Rocket(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 12, 27, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 12, 27, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -612,7 +613,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item ShellsBox(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 32, 12, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 32, 12, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -630,7 +631,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static  Item Shells(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 15, 7, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 15, 7, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -648,7 +649,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Clip(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 9, 11, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 9, 11, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -666,7 +667,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item AmmoBox(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 28, 16, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 28, 16, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -684,7 +685,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item BFG9000(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 61, 36, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 61, 36, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -702,7 +703,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item PlasmaRifle(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 54, 16, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 54, 16, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -720,7 +721,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item RocketLauncher(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 62, 16, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 62, 16, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -738,7 +739,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Chaingun(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 54, 16, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 54, 16, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -756,7 +757,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item SuperShotgun(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 54, 14, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 54, 14, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -774,7 +775,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Shotgun(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 63, 12, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 63, 12, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,
@@ -792,7 +793,7 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Item Chainsaw(int x, int y)
         {
-            Transform transform = tileCenteredTransform(x, y, 62, 24, Scenes.Map.TileSize);
+            Transform transform = tileCenteredTransform(x, y, 62, 24, Scenes.Maps.Map.TileSize);
 
             return new Item(
                 transform,

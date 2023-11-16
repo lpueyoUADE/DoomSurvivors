@@ -1,4 +1,6 @@
 ﻿using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Scenes.Maps;
+using DoomSurvivors.Scenes.Maps.Placers;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -11,58 +13,58 @@ namespace DoomSurvivors.Entities.Factories
         public static Monster CreateMonster(MonsterPlacer monsterPlacer, Entity target = null)
         {
             Monster newMonster;
-            switch (monsterPlacer.monsterType)
+            switch (monsterPlacer.PlacerType)
             {
                 case MonsterType.Zombie:
-                    newMonster = Zombie((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = Zombie((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
                 case MonsterType.Shotguner:
-                    newMonster = Shotguner((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = Shotguner((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
                 case MonsterType.Chainguner:
-                    newMonster = Chainguner((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = Chainguner((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
                 case MonsterType.Wolfenstein:
-                    newMonster = Wolfenstein((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = Wolfenstein((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
                 case MonsterType.Imp:
-                    newMonster = Imp((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = Imp((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
                 case MonsterType.Pinky:
-                    newMonster = Pinky((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = Pinky((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
                 case MonsterType.BaronOfHell:
-                    newMonster = BaronOfHell((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = BaronOfHell((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
                 case MonsterType.HellKnight:
-                    newMonster = HellKnight((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = HellKnight((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
                 case MonsterType.CacoDemon:
-                    newMonster = CacoDemon((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = CacoDemon((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
                 case MonsterType.LostSoul:
-                    newMonster = LostSoul((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = LostSoul((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
                 case MonsterType.PainElemental:
-                    newMonster = PainElemental((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = PainElemental((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
                 case MonsterType.Mancubus:
-                    newMonster = Mancubus((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = Mancubus((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
                 case MonsterType.Arachnotron:
-                    newMonster = Arachnotron((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = Arachnotron((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
                 case MonsterType.Revenant:
-                    newMonster = Revenant((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = Revenant((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
                 case MonsterType.ArchVile:
-                    newMonster = Archvile((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = Archvile((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
                 case MonsterType.SpiderMasterMind:
-                    newMonster = SpiderMasterMind((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = SpiderMasterMind((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
                 case MonsterType.CyberDemon:
-                    newMonster = CyberDemon((int)monsterPlacer.position.X, (int)monsterPlacer.position.Y, target);
+                    newMonster = CyberDemon((int)monsterPlacer.Position.X, (int)monsterPlacer.Position.Y, target);
                     break;
 
                 default: throw new ArgumentException("Inexistent Monster Type");

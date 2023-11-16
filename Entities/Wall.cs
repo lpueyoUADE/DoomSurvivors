@@ -1,13 +1,6 @@
 ﻿using DoomSurvivors.Entities.Animations;
 using DoomSurvivors.Utilities;
-using DoomSurvivors.Viewport;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using Tao.Sdl;
 
 namespace DoomSurvivors.Entities
 {
@@ -16,17 +9,6 @@ namespace DoomSurvivors.Entities
         public enum WallType
         {
             TestWall
-        }
-        public struct WallPlacer
-        {
-            public WallType wallType;
-            public Vector position;
-
-            public WallPlacer(WallType wallType, int x, int y) : this()
-            {
-                this.wallType = wallType;
-                this.position = new Vector(x, y);
-            }
         }
 
         private Sprite sprite;

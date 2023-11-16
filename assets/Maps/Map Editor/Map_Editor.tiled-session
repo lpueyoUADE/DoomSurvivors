@@ -10,7 +10,7 @@
     "fileStates": {
         "": {
             "scaleInDock": 1,
-            "scaleInEditor": 0.5
+            "scaleInEditor": 1
         },
         "Floor Tiles.tsx": {
             "scaleInDock": 1,
@@ -21,15 +21,22 @@
             "scaleInEditor": 1
         },
         "Map_editor.tmx": {
-            "scale": 1,
-            "selectedLayer": 2,
+            "scale": 0.33,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 850.5,
-                "y": 385
+                "x": 1003.030303030303,
+                "y": 959.0909090909091
             }
         },
         "Map_editor.tmx#AASHITTY": {
             "dynamicWrapping": true
+        },
+        "Map_editor.tmx#Exit Point Tiles": {
+            "scaleInDock": 1
+        },
+        "Map_editor.tmx#Exit_point_tiles": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "Map_editor.tmx#Floor Tiles": {
             "dynamicWrapping": false,
@@ -58,12 +65,15 @@
             "scaleInDock": 1
         },
         "Map_tester.tmx": {
-            "scale": 1,
+            "scale": 0.25,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1599.5,
-                "y": 1599.5
+                "x": 1594,
+                "y": 1592
             }
+        },
+        "Map_tester.tmx#Exit point tiles": {
+            "scaleInDock": 1
         },
         "Map_tester.tmx#Floor Tiles": {
             "scaleInDock": 1
@@ -78,6 +88,7 @@
             "scaleInDock": 1
         },
         "Map_tester.tmx#Wall Tiles": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "Monsters Tiles.tsx": {
@@ -90,20 +101,19 @@
         }
     },
     "last.exportedFilePath": "C:/projects/C#/DoomSurvivors/assets/Maps/Test Map",
-    "last.imagePath": "C:/projects/C#/DoomSurvivors/assets/Maps/Map Editor/Walls",
+    "last.imagePath": "C:/projects/C#/DoomSurvivors/assets/Maps/Map Editor",
     "map.height": 50,
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.tileHeight": 64,
     "map.tileWidth": 64,
     "map.width": 50,
     "openFiles": [
-        "Map_editor.tmx",
-        "Map_tester.tmx"
+        "Map_editor.tmx"
     ],
     "project": "Map_Editor.tiled-project",
     "recentFiles": [
-        "Map_tester.tmx",
         "Map_editor.tmx",
+        "Map_tester.tmx",
         "Monsters Tiles.tsx",
         "Wall Tiles.tsx",
         "Floor Tiles.tsx",
@@ -116,6 +126,6 @@
         "width": 64
     },
     "tileset.transparentColor": "#00ffff",
-    "tileset.type": 1,
+    "tileset.type": 0,
     "tileset.useTransparentColor": true
 }

@@ -1,4 +1,6 @@
 ﻿using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Scenes.Maps;
+using DoomSurvivors.Scenes.Maps.Placers;
 using System;
 using static DoomSurvivors.Entities.Wall;
 
@@ -9,10 +11,10 @@ namespace DoomSurvivors.Entities.Factories
         public static Wall CreateWall(WallPlacer wallPlacer)
         {
             Wall wall;
-            switch(wallPlacer.wallType)
+            switch(wallPlacer.PlacerType)
             {
                 case WallType.TestWall:
-                    wall = TestWall((int)wallPlacer.position.X, (int)wallPlacer.position.Y);
+                    wall = TestWall((int)wallPlacer.Position.X, (int)wallPlacer.Position.Y);
                     break;
 
                 default:

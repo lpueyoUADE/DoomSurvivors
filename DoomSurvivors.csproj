@@ -81,6 +81,8 @@
   <ItemGroup>
     <Compile Include="Entities\Animations\Sprite.cs" />
     <Compile Include="Entities\Animations\SpriteReference.cs" />
+    <Compile Include="Entities\ExitSwitch.cs" />
+    <Compile Include="Entities\Factories\ExitSwitchFactory.cs" />
     <Compile Include="Entities\Factories\ParticleFactory.cs" />
     <Compile Include="Entities\Particle.cs" />
     <Compile Include="Entities\Weapons\BulletWeapon.cs" />
@@ -112,11 +114,17 @@
     <Compile Include="Entities\Weapons\Weapon.cs" />
     <Compile Include="Entities\Weapons\WeaponController.cs" />
     <Compile Include="Main\Engine.cs" />
+    <Compile Include="Scenes\Maps\Placers\DecorationPlacer.cs" />
+    <Compile Include="Scenes\Maps\Placers\ExitSwitchPlacer.cs" />
+    <Compile Include="Scenes\Maps\Placers\ItemPlacer.cs" />
+    <Compile Include="Scenes\Maps\Placers\MonsterPlacer.cs" />
+    <Compile Include="Scenes\Maps\Placers\Placer.cs" />
+    <Compile Include="Scenes\Maps\Placers\WallPlacer.cs" />
     <Compile Include="Scenes\UI\Button.cs" />
-    <Compile Include="Scenes\JSONMap.cs" />
-    <Compile Include="Scenes\JSONMapLayer.cs" />
-    <Compile Include="Scenes\JSONTileset.cs" />
-    <Compile Include="Scenes\Map.cs" />
+    <Compile Include="Scenes\Maps\JSONMap.cs" />
+    <Compile Include="Scenes\Maps\JSONMapLayer.cs" />
+    <Compile Include="Scenes\Maps\JSONTileset.cs" />
+    <Compile Include="Scenes\Maps\Map.cs" />
     <Compile Include="Scenes\MenuScene.cs" />
     <Compile Include="Entities\Monster.cs" />
     <Compile Include="Scenes\PlayableScene.cs" />
@@ -155,6 +163,9 @@
     <Content Include="assets\Crosshair\crosshair_3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="assets\Icon\DoomSurvivorsLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="assets\Icon\logo.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -177,6 +188,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Maps\win.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\ExitSwitch\Exit_Switch.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Sprites\Monsters\BaronOfHell.png">
