@@ -131,7 +131,6 @@ namespace DoomSurvivors.Entities
             this.transform.Size = new Vector(
                 this.animationController.CurrentAnimationSprite.Transform.Size.X,
                 this.animationController.CurrentAnimationSprite.Transform.Size.Y + this.animationController.VerticalOffset);
-            // this.transform.Y = this.transform.Y + this.animationController.VerticalOffset;
             DrawingOffset = new Vector(DrawingOffset.X, this.animationController.VerticalOffset);
 
             ApplyFriction();

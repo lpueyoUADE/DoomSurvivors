@@ -32,7 +32,8 @@
             "dynamicWrapping": true
         },
         "Map_editor.tmx#Exit Point Tiles": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "Map_editor.tmx#Exit_point_tiles": {
             "scaleInDock": 1,
@@ -121,6 +122,8 @@
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
+    "tileset.margin": 1,
+    "tileset.spacing": 1,
     "tileset.tileSize": {
         "height": 64,
         "width": 64

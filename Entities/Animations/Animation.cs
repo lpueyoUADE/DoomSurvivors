@@ -43,6 +43,8 @@ namespace DoomSurvivors.Entities.Animations
 
         public int MaxHeight => maxHeight;
 
+        public int VerticalOffset => this.maxHeight - CurrentFrame.Transform.H;
+
         public Animation(List<Sprite> keyFrames, float speed, bool isLoopEnabled, bool isInterruptable)
         {
             this.keyFrames = keyFrames;

@@ -130,7 +130,7 @@ namespace DoomSurvivors
                         ((OffensiveEntity)target).ApplyDamage(((RayTracedWeapon)rayList[i].Owner.CurrentWeapon).Damage);
                         particleList.Add(ParticleFactory.CreateParticle(ParticleType.Blood, hitPoint));
                     }
-                    else if (target is Wall)
+                    else if (target is Wall || target is Decoration)
                         particleList.Add(ParticleFactory.CreateParticle(ParticleType.WallHit, hitPoint));
                 }
 
@@ -182,6 +182,12 @@ namespace DoomSurvivors
             }
 
             // Load Decor
+            foreach (DecorationPlacer decorationPlacer in map.DecorationList)
+            {
+                Decoration decoration = DecorationFactory.CreateDecoration(decorationPlacer);
+                decoration.DrawBoundingBox = drawBoundingBox;
+                AddGameObject(decoration);
+            }
 
             // Set Camera
             Camera.Instance.setCamera(player, new Transform(0, 0));

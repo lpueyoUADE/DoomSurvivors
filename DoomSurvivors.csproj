@@ -82,6 +82,7 @@
     <Compile Include="Entities\Animations\Sprite.cs" />
     <Compile Include="Entities\Animations\SpriteReference.cs" />
     <Compile Include="Entities\ExitSwitch.cs" />
+    <Compile Include="Entities\Factories\DecorationFactory.cs" />
     <Compile Include="Entities\Factories\ExitSwitchFactory.cs" />
     <Compile Include="Entities\Factories\ParticleFactory.cs" />
     <Compile Include="Entities\Particle.cs" />
@@ -188,6 +189,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Maps\win.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sprites\Decoration\Decoration.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Sprites\ExitSwitch\Exit_Switch.png">

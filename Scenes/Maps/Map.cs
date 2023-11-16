@@ -24,7 +24,7 @@ namespace DoomSurvivors.Scenes.Maps
         private ExitSwitchPlacer exitPoint;
         private List<MonsterPlacer> monsterList;
         private List<WallPlacer> wallList;
-        private List<DecorationPlacer> decorList;
+        private List<DecorationPlacer> decorationList;
         private List<ItemPlacer> itemList;
 
         public Transform Transform => transform;
@@ -32,7 +32,7 @@ namespace DoomSurvivors.Scenes.Maps
         public ExitSwitchPlacer ExitPoint => exitPoint;
         public List<MonsterPlacer> MonsterList => monsterList;
         public List<WallPlacer> WallList => wallList;
-        public List<DecorationPlacer> DecorList => decorList;
+        public List<DecorationPlacer> DecorationList => decorationList;
         public List<ItemPlacer> ItemList => itemList;
 
         private static int tileSize = 64;
@@ -59,13 +59,13 @@ namespace DoomSurvivors.Scenes.Maps
             this.exitPoint = exitPoint;
             this.monsterList = monsters;
             this.wallList = walls;
-            this.decorList = decorations;
+            this.decorationList = decorations;
             this.itemList = items;
         }
 
         public static Map CreateMap(string name)
         {
-            string fileName = "assets/Maps/Test Map/Test_map_001.json";
+            string fileName = "assets/Maps/Test Map/Test_map_001.json"; // Hardcoded
             string jsonString = File.ReadAllText(fileName);
             
             JSONMap jsonMap = JsonSerializer.Deserialize<JSONMap>(jsonString);
@@ -129,6 +129,18 @@ namespace DoomSurvivors.Scenes.Maps
                     tileID = itemsLayer.data[index];
                     if (tileID > 0)
                         itemPlacers.Add(new ItemPlacer((ItemType)tileID - itemTileset.firstgid, j * tileSize, i * tileSize));
+                }
+            }
+
+            // Decoration
+            for (int i = 0; i < decorationsLayer.height; i++)
+            {
+                for (int j = 0; j < decorationsLayer.width; j++)
+                {
+                    index = j + (decorationsLayer.width * i); // Matrix to Array index
+                    tileID = decorationsLayer.data[index];
+                    if (tileID > 0)
+                        decorationPlacers.Add(new DecorationPlacer((DecorationType)tileID - decorationTileset.firstgid, j * tileSize, i * tileSize));
                 }
             }
 

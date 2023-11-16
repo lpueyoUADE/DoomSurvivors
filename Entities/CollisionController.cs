@@ -18,6 +18,12 @@ namespace DoomSurvivors.Entities
             else if (other is Wall)
                 ((Wall)other).OnCollision(gameObject);
 
+            else if (gameObject is Decoration)
+                ((Decoration)gameObject).OnCollision(other);
+
+            else if (other is Decoration)
+                ((Decoration)other).OnCollision(gameObject);
+
             else if(gameObject is Item && other is Player)
                 ((Item)gameObject).OnCollision((Player)other);
 
