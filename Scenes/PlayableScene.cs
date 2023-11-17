@@ -23,6 +23,7 @@ namespace DoomSurvivors
         private List<Tracer> tracerList;
         private List<Ray> rayList;
         private List<Particle> particleList;
+        private List<GameObject> interactableList;
         private List<GameObject> gameObjectList;
         private List<GameObject> deadEntityList;
         private bool drawBoundingBox;
@@ -43,6 +44,7 @@ namespace DoomSurvivors
             gameObjectList.Clear();
             deadEntityList.Clear();
             particleList.Clear();
+            interactableList.Clear();
             rayList.Clear();
             tracerList.Clear();
         }
@@ -52,6 +54,7 @@ namespace DoomSurvivors
             this.gameObjectList = new List<GameObject>();
             this.deadEntityList = new List<GameObject>();
             this.particleList = new List<Particle>();
+            this.interactableList = new List<GameObject>();
             this.rayList = new List<Ray>();
             this.tracerList = new List<Tracer>();
             this.map = map;
@@ -65,24 +68,24 @@ namespace DoomSurvivors
             this.gameObjectList.Add(gameObject);
         }
 
+        public void AddInteractable(GameObject gameObject)
+        {
+            this.interactableList.Add(gameObject);
+        }
         private void checkCollisions()
         {
             // check-then-update approach
             // TODO: Implement either Quadtrees or Fixed Grid.
             // O(n**2)
+
             for (int i = 0; i < gameObjectList.Count; i++)
             {
-                GameObject gameObject = gameObjectList[i];
-                if (gameObject.CollisionType == CollisionType.Disabled)
-                    continue;
-
                 for (int j = i + 1; j < gameObjectList.Count; j++) // j = i + 1 Para no checkear A con B y despues B con A
                 {
-                    if (i == j)
-                        continue;
-
+                    GameObject gameObject = gameObjectList[i];
                     GameObject other = gameObjectList[j];
-                    if (other.CollisionType == CollisionType.Disabled)
+
+                    if (!(gameObject is Entity) && !(other is Entity)) // Do not check Game Objects that dont move.
                         continue;
 
                     if (gameObject.Transform.isColliding(other.Transform))
@@ -154,6 +157,7 @@ namespace DoomSurvivors
             ExitSwitch exitSwitch = ExitSwitchFactory.CreateExitSwitch(map.ExitPoint);
             exitSwitch.DrawBoundingBox = drawBoundingBox;
             AddGameObject(exitSwitch);
+            AddInteractable(exitSwitch);
 
             // Load Monsters
             foreach (MonsterPlacer monsterPlacer in map.MonsterList)
@@ -196,7 +200,7 @@ namespace DoomSurvivors
             RayTracedWeapon.RayTracedWeaponShotAction += RayTracedWeaponShotActionHandler;
             BulletWeapon.BulletWeaponShotAction += BulletWeaponShotActionHandler;
             Bullet.BulletHitAction += BulletHitActionHandler;
-
+            Player.InteractAction += InteractActionHandler;
         }
         public override void UnLoad()
         {
@@ -206,6 +210,7 @@ namespace DoomSurvivors
             RayTracedWeapon.RayTracedWeaponShotAction -= RayTracedWeaponShotActionHandler;
             BulletWeapon.BulletWeaponShotAction -= BulletWeaponShotActionHandler;
             Bullet.BulletHitAction -= BulletHitActionHandler;
+            Player.InteractAction -= InteractActionHandler;
 
             Player player = gameObjectList.OfType<Player>().FirstOrDefault();
             player?.Unload();
@@ -227,7 +232,14 @@ namespace DoomSurvivors
         {
             this.particleList.Add(particle);
         }
-
+        private void InteractActionHandler(Vector position, int radius)
+        {
+            foreach (ExitSwitch interactable in interactableList)
+            {
+                if (Math.Abs((interactable.Transform.PositionCenter - position).Length) <= radius)
+                    interactable.OnInteract();
+            }
+        }
         public override void Update()
         {
             // Camera Update

@@ -62,6 +62,9 @@ namespace DoomSurvivors.Main
         public static event Action DownArrowPressedAction;
         public static event Action UpArrowPressedAction;
         public static event Action EnterPressedAction;
+        public static event Action MouseWheelDownAction;
+        public static event Action MouseWheelUpAction;
+        public static event Action InteractButtonPressedAction;
         public static void DebugModeActions()
         {
             Engine.DrawRect(Engine.Transform.W / 2, 0, 1, Engine.Transform.H, 0xfff);
@@ -161,6 +164,11 @@ namespace DoomSurvivors.Main
                         case Sdl.SDLK_RETURN:
                             EnterPressedAction?.Invoke();
                             break;
+
+                        case Sdl.SDLK_e:
+                            InteractButtonPressedAction?.Invoke();
+                            break;
+
                     }
                     break;
 
@@ -176,6 +184,19 @@ namespace DoomSurvivors.Main
                             break;
                     }
 
+                    break;
+
+                case Sdl.SDL_MOUSEBUTTONDOWN:
+                    switch(sdl_event.button.button)
+                    {
+                        case Sdl.SDL_BUTTON_WHEELDOWN:
+                            MouseWheelDownAction?.Invoke();
+                            break;
+
+                        case Sdl.SDL_BUTTON_WHEELUP:
+                            MouseWheelUpAction?.Invoke();
+                            break;
+                    }
                     break;
             }
         }

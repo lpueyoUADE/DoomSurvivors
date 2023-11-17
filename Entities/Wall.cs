@@ -12,6 +12,11 @@ namespace DoomSurvivors.Entities
         }
 
         private Sprite sprite;
+        protected Sprite Sprite
+        {
+            get { return sprite; }
+            set { sprite = value; }
+        }
 
         public Wall(Transform transform, Sprite sprite, CollisionType collisionType = CollisionType.Static, bool drawShadow = true, bool drawBoundingBox = false) :
             base(transform, collisionType, drawShadow, drawBoundingBox)

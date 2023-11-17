@@ -91,8 +91,8 @@ namespace DoomSurvivors.Entities
         {
             if (showVisionRadius)
             {
-                Vector newPosition = Camera.Instance.WorldToCameraPosition(this.Transform.Position);
-                Engine.DrawCirle((int)newPosition.X + transform.W / 2, (int)newPosition.Y + transform.H / 2, (int)this.visionRadius, new Color(0, 255, 0, 255));
+                Vector newPosition = Camera.Instance.WorldToCameraPosition(this.Transform.PositionCenter);
+                Engine.DrawCirle((int)newPosition.X, (int)newPosition.Y, (int)this.visionRadius, new Color(0, 255, 0, 255));
             }
 
             base.Render();

@@ -5,7 +5,6 @@ using DoomSurvivors.Utilities;
 using DoomSurvivors.Viewport;
 using System;
 using static DoomSurvivors.Scenes.UI.Font;
-using Text = DoomSurvivors.Scenes.UI.Text;
 
 namespace DoomSurvivors.Scenes
 {
@@ -69,8 +68,21 @@ namespace DoomSurvivors.Scenes
             Program.UpArrowPressedAction += UpArrowPressedActionHandler;
             Program.DownArrowPressedAction += DownArrowPressedActionHandler;
             Program.EnterPressedAction += EnterPressedActionHandler;
+            Program.LeftMouseButtonReleasedAction += LeftMouseButtonReleasedActionHandler;
+            Program.MouseWheelDownAction += MouseWheelDownActionHandler;
+            Program.MouseWheelUpAction += MouseWheelUpActionHandler;
         }
+        public override void UnLoad()
+        {
+            Camera.Instance.Active = false;
 
+            Program.UpArrowPressedAction -= UpArrowPressedActionHandler;
+            Program.DownArrowPressedAction -= DownArrowPressedActionHandler;
+            Program.EnterPressedAction -= EnterPressedActionHandler;
+            Program.LeftMouseButtonReleasedAction -= LeftMouseButtonReleasedActionHandler;
+            Program.MouseWheelDownAction -= MouseWheelDownActionHandler;
+            Program.MouseWheelUpAction -= MouseWheelUpActionHandler;
+        }
 
         private void UpArrowPressedActionHandler()
         {
@@ -84,15 +96,18 @@ namespace DoomSurvivors.Scenes
         {
             canvas.Action();
         }
-
-
-        public override void UnLoad()
+        private void LeftMouseButtonReleasedActionHandler()
         {
-            Camera.Instance.Active = false;
+            canvas.Action();
+        }
 
-            Program.UpArrowPressedAction -= UpArrowPressedActionHandler;
-            Program.DownArrowPressedAction -= DownArrowPressedActionHandler;
-            Program.EnterPressedAction -= EnterPressedActionHandler;
+        private void MouseWheelUpActionHandler() 
+        {
+            canvas.Previous();
+        }
+        private void MouseWheelDownActionHandler()
+        {
+            canvas.Next();
         }
     }
 }

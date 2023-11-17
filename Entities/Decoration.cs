@@ -1,5 +1,6 @@
 ﻿using DoomSurvivors.Entities.Animations;
 using DoomSurvivors.Utilities;
+using System;
 using System.Windows;
 
 namespace DoomSurvivors.Entities
@@ -37,9 +38,9 @@ namespace DoomSurvivors.Entities
             HangingCorpse10,
             HellThingy,
             ImpaledZombieStill,
-            ImpaledZombieAnimated,
             ImpaledSkulls,
             ImpaledSingleSkull,
+            ImpaledZombieAnimated,
             SmallBlueTorch,
             SmallGreenTorch,
             SmallRedTorch,
@@ -58,6 +59,7 @@ namespace DoomSurvivors.Entities
         private Animation idleAnimation;
         public Decoration(Transform transform, Animation idleAnimation, CollisionType collisionType = CollisionType.Static, bool drawShadow = true, bool drawBoundingBox = false) : base(transform, collisionType, drawShadow, drawBoundingBox)
         {
+            Random rnd = new Random();
             this.idleAnimation = idleAnimation;
             this.IsRayCastCollidable = true;
         }

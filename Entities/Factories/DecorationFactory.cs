@@ -1,5 +1,6 @@
 ﻿
 using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Scenes.Maps;
 using DoomSurvivors.Scenes.Maps.Placers;
 using System;
 using System.Collections.Generic;
@@ -103,14 +104,14 @@ namespace DoomSurvivors.Entities.Factories
                 case DecorationType.ImpaledZombieStill:
                     decoration = ImpaledZombieStill(decorationPlacer.Position);
                     break;
-                case DecorationType.ImpaledZombieAnimated:
-                    decoration = ImpaledZombieAnimated(decorationPlacer.Position);
-                    break;
                 case DecorationType.ImpaledSkulls:
                     decoration = ImpaledSkulls(decorationPlacer.Position);
                     break;
                 case DecorationType.ImpaledSingleSkull:
                     decoration = ImpaledSingleSkull(decorationPlacer.Position);
+                    break;
+                case DecorationType.ImpaledZombieAnimated:
+                    decoration = ImpaledZombieAnimated(decorationPlacer.Position);
                     break;
                 case DecorationType.SmallBlueTorch:
                     decoration = SmallBlueTorch(decorationPlacer.Position);
@@ -160,9 +161,13 @@ namespace DoomSurvivors.Entities.Factories
             return decoration;
         }
 
+        private static Transform FromBottomUpTransform(Vector position, Vector size, int tilesetSize)
+        {
+            return new Transform((int)position.X, (int)(position.Y + tilesetSize - size.Y), (int)size.X, (int)size.Y);
+        }
         private static Decoration FlamingBarrel(Vector position)
         {
-            Transform transform = new Transform(position, new Vector(37, 53));
+            Transform transform = FromBottomUpTransform(position, new Vector(37, 53), Map.TileSize);
 
             return new Decoration(
                 transform,
@@ -172,7 +177,7 @@ namespace DoomSurvivors.Entities.Factories
                         new Sprite("Decoration", new Transform(39, 130, 34, 53)),
                         new Sprite("Decoration", new Transform(74, 130, 36, 51))
                     },
-                    Animation.Speed.fast,
+                    Animation.Speed.faster,
                     true,
                     false
                 )
@@ -181,222 +186,783 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Decoration SmallCandle(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(16, 15), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                        new Sprite("Decoration", new Transform(1, 198, 16, 15))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration BigCandle(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(29, 61), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                        new Sprite("Decoration", new Transform(18, 198, 29, 61))
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration SkullCandle(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(41, 43), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                        new Sprite("Decoration", new Transform(48, 198, 41, 43)),
+                        new Sprite("Decoration", new Transform(90, 198, 41, 43)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration TallColumn(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(38, 128), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                        new Sprite("Decoration", new Transform(1, 274, 38, 128)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration GreenTallColumn(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(35, 53), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                        new Sprite("Decoration", new Transform(40, 274, 35, 53)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration GreenSmallColumn(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(35, 40), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                        new Sprite("Decoration", new Transform(76, 274, 35, 40)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration GreenHeartColumn(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(35, 45), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                        new Sprite("Decoration", new Transform(112, 274, 35, 45)),
+                        new Sprite("Decoration", new Transform(148, 274, 35, 46)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration RedTallColumn(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(35, 53), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                        new Sprite("Decoration", new Transform(184, 274, 35, 53)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration RedSmallColumn(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(35, 40), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                        new Sprite("Decoration", new Transform(220, 274, 35, 40)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration RedSkullColumn(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(35, 49), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                        new Sprite("Decoration", new Transform(256, 274, 35, 49)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration EvilEye(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(48, 60), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                        new Sprite("Decoration", new Transform(1, 417, 48, 60)),
+                        new Sprite("Decoration", new Transform(50, 417, 47, 59)),
+                        new Sprite("Decoration", new Transform(98, 417, 46, 60)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration GibPuddle1(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(29, 8), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                        new Sprite("Decoration", new Transform(1, 492, 29, 8)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration GibPuddle2(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(41, 7), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                        new Sprite("Decoration", new Transform(31, 492, 41, 7)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration GibPuddle3(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(32, 3), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                        new Sprite("Decoration", new Transform(73, 492, 32, 3)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration GibPuddle4(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(55, 10), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                        new Sprite("Decoration", new Transform(106, 492, 55, 10)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration HangingCorpseAnimated(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(30, 68), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(1, 517, 30, 68)),
+                      new Sprite("Decoration", new Transform(32, 517, 30, 68)),
+                      new Sprite("Decoration", new Transform(63, 517, 30, 68)),
+                    },
+                    Animation.Speed.regular,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration HangingCorpse1(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(41, 84), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(1, 586, 41, 84)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration HangingCorpse2(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(39, 79), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(43, 586, 39, 79)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration HangingCorpse3(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(18, 67), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(83, 586, 18, 67)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration HangingCorpse4(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(14, 53), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(102, 586, 14, 53)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration HangingCorpse5(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(22, 88), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(1, 671, 22, 88)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration HangingCorpse6(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(22, 88), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(24, 671, 22, 85)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration HangingCorpse7(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(22, 64), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(47, 671, 22, 64)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration HangingCorpse8(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(22, 64), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(70, 671, 22, 64)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration HangingCorpse9(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(22, 57), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(93, 671, 22, 57)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration HangingCorpse10(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(22, 61), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(116, 671, 22, 61)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration HellThingy(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(32, 35), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(1, 774, 32, 35)),
+                      new Sprite("Decoration", new Transform(34, 774, 32, 35)),
+                      new Sprite("Decoration", new Transform(67, 774, 32, 35)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration ImpaledZombieStill(Vector position)
         {
-            throw new NotImplementedException();
-        }
+            Transform transform = FromBottomUpTransform(position, new Vector(40, 66), Map.TileSize);
 
-        private static Decoration ImpaledZombieAnimated(Vector position)
-        {
-            throw new NotImplementedException();
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(1, 824, 40, 66)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
-
         private static Decoration ImpaledSkulls(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(41, 67), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(42, 824, 41, 67)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration ImpaledSingleSkull(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(41, 56), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(84, 824, 41, 56)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
+
+        private static Decoration ImpaledZombieAnimated(Vector position)
+        {
+            Transform transform = FromBottomUpTransform(position, new Vector(35, 66), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(126, 824, 35, 66)),
+                      new Sprite("Decoration", new Transform(162, 824, 38, 66)),
+                    },
+                    Animation.Speed.regular,
+                    true,
+                    false
+                )
+            );
+        }
+
 
         private static Decoration SmallBlueTorch(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(17, 73), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(1, 906, 17, 73)),
+                      new Sprite("Decoration", new Transform(19, 906, 17, 68)),
+                      new Sprite("Decoration", new Transform(37, 906, 16, 68)),
+                      new Sprite("Decoration", new Transform(54, 906, 17, 74)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration SmallGreenTorch(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(17, 73), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(72, 906, 17, 73)),
+                      new Sprite("Decoration", new Transform(90, 906, 17, 68)),
+                      new Sprite("Decoration", new Transform(108, 906, 16, 68)),
+                      new Sprite("Decoration", new Transform(125, 906, 17, 74)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration SmallRedTorch(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(17, 73), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(143, 906, 17, 73)),
+                      new Sprite("Decoration", new Transform(161, 906, 17, 68)),
+                      new Sprite("Decoration", new Transform(179, 906, 16, 68)),
+                      new Sprite("Decoration", new Transform(196, 906, 17, 74)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration BigBlueTorch(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(26, 96), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(1, 995, 26, 96)),
+                      new Sprite("Decoration", new Transform(28, 995, 26, 96)),
+                      new Sprite("Decoration", new Transform(55, 995, 26, 96)),
+                      new Sprite("Decoration", new Transform(82, 995, 26, 97)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration BigGreenTorch(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(26, 96), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(109, 995, 26, 96)),
+                      new Sprite("Decoration", new Transform(136, 995, 26, 91)),
+                      new Sprite("Decoration", new Transform(163, 995, 26, 91)),
+                      new Sprite("Decoration", new Transform(190, 995, 26, 97)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration BigRedTorch(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(26, 96), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(217, 995, 26, 96)),
+                      new Sprite("Decoration", new Transform(244, 995, 26, 91)),
+                      new Sprite("Decoration", new Transform(271, 995, 26, 91)),
+                      new Sprite("Decoration", new Transform(298, 995, 26, 97)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration BigBlueLamp(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(23, 80), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(1, 1093, 23, 80)),
+                      new Sprite("Decoration", new Transform(25, 1093, 23, 80)),
+                      new Sprite("Decoration", new Transform(49, 1093, 23, 80)),
+                      new Sprite("Decoration", new Transform(73, 1093, 23, 80)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration SmallBlueLamp(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(21, 60), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(97, 1093, 21, 60)),
+                      new Sprite("Decoration", new Transform(119, 1093, 21, 60)),
+                      new Sprite("Decoration", new Transform(141, 1093, 21, 60)),
+                      new Sprite("Decoration", new Transform(163, 1093, 21, 60)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration Lamp(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(23, 48), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(185, 1093, 23, 48)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration BigTree(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(124, 124), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(1, 1188, 124, 124)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration SmallTree(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(51, 70), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(126, 1188, 51, 70)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration GrayStump(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(29, 47), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(178, 1188, 29, 47)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
 
         private static Decoration Stump(Vector position)
         {
-            throw new NotImplementedException();
+            Transform transform = FromBottomUpTransform(position, new Vector(47, 47), Map.TileSize);
+
+            return new Decoration(
+                transform,
+                new Animation(
+                    new List<Sprite> {
+                      new Sprite("Decoration", new Transform(208, 1188, 47, 47)),
+                    },
+                    Animation.Speed.faster,
+                    true,
+                    false
+                )
+            );
         }
     }
 }
