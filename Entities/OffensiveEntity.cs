@@ -9,6 +9,7 @@ namespace DoomSurvivors.Entities
         protected WeaponController weaponController;
         private Vector weaponOffset;
         private Vector aimingAt;
+        private int maxLife;
         private int life;
         private bool isAttacking;
         private readonly float attackingFriction;
@@ -24,6 +25,12 @@ namespace DoomSurvivors.Entities
             set => this.life = value;
         } 
 
+        public int MaxLife
+        {
+            get => this.maxLife;
+            set => this.maxLife = value;
+        }
+
         public bool IsDying => this.State == State.Dying || this.State == State.Gibbing;
         public bool IsDeath => this.State == State.Death || this.State == State.GibDeath;
 
@@ -36,7 +43,7 @@ namespace DoomSurvivors.Entities
             this.weaponController = weaponController == null ? new WeaponController() : weaponController;
             this.aimingAt = new Vector(0, 0);
             this.life = life;
-
+            this.maxLife = life;
             this.attackingFriction = 0.3f;
 
             this.IsRayCastCollidable = true;

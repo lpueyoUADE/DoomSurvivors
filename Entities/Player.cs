@@ -15,12 +15,18 @@ namespace DoomSurvivors.Entities
         private int interactionRadius;
         private bool drawInteractionRadius;
 
+        public bool DrawInteractionRadius 
+        {
+            get => drawInteractionRadius;
+            set => drawInteractionRadius = value;
+        }
         public static event Action<Vector, int> InteractAction;
         public Player(Transform transform, double speed, int life, Vector WeaponOffset, AnimationController animationController, WeaponController weaponController=null) : 
             base(transform, speed, life, WeaponOffset, animationController, weaponController)
         {
             this.CollisionType = CollisionType.Static;
-            this.Life = 10000;
+            this.Life = 100;
+            this.MaxLife = 100;
             this.interactionRadius = 70;
             this.drawInteractionRadius = true;
             // Stats

@@ -4,6 +4,7 @@ using DoomSurvivors.Entities.Weapons;
 using DoomSurvivors.Scenes;
 using DoomSurvivors.Scenes.Maps;
 using DoomSurvivors.Scenes.Maps.Placers;
+using DoomSurvivors.Scenes.UI;
 using DoomSurvivors.Viewport;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,8 @@ namespace DoomSurvivors
         private List<GameObject> interactableList;
         private List<GameObject> gameObjectList;
         private List<GameObject> deadEntityList;
+
+        private HUD hud;
         private bool drawBoundingBox;
         private bool drawVisionRadius;
 
@@ -61,6 +64,9 @@ namespace DoomSurvivors
 
             this.drawBoundingBox = drawBoundingBox;
             this.drawVisionRadius = drawVisionRadius;
+
+
+            this.hud = new HUD(0, null);
         }
 
         public void AddGameObject(GameObject gameObject)
@@ -150,8 +156,12 @@ namespace DoomSurvivors
             // Load Player
             Player player = PlayerFactory.Player((int)map.SpawnPoint.X, (int)map.SpawnPoint.Y);
             player.DrawBoundingBox = drawBoundingBox;
+            player.DrawInteractionRadius = drawBoundingBox;
             player.Load();
             AddGameObject(player);
+
+            // Load HUD
+            hud.Player = player;
 
             // Load Exit Point
             ExitSwitch exitSwitch = ExitSwitchFactory.CreateExitSwitch(map.ExitPoint);
@@ -277,6 +287,9 @@ namespace DoomSurvivors
                 particle.Update();
                 particle.Render();
             }
+
+            hud.Update();
+            hud.Render();
 
             tracerList.RemoveAll(tracer => tracer.hasFinished);
             gameObjectList.RemoveAll(gameObject => gameObject is Bullet && ((Bullet)gameObject).isDead);

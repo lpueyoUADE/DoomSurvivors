@@ -48,6 +48,10 @@ namespace DoomSurvivors
             reload = true;   
         }
 
+        public void NextScene()
+        {
+        }
+
         public void Load()
         {
             if (reload)

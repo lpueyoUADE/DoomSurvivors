@@ -138,6 +138,8 @@
     <Compile Include="Main\Sound.cs" />
     <Compile Include="Scenes\UI\Canvas.cs" />
     <Compile Include="Scenes\UI\Font.cs" />
+    <Compile Include="Scenes\UI\HUD.cs" />
+    <Compile Include="Scenes\UI\StatusBar.cs" />
     <Compile Include="Scenes\UI\Text.cs" />
     <Compile Include="Scenes\UI\UIElement.cs" />
     <Compile Include="Utilities\Color.cs" />
@@ -163,6 +165,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Crosshair\crosshair_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\HUD\HUD.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Icon\DoomSurvivorsLogo.png">

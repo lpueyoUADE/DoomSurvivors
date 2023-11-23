@@ -47,6 +47,7 @@ namespace DoomSurvivors.Entities.Animations
             { "Walls", new SpriteReference("assets/Sprites/Walls/wall_001.png", cyanColorKey)},
             { "ExitSwitch", new SpriteReference("assets/Sprites/ExitSwitch/Exit_Switch.png", cyanColorKey)},
             { "Decoration", new SpriteReference("assets/Sprites/Decoration/Decoration.png", cyanColorKey)},
+            { "HUD", new SpriteReference("assets/HUD/HUD.png", cyanColorKey)},
         };
 
         private readonly string imageName;

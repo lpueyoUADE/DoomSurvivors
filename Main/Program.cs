@@ -1,6 +1,7 @@
 ﻿using DoomSurvivors.Entities;
 using DoomSurvivors.Scenes;
 using DoomSurvivors.Scenes.Maps;
+using DoomSurvivors.Scenes.UI;
 using DoomSurvivors.Utilities;
 using System;
 using System.Collections.Generic;

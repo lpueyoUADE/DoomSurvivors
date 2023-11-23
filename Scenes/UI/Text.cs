@@ -26,6 +26,7 @@ namespace DoomSurvivors.Scenes.UI
         public string Content
         {
             get => content;
+            set => content = value;
         }
 
         public Color Color

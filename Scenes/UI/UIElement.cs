@@ -27,7 +27,6 @@ namespace DoomSurvivors.Scenes.UI
             set { backgroundColor = value; }
         }
 
-
         public UIElement(int x, int y, int padding, Color backgroundColor=null) {
             this.transform = new Transform(x,y,0,0);
             this.padding = padding;

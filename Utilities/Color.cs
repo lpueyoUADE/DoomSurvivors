@@ -18,6 +18,10 @@ namespace DoomSurvivors.Utilities
         {
             get => new Color(0, 0, 0, 255);
         }
+        public static Color Red
+        {
+            get => new Color(255, 0, 0, 255);
+        }
 
         public static Color Transparent
         {

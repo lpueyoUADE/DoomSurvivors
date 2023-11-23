@@ -113,6 +113,19 @@ class Engine
     {
         Sdl.SDL_FillRect(screen, ref rect, color);
     }
+
+    public static void DrawFilledRect(Transform transform, Color color, int steps)
+    {
+        if (transform.W <= 0)
+            return;
+
+        float alfaStep = 255 / steps;
+        for (int i = 0; i < steps; i++)
+        {
+            int deltaSize = i == 0 ? 0 : -(i * 4);
+            DrawRect(transform.X + i * 2, transform.Y + i * 2, transform.W + deltaSize, transform.H + deltaSize, new Color(color.R, color.G, color.B, (byte)(alfaStep * (i + 1))));
+        }
+    }
     public static void Show()
     {
         Sdl.SDL_Flip(screen);
