@@ -12,6 +12,7 @@ namespace DoomSurvivors.Entities.Factories
                 WeaponID.Pistol,
                 Mechanism.Automatic,
                 10,
+                100,
                 0.5f,
                 bulletsPerShot: 1,
                 damage: 5,
@@ -26,8 +27,9 @@ namespace DoomSurvivors.Entities.Factories
             return new RayTracedWeapon(
                 WeaponID.Pistol,
                 Mechanism.Automatic,
-                ammo:10,
-                cooldown: 0.5f,
+                ammo: 100,
+                maxAmmo: 100,
+                cooldown: 0.3f,
                 bulletsPerShot: 1,
                 damage: 5,
                 owner,
@@ -42,6 +44,7 @@ namespace DoomSurvivors.Entities.Factories
                 WeaponID.Pistol,
                 Mechanism.SemiAutomatic,
                 10,
+                100,
                 0.1f,
                 owner,
                 new Bullet(
@@ -70,6 +73,7 @@ namespace DoomSurvivors.Entities.Factories
                 WeaponID.Pistol,
                 Mechanism.Automatic,
                 10,
+                100,
                 0.1f,
                 owner,
                 new Bullet(

@@ -67,19 +67,7 @@ namespace DoomSurvivors.Entities
             RedSkullKey,
             YellowSkullKey
         }
-        /*
-        public struct ItemPlacer
-        {
-            public ItemType itemType;
-            public Vector position;
 
-            public ItemPlacer(ItemType itemType, int x, int y) : this()
-            {
-                this.itemType = itemType;
-                this.position = new Vector(x, y);
-            }
-        }
-        */
         public bool Collected => this.collected;
         public Item(Transform transform, Animation idleAnimation, Halo halo=null, bool drawShadow = true, bool drawBoundingBox = false) : base(transform, CollisionType.Static, drawShadow, drawBoundingBox)
         {

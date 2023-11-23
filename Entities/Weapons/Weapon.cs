@@ -25,6 +25,7 @@ namespace DoomSurvivors.Entities.Weapons
         private WeaponID weaponID;
         private Mechanism mechanism;
         private int ammo;
+        private int maxAmmo;
         private float cooldown;
         private DateTime lastShotTime;
         private bool hasNeverBeenShot;
@@ -33,11 +34,12 @@ namespace DoomSurvivors.Entities.Weapons
         private int chamberedBullets;
         private const int MAX_CHAMBERED_BULLETS = 1;
 
-        public Weapon(WeaponID weaponID, Mechanism mechanism, int ammo, float cooldown, OffensiveEntity owner)
+        public Weapon(WeaponID weaponID, Mechanism mechanism, int ammo, int maxAmmo, float cooldown, OffensiveEntity owner)
         {
             this.weaponID = weaponID;
             this.mechanism = mechanism;
             this.ammo = ammo;
+            this.maxAmmo = maxAmmo;
             this.cooldown = cooldown;
             this.lastShotTime = DateTime.Now;
             this.hasNeverBeenShot = true;
@@ -60,16 +62,40 @@ namespace DoomSurvivors.Entities.Weapons
             get { return chamberedBullets > 0; }
         }
 
+        public float Cooldown
+        {
+            get => this.cooldown;
+        }
+
+        public DateTime LastShotTime
+        {
+            get => this.lastShotTime;
+        }
+
+        public int Ammo
+        {
+            get => this.ammo;
+        }
+        public int MaxAmmo
+        {
+            get => this.maxAmmo;
+        }
+
+        public bool HasAmmo
+        {
+            get => this.ammo > 0;
+        }
         public void ReleaseTrigger()
         {
             this.chamberedBullets = MAX_CHAMBERED_BULLETS;
         }
+
         public virtual bool IsReadyToShoot
         {
             get {
                 float elapsedTime = (float)(DateTime.Now - this.lastShotTime).TotalSeconds;
                 bool coolDownRestored = elapsedTime > this.cooldown;
-                return this.hasNeverBeenShot || ((this.IsAutomatic || (this.IsSemiAutomatic && HasChamberedBullets)) && coolDownRestored);
+                return HasAmmo && (this.hasNeverBeenShot || ((this.IsAutomatic || (this.IsSemiAutomatic && HasChamberedBullets)) && coolDownRestored));
             }
         }
 
@@ -85,7 +111,7 @@ namespace DoomSurvivors.Entities.Weapons
                 this.hasNeverBeenShot = false;
                 this.lastShotTime = DateTime.Now;
                 this.chamberedBullets--;
-
+                this.ammo--;
                 ShootAction(target);
             }
         }

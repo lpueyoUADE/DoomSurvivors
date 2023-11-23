@@ -1,6 +1,7 @@
 ﻿using DoomSurvivors.Entities;
 using DoomSurvivors.Entities.Animations;
 using DoomSurvivors.Utilities;
+using System;
 using System.Windows;
 
 namespace DoomSurvivors.Scenes.UI
@@ -10,10 +11,11 @@ namespace DoomSurvivors.Scenes.UI
         private Player player;
         private Sprite hudSprite;
 
-        StatusBar lifeBar;
-        StatusBar armorBar;
-        StatusBar xpBar;
-        StatusBar coolDownBar;
+        private StatusBar lifeBar;
+        private StatusBar armorBar;
+        private StatusBar xpBar;
+        private StatusBar ammoBar;
+        private StatusBar coolDownBar;
 
         public Player Player { 
             get { return player; } 
@@ -75,6 +77,16 @@ namespace DoomSurvivors.Scenes.UI
                 new Color(0x8888FFFF)
             );
 
+            this.ammoBar = new StatusBar(
+                new Transform(this.Transform.X + 315, this.Transform.Y + 37, 43, 21),
+                1.0f,
+                5,
+                10,
+                "",
+                new Vector(0, 0),
+                Color.White,
+                new Color(0xAF7B1FFF)
+            );
         }
 
         public override void Render()
@@ -91,12 +103,18 @@ namespace DoomSurvivors.Scenes.UI
             armorBar.Render();
             xpBar.Render();
             coolDownBar.Render();
+            ammoBar.Render();
         }
 
         public override void Update()
         {
             lifeBar.Fullness = player.Life/ (float)player.MaxLife;
             lifeBar.DisplayValue = player.Life.ToString();
+
+            coolDownBar.Fullness = (float)(DateTime.Now - player.CurrentWeapon.LastShotTime).TotalSeconds / player.CurrentWeapon.Cooldown;
+
+            ammoBar.Fullness = (float)player.CurrentWeapon.Ammo / player.CurrentWeapon.MaxAmmo;
+            ammoBar.DisplayValue = player.CurrentWeapon.Ammo.ToString();
         }
     }
 }
