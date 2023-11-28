@@ -66,6 +66,7 @@ namespace DoomSurvivors.Main
         public static event Action MouseWheelDownAction;
         public static event Action MouseWheelUpAction;
         public static event Action InteractButtonPressedAction;
+        public static event Action<int> NumericButtonPressedAction;
         public static void DebugModeActions()
         {
             Engine.DrawRect(Engine.Transform.W / 2, 0, 1, Engine.Transform.H, 0xfff);
@@ -78,10 +79,8 @@ namespace DoomSurvivors.Main
 
             // TODO Crear Factories de Scenes
             MenuScene MainMenuScene = new MenuScene(Engine.LoadImage("assets/Icon/DoomSurvivorsLogo.png"));
-            MenuScene WinScene = new MenuScene(Engine.LoadImage("assets/Maps/win.png"));
-            MenuScene LoseScene = new MenuScene(Engine.LoadImage("assets/Maps/lose.png"));
             PlayableScene E1Scene = new PlayableScene(
-                Map.CreateMap("E1_Test"),
+                Map.CreateMap("E1_Test", "assets/Maps/Test Map/Test_map_001.json", "assets/Maps/Test Map/Test_map_Floor.png"),
                 DEBUG_MODE, // Show Bounding Boxes
                 DEBUG_MODE   // Show vision Radius
             );
@@ -90,8 +89,7 @@ namespace DoomSurvivors.Main
                 new List<Scene> {
                     MainMenuScene,
                     E1Scene,
-                    WinScene,
-                    LoseScene
+                    E1Scene
                 }
             );
 
@@ -168,6 +166,36 @@ namespace DoomSurvivors.Main
 
                         case Sdl.SDLK_e:
                             InteractButtonPressedAction?.Invoke();
+                            break;
+
+                        case Sdl.SDLK_1:
+                            NumericButtonPressedAction?.Invoke(1);
+                            break;
+
+                        case Sdl.SDLK_2:
+                            NumericButtonPressedAction?.Invoke(2);
+                            break;
+
+                        case Sdl.SDLK_3:
+                            NumericButtonPressedAction?.Invoke(3);
+                            break;
+                        case Sdl.SDLK_4:
+                            NumericButtonPressedAction?.Invoke(4);
+                            break;
+                        case Sdl.SDLK_5:
+                            NumericButtonPressedAction?.Invoke(5);
+                            break;
+                        case Sdl.SDLK_6:
+                            NumericButtonPressedAction?.Invoke(6);
+                            break;
+                        case Sdl.SDLK_7:
+                            NumericButtonPressedAction?.Invoke(7);
+                            break;
+                        case Sdl.SDLK_8:
+                            NumericButtonPressedAction?.Invoke(8);
+                            break;
+                        case Sdl.SDLK_9:
+                            NumericButtonPressedAction?.Invoke(9);
                             break;
 
                     }

@@ -38,7 +38,7 @@ namespace DoomSurvivors.Scenes.Maps
         private static int tileSize = 64;
         public static int TileSize => tileSize;
 
-        public Map(
+        private Map(
                 string name, 
                 string floorTexture,
                 int width,
@@ -63,10 +63,9 @@ namespace DoomSurvivors.Scenes.Maps
             this.itemList = items;
         }
 
-        public static Map CreateMap(string name)
+        public static Map CreateMap(string name, string jsonMapPath, string fileName)
         {
-            string fileName = "assets/Maps/Test Map/Test_map_001.json"; // Hardcoded
-            string jsonString = File.ReadAllText(fileName);
+            string jsonString = File.ReadAllText(jsonMapPath);
             
             JSONMap jsonMap = JsonSerializer.Deserialize<JSONMap>(jsonString);
             
@@ -170,7 +169,7 @@ namespace DoomSurvivors.Scenes.Maps
             return new Map
             (
                 name,
-                "assets/Maps/Test Map/Test_map_Floor.png", // Hardcoded
+                fileName, // Hardcoded
                 floorLayer.width * jsonMap.tilewidth,
                 floorLayer.height * jsonMap.tileheight,
                 spawnPoint,
@@ -191,6 +190,5 @@ namespace DoomSurvivors.Scenes.Maps
         {
             this.Render();
         }
-
     }
 }

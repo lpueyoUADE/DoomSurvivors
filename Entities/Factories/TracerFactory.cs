@@ -1,9 +1,4 @@
 ﻿using DoomSurvivors.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DoomSurvivors.Entities.Factories
 {
@@ -21,7 +16,7 @@ namespace DoomSurvivors.Entities.Factories
         {
             return new Tracer(
                 20,
-                new Color(0xff000080),
+                new Color(0xff0000aa),
                 new Color(0xffff00ff)
             );
         }

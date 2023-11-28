@@ -25,8 +25,8 @@ namespace DoomSurvivors.Entities.Weapons
         }
 
         public static event Action<RayTracedWeapon, Ray> RayTracedWeaponShotAction;
-        public RayTracedWeapon(WeaponID weaponID, Mechanism mechanism, int ammo, int maxAmmo, float cooldown,int bulletsPerShot, int damage, OffensiveEntity owner, Tracer tracer, float reach) :
-            base(weaponID, mechanism, ammo, maxAmmo, cooldown, owner)
+        public RayTracedWeapon(WeaponID weaponID, Mechanism mechanism, AmmoType ammoType, int ammo, int maxAmmo, float cooldown,int bulletsPerShot, int damage, OffensiveEntity owner, Tracer tracer, float reach) :
+            base(weaponID, mechanism, ammoType, ammo, maxAmmo, cooldown, owner)
         {
             this.damage = damage;
             this.tracer = tracer;

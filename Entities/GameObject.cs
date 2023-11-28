@@ -1,13 +1,7 @@
 ﻿using DoomSurvivors.Entities.Animations;
 using DoomSurvivors.Utilities;
 using DoomSurvivors.Viewport;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using Tao.Sdl;
 
 namespace DoomSurvivors.Entities
 {

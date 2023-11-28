@@ -9,10 +9,18 @@ namespace DoomSurvivors.Entities.Weapons
         Pistol,
         Shotgun,
         SuperShotgun,
-        Minigun,
+        Chaingun,
         RocketLauncher,
         PlasmaRifle,
         BFG
+    }
+
+    public enum AmmoType
+    {
+        Bullet,
+        Shells,
+        Plasma,
+        Rocket
     }
 
     public enum Mechanism
@@ -24,6 +32,7 @@ namespace DoomSurvivors.Entities.Weapons
     {
         private WeaponID weaponID;
         private Mechanism mechanism;
+        private AmmoType ammoType;
         private int ammo;
         private int maxAmmo;
         private float cooldown;
@@ -34,10 +43,11 @@ namespace DoomSurvivors.Entities.Weapons
         private int chamberedBullets;
         private const int MAX_CHAMBERED_BULLETS = 1;
 
-        public Weapon(WeaponID weaponID, Mechanism mechanism, int ammo, int maxAmmo, float cooldown, OffensiveEntity owner)
+        public Weapon(WeaponID weaponID, Mechanism mechanism, AmmoType ammoType, int ammo, int maxAmmo, float cooldown, OffensiveEntity owner)
         {
             this.weaponID = weaponID;
             this.mechanism = mechanism;
+            this.ammoType = ammoType;
             this.ammo = ammo;
             this.maxAmmo = maxAmmo;
             this.cooldown = cooldown;

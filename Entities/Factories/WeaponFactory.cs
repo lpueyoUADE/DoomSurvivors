@@ -6,11 +6,80 @@ namespace DoomSurvivors.Entities.Factories
 {
     public static class WeaponFactory
     {
+        public static Weapon Pistol(OffensiveEntity owner)
+        {
+            return new RayTracedWeapon(
+                WeaponID.Pistol,
+                Mechanism.Automatic,
+                AmmoType.Bullet,
+                ammo: 100,
+                maxAmmo: 100,
+                cooldown: 0.3f,
+                bulletsPerShot: 1,
+                damage: 5,
+                owner,
+                TracerFactory.YellowTracer(),
+                300f
+            );
+        }
+
+        public static Weapon Shotgun(OffensiveEntity owner)
+        {
+            return new RayTracedWeapon(
+                WeaponID.Shotgun,
+                Mechanism.SemiAutomatic,
+                AmmoType.Shells,
+                ammo: 100,
+                maxAmmo: 100,
+                cooldown: 0.4f,
+                bulletsPerShot: 3,
+                damage: 5,
+                owner,
+                TracerFactory.YellowTracer(),
+                300f
+            );
+        }
+
+        public static Weapon SuperShotgun(OffensiveEntity owner)
+        {
+            return new RayTracedWeapon(
+                WeaponID.SuperShotgun,
+                Mechanism.SemiAutomatic,
+                AmmoType.Shells,
+                ammo: 100,
+                maxAmmo: 100,
+                cooldown: 0.5f,
+                bulletsPerShot: 6,
+                damage: 5,
+                owner,
+                TracerFactory.YellowTracer(),
+                300f
+            );
+        }
+
+        public static Weapon Chaingun(OffensiveEntity owner)
+        {
+            return new RayTracedWeapon(
+                WeaponID.Chaingun,
+                Mechanism.Automatic,
+                AmmoType.Shells,
+                ammo: 100,
+                maxAmmo: 100,
+                cooldown: 0.2f,
+                bulletsPerShot: 1,
+                damage: 5,
+                owner,
+                TracerFactory.YellowTracer(),
+                300f
+            );
+        }
+
         public static Weapon RayTracedPistolRed(OffensiveEntity owner)
         {
             return new RayTracedWeapon(
                 WeaponID.Pistol,
                 Mechanism.Automatic,
+                AmmoType.Bullet,
                 10,
                 100,
                 0.5f,
@@ -27,6 +96,7 @@ namespace DoomSurvivors.Entities.Factories
             return new RayTracedWeapon(
                 WeaponID.Pistol,
                 Mechanism.Automatic,
+                AmmoType.Bullet,
                 ammo: 100,
                 maxAmmo: 100,
                 cooldown: 0.3f,
@@ -43,6 +113,7 @@ namespace DoomSurvivors.Entities.Factories
             return new BulletWeapon(
                 WeaponID.Pistol,
                 Mechanism.SemiAutomatic,
+                AmmoType.Bullet,
                 10,
                 100,
                 0.1f,
@@ -72,6 +143,7 @@ namespace DoomSurvivors.Entities.Factories
             return new BulletWeapon(
                 WeaponID.Pistol,
                 Mechanism.Automatic,
+                AmmoType.Bullet,
                 10,
                 100,
                 0.1f,

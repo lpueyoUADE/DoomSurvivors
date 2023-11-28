@@ -31,11 +31,10 @@ namespace DoomSurvivors.Entities
         }
 
         public void OnInteract()
-        {
-            Console.WriteLine("CLANK");
-            
+        {           
             if(!isOneTimeUse || !usedAtLeastOnce)
                 SwitchState();
+                SceneController.Instance.ChangeScene(2);
         }
     }
 }

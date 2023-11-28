@@ -1,7 +1,9 @@
 ﻿using DoomSurvivors.Entities;
 using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Entities.Weapons;
 using DoomSurvivors.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace DoomSurvivors.Scenes.UI
@@ -16,6 +18,14 @@ namespace DoomSurvivors.Scenes.UI
         private StatusBar xpBar;
         private StatusBar ammoBar;
         private StatusBar coolDownBar;
+
+        private Dictionary<WeaponID, Sprite> weapons;
+        private Image selectedWeaponImage;
+        private WeaponID selectedWeaponID;
+
+        private Dictionary<AmmoType, Sprite> ammoTypes;
+        private Image selectedAmmoTypeImage;
+        private AmmoType selectedAmmoType;
 
         public Player Player { 
             get { return player; } 
@@ -74,7 +84,7 @@ namespace DoomSurvivors.Scenes.UI
                 "",
                 new Vector(5, 0),
                 Color.White,
-                new Color(0x8888FFFF)
+                new Color(0xC39B2FFF)
             );
 
             this.ammoBar = new StatusBar(
@@ -87,6 +97,33 @@ namespace DoomSurvivors.Scenes.UI
                 Color.White,
                 new Color(0xAF7B1FFF)
             );
+
+            this.weapons = new Dictionary<WeaponID, Sprite>
+            {
+                { WeaponID.Pistol, new Sprite("HUD", new Transform(62, 88, 29, 14)) },
+                { WeaponID.Chainsaw, new Sprite("HUD", new Transform(92, 88, 62, 24)) },
+                { WeaponID.Shotgun, new Sprite("HUD", new Transform(155, 88, 63, 12)) },
+                { WeaponID.SuperShotgun, new Sprite("HUD", new Transform(219, 88, 54, 14)) },
+                { WeaponID.Chaingun, new Sprite("HUD", new Transform(274, 88, 54, 16)) },
+                { WeaponID.RocketLauncher, new Sprite("HUD", new Transform(329, 88, 62, 16)) },
+                { WeaponID.PlasmaRifle, new Sprite("HUD", new Transform(392, 88, 54, 16)) },
+                { WeaponID.BFG, new Sprite("HUD", new Transform(447, 88, 61, 36)) },
+            };
+
+            this.selectedWeaponID = WeaponID.Pistol;
+            this.selectedWeaponImage = new Image(new Transform(this.Transform.X + 316, this.Transform.Y + 6, 74,22), weapons[selectedWeaponID]);
+
+
+            this.ammoTypes = new Dictionary<AmmoType, Sprite>
+            {
+                { AmmoType.Bullet, new Sprite("HUD", new Transform(1, 88, 9, 11)) },
+                { AmmoType.Shells, new Sprite("HUD", new Transform(12, 88, 15, 7)) },
+                { AmmoType.Plasma, new Sprite("HUD", new Transform(29, 88, 17, 12)) },
+                { AmmoType.Rocket, new Sprite("HUD", new Transform(48, 88, 12, 27)) },
+            };
+
+            this.selectedAmmoType = AmmoType.Bullet;
+            this.selectedAmmoTypeImage = new Image(new Transform(this.Transform.X + 368, this.Transform.Y + 37, 21, 21), ammoTypes[selectedAmmoType]);
         }
 
         public override void Render()
@@ -104,12 +141,18 @@ namespace DoomSurvivors.Scenes.UI
             xpBar.Render();
             coolDownBar.Render();
             ammoBar.Render();
+
+            selectedWeaponImage.Render();
+            selectedAmmoTypeImage.Render();
         }
 
         public override void Update()
         {
             lifeBar.Fullness = player.Life/ (float)player.MaxLife;
             lifeBar.DisplayValue = player.Life.ToString();
+
+            armorBar.Fullness = player.Armor / (float)player.MaxArmor;
+            armorBar.DisplayValue = player.Armor.ToString();
 
             coolDownBar.Fullness = (float)(DateTime.Now - player.CurrentWeapon.LastShotTime).TotalSeconds / player.CurrentWeapon.Cooldown;
 

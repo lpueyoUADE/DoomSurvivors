@@ -4,6 +4,7 @@ using DoomSurvivors.Main;
 using DoomSurvivors.Utilities;
 using DoomSurvivors.Viewport;
 using System;
+using System.CodeDom;
 using System.Windows;
 using Tao.Sdl;
 
@@ -15,10 +16,26 @@ namespace DoomSurvivors.Entities
         private int interactionRadius;
         private bool drawInteractionRadius;
 
+        private int armor;
+        private int maxArmor;
+
+        private int xp;
+        private int maxLevelXp;
+        private int level;
         public bool DrawInteractionRadius 
         {
             get => drawInteractionRadius;
             set => drawInteractionRadius = value;
+        }
+
+        public int MaxArmor
+        {
+            get => maxArmor;
+        }
+
+        public int Armor
+        {
+            get => armor;
         }
         public static event Action<Vector, int> InteractAction;
         public Player(Transform transform, double speed, int life, Vector WeaponOffset, AnimationController animationController, WeaponController weaponController=null) : 
@@ -27,6 +44,8 @@ namespace DoomSurvivors.Entities
             this.CollisionType = CollisionType.Static;
             this.Life = 100;
             this.MaxLife = 100;
+            this.armor = 0;
+            this.maxArmor = 100;
             this.interactionRadius = 70;
             this.drawInteractionRadius = true;
             // Stats
@@ -50,7 +69,6 @@ namespace DoomSurvivors.Entities
                 Vector newPosition = Camera.Instance.WorldToCameraPosition(this.Transform.PositionCenter);
                 Engine.DrawCirle((int)newPosition.X, (int)newPosition.Y, (int)this.interactionRadius, new Color(255, 0, 255, 255));
             }
-
         }
 
         private void LeftMouseButtonReleasedActionHandler()
@@ -61,6 +79,10 @@ namespace DoomSurvivors.Entities
         private void InteractButtonPressedActionHandler()
         {
             Interact();
+        }
+        private void NumericButtonPressedActionHandler(int number)
+        {
+            weaponController.SelectWeapon(number);          
         }
 
         protected override void InputEvents()
@@ -90,9 +112,7 @@ namespace DoomSurvivors.Entities
             }
 
             if (Engine.MousePress(Engine.MOUSEBUTTON_RIGHT))
-            {
-                SceneController.Instance.ChangeScene(2);
-            }
+            {}
         }
         private void Interact()
         {
@@ -103,12 +123,14 @@ namespace DoomSurvivors.Entities
         {
             Program.LeftMouseButtonReleasedAction += LeftMouseButtonReleasedActionHandler;
             Program.InteractButtonPressedAction += InteractButtonPressedActionHandler;
+            Program.NumericButtonPressedAction += NumericButtonPressedActionHandler;
         }
 
         public void Unload()
         {
             Program.LeftMouseButtonReleasedAction -= LeftMouseButtonReleasedActionHandler;
             Program.InteractButtonPressedAction -= InteractButtonPressedActionHandler;
+            Program.NumericButtonPressedAction -= NumericButtonPressedActionHandler;
         }
     }
 }

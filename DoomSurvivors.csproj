@@ -139,6 +139,7 @@
     <Compile Include="Scenes\UI\Canvas.cs" />
     <Compile Include="Scenes\UI\Font.cs" />
     <Compile Include="Scenes\UI\HUD.cs" />
+    <Compile Include="Scenes\UI\Image.cs" />
     <Compile Include="Scenes\UI\StatusBar.cs" />
     <Compile Include="Scenes\UI\Text.cs" />
     <Compile Include="Scenes\UI\UIElement.cs" />
@@ -155,6 +156,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -103,6 +103,7 @@ namespace DoomSurvivors.Entities.Factories
             );
 
             player.AddWeapon(WeaponFactory.RayTracedPistolYellow(player));
+            player.AddWeapon(WeaponFactory.SuperShotgun(player));
             //player.AddWeapon(WeaponFactory.BulletPistolSemiAutomatic(player));
             //player.AddWeapon(WeaponFactory.BulletPistolAutomatic(player));
 
