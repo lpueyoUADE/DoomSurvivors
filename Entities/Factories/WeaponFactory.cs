@@ -65,7 +65,7 @@ namespace DoomSurvivors.Entities.Factories
                 AmmoType.Shells,
                 ammo: 100,
                 maxAmmo: 100,
-                cooldown: 0.2f,
+                cooldown: 0.1f,
                 bulletsPerShot: 1,
                 damage: 5,
                 owner,

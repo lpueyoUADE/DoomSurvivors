@@ -24,8 +24,8 @@
             "scale": 0.33,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 1036.3636363636365,
-                "y": 751.5151515151517
+                "x": 996.9696969696968,
+                "y": 778.7878787878788
             }
         },
         "Map_editor.tmx#AASHITTY": {
@@ -72,8 +72,8 @@
             "scale": 0.25,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1592,
-                "y": 1588
+                "x": 1742,
+                "y": 1598
             }
         },
         "Map_tester.tmx#Exit point tiles": {
