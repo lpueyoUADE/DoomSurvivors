@@ -25,7 +25,7 @@ class Engine
         Engine.transform.H = height;
         int colores = 32;
 
-        int flags = (Sdl.SDL_HWSURFACE | Sdl.SDL_DOUBLEBUF | Sdl.SDL_ANYFORMAT);
+        int flags = Sdl.SDL_HWSURFACE | Sdl.SDL_DOUBLEBUF | Sdl.SDL_ANYFORMAT;
         Sdl.SDL_Init(Sdl.SDL_INIT_EVERYTHING);
         screen = Sdl.SDL_SetVideoMode(
             width,

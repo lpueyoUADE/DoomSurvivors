@@ -31,7 +31,6 @@ namespace DoomSurvivors.Main
             . MenuScenes (menu items)
             . Collisions (Walls and enemies) (OK - Falta corregir Bug con Walls)
             . Items (OK - Falta agregar efectos)
-            . Maps system (OK - Falta cargar Decors - Exit Point - Crear mapas)
 
             (Pending)
             . HUD 
@@ -41,6 +40,10 @@ namespace DoomSurvivors.Main
             . Skill tree
             . Stats (health, xp)
             . Sounds
+            
+            . Death condition
+            . Win condition
+            . pause menu
 
             (Nice to Have)
             . Doors
@@ -50,6 +53,7 @@ namespace DoomSurvivors.Main
             . Survivors Mode
 
             (Done)
+            . Maps system (OK)
             . Particle effects (OK)
             . RayCasted Bullets (OK)
             . Factories (Monsters & Weapons) (OK)
