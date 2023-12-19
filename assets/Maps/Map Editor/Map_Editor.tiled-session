@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Map_editor.tmx",
+    "activeFile": "E1M3.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -11,6 +11,95 @@
         "": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "E1M1.tmx": {
+            "scale": 0.206884765625,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 2042.199669577531,
+                "y": 2044.6164739202268
+            }
+        },
+        "E1M1.tmx#Decoration Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M1.tmx#Exit Point Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M1.tmx#Floor Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M1.tmx#Item Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M1.tmx#Monster Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M1.tmx#Spawn Point Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M1.tmx#Wall Tiles": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "E1M2.tmx": {
+            "scale": 0.125,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 2156,
+                "y": 1464
+            }
+        },
+        "E1M2.tmx#Decoration Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M2.tmx#Exit Point Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M2.tmx#Floor Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M2.tmx#Item Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M2.tmx#Monster Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M2.tmx#Spawn Point Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M2.tmx#Wall Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M3.tmx": {
+            "scale": 0.125,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 2284,
+                "y": 1912
+            }
+        },
+        "E1M3.tmx#Decoration Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M3.tmx#Exit Point Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M3.tmx#Floor Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M3.tmx#Item Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M3.tmx#Monster Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M3.tmx#Spawn Point Tiles": {
+            "scaleInDock": 1
+        },
+        "E1M3.tmx#Wall Tiles": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
         },
         "Floor Tiles.tsx": {
             "scaleInDock": 1,
@@ -24,8 +113,8 @@
             "scale": 0.33,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 996.9696969696968,
-                "y": 778.7878787878788
+                "x": 957.5757575757576,
+                "y": 959.0909090909092
             }
         },
         "Map_editor.tmx#AASHITTY": {
@@ -72,8 +161,8 @@
             "scale": 0.25,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1742,
-                "y": 1598
+                "x": 1734,
+                "y": 1592
             }
         },
         "Map_tester.tmx#Exit point tiles": {
@@ -104,7 +193,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "C:/projects/C#/DoomSurvivors/assets/Maps/Test Map",
+    "last.exportedFilePath": "C:/projects/C#/DoomSurvivors/assets/Maps/E1M3 Map",
     "last.imagePath": "C:/projects/C#/DoomSurvivors/assets/Maps/Map Editor",
     "map.height": 50,
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
@@ -113,12 +202,17 @@
     "map.width": 50,
     "openFiles": [
         "Map_editor.tmx",
-        "Map_tester.tmx"
+        "E1M1.tmx",
+        "E1M2.tmx",
+        "E1M3.tmx"
     ],
     "project": "Map_Editor.tiled-project",
     "recentFiles": [
-        "Map_tester.tmx",
         "Map_editor.tmx",
+        "E1M1.tmx",
+        "E1M2.tmx",
+        "E1M3.tmx",
+        "Map_tester.tmx",
         "Monsters Tiles.tsx",
         "Wall Tiles.tsx",
         "Floor Tiles.tsx",

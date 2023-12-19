@@ -88,25 +88,71 @@ namespace DoomSurvivors.Main
                 Engine.LoadImage("assets/Icon/DoomSurvivorsLogo.png"),
                 new Canvas(
                     new Transform(0, Engine.Transform.H / 2, Engine.Transform.W, Engine.Transform.H / 2),
-                    new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => SceneController.Instance.ChangeScene(1), "JUEGO NUEVO"),
+                    new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => SceneController.Instance.ChangeScene(2), "JUEGO NUEVO"),
                     new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => Environment.Exit(0), "SALIR")
                 )
             );
-            PlayableScene E1Scene = new PlayableScene(
-                Map.CreateMap("E1_Test", "assets/Maps/Test Map/Test_map_001.json", "assets/Maps/Test Map/Test_map_Floor.png"),
+
+            // TODO: Mejorar cambio de escenas
+            MenuScene LevelSelectorMenuScene = new MenuScene(
+                IntPtr.Zero,
+                new Canvas(
+                    new Transform(0, 0, Engine.Transform.W, Engine.Transform.H),
+                    new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => SceneController.Instance.ChangeScene(3), "GARAGE"),
+                    new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => SceneController.Instance.ChangeScene(4), "PLANTA ATOMICA"),
+                    new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => SceneController.Instance.ChangeScene(5), "ICONO DEL MAL"),
+                    new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => SceneController.Instance.ChangeScene(0), "MAPA DE TESTING"),
+                    new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => SceneController.Instance.ChangeScene(1), "VOLVER")
+                ),
+                Color.Black
+            );
+
+            MenuScene WinScene = new MenuScene(
+                Engine.LoadImage("assets/Icon/winScreen.png"),
+                new Canvas(
+                    new Transform(0, Engine.Transform.H / 2, Engine.Transform.W, Engine.Transform.H / 2),
+                    new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => SceneController.Instance.ChangeScene(1), "MENU PRINCIPAL"),
+                    new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => Environment.Exit(0), "SALIR")
+                )
+            );
+
+            PlayableScene TestMapScene = new PlayableScene(
+                Map.CreateMap("TestMapScene", "assets/Maps/Test Map/Test_map_001.json", "assets/Maps/Test Map/Test_map_Floor.png"),
                 DEBUG_MODE, // Show Bounding Boxes
                 DEBUG_MODE   // Show vision Radius
             );
 
+            PlayableScene E1M1Scene = new PlayableScene(
+                Map.CreateMap("Garage", "assets/Maps/E1M1 Map/E1M1.json", "assets/Maps/E1M1 Map/E1M1.png"),
+                DEBUG_MODE,
+                DEBUG_MODE
+            );
+
+            PlayableScene E1M2Scene = new PlayableScene(
+                Map.CreateMap("PlantaAtomica", "assets/Maps/E1M2 Map/E1M2.json", "assets/Maps/E1M2 Map/E1M2.png"),
+                DEBUG_MODE,
+                DEBUG_MODE
+            );
+
+            PlayableScene E1M3Scene = new PlayableScene(
+                Map.CreateMap("IconoDelMal", "assets/Maps/E1M3 Map/E1M3.json", "assets/Maps/E1M3 Map/E1M3.png"),
+                DEBUG_MODE,
+                DEBUG_MODE
+            );
+
             SceneController.Instance.setScenes(
                 new List<Scene> {
+                    TestMapScene,
                     MainMenuScene,
-                    E1Scene,
-                    E1Scene
+                    LevelSelectorMenuScene,
+                    E1M1Scene,
+                    E1M2Scene,
+                    E1M3Scene,
+                    WinScene
                 }
             );
 
-            SceneController.Instance.ChangeScene(0);
+            SceneController.Instance.ChangeScene(1);
 
             // Crosshair
             crosshair = new Crosshair(true);

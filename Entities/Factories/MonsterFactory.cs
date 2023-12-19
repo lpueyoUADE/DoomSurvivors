@@ -81,9 +81,9 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster wolfenstein = new Monster(
                 new Transform(x, y, 29, 56),
-                5.0f,
-                10,
-                new Vector(4, 21),
+                4,
+                50,
+                new Vector(9, 24),
                 Aggressiveness.Easy,
                 new Sound("assets/Sounds/Monsters/DSSSSIT.wav"),
                 new Sound("assets/Sounds/Monsters/DSPOPAIN.wav"),
@@ -177,12 +177,13 @@ namespace DoomSurvivors.Entities.Factories
                     new Drop(ItemType.Clip, 1f),
                 },
                 null,
-                target, // Chasing Target,
-                300.0f  // Vision radius
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f
             );
 
             wolfenstein.AddWeapon(
-                WeaponFactory.CreateWeapon(WeaponID.Chaingun, wolfenstein)
+                WeaponFactory.CreateWeapon(WeaponID.AutomaticPistol, wolfenstein)
             );
 
             return wolfenstein;
@@ -192,10 +193,10 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster cyberdemon = new Monster(
                 new Transform(x, y, 82, 108),
-                5.0f,
-                10,
+                4,
+                4000,
                 new Vector(71, 52),
-                Aggressiveness.Hard,
+                Aggressiveness.Boss,
                 new Sound("assets/Sounds/Monsters/DSCYBSIT.wav"),
                 new Sound("assets/Sounds/Monsters/DSPOPAIN.wav"),
                 new Sound("assets/Sounds/Monsters/DSCYBDTH.wav"),
@@ -271,8 +272,9 @@ namespace DoomSurvivors.Entities.Factories
                     new Drop(ItemType.RocketBox, 1f)
                 },
                 null,
-                target, // Chasing Target,
-                300.0f  // Vision radius
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f
             );
 
             cyberdemon.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.CyberDemonRocketLauncher, cyberdemon));
@@ -284,8 +286,8 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster spiderMasterMind = new Monster(
                 new Transform(x, y, 195, 110),
-                5.0f,
-                10,
+                4,
+                3000,
                 new Vector(91, 60),
                 Aggressiveness.Boss,
                 new Sound("assets/Sounds/Monsters/DSSPISIT.wav"),
@@ -364,11 +366,12 @@ namespace DoomSurvivors.Entities.Factories
                     new Drop(ItemType.AmmoBox, 1f),
                 },
                 null,
-                target, // Chasing Target,
-                300.0f  // Vision radius
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f
             );
 
-            spiderMasterMind.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.Chaingun, spiderMasterMind));
+            spiderMasterMind.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.AutomaticChaingun, spiderMasterMind));
 
             return spiderMasterMind;
         }
@@ -377,9 +380,9 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster archVile = new Monster(
                 new Transform(x, y, 32, 76),
-                5.0f,
-                10,
-                new Vector(4, 21),
+                4,
+                700,
+                new Vector(32, 28),
                 Aggressiveness.Hard,
                 new Sound("assets/Sounds/Monsters/DSVILSIT.wav"),
                 new Sound("assets/Sounds/Monsters/DSPOPAIN.wav"),
@@ -473,8 +476,9 @@ namespace DoomSurvivors.Entities.Factories
                     new Drop(ItemType.HealthPotion, 1f),
                 },
                 null,
-                target, // Chasing Target,
-                300.0f  // Vision radius
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f
             );
 
             archVile.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.ImpFireBall, archVile));
@@ -486,9 +490,9 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster revenant = new Monster(
                 new Transform(x, y, 41, 79),
-                5.0f,
-                10,
-                new Vector(4, 21),
+                4,
+                300,
+                new Vector(11, 32),
                 Aggressiveness.Hard,
                 new Sound("assets/Sounds/Monsters/DSSKESIT.wav"),
                 new Sound("assets/Sounds/Monsters/DSPOPAIN.wav"),
@@ -570,8 +574,9 @@ namespace DoomSurvivors.Entities.Factories
                     new Drop(ItemType.Rocket, 1f),
                 },
                 null,
-                target, // Chasing Target,
-                300.0f  // Vision radius
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f
             );
 
             revenant.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.ReventantRocketLauncher, revenant));
@@ -583,9 +588,9 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster arachnotron = new Monster(
                 new Transform(x, y, 98, 55),
-                5.0f,
-                10,
-                new Vector(4, 21),
+                6,
+                500,
+                new Vector(45, 32),
                 Aggressiveness.Medium,
                 new Sound("assets/Sounds/Monsters/DSBSPSIT.wav"),
                 new Sound("assets/Sounds/Monsters/DSPOPAIN.wav"),
@@ -659,8 +664,9 @@ namespace DoomSurvivors.Entities.Factories
                     new Drop(ItemType.PlasmaCell, 1f),
                 },
                 null,
-                target, // Chasing Target,
-                300.0f  // Vision radius
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f
             );
 
             arachnotron.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.ArachnotronPlasmaRifle, arachnotron));
@@ -672,8 +678,8 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster mancubus = new Monster(
                 new Transform(x, y, 73, 65),
-                5.0f,
-                10,
+                4,
+                600,
                 new Vector(4, 21),
                 Aggressiveness.Medium,
                 new Sound("assets/Sounds/Monsters/DSMANSIT.wav"),
@@ -753,9 +759,10 @@ namespace DoomSurvivors.Entities.Factories
                 new List<Drop> {
                     new Drop(ItemType.Rocket, 1f),
                 },
-                null, 
-                target, // Chasing Target,
-                300.0f  // Vision radius
+                null,
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f
             );
 
             mancubus.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.MancubusFireBall, mancubus));
@@ -767,9 +774,9 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster painElemental = new Monster(
                 new Transform(x, y, 77, 57),
-                5.0f,
-                10,
-                new Vector(4, 21),
+                4,
+                400,
+                new Vector(38, 41),
                 Aggressiveness.Medium,
                 new Sound("assets/Sounds/Monsters/DSPESIT.wav"),
                 new Sound("assets/Sounds/Monsters/DSPEPAIN.wav"),
@@ -840,8 +847,9 @@ namespace DoomSurvivors.Entities.Factories
                 ),
                 new List<Drop> {},
                 null,
-                target, // Chasing Target,
-                300.0f,  // Vision radius,
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f,
                 leaveCorpse: false
             );
 
@@ -854,8 +862,8 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster lostSoul = new Monster(
                 new Transform(x, y, 73, 65),
-                5.0f,
-                10,
+                8,
+                100,
                 new Vector(4, 21),
                 Aggressiveness.Hard,
                 new Sound("assets/Sounds/Monsters/DSSKLATK.wav"),
@@ -923,12 +931,13 @@ namespace DoomSurvivors.Entities.Factories
                      ),
                      gibDeath: null
                  ),
-                 new List<Drop> {},
-                 null,
-                 target, // Chasing Target,
-                 300.0f,  // Vision radius
-                 leaveCorpse: false
-             );
+                new List<Drop> {},
+                null,
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f,
+                leaveCorpse: false
+            );
 
             lostSoul.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.Melee, lostSoul));
 
@@ -939,8 +948,8 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster cacoDemon = new Monster(
                 new Transform(x, y, 63, 66),
-                5.0f,
-                10,
+                4,
+                400,
                 new Vector(4, 21),
                 Aggressiveness.Medium,
                 new Sound("assets/Sounds/Monsters/DSCACSIT.wav"),
@@ -1012,8 +1021,9 @@ namespace DoomSurvivors.Entities.Factories
                     new Drop(ItemType.HealthPotion, 1f),
                 },
                 null,
-                target, // Chasing Target,
-                300.0f  // Vision radius
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f
             );
 
             cacoDemon.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.CacoDemonFireBall, cacoDemon));
@@ -1025,9 +1035,9 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster hellKnight = new Monster(
                 new Transform(x, y, 41, 73),
-                5.0f,
-                10,
-                new Vector(4, 21),
+                4,
+                500,
+                new Vector(3, 20),
                 Aggressiveness.Medium,
                 new Sound("assets/Sounds/Monsters/DSKNTSIT.wav"),
                 new Sound("assets/Sounds/Monsters/DSPEPAIN.wav"),
@@ -1102,8 +1112,9 @@ namespace DoomSurvivors.Entities.Factories
                     new Drop(ItemType.HealthPotion, 1f),
                 },
                 null,
-                target, // Chasing Target,
-                300.0f  // Vision radius
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f
             );
 
             hellKnight.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.HellKnightFireBall, hellKnight));
@@ -1115,8 +1126,8 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster baronOfHell = new Monster(
                 new Transform(x, y, 41, 73),
-                3.0f,
-                10,
+                4,
+                1000,
                 new Vector(3, 20),
                 Aggressiveness.Hard,
                 new Sound("assets/Sounds/Monsters/DSBRSSIT.wav"),
@@ -1191,8 +1202,9 @@ namespace DoomSurvivors.Entities.Factories
                     new Drop(ItemType.Helmet, 1f),
                 },
                 null,
-                target, // Chasing Target,
-                300.0f  // Vision radius
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f
             );
             baronOfHell.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.BaronFireBall, baronOfHell));
 
@@ -1203,8 +1215,8 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster pinky = new Monster(
                 new Transform(x, y, 40, 56),
-                5.0f,
-                10,
+                6,
+                150,
                 new Vector(4, 21),
                 Aggressiveness.Medium,
                 new Sound("assets/Sounds/Monsters/DSSGTSIT.wav"),
@@ -1277,8 +1289,9 @@ namespace DoomSurvivors.Entities.Factories
                 ),
                 new List<Drop> {},
                 null,
-                target, // Chasing Target,
-                300.0f  // Vision radius
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f
             );
 
             pinky.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.Melee, pinky));
@@ -1290,8 +1303,8 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster imp = new Monster(
                 new Transform(x, y, 41, 57),
-                5.0f,
-                10,
+                4,
+                60,
                 new Vector(4, 21),
                 Aggressiveness.Easy,
                 new Sound("assets/Sounds/Monsters/DSBGSIT1.wav"),
@@ -1386,12 +1399,12 @@ namespace DoomSurvivors.Entities.Factories
                     new Drop(ItemType.HealthPotion, 1f),
                 },
                 null,
-                target, // Chasing Target,
-                300.0f  // Vision radius
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f
             );
 
             imp.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.ImpFireBall, imp));
-
 
             return imp;
         }
@@ -1400,8 +1413,8 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster chainguner = new Monster(
                 new Transform(x, y, 36, 55),
-                5.0f,
-                10,
+                4,
+                70,
                 new Vector(4, 21),
                 Aggressiveness.Medium,
                 new Sound("assets/Sounds/Monsters/DSPOSIT1.wav"),
@@ -1496,11 +1509,12 @@ namespace DoomSurvivors.Entities.Factories
                     new Drop(ItemType.Clip, 1f),
                 },
                 null,
-                target, // Chasing Target,
-                300.0f  // Vision radius
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f
             );
 
-            chainguner.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.Chaingun, chainguner));
+            chainguner.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.AutomaticChaingun, chainguner));
 
             return chainguner;
         }
@@ -1509,8 +1523,8 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster shotguner = new Monster(
                 new Transform(x, y, 36, 55),
-                5.0f,
-                10,
+                4,
+                30,
                 new Vector(4, 21),
                 Aggressiveness.Easy,
                 new Sound("assets/Sounds/Monsters/DSPOSIT2.wav"),
@@ -1606,11 +1620,12 @@ namespace DoomSurvivors.Entities.Factories
                     new Drop(ItemType.Shells, 1f),
                 },
                 null,
-                target, // Chasing Target,
-                300.0f  // Vision radius
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f
             );
 
-            shotguner.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.Chaingun, shotguner));
+            shotguner.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.AutomaticShotgun, shotguner));
 
             return shotguner;
         }
@@ -1619,8 +1634,8 @@ namespace DoomSurvivors.Entities.Factories
         {
             Monster zombie = new Monster(
                 new Transform(x, y, 41, 55),
-                5.0f,
-                10,
+                4,
+                20,
                 new Vector(3, 20),
                 Aggressiveness.Easy,
                 new Sound("assets/Sounds/Monsters/DSPOSIT3.wav"),
@@ -1715,11 +1730,12 @@ namespace DoomSurvivors.Entities.Factories
                     new Drop(ItemType.Clip, 1f),
                 },
                 null,
-                target, // Chasing Target,
-                300.0f  // Vision radius
+                target: target,
+                visionRadius: 500f,
+                attackRadius: 400f
             );
 
-            zombie.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.Chaingun, zombie));
+            zombie.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.AutomaticPistol, zombie));
             return zombie;
         }
     }

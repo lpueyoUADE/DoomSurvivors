@@ -38,7 +38,7 @@ namespace DoomSurvivors.Entities
             if (!isOneTimeUse || !usedAtLeastOnce)
                 this.actionSound.PlayOnce();
                 SwitchState();
-                SceneController.Instance.ChangeScene(2);
+                SceneController.Instance.NextLevel();
         }
     }
 }

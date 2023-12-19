@@ -154,6 +154,15 @@
     <None Include="assets\Fonts\DooM.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="assets\Maps\E1M1 Map\E1M1.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="assets\Maps\E1M2 Map\E1M2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="assets\Maps\E1M3 Map\E1M3.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="assets\Maps\Test Map\Test_map_001.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -179,16 +188,16 @@
     <Content Include="assets\Icon\logo.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\Maps\e1_test.png">
+    <Content Include="assets\Icon\winScreen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\Maps\floor_test.png">
+    <Content Include="assets\Maps\E1M1 Map\E1M1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\Maps\lose.png">
+    <Content Include="assets\Maps\E1M2 Map\E1M2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\Maps\main_menu.png">
+    <Content Include="assets\Maps\E1M3 Map\E1M3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Maps\Map Editor\wall_001.png">
@@ -197,13 +206,13 @@
     <Content Include="assets\Maps\Test Map\Test_map_Floor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="assets\Maps\win.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="assets\Sounds\Weapons\DSBAREXP.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Sounds\Weapons\DSBFG.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\Sounds\Weapons\DSCLAW.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="assets\Sounds\Weapons\DSDBOPN.wav">

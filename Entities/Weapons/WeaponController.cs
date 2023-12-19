@@ -17,7 +17,7 @@ namespace DoomSurvivors.Entities.Weapons
         public WeaponController()
         {
             this.weapons = new List<Weapon>();
-            this.selectedWeapon = -1;
+            this.selectedWeapon = 0;
 
             this.ammo = new Dictionary<AmmoType, int> {
                 { AmmoType.Bullet, 50 },
@@ -37,7 +37,7 @@ namespace DoomSurvivors.Entities.Weapons
             };
 
             this.ammoPerNewWeapon = new Dictionary<WeaponID, (AmmoType, int)> {
-                {WeaponID.Chainsaw, (AmmoType.Bullet, 0)},
+                { WeaponID.Chainsaw, (AmmoType.Bullet, 0) },
                 { WeaponID.Pistol, (AmmoType.Bullet, 0) },
                 { WeaponID.Shotgun , (AmmoType.Shells, 8)},
                 { WeaponID.SuperShotgun, (AmmoType.Bullet, 8) },
@@ -51,7 +51,8 @@ namespace DoomSurvivors.Entities.Weapons
                 { WeaponID.CacoDemonFireBall, (AmmoType.Infinte, 0)},
                 { WeaponID.MancubusFireBall, (AmmoType.Infinte, 0)},
                 { WeaponID.ReventantRocketLauncher, (AmmoType.Infinte, 0)},
-                { WeaponID.ArachnotronPlasmaRifle, (AmmoType.Infinte, 0)}
+                { WeaponID.ArachnotronPlasmaRifle, (AmmoType.Infinte, 0) },
+                { WeaponID.Melee, (AmmoType.Infinte, 0) },
             };
         }
 
@@ -68,7 +69,7 @@ namespace DoomSurvivors.Entities.Weapons
             if (!this.weapons.Contains(weapon))
                 this.weapons.Add(weapon);
             
-            this.selectedWeapon = this.weapons.Count - 1;
+            // this.selectedWeapon = this.weapons.Count - 1;
 
             AddAmmo(ammoPerNewWeapon[weapon.WeaponID].Item1, ammoPerNewWeapon[weapon.WeaponID].Item2);
         }

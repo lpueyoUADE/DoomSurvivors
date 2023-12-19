@@ -85,7 +85,7 @@ namespace DoomSurvivors
                 new Canvas(
                     new Transform(0, 0, Engine.Transform.W, Engine.Transform.H),
                     new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => { ((PlayableScene)SceneController.Instance.CurrentScene).EscapeButtonPressedActionHandler(); }, "CONTINUAR"),
-                    new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => SceneController.Instance.ChangeScene(0), "VOLVER AL MENU PRINCIPAL")
+                    new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => SceneController.Instance.ChangeScene(1), "VOLVER AL MENU PRINCIPAL")
                 ),
                 new Color(0, 0, 0, 64)
             );
@@ -345,7 +345,6 @@ namespace DoomSurvivors
 
                 // Map Update
                 map.Update();
-                // map.Render();
 
                 // Collisions
                 checkCollisions();
@@ -354,14 +353,12 @@ namespace DoomSurvivors
                 for (int i = 0; i < deadEntityList.Count; i++)
                 {
                     deadEntityList[i].Update();
-                    // deadEntityList[i].Render();
                 }
 
                 // GameObject Update
                 for (int i = 0; i < gameObjectList.Count; i++)
                 {
                     gameObjectList[i].Update();
-                    // gameObjectList[i].Render();
                 }
 
                 // Check casted rays
@@ -371,17 +368,14 @@ namespace DoomSurvivors
                 foreach (Tracer tracer in tracerList)
                 { 
                     tracer.Update();
-                    // tracer.Render();
                 }
 
                 foreach (Particle particle in particleList)
                 {
                     particle.Update();
-                    // particle.Render();
                 }
 
                 hud.Update();
-                // hud.Render();
 
                 tracerList.RemoveAll(tracer => tracer.hasFinished);
                 gameObjectList.RemoveAll(gameObject => gameObject is Bullet && ((Bullet)gameObject).isDead);

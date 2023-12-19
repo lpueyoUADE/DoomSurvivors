@@ -42,14 +42,13 @@ namespace DoomSurvivors
             if (nextSceneIndex < 0 || nextSceneIndex > scenes.Count)
                 throw new ArgumentOutOfRangeException("Scene index out of bounds");
 
-            // scenes[currentSceneIndex].UnLoad();
-
             this.nextSceneIndex = nextSceneIndex;
-            reload = true;   
+            reload = true;
         }
 
-        public void NextScene()
+        public void NextLevel()
         {
+            ChangeScene(currentSceneIndex + 1);
         }
 
         public void Load()

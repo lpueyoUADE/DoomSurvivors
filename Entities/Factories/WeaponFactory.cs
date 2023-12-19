@@ -74,6 +74,16 @@ namespace DoomSurvivors.Entities.Factories
                     returnWeapon = CyberDemonRocketLauncher(owner);
                     break;
 
+                case WeaponID.AutomaticPistol:
+                    returnWeapon = AutomaticPistol(owner);
+                    break;
+                case WeaponID.AutomaticShotgun:
+                    returnWeapon = AutomaticShotgun(owner);
+                    break;
+                case WeaponID.AutomaticChaingun:
+                    returnWeapon = AutomaticChaingun(owner);
+                    break;
+
                 default:
                     throw new ArgumentException("Inexistent Weapon ID");
             }
@@ -85,14 +95,14 @@ namespace DoomSurvivors.Entities.Factories
             return new RayTracedWeapon(
                 WeaponID.Chainsaw,
                 Mechanism.Automatic,
-                AmmoType.Bullet,
+                AmmoType.Infinte,
                 1,
-                cooldown: 0.3f,
+                cooldown: 0.5f,
                 raysPerShot: 1,
-                damage: 5,
+                damage: 200,
                 owner,
                 TracerFactory.YellowTracer(),
-                300f,
+                75f,
                 new Sound("assets/Sounds/Weapons/DSSAWFUL.wav")
             );
         }
@@ -104,9 +114,9 @@ namespace DoomSurvivors.Entities.Factories
                 Mechanism.SemiAutomatic,
                 AmmoType.Bullet,
                 1,
-                cooldown: 0.5f,
+                cooldown: 0.4f,
                 raysPerShot: 1,
-                damage: 5,
+                damage: 10,
                 owner,
                 TracerFactory.YellowTracer(),
                 500f,
@@ -123,7 +133,7 @@ namespace DoomSurvivors.Entities.Factories
                 1,
                 cooldown: 1f,
                 raysPerShot: 3,
-                damage: 5,
+                damage: 20,
                 owner,
                 TracerFactory.YellowTracer(),
                 400f,
@@ -140,7 +150,7 @@ namespace DoomSurvivors.Entities.Factories
                 2,
                 cooldown: 1.5f,
                 raysPerShot: 6,
-                damage: 5,
+                damage: 25,
                 owner,
                 TracerFactory.YellowTracer(),
                 200f,
@@ -155,9 +165,9 @@ namespace DoomSurvivors.Entities.Factories
                 Mechanism.Automatic,
                 AmmoType.Bullet,
                 1,
-                cooldown: 0.15f,
+                cooldown: 0.1f,
                 raysPerShot: 1,
-                damage: 5,
+                damage: 20,
                 owner,
                 TracerFactory.YellowTracer(),
                 400f,
@@ -172,7 +182,7 @@ namespace DoomSurvivors.Entities.Factories
                 Mechanism.SemiAutomatic,
                 AmmoType.Rocket,
                 1,
-                cooldown: 2f,
+                cooldown: 1.5f,
                 owner,
                  new Bullet(
                     new Transform(0, 0, 15, 14),
@@ -187,7 +197,7 @@ namespace DoomSurvivors.Entities.Factories
                             false
                         )
                     ),
-                    5,
+                    250,
                     owner,
                     5f,
                     new Color(0xff000000),
@@ -223,9 +233,9 @@ namespace DoomSurvivors.Entities.Factories
                             false
                         )
                     ),
-                    5,
+                    45,
                     owner,
-                    0.7f,
+                    1f,
                     new Color(0x00ffff11),
                     new Color(0x0000ffff),
                     wallHitParticle: ParticleType.PlasmaHit,
@@ -247,7 +257,7 @@ namespace DoomSurvivors.Entities.Factories
                 owner,
                  new Bullet(
                     new Transform(0, 0, 45, 45),
-                    10f,
+                    12f,
                     new AnimationController(
                         new Animation(
                             new List<Sprite>{
@@ -259,7 +269,7 @@ namespace DoomSurvivors.Entities.Factories
                             false
                         )
                     ),
-                    5,
+                    1500,
                     owner,
                     5f,
                     new Color(0x00ffff11),
@@ -327,7 +337,19 @@ namespace DoomSurvivors.Entities.Factories
 
         private static Weapon Melee(OffensiveEntity owner)
         {
-            return ImpFireBall(owner);
+            return new RayTracedWeapon(
+                WeaponID.Melee,
+                Mechanism.Automatic,
+                AmmoType.Infinte,
+                1,
+                cooldown: 0.5f,
+                raysPerShot: 1,
+                damage: 40,
+                owner,
+                TracerFactory.InvicibleTracer(),
+                75f,
+                new Sound("assets/Sounds/Weapons/DSCLAW.wav")
+            );
         }
 
         private static Weapon ImpFireBall(OffensiveEntity owner)
@@ -353,9 +375,9 @@ namespace DoomSurvivors.Entities.Factories
                             false
                         )
                     ),
-                    5,
+                    24,
                     owner,
-                    0.7f,
+                    5f,
                     new Color(0xff000011),
                     new Color(0xffff00ff),
                     wallHitParticle: ParticleType.ImpFireBallHit,
@@ -388,7 +410,7 @@ namespace DoomSurvivors.Entities.Factories
                             false
                         )
                     ),
-                    5,
+                    50,
                     owner,
                     5f,
                     new Color(0x00ff0011),
@@ -424,7 +446,7 @@ namespace DoomSurvivors.Entities.Factories
                             false
                         )
                     ),
-                    5,
+                    60,
                     owner,
                     5f,
                     new Color(0x00ff0011),
@@ -460,7 +482,7 @@ namespace DoomSurvivors.Entities.Factories
                             false
                         )
                     ),
-                    5,
+                    50,
                     owner,
                     5f,
                     new Color(0xff000011),
@@ -532,7 +554,7 @@ namespace DoomSurvivors.Entities.Factories
                             false
                         )
                     ),
-                    5,
+                    30,
                     owner,
                     0.7f,
                     new Color(0x00ff0011),
@@ -567,7 +589,7 @@ namespace DoomSurvivors.Entities.Factories
                              false
                          )
                      ),
-                     5,
+                     50,
                      owner,
                      3f,
                      new Color(0xff000011),
@@ -586,7 +608,7 @@ namespace DoomSurvivors.Entities.Factories
                 Mechanism.Automatic,
                 AmmoType.Infinte,
                 1,
-                cooldown: 1f,
+                cooldown:0.9f,
                 owner,
                  new Bullet(
                     new Transform(0, 0, 19, 16),
@@ -601,9 +623,9 @@ namespace DoomSurvivors.Entities.Factories
                             false
                         )
                     ),
-                    5,
+                    80,
                     owner,
-                    0.7f,
+                    5f,
                     new Color(0xff000011),
                     new Color(0xff0000ff),
                     wallHitParticle: ParticleType.RocketLauncherHit,
@@ -613,5 +635,56 @@ namespace DoomSurvivors.Entities.Factories
                 new Sound("assets/Sounds/Weapons/DSSKEATK.wav", 32)
             );
         }
+        private static Weapon AutomaticChaingun(OffensiveEntity owner)
+        {
+            return new RayTracedWeapon(
+               WeaponID.Chaingun,
+               Mechanism.Automatic,
+               AmmoType.Infinte,
+               1,
+               cooldown: 0.2f,
+               raysPerShot: 1,
+               damage: 5,
+               owner,
+               TracerFactory.RedTracer(),
+               400f,
+               new Sound("assets/Sounds/Weapons/DSPISTOL.wav")
+           );
+        }
+
+        private static Weapon AutomaticShotgun(OffensiveEntity owner)
+        {
+            return new RayTracedWeapon(
+                WeaponID.Shotgun,
+                Mechanism.Automatic,
+                AmmoType.Infinte,
+                1,
+                cooldown: 1f,
+                raysPerShot: 2,
+                damage: 5,
+                owner,
+                TracerFactory.RedTracer(),
+                500f,
+                new Sound("assets/Sounds/Weapons/DSPISTOL.wav")
+            );
+        }
+        private static Weapon AutomaticPistol(OffensiveEntity owner)
+        {
+            return new RayTracedWeapon(
+                WeaponID.Pistol,
+                Mechanism.Automatic,
+                AmmoType.Infinte,
+                1,
+                cooldown: 0.4f,
+                raysPerShot: 1,
+                damage: 5,
+                owner,
+                TracerFactory.RedTracer(),
+                500f,
+                new Sound("assets/Sounds/Weapons/DSPISTOL.wav")
+            );
+        }
+
+
     }
 }

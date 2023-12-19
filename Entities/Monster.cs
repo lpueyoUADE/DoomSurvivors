@@ -36,14 +36,16 @@ namespace DoomSurvivors.Entities
 
         public static class Aggressiveness
         {
-            public const float Easy = 50;
-            public const float Medium = 30;
+            public const float Easy = 100;
+            public const float Medium = 50;
             public const float Hard = 20;
             public const float Boss = 10;
         }
 
         private Entity target;
         private double visionRadius;
+        private double attackRadius;
+
         private bool showVisionRadius;
         private bool leaveCorpse;
         private int clock;
@@ -79,11 +81,12 @@ namespace DoomSurvivors.Entities
 
         public bool TargetOnSight => (target.Transform.Position - transform.Position).Length <= this.visionRadius;
 
-        public Monster(Transform transform, double speed, int life, Vector weaponPosition, float aggressiveness, Sound alertSound, Sound painSound, Sound deathSound, AnimationController animationController, List<Drop> drops, WeaponController weaponController=null, Entity target = null, double visionRadius = 0, bool leaveCorpse=true) :
+        public Monster(Transform transform, double speed, int life, Vector weaponPosition, float aggressiveness, Sound alertSound, Sound painSound, Sound deathSound, AnimationController animationController, List<Drop> drops, WeaponController weaponController=null, Entity target = null, double visionRadius = 0, double attackRadius = 0, bool leaveCorpse=true) :
             base(transform, speed, life, weaponPosition, animationController, weaponController)
         {
             this.target = target;
             this.visionRadius = visionRadius;
+            this.attackRadius = attackRadius;
             this.leaveCorpse = leaveCorpse;
 
             this.clock = 0;
@@ -120,13 +123,16 @@ namespace DoomSurvivors.Entities
                 }
             }
 
-            clock++;
-            if(clock == aggressiveness)
+            if (distance.Length <= attackRadius && (!(CurrentWeapon is RayTracedWeapon) || distance.Length <= ((RayTracedWeapon)CurrentWeapon).Reach))
             {
-                this.clock = 0;
-                
-                if(TargetOnSight && CurrentWeapon.IsReadyToShoot)
-                    AttackAt(target.Transform.PositionCenter);
+                clock++;
+                if (clock == aggressiveness)
+                {
+                    this.clock = 0;
+
+                    if (TargetOnSight && CurrentWeapon.IsReadyToShoot)
+                        AttackAt(target.Transform.PositionCenter);
+                }
             }
         }
 

@@ -20,5 +20,13 @@ namespace DoomSurvivors.Entities.Factories
                 new Color(0xffff00ff)
             );
         }
+        public static Tracer InvicibleTracer()
+        {
+            return new Tracer(
+                20,
+                new Color(0x0),
+                new Color(0x0)
+            );
+        }
     }
 }

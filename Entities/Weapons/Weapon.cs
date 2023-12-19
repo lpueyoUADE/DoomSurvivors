@@ -22,7 +22,10 @@ namespace DoomSurvivors.Entities.Weapons
         MancubusFireBall,
         ReventantRocketLauncher,
         ArachnotronPlasmaRifle,
-        CyberDemonRocketLauncher
+        CyberDemonRocketLauncher,
+        AutomaticPistol,
+        AutomaticShotgun,
+        AutomaticChaingun,
     }
 
     public enum AmmoType

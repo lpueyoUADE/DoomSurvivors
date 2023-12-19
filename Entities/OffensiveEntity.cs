@@ -55,7 +55,7 @@ namespace DoomSurvivors.Entities
 
         private bool GibCondition()
         {
-            return this.life <= -this.maxLife;
+            return this.life <= -this.maxLife / 2;
         }
 
         override protected void setState(Vector direction)

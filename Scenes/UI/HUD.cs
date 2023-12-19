@@ -130,7 +130,8 @@ namespace DoomSurvivors.Scenes.UI
                 { WeaponID.Chaingun, AmmoType.Bullet},
                 { WeaponID.RocketLauncher, AmmoType.Rocket},
                 { WeaponID.PlasmaRifle, AmmoType.Plasma},
-                { WeaponID.BFG, AmmoType.Plasma}
+                { WeaponID.BFG, AmmoType.Plasma},
+                { WeaponID.Melee, AmmoType.Bullet},
             };
 
             this.selectedAmmoType = AmmoType.Bullet;

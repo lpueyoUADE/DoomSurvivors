@@ -33,7 +33,7 @@ namespace DoomSurvivors.Entities.Weapons
             this.tracer = tracer;
             this.reach = reach;
             this.raysPerShot = raysPerShot;
-            this.accuaracy = 5;
+            this.accuaracy = owner is Monster ? 10 : 7;
         }
 
         protected override void ShootAction(Vector target)
