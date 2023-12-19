@@ -96,28 +96,32 @@ namespace DoomSurvivors.Entities.Weapons
         protected override void InputEvents()
         { }
 
+        public override void Render()
+        {
+            Engine.DrawGradientLine(
+                Camera.Instance.WorldToCameraPosition(origin),
+                Camera.Instance.WorldToCameraPosition(Transform.PositionCenter),
+                beginColorTracer,
+                endColorTracer,
+                15
+            );
+            base.Render();
+        }
+
         public override void Update()
         {
             remainingLife -= Program.DeltaTime;
 
             Vector distance = Transform.PositionCenter - origin;
             Vector dir = direction;
-            Vector begin = origin;
 
             // TODO: Implement it properly!
             // Keep the line to a max length
             if (distance.Length > maxHaloLength)
             {
                 dir.Normalize();
-                begin = origin + dir * maxHaloLength;
             }
 
-            Engine.DrawGradientLine(
-                Camera.Instance.WorldToCameraPosition(begin),
-                Camera.Instance.WorldToCameraPosition(Transform.PositionCenter),
-                beginColorTracer,
-                endColorTracer,
-                15);
             base.Update();
         }
 
@@ -135,7 +139,6 @@ namespace DoomSurvivors.Entities.Weapons
         {
             return ReferenceEquals(this.owner, entity);
         }
-
         public void Destroy()
         {
             this.remainingLife = 0;
