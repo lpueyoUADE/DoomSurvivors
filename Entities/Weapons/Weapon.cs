@@ -12,7 +12,17 @@ namespace DoomSurvivors.Entities.Weapons
         Chaingun,
         RocketLauncher,
         PlasmaRifle,
-        BFG
+        BFG,
+        Melee,
+        /* Enemies */
+        ImpFireBall,
+        HellKnightFireBall,
+        BaronFireBall,
+        CacoDemonFireBall,
+        MancubusFireBall,
+        ReventantRocketLauncher,
+        ArachnotronPlasmaRifle,
+        CyberDemonRocketLauncher
     }
 
     public enum AmmoType
@@ -20,7 +30,8 @@ namespace DoomSurvivors.Entities.Weapons
         Bullet,
         Shells,
         Plasma,
-        Rocket
+        Rocket,
+        Infinte
     }
 
     public enum Mechanism
@@ -33,28 +44,45 @@ namespace DoomSurvivors.Entities.Weapons
         private WeaponID weaponID;
         private Mechanism mechanism;
         private AmmoType ammoType;
-        private int ammo;
-        private int maxAmmo;
+        private int ammoPerShot;
         private float cooldown;
         private DateTime lastShotTime;
         private bool hasNeverBeenShot;
         private OffensiveEntity owner;
 
+        private Sound shootSound;
+        private Sound noAmmoSound;
+
         private int chamberedBullets;
         private const int MAX_CHAMBERED_BULLETS = 1;
 
-        public Weapon(WeaponID weaponID, Mechanism mechanism, AmmoType ammoType, int ammo, int maxAmmo, float cooldown, OffensiveEntity owner)
+        public WeaponID WeaponID
+        {
+            get => this.weaponID;
+        }
+
+        public AmmoType AmmoType
+        { 
+            get => this.ammoType; 
+        }
+
+        public override bool Equals(Object obj)
+        {
+            return ((Weapon)obj).WeaponID == WeaponID;
+        }
+        public Weapon(WeaponID weaponID, Mechanism mechanism, AmmoType ammoType, int ammoPerShot, float cooldown, OffensiveEntity owner, Sound shootSound)
         {
             this.weaponID = weaponID;
             this.mechanism = mechanism;
             this.ammoType = ammoType;
-            this.ammo = ammo;
-            this.maxAmmo = maxAmmo;
+            this.ammoPerShot = ammoPerShot;
             this.cooldown = cooldown;
             this.lastShotTime = DateTime.Now;
             this.hasNeverBeenShot = true;
             this.owner = owner;
             this.chamberedBullets = MAX_CHAMBERED_BULLETS;
+            this.shootSound = shootSound;
+            this.noAmmoSound = new Sound("assets/Sounds/Weapons/DSDBOPN.wav");
         }
 
         public bool IsSemiAutomatic
@@ -81,19 +109,9 @@ namespace DoomSurvivors.Entities.Weapons
         {
             get => this.lastShotTime;
         }
-
-        public int Ammo
-        {
-            get => this.ammo;
-        }
-        public int MaxAmmo
-        {
-            get => this.maxAmmo;
-        }
-
         public bool HasAmmo
         {
-            get => this.ammo > 0;
+            get => this.owner.HasAmmo(this.ammoType, this.ammoPerShot);
         }
         public void ReleaseTrigger()
         {
@@ -121,9 +139,15 @@ namespace DoomSurvivors.Entities.Weapons
                 this.hasNeverBeenShot = false;
                 this.lastShotTime = DateTime.Now;
                 this.chamberedBullets--;
-                this.ammo--;
+                this.owner.ConsumeAmmo(this.ammoType, this.ammoPerShot);
                 ShootAction(target);
+                this.shootSound.PlayOnce();
             }
+        }
+
+        public void PlayNoAmmoSound()
+        {
+            this.noAmmoSound.PlayOnce();
         }
     }
 }

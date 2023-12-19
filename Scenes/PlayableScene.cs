@@ -1,24 +1,24 @@
 ﻿using DoomSurvivors.Entities;
 using DoomSurvivors.Entities.Factories;
 using DoomSurvivors.Entities.Weapons;
+using DoomSurvivors.Main;
 using DoomSurvivors.Scenes;
 using DoomSurvivors.Scenes.Maps;
 using DoomSurvivors.Scenes.Maps.Placers;
 using DoomSurvivors.Scenes.UI;
+using DoomSurvivors.Utilities;
 using DoomSurvivors.Viewport;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 using static DoomSurvivors.Entities.Item;
-using static DoomSurvivors.Entities.Monster;
-using static DoomSurvivors.Entities.Particle;
-using static DoomSurvivors.Entities.Wall;
+using static DoomSurvivors.Scenes.UI.Font;
 
 namespace DoomSurvivors
 {
-    internal class PlayableScene : Scene
+    internal class PlayableScene : Scene, IRenderizable
     {
         private Map map;
         private List<Tracer> tracerList;
@@ -29,8 +29,14 @@ namespace DoomSurvivors
         private List<GameObject> deadEntityList;
 
         private HUD hud;
+        private MenuScene menuScene;
+
         private bool drawBoundingBox;
         private bool drawVisionRadius;
+
+        private bool showingMenu;
+
+        private Sound umphSound = new Sound("assets/Sounds/Player/DSNOWAY.wav");
 
         public bool DrawBoundingBox {
             get { return this.drawBoundingBox; }
@@ -42,6 +48,11 @@ namespace DoomSurvivors
             set { this.drawVisionRadius = value; }
         }
 
+        public bool ShowingMenu
+        {
+            get => this.showingMenu;
+            set => this.showingMenu = value;
+        }
         private void ClearLists()
         {
             gameObjectList.Clear();
@@ -65,8 +76,19 @@ namespace DoomSurvivors
             this.drawBoundingBox = drawBoundingBox;
             this.drawVisionRadius = drawVisionRadius;
 
+            this.showingMenu = false;
 
             this.hud = new HUD(0, null);
+
+            this.menuScene = new MenuScene(
+                IntPtr.Zero,
+                new Canvas(
+                    new Transform(0, 0, Engine.Transform.W, Engine.Transform.H),
+                    new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => { ((PlayableScene)SceneController.Instance.CurrentScene).EscapeButtonPressedActionHandler(); }, "CONTINUAR"),
+                    new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => SceneController.Instance.ChangeScene(0), "VOLVER AL MENU PRINCIPAL")
+                ),
+                new Color(0, 0, 0, 64)
+            );
         }
 
         public void AddGameObject(GameObject gameObject)
@@ -101,13 +123,16 @@ namespace DoomSurvivors
         }
         public void CheckRayCollisions()
         {
-            GameObject target = null;
-            double targetDistance = float.MaxValue;
+            GameObject target;
+            double targetDistance;
             double distance;
             double x, y;
-            Vector hitPoint = new Vector(0, 0);
+            Vector hitPoint;
             for (int i = 0; i < rayList.Count; i++)
             {
+                target = null;
+                targetDistance = float.MaxValue;
+                hitPoint = new Vector(0, 0);
                 Vector end = rayList[i].Origin + rayList[i].Direction * rayList[i].MaxDistance;
 
                 for (int j = 0; j < gameObjectList.Count; j++)
@@ -116,7 +141,7 @@ namespace DoomSurvivors
                     {
                         if (
                             (!(gameObjectList[j] is OffensiveEntity) || !rayList[i].IsOwnedBy((OffensiveEntity)gameObjectList[j])) && 
-                            (!(gameObjectList[j] is OffensiveEntity) || !((OffensiveEntity)gameObjectList[j]).IsDying) && 
+                            (!(gameObjectList[j] is OffensiveEntity) || !(((OffensiveEntity)gameObjectList[j]).Life <= 0)) && 
                             rayList[i].Intersects(gameObjectList[j].Transform, out x, out y))
                         {
                             distance = (gameObjectList[j].Transform.PositionCenter - rayList[i].Origin).Length;
@@ -211,6 +236,8 @@ namespace DoomSurvivors
             BulletWeapon.BulletWeaponShotAction += BulletWeaponShotActionHandler;
             Bullet.BulletHitAction += BulletHitActionHandler;
             Player.InteractAction += InteractActionHandler;
+            Monster.AddDropItemAction += AddDropItemActionHandler;
+            Program.EscapeButtonPressedAction += EscapeButtonPressedActionHandler;
         }
         public override void UnLoad()
         {
@@ -221,11 +248,21 @@ namespace DoomSurvivors
             BulletWeapon.BulletWeaponShotAction -= BulletWeaponShotActionHandler;
             Bullet.BulletHitAction -= BulletHitActionHandler;
             Player.InteractAction -= InteractActionHandler;
+            Monster.AddDropItemAction -= AddDropItemActionHandler;
+            Program.EscapeButtonPressedAction -= EscapeButtonPressedActionHandler;
 
             Player player = gameObjectList.OfType<Player>().FirstOrDefault();
             player?.Unload();
 
             ClearLists();
+
+            this.showingMenu = false;
+            this.menuScene.UnLoad();
+        }
+
+        private void AddDropItemActionHandler(ItemType itemType, Vector position)
+        {
+            AddGameObject(ItemFactory.CreateItem(new ItemPlacer(itemType, (int)position.X, (int)position.Y)));
         }
 
         private void RayTracedWeaponShotActionHandler(RayTracedWeapon weapon, Ray ray)
@@ -248,59 +285,115 @@ namespace DoomSurvivors
             {
                 if (Math.Abs((interactable.Transform.PositionCenter - position).Length) <= radius)
                     interactable.OnInteract();
+                else
+                    umphSound.PlayOnce();
             }
         }
-        public override void Update()
+        private void EscapeButtonPressedActionHandler()
         {
-            // Camera Update
-            Camera.Instance.Update();
+            this.showingMenu = !this.showingMenu;
 
+            if (this.showingMenu)
+                this.menuScene.Load();
+            else
+                this.menuScene.UnLoad();
+        }
+
+        override public void Render()
+        {
             // Map Update
-            map.Update();
-
-            // Collisions
-            checkCollisions();
+            map.Render();
 
             // Dead Entities Update
             for (int i = 0; i < deadEntityList.Count; i++)
             {
-                deadEntityList[i].Update();
                 deadEntityList[i].Render();
             }
 
             // GameObject Update
             for (int i = 0; i < gameObjectList.Count; i++)
             {
-                gameObjectList[i].Update();
                 gameObjectList[i].Render();
             }
-
-            // Check casted rays
-            CheckRayCollisions();
-
             // Tracer Effects Update
             foreach (Tracer tracer in tracerList)
-                tracer.Update();
+                tracer.Render();
 
             foreach (Particle particle in particleList)
             {
-                particle.Update();
                 particle.Render();
             }
-
-            hud.Update();
             hud.Render();
 
-            tracerList.RemoveAll(tracer => tracer.hasFinished);
-            gameObjectList.RemoveAll(gameObject => gameObject is Bullet && ((Bullet)gameObject).isDead);
-            gameObjectList.RemoveAll(gameObject => gameObject is Item && ((Item)gameObject).Collected);
+            if (this.showingMenu)
+            {
+                menuScene.Render();
+            }
+        }
 
-            deadEntityList.AddRange(gameObjectList.FindAll(gameObject => (gameObject is Monster && ((Monster)gameObject).IsDeath && ((Monster)gameObject).LeaveCorpse) || gameObject is Player && ((Player)gameObject).IsDeath));
-            gameObjectList.RemoveAll(gameObject => gameObject is OffensiveEntity && ((OffensiveEntity)gameObject).IsDeath);
+        public override void Update()
+        {
+            
+            if (this.showingMenu)
+            {
+                menuScene.Update();
+            }
+            else
+            {
+                // Camera Update
+                Camera.Instance.Update();
 
-            particleList.RemoveAll(particle => particle.HasEnded);
+                // Map Update
+                map.Update();
+                // map.Render();
 
-            rayList.Clear();
+                // Collisions
+                checkCollisions();
+
+                // Dead Entities Update
+                for (int i = 0; i < deadEntityList.Count; i++)
+                {
+                    deadEntityList[i].Update();
+                    // deadEntityList[i].Render();
+                }
+
+                // GameObject Update
+                for (int i = 0; i < gameObjectList.Count; i++)
+                {
+                    gameObjectList[i].Update();
+                    // gameObjectList[i].Render();
+                }
+
+                // Check casted rays
+                CheckRayCollisions();
+
+                // Tracer Effects Update
+                foreach (Tracer tracer in tracerList)
+                { 
+                    tracer.Update();
+                    // tracer.Render();
+                }
+
+                foreach (Particle particle in particleList)
+                {
+                    particle.Update();
+                    // particle.Render();
+                }
+
+                hud.Update();
+                // hud.Render();
+
+                tracerList.RemoveAll(tracer => tracer.hasFinished);
+                gameObjectList.RemoveAll(gameObject => gameObject is Bullet && ((Bullet)gameObject).isDead);
+                gameObjectList.RemoveAll(gameObject => gameObject is Item && ((Item)gameObject).Collected);
+
+                deadEntityList.AddRange(gameObjectList.FindAll(gameObject => (gameObject is Monster && ((Monster)gameObject).IsDeath && ((Monster)gameObject).LeaveCorpse) || gameObject is Player && ((Player)gameObject).IsDeath));
+                gameObjectList.RemoveAll(gameObject => gameObject is OffensiveEntity && ((OffensiveEntity)gameObject).IsDeath);
+
+                particleList.RemoveAll(particle => particle.HasEnded);
+
+                rayList.Clear();
+            }
         }
         public override void Reset()
         {

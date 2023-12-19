@@ -14,7 +14,7 @@ namespace DoomSurvivors.Entities.Weapons
 
         public static event Action<BulletWeapon> BulletWeaponShotAction;
 
-        public BulletWeapon(WeaponID weaponID, Mechanism mechanism, AmmoType ammoType, int ammo, int maxAmmo, float cooldown, OffensiveEntity owner, Bullet bullet) : base(weaponID, mechanism, ammoType, ammo, maxAmmo, cooldown, owner)
+        public BulletWeapon(WeaponID weaponID, Mechanism mechanism, AmmoType ammoType, int ammoPerShot, float cooldown, OffensiveEntity owner, Bullet bullet, Sound shootSound) : base(weaponID, mechanism, ammoType, ammoPerShot, cooldown, owner, shootSound)
         {
             this.bullet = bullet;
         }

@@ -56,7 +56,7 @@ namespace DoomSurvivors.Entities
             if (cycles == lifespan)
                 return;
 
-            Render();
+            // Render();
             cycles++;
         }
 

@@ -25,10 +25,10 @@ namespace DoomSurvivors.Entities
                 ((Decoration)other).OnCollision(gameObject);
 
             else if(gameObject is Item && other is Player)
-                ((Item)gameObject).OnCollision((Player)other);
+                ((Item)gameObject).OnCollision(other);
 
             else if (other is Item && gameObject is Player)
-                ((Item)other).OnCollision((Player)gameObject);
+                ((Item)other).OnCollision(gameObject);
 
             else
                 gameObject.OnCollision(other);

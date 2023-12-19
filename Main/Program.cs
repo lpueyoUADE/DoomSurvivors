@@ -6,6 +6,7 @@ using DoomSurvivors.Utilities;
 using System;
 using System.Collections.Generic;
 using Tao.Sdl;
+using static DoomSurvivors.Scenes.UI.Font;
 
 namespace DoomSurvivors.Main
 {
@@ -64,6 +65,7 @@ namespace DoomSurvivors.Main
 
         public static event Action LeftMouseButtonReleasedAction;
         public static event Action RightMouseButtonReleasedAction;
+        public static event Action EscapeButtonPressedAction;
         public static event Action DownArrowPressedAction;
         public static event Action UpArrowPressedAction;
         public static event Action EnterPressedAction;
@@ -82,7 +84,14 @@ namespace DoomSurvivors.Main
             Program.Initialize();
 
             // TODO Crear Factories de Scenes
-            MenuScene MainMenuScene = new MenuScene(Engine.LoadImage("assets/Icon/DoomSurvivorsLogo.png"));
+            MenuScene MainMenuScene = new MenuScene(
+                Engine.LoadImage("assets/Icon/DoomSurvivorsLogo.png"),
+                new Canvas(
+                    new Transform(0, Engine.Transform.H / 2, Engine.Transform.W, Engine.Transform.H / 2),
+                    new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => SceneController.Instance.ChangeScene(1), "JUEGO NUEVO"),
+                    new Button(500, 500, 15, FontType.DoomFont, 28, Color.White, null, new Color(255, 0, 0, 255), () => Environment.Exit(0), "SALIR")
+                )
+            );
             PlayableScene E1Scene = new PlayableScene(
                 Map.CreateMap("E1_Test", "assets/Maps/Test Map/Test_map_001.json", "assets/Maps/Test Map/Test_map_Floor.png"),
                 DEBUG_MODE, // Show Bounding Boxes
@@ -128,6 +137,7 @@ namespace DoomSurvivors.Main
                 Engine.Clear();
 
                 SceneController.Instance.Update();
+                SceneController.Instance.Render();
 
                 crosshair.Update();
 
@@ -166,6 +176,10 @@ namespace DoomSurvivors.Main
 
                         case Sdl.SDLK_RETURN:
                             EnterPressedAction?.Invoke();
+                            break;
+
+                        case Sdl.SDLK_ESCAPE:
+                            EscapeButtonPressedAction?.Invoke();
                             break;
 
                         case Sdl.SDLK_e:

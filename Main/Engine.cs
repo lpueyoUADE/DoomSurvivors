@@ -40,31 +40,8 @@ class Engine
         Sdl.SDL_WM_SetCaption("DooM Survivors", "assets/Icon/logo.ico");
 
         SdlTtf.TTF_Init();
-    }
-
-    public static void Initialize(int an, int al, int colores)
-    {
-        transform.W = an;
-        transform.H = al;
-
-        int flags = (Sdl.SDL_HWSURFACE | Sdl.SDL_DOUBLEBUF | Sdl.SDL_ANYFORMAT);
-        Sdl.SDL_Init(Sdl.SDL_INIT_EVERYTHING);
-        screen = Sdl.SDL_SetVideoMode(
-            transform.W,
-            transform.H,
-            colores,
-            flags);
-
-        Sdl.SDL_Rect rect2 =
-            new Sdl.SDL_Rect(0, 0, (short)transform.W, (short)transform.H);
-        Sdl.SDL_SetClipRect(screen, ref rect2);
-
-        SdlTtf.TTF_Init();
-    }
-
-    public static void Debug(string text)
-    {
-        System.Console.Write(text + "\n");
+        SdlMixer.Mix_OpenAudio(44100, (short)SdlMixer.MIX_DEFAULT_FORMAT, 2, 2048);
+        SdlMixer.Mix_Volume(-1, 32);
     }
 
     public static void Clear()

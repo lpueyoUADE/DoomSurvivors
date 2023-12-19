@@ -11,7 +11,7 @@ namespace DoomSurvivors
         public abstract void Load();
         public abstract void UnLoad();
         public abstract void Update();
-
+        public abstract void Render();
         public abstract void Reset();
     }
 }

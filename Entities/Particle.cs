@@ -5,15 +5,23 @@ using System.Windows;
 
 namespace DoomSurvivors.Entities
 {
+    public enum ParticleType
+    {
+        Blood,
+        WallHit,
+        RocketLauncherHit, 
+        PlasmaHit,
+        BFGHit,
+        ImpFireBallHit,
+        HellKnightFireBallHit,
+        BaronFireBallHit,
+        CacoDemonFireBallHit,
+        ReventantRocketLauncherHit,
+        ArachnotronPlasmaRifleHit,
+        MancubusFireBallHit
+    }
     public class Particle : IRenderizable
     {
-        public enum ParticleType
-        {
-            Blood,
-            WallHit
-        }
-        
-        
         private Vector origin;
         private Animation animation;
         

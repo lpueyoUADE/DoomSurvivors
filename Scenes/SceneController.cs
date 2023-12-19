@@ -67,5 +67,10 @@ namespace DoomSurvivors
         {
             scenes[currentSceneIndex].Update();
         }
+
+        public void Render()
+        {
+            scenes[currentSceneIndex].Render();
+        }
     }
 }

@@ -22,6 +22,10 @@ namespace DoomSurvivors.Entities
         private int xp;
         private int maxLevelXp;
         private int level;
+
+        private bool triggerReleased;
+
+        private Sound deathSound;
         public bool DrawInteractionRadius 
         {
             get => drawInteractionRadius;
@@ -36,6 +40,7 @@ namespace DoomSurvivors.Entities
         public int Armor
         {
             get => armor;
+            set => armor = value;
         }
         public static event Action<Vector, int> InteractAction;
         public Player(Transform transform, double speed, int life, Vector WeaponOffset, AnimationController animationController, WeaponController weaponController=null) : 
@@ -48,6 +53,8 @@ namespace DoomSurvivors.Entities
             this.maxArmor = 100;
             this.interactionRadius = 70;
             this.drawInteractionRadius = true;
+            this.triggerReleased = true;
+            this.deathSound = new Sound("assets/Sounds/Player/DSPLDETH.wav");
             // Stats
             /*
                 Vida
@@ -58,6 +65,35 @@ namespace DoomSurvivors.Entities
                 punteria
                 carring capacity
             */
+        }
+
+        public void AddLife(int life)
+        {
+            this.Life = (int)Tools.Clamp(this.Life + life, 0, MaxLife);
+        }
+
+        public void AddArmor(int armor)
+        {
+            this.Armor = (int)Tools.Clamp(this.Armor + armor, 0, maxArmor);
+        }
+
+        override public void ApplyDamage(int damage)
+        {
+            int lifeDamage = (int)Math.Ceiling((double)damage * (1/3.0));
+            int armorDamage = (int)Math.Ceiling((double)damage * (2 / 3.0));
+
+            if (armor > 0)
+                this.armor = (int)Tools.Clamp(this.armor - armorDamage, 0, this.maxArmor);
+            else
+                lifeDamage = damage;
+
+            base.ApplyDamage(lifeDamage);
+        }
+
+        override protected void Die()
+        {
+            base.Die();
+            this.deathSound.PlayOnce();
         }
 
         public override void Render()
@@ -71,18 +107,68 @@ namespace DoomSurvivors.Entities
             }
         }
 
+        public void AddAmmo(AmmoType ammoType, int amount)
+        {
+            this.weaponController.AddAmmo(ammoType, amount);
+        }
+
+        public int GetAmmo(AmmoType ammoType)
+        {
+            return this.weaponController.GetAmmo(ammoType);
+        }
+
+        public int GetMaxAmmoCapacity(AmmoType ammoType)
+        {
+            return this.weaponController.GetMaxAmmoCapacity(ammoType);
+        }
+
         private void LeftMouseButtonReleasedActionHandler()
         {
             this.weaponController.CurrentWeapon.ReleaseTrigger();
+            this.triggerReleased = true;
         }
 
         private void InteractButtonPressedActionHandler()
         {
             Interact();
+            triggerReleased = true;
         }
         private void NumericButtonPressedActionHandler(int number)
         {
-            weaponController.SelectWeapon(number);          
+            switch (number)
+            {
+                case 1:
+                    weaponController.SelectWeapon(WeaponID.Pistol);
+                    break;
+
+                case 2:
+                    weaponController.SelectWeapon(WeaponID.Shotgun);
+                    break;
+
+                case 3:
+                    weaponController.SelectWeapon(WeaponID.SuperShotgun);
+                    break;
+
+                case 4:
+                    weaponController.SelectWeapon(WeaponID.Chaingun);
+                    break;
+
+                case 5:
+                    weaponController.SelectWeapon(WeaponID.RocketLauncher);
+                    break;
+
+                case 6:
+                    weaponController.SelectWeapon(WeaponID.PlasmaRifle);
+                    break;
+
+                case 7:
+                    weaponController.SelectWeapon(WeaponID.BFG);
+                    break;
+
+                case 8:
+                    weaponController.SelectWeapon(WeaponID.Chainsaw);
+                    break;
+            }        
         }
 
         protected override void InputEvents()
@@ -103,11 +189,18 @@ namespace DoomSurvivors.Entities
 
             if (Engine.MousePress(Engine.MOUSEBUTTON_LEFT))
             {
+                if (weaponController.GetCurrentWeaponAmmo() == 0 && triggerReleased)
+                {
+                    weaponController.CurrentWeapon.PlayNoAmmoSound();
+                    triggerReleased = false;
+                }
+
                 if (weaponController.CurrentWeapon.IsReadyToShoot)
                 {
                     int x, y;
                     Sdl.SDL_GetMouseState(out x, out y);
                     AttackAt(Camera.Instance.CameraToWorldPosition(new Vector(x, y)));
+
                 }
             }
 

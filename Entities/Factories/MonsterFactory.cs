@@ -1,10 +1,14 @@
 ﻿using DoomSurvivors.Entities.Animations;
-using DoomSurvivors.Scenes.Maps;
+using DoomSurvivors.Entities.Weapons;
 using DoomSurvivors.Scenes.Maps.Placers;
 using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
+using System.Numerics;
 using System.Windows;
+using static DoomSurvivors.Entities.Item;
 using static DoomSurvivors.Entities.Monster;
+using Vector = System.Windows.Vector;
 
 namespace DoomSurvivors.Entities.Factories
 {
@@ -80,6 +84,10 @@ namespace DoomSurvivors.Entities.Factories
                 5.0f,
                 10,
                 new Vector(4, 21),
+                Aggressiveness.Easy,
+                new Sound("assets/Sounds/Monsters/DSSSSIT.wav"),
+                new Sound("assets/Sounds/Monsters/DSPOPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSSSDTH.wav"),
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
@@ -165,17 +173,16 @@ namespace DoomSurvivors.Entities.Factories
                         false
                     )
                 ),
+                new List<Drop> {
+                    new Drop(ItemType.Clip, 1f),
+                },
                 null,
                 target, // Chasing Target,
-                250.0f  // Vision radius
+                300.0f  // Vision radius
             );
 
             wolfenstein.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(wolfenstein)
-            );
-
-            wolfenstein.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(wolfenstein)
+                WeaponFactory.CreateWeapon(WeaponID.Chaingun, wolfenstein)
             );
 
             return wolfenstein;
@@ -187,7 +194,11 @@ namespace DoomSurvivors.Entities.Factories
                 new Transform(x, y, 82, 108),
                 5.0f,
                 10,
-                new Vector(4, 21),
+                new Vector(71, 52),
+                Aggressiveness.Hard,
+                new Sound("assets/Sounds/Monsters/DSCYBSIT.wav"),
+                new Sound("assets/Sounds/Monsters/DSPOPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSCYBDTH.wav"),
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
@@ -255,18 +266,16 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     gibDeath: null
                 ),
+                new List<Drop> {
+                    new Drop(ItemType.RocketLauncher, 1f),
+                    new Drop(ItemType.RocketBox, 1f)
+                },
                 null,
                 target, // Chasing Target,
-                250.0f  // Vision radius
+                300.0f  // Vision radius
             );
 
-            cyberdemon.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(cyberdemon)
-            );
-
-            cyberdemon.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(cyberdemon)
-            );
+            cyberdemon.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.CyberDemonRocketLauncher, cyberdemon));
 
             return cyberdemon;
         }
@@ -277,7 +286,11 @@ namespace DoomSurvivors.Entities.Factories
                 new Transform(x, y, 195, 110),
                 5.0f,
                 10,
-                new Vector(4, 21),
+                new Vector(91, 60),
+                Aggressiveness.Boss,
+                new Sound("assets/Sounds/Monsters/DSSPISIT.wav"),
+                new Sound("assets/Sounds/Monsters/DSPOPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSSPIDTH.wav"),
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
@@ -346,18 +359,16 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     gibDeath: null
                 ),
+                new List<Drop> {
+                    new Drop(ItemType.Chaingun, 1f),
+                    new Drop(ItemType.AmmoBox, 1f),
+                },
                 null,
                 target, // Chasing Target,
-                250.0f  // Vision radius
+                300.0f  // Vision radius
             );
 
-            spiderMasterMind.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(spiderMasterMind)
-            );
-
-            spiderMasterMind.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(spiderMasterMind)
-            );
+            spiderMasterMind.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.Chaingun, spiderMasterMind));
 
             return spiderMasterMind;
         }
@@ -369,6 +380,10 @@ namespace DoomSurvivors.Entities.Factories
                 5.0f,
                 10,
                 new Vector(4, 21),
+                Aggressiveness.Hard,
+                new Sound("assets/Sounds/Monsters/DSVILSIT.wav"),
+                new Sound("assets/Sounds/Monsters/DSPOPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSVILDTH.wav"),
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
@@ -454,29 +469,30 @@ namespace DoomSurvivors.Entities.Factories
                         false
                     )
                 ),
+                new List<Drop> {
+                    new Drop(ItemType.HealthPotion, 1f),
+                },
                 null,
                 target, // Chasing Target,
-                250.0f  // Vision radius
+                300.0f  // Vision radius
             );
 
-            archVile.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(archVile)
-            );
-
-            archVile.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(archVile)
-            );
+            archVile.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.ImpFireBall, archVile));
 
             return archVile;
         }
 
         private static Monster Revenant(int x, int y, Entity target)
         {
-            Monster archVile = new Monster(
+            Monster revenant = new Monster(
                 new Transform(x, y, 41, 79),
                 5.0f,
                 10,
                 new Vector(4, 21),
+                Aggressiveness.Hard,
+                new Sound("assets/Sounds/Monsters/DSSKESIT.wav"),
+                new Sound("assets/Sounds/Monsters/DSPOPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSSKEDTH.wav"),
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
@@ -550,20 +566,17 @@ namespace DoomSurvivors.Entities.Factories
                         false
                     )
                 ),
+                new List<Drop> {
+                    new Drop(ItemType.Rocket, 1f),
+                },
                 null,
                 target, // Chasing Target,
-                250.0f  // Vision radius
+                300.0f  // Vision radius
             );
 
-            archVile.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(archVile)
-            );
+            revenant.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.ReventantRocketLauncher, revenant));
 
-            archVile.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(archVile)
-            );
-
-            return archVile;
+            return revenant;
         }
 
         private static Monster Arachnotron(int x, int y, Entity target)
@@ -573,6 +586,10 @@ namespace DoomSurvivors.Entities.Factories
                 5.0f,
                 10,
                 new Vector(4, 21),
+                Aggressiveness.Medium,
+                new Sound("assets/Sounds/Monsters/DSBSPSIT.wav"),
+                new Sound("assets/Sounds/Monsters/DSPOPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSBSPDTH.wav"),
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
@@ -638,18 +655,15 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     gibDeath: null
                 ),
+                new List<Drop> {
+                    new Drop(ItemType.PlasmaCell, 1f),
+                },
                 null,
                 target, // Chasing Target,
-                250.0f  // Vision radius
+                300.0f  // Vision radius
             );
 
-            arachnotron.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(arachnotron)
-            );
-
-            arachnotron.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(arachnotron)
-            );
+            arachnotron.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.ArachnotronPlasmaRifle, arachnotron));
 
             return arachnotron;
         }
@@ -661,6 +675,10 @@ namespace DoomSurvivors.Entities.Factories
                 5.0f,
                 10,
                 new Vector(4, 21),
+                Aggressiveness.Medium,
+                new Sound("assets/Sounds/Monsters/DSMANSIT.wav"),
+                new Sound("assets/Sounds/Monsters/DSMNPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSMANDTH.wav"),
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
@@ -732,18 +750,15 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     gibDeath: null
                 ),
-                null,
+                new List<Drop> {
+                    new Drop(ItemType.Rocket, 1f),
+                },
+                null, 
                 target, // Chasing Target,
-                250.0f  // Vision radius
+                300.0f  // Vision radius
             );
 
-            mancubus.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(mancubus)
-            );
-
-            mancubus.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(mancubus)
-            );
+            mancubus.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.MancubusFireBall, mancubus));
 
             return mancubus;
         }
@@ -755,6 +770,10 @@ namespace DoomSurvivors.Entities.Factories
                 5.0f,
                 10,
                 new Vector(4, 21),
+                Aggressiveness.Medium,
+                new Sound("assets/Sounds/Monsters/DSPESIT.wav"),
+                new Sound("assets/Sounds/Monsters/DSPEPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSPEDTH.wav"),
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
@@ -819,19 +838,14 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     gibDeath: null
                 ),
+                new List<Drop> {},
                 null,
                 target, // Chasing Target,
-                250.0f,  // Vision radius,
+                300.0f,  // Vision radius,
                 leaveCorpse: false
             );
 
-            painElemental.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(painElemental)
-            );
-
-            painElemental.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(painElemental)
-            );
+            painElemental.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.ImpFireBall, painElemental));
 
             return painElemental;
         }
@@ -839,20 +853,24 @@ namespace DoomSurvivors.Entities.Factories
         private static Monster LostSoul(int x, int y, Entity target)
         {
             Monster lostSoul = new Monster(
-                 new Transform(x, y, 73, 65),
-                 5.0f,
-                 10,
-                 new Vector(4, 21),
-                 new AnimationController(
-                     idle: new Animation(
-                         new List<Sprite>{
+                new Transform(x, y, 73, 65),
+                5.0f,
+                10,
+                new Vector(4, 21),
+                Aggressiveness.Hard,
+                new Sound("assets/Sounds/Monsters/DSSKLATK.wav"),
+                new Sound("assets/Sounds/Monsters/DSPEPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSFIRXPL.wav"),
+                new AnimationController(
+                    idle: new Animation(
+                        new List<Sprite>{
                             new Sprite("LostSoul", new Transform(44,33,44,47)),
                             new Sprite("LostSoul", new Transform(44,120,44,46)),
-                         },
-                         Animation.Speed.slow,
-                         true,
-                         true
-                     ),
+                        },
+                        Animation.Speed.slow,
+                        true,
+                        true
+                    ),
                      moving: new Animation(
                          new List<Sprite>{
                             new Sprite("LostSoul", new Transform(44,33,44,47)),
@@ -905,19 +923,14 @@ namespace DoomSurvivors.Entities.Factories
                      ),
                      gibDeath: null
                  ),
+                 new List<Drop> {},
                  null,
                  target, // Chasing Target,
-                 250.0f,  // Vision radius
+                 300.0f,  // Vision radius
                  leaveCorpse: false
              );
 
-            lostSoul.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(lostSoul)
-            );
-
-            lostSoul.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(lostSoul)
-            );
+            lostSoul.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.Melee, lostSoul));
 
             return lostSoul;
         }
@@ -929,6 +942,10 @@ namespace DoomSurvivors.Entities.Factories
                 5.0f,
                 10,
                 new Vector(4, 21),
+                Aggressiveness.Medium,
+                new Sound("assets/Sounds/Monsters/DSCACSIT.wav"),
+                new Sound("assets/Sounds/Monsters/DSPEPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSCACDTH.wav"),
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
@@ -991,18 +1008,15 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     gibDeath: null
                 ),
+                new List<Drop> {
+                    new Drop(ItemType.HealthPotion, 1f),
+                },
                 null,
                 target, // Chasing Target,
-                250.0f  // Vision radius
+                300.0f  // Vision radius
             );
 
-            cacoDemon.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(cacoDemon)
-            );
-
-            cacoDemon.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(cacoDemon)
-            );
+            cacoDemon.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.CacoDemonFireBall, cacoDemon));
 
             return cacoDemon;
         }
@@ -1014,6 +1028,10 @@ namespace DoomSurvivors.Entities.Factories
                 5.0f,
                 10,
                 new Vector(4, 21),
+                Aggressiveness.Medium,
+                new Sound("assets/Sounds/Monsters/DSKNTSIT.wav"),
+                new Sound("assets/Sounds/Monsters/DSPEPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSKNTDTH.wav"),
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
@@ -1080,18 +1098,15 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     gibDeath: null
                 ),
+                new List<Drop> {
+                    new Drop(ItemType.HealthPotion, 1f),
+                },
                 null,
                 target, // Chasing Target,
-                250.0f  // Vision radius
+                300.0f  // Vision radius
             );
 
-            hellKnight.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(hellKnight)
-            );
-
-            hellKnight.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(hellKnight)
-            );
+            hellKnight.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.HellKnightFireBall, hellKnight));
 
             return hellKnight;
         }
@@ -1103,6 +1118,10 @@ namespace DoomSurvivors.Entities.Factories
                 3.0f,
                 10,
                 new Vector(3, 20),
+                Aggressiveness.Hard,
+                new Sound("assets/Sounds/Monsters/DSBRSSIT.wav"),
+                new Sound("assets/Sounds/Monsters/DSPEPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSBRSDTH.wav"),
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
@@ -1168,13 +1187,14 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     gibDeath: null
                 ),
+                new List<Drop> {
+                    new Drop(ItemType.Helmet, 1f),
+                },
                 null,
                 target, // Chasing Target,
-                250.0f  // Vision radius
+                300.0f  // Vision radius
             );
-            baronOfHell.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(baronOfHell)
-            );
+            baronOfHell.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.BaronFireBall, baronOfHell));
 
             return baronOfHell;
         }
@@ -1186,6 +1206,10 @@ namespace DoomSurvivors.Entities.Factories
                 5.0f,
                 10,
                 new Vector(4, 21),
+                Aggressiveness.Medium,
+                new Sound("assets/Sounds/Monsters/DSSGTSIT.wav"),
+                new Sound("assets/Sounds/Monsters/DSPEPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSSGTDTH.wav"),
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
@@ -1251,18 +1275,13 @@ namespace DoomSurvivors.Entities.Factories
                     ),
                     gibDeath: null
                 ),
+                new List<Drop> {},
                 null,
                 target, // Chasing Target,
-                250.0f  // Vision radius
+                300.0f  // Vision radius
             );
 
-            pinky.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(pinky)
-            );
-
-            pinky.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(pinky)
-            );
+            pinky.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.Melee, pinky));
 
             return pinky;
         }
@@ -1274,6 +1293,10 @@ namespace DoomSurvivors.Entities.Factories
                 5.0f,
                 10,
                 new Vector(4, 21),
+                Aggressiveness.Easy,
+                new Sound("assets/Sounds/Monsters/DSBGSIT1.wav"),
+                new Sound("assets/Sounds/Monsters/DSPEPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSBGDTH1.wav"),
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
@@ -1359,18 +1382,16 @@ namespace DoomSurvivors.Entities.Factories
                         false
                     )
                 ),
+                new List<Drop> {
+                    new Drop(ItemType.HealthPotion, 1f),
+                },
                 null,
                 target, // Chasing Target,
-                250.0f  // Vision radius
+                300.0f  // Vision radius
             );
 
-            imp.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(imp)
-            );
+            imp.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.ImpFireBall, imp));
 
-            imp.AddWeapon(
-                WeaponFactory.BulletPistolAutomatic(imp)
-            );
 
             return imp;
         }
@@ -1382,6 +1403,10 @@ namespace DoomSurvivors.Entities.Factories
                 5.0f,
                 10,
                 new Vector(4, 21),
+                Aggressiveness.Medium,
+                new Sound("assets/Sounds/Monsters/DSPOSIT1.wav"),
+                new Sound("assets/Sounds/Monsters/DSPOPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSPODTH3.wav"),
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
@@ -1427,7 +1452,7 @@ namespace DoomSurvivors.Entities.Factories
                             new Sprite("Chainguner", new Transform(131,676,48,64)),
                             new Sprite("Chainguner", new Transform(223,676,59,59)),
                             new Sprite("Chainguner", new Transform(326,676,65,49)),
-                            new Sprite("Chainguner", new Transform(435,676,64,38)),
+                            new Sprite("Chainguner", new Transform(435,676,64,37)),
                             new Sprite("Chainguner", new Transform(543,676,65,25)),
                             new Sprite("Chainguner", new Transform(652,676,65,21)),
                         },
@@ -1466,18 +1491,16 @@ namespace DoomSurvivors.Entities.Factories
                         false
                     )
                 ),
+                new List<Drop> {
+                    new Drop(ItemType.Chaingun, 1f),
+                    new Drop(ItemType.Clip, 1f),
+                },
                 null,
                 target, // Chasing Target,
-                250.0f  // Vision radius
+                300.0f  // Vision radius
             );
 
-            chainguner.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(chainguner)
-            );
-
-            //chainguner.AddWeapon(
-            //    WeaponFactory.BulletPistolAutomatic(chainguner)
-            //);
+            chainguner.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.Chaingun, chainguner));
 
             return chainguner;
         }
@@ -1489,6 +1512,10 @@ namespace DoomSurvivors.Entities.Factories
                 5.0f,
                 10,
                 new Vector(4, 21),
+                Aggressiveness.Easy,
+                new Sound("assets/Sounds/Monsters/DSPOSIT2.wav"),
+                new Sound("assets/Sounds/Monsters/DSPOPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSPODTH2.wav"),
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
@@ -1574,18 +1601,16 @@ namespace DoomSurvivors.Entities.Factories
                         false
                     )
                 ),
+                new List<Drop> {
+                    new Drop(ItemType.Shotgun, 1f),
+                    new Drop(ItemType.Shells, 1f),
+                },
                 null,
                 target, // Chasing Target,
-                250.0f  // Vision radius
+                300.0f  // Vision radius
             );
 
-            shotguner.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(shotguner)
-            );
-
-            //shotguner.AddWeapon(
-            //    WeaponFactory.BulletPistolAutomatic(shotguner)
-            //);
+            shotguner.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.Chaingun, shotguner));
 
             return shotguner;
         }
@@ -1597,6 +1622,10 @@ namespace DoomSurvivors.Entities.Factories
                 5.0f,
                 10,
                 new Vector(3, 20),
+                Aggressiveness.Easy,
+                new Sound("assets/Sounds/Monsters/DSPOSIT3.wav"),
+                new Sound("assets/Sounds/Monsters/DSPOPAIN.wav"),
+                new Sound("assets/Sounds/Monsters/DSPODTH1.wav"),
                 new AnimationController(
                     idle: new Animation(
                         new List<Sprite>{
@@ -1682,19 +1711,15 @@ namespace DoomSurvivors.Entities.Factories
                         false
                     )
                 ),
+                new List<Drop> { 
+                    new Drop(ItemType.Clip, 1f),
+                },
                 null,
                 target, // Chasing Target,
-                250.0f  // Vision radius
+                300.0f  // Vision radius
             );
 
-            zombie.AddWeapon(
-                WeaponFactory.RayTracedPistolRed(zombie)
-            );
-
-            //zombie.AddWeapon(
-            //    WeaponFactory.BulletPistolAutomatic(zombie)
-            //);
-
+            zombie.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.Chaingun, zombie));
             return zombie;
         }
     }

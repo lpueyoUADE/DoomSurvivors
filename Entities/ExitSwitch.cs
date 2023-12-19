@@ -10,6 +10,8 @@ namespace DoomSurvivors.Entities
         public bool state;
         public bool isOneTimeUse;
         public bool usedAtLeastOnce;
+
+        private Sound actionSound;
         public enum ExitSwitchType
         {
             Regular
@@ -21,6 +23,7 @@ namespace DoomSurvivors.Entities
             this.state = false;
             this.isOneTimeUse = isOneTimeUse;
             this.usedAtLeastOnce = false;
+            this.actionSound = new Sound("assets/Sounds/Switch/DSSWTCHN.wav");
         }
 
         public void SwitchState()
@@ -31,8 +34,9 @@ namespace DoomSurvivors.Entities
         }
 
         public void OnInteract()
-        {           
-            if(!isOneTimeUse || !usedAtLeastOnce)
+        {
+            if (!isOneTimeUse || !usedAtLeastOnce)
+                this.actionSound.PlayOnce();
                 SwitchState();
                 SceneController.Instance.ChangeScene(2);
         }

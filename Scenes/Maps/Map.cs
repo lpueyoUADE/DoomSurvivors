@@ -187,8 +187,6 @@ namespace DoomSurvivors.Scenes.Maps
         }
 
         public void Update()
-        {
-            this.Render();
-        }
+        {}
     }
 }

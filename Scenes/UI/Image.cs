@@ -8,6 +8,12 @@ namespace DoomSurvivors.Scenes.UI
         private Transform transform;
         private Sprite sprite;
 
+        public Sprite Sprite
+        { 
+            get => sprite;
+            set => sprite = value;
+        }
+
         public Image(Transform transform, Sprite sprite)
         {
             this.transform = transform;

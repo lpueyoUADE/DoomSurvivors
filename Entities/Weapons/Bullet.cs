@@ -4,6 +4,7 @@ using DoomSurvivors.Main;
 using DoomSurvivors.Utilities;
 using DoomSurvivors.Viewport;
 using System;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace DoomSurvivors.Entities.Weapons
@@ -14,6 +15,15 @@ namespace DoomSurvivors.Entities.Weapons
         private OffensiveEntity owner;
         private float lifespan;
         private float remainingLife;
+
+        private Color beginColorTracer;
+        private Color endColorTracer;
+
+        private ParticleType wallHitParticle;
+        private ParticleType entityHitParticle;
+
+        private Sound deathSound;
+
         public Vector origin;
         public Vector offset;
         public float maxHaloLength = 100f;
@@ -24,10 +34,10 @@ namespace DoomSurvivors.Entities.Weapons
 
         public static event Action<Particle> BulletHitAction;
 
-        public Bullet(Transform transform, double speed, AnimationController animationController, int damage, OffensiveEntity owner, float lifespan) : 
-            this (transform, speed, animationController, damage, owner, new Vector(0,0), lifespan)
-        {}
-        public Bullet(Transform transform, double speed, AnimationController animationController, int damage, OffensiveEntity owner, Vector direction, float lifespan) :
+        public Bullet(Transform transform, double speed, AnimationController animationController, int damage, OffensiveEntity owner, float lifespan, Color beginColorTracer, Color endColorTracer, ParticleType wallHitParticle, ParticleType entityHitParticle, Sound deathSound) :
+            this(transform, speed, animationController, damage, owner, new Vector(0, 0), lifespan, beginColorTracer, endColorTracer, wallHitParticle, entityHitParticle, deathSound)
+        { }
+        public Bullet(Transform transform, double speed, AnimationController animationController, int damage, OffensiveEntity owner, Vector direction, float lifespan, Color beginColorTracer, Color endColorTracer, ParticleType wallHitParticle, ParticleType entityHitParticle, Sound deathSound) :
             base(transform, speed, animationController)
         {
             this.damage = damage;
@@ -38,6 +48,14 @@ namespace DoomSurvivors.Entities.Weapons
 
             this.origin = Transform.Position;
             this.offset = new Vector(0, 0);
+
+            this.beginColorTracer = beginColorTracer;
+            this.endColorTracer = endColorTracer;
+
+            this.wallHitParticle = wallHitParticle;
+            this.entityHitParticle = entityHitParticle;
+
+            this.deathSound = deathSound;
 
             this.CollisionType = CollisionType.Static;
         }
@@ -57,12 +75,12 @@ namespace DoomSurvivors.Entities.Weapons
                     return;
 
                 ((OffensiveEntity)other).ApplyDamage(this.damage);
-                BulletHitAction?.Invoke(ParticleFactory.CreateParticle(Particle.ParticleType.Blood, transform.PositionCenter));
+                BulletHitAction?.Invoke(ParticleFactory.CreateParticle(entityHitParticle, transform.PositionCenter));
                 this.Destroy();
             }
-            else if (other is Wall)
+            else if (other is Wall || other is Decoration)
             {
-                BulletHitAction?.Invoke(ParticleFactory.CreateParticle(Particle.ParticleType.WallHit, transform.PositionCenter));
+                BulletHitAction?.Invoke(ParticleFactory.CreateParticle(wallHitParticle, transform.PositionCenter));
                 this.Destroy();
             }
             else if (other is Entity)
@@ -70,17 +88,18 @@ namespace DoomSurvivors.Entities.Weapons
                 this.Destroy();
             }
 
+            this.deathSound.PlayOnce();
+
             base.OnCollision(other);
         }
 
         protected override void InputEvents()
-        {}
+        { }
 
         public override void Update()
         {
             remainingLife -= Program.DeltaTime;
 
-            
             Vector distance = Transform.PositionCenter - origin;
             Vector dir = direction;
             Vector begin = origin;
@@ -91,20 +110,25 @@ namespace DoomSurvivors.Entities.Weapons
             {
                 dir.Normalize();
                 begin = origin + dir * maxHaloLength;
-            } 
+            }
 
-            Engine.DrawGradientLine(Camera.Instance.WorldToCameraPosition(begin), Camera.Instance.WorldToCameraPosition(Transform.PositionCenter), new Color(0xff000011), new Color(0xffff00ff), 15);
+            Engine.DrawGradientLine(
+                Camera.Instance.WorldToCameraPosition(begin),
+                Camera.Instance.WorldToCameraPosition(Transform.PositionCenter),
+                beginColorTracer,
+                endColorTracer,
+                15);
             base.Update();
         }
 
         public Bullet Clone()
         {
-            return new Bullet(transform, speed, AnimationController, damage, owner, direction, lifespan);
+            return new Bullet(transform, speed, AnimationController, damage, owner, direction, lifespan, beginColorTracer, endColorTracer, wallHitParticle, entityHitParticle, deathSound);
         }
 
         public Bullet Clone(Vector position, Vector aimingAt)
         {
-            return new Bullet(new Transform(position, transform.Size), speed, AnimationController, damage, owner, aimingAt - position, lifespan);
+            return new Bullet(new Transform(position, transform.Size), speed, AnimationController, damage, owner, aimingAt - position, lifespan, beginColorTracer, endColorTracer, wallHitParticle, entityHitParticle, deathSound);
         }
 
         public bool IsOwnedBy(OffensiveEntity entity)

@@ -28,6 +28,8 @@ namespace DoomSurvivors.Entities
 
         private bool collected;
 
+        private ItemAction action;
+
         public enum ItemType
         {
             Chainsaw,
@@ -69,21 +71,20 @@ namespace DoomSurvivors.Entities
         }
 
         public bool Collected => this.collected;
-        public Item(Transform transform, Animation idleAnimation, Halo halo=null, bool drawShadow = true, bool drawBoundingBox = false) : base(transform, CollisionType.Static, drawShadow, drawBoundingBox)
+        public Item(Transform transform, Animation idleAnimation, ItemAction action, Halo halo=null, bool drawShadow = true, bool drawBoundingBox = false) : base(transform, CollisionType.Static, drawShadow, drawBoundingBox)
         {
             Random rnd = new Random();
             this.idleAnimation = idleAnimation;
             this.hoveringOffsetStepIndex = rnd.Next(0,hoveringOffsetSteps.Count);
             this.hoveringOffsetStepTime = 0;
             this.halo = halo;
+            this.action = action;
         }
 
         override public void OnCollision(GameObject other)
         {
-            if (other is Player)
-            {
-                this.collected = true;
-            }
+            this.collected = true;
+            this.action.Invoke((Player)other);
         }
         private void Hovering()
         {

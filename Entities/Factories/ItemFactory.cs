@@ -1,4 +1,5 @@
 ﻿using DoomSurvivors.Entities.Animations;
+using DoomSurvivors.Entities.Weapons;
 using DoomSurvivors.Scenes.Maps.Placers;
 using DoomSurvivors.Utilities;
 using System;
@@ -8,7 +9,7 @@ using static DoomSurvivors.Entities.Item;
 namespace DoomSurvivors.Entities.Factories
 {
     public static class ItemFactory
-    {
+    {       
         public static Item CreateItem(ItemPlacer itemPlacer)
         {
             Item newItem;
@@ -149,6 +150,10 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => { },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0xFF7F1B00), new Color(0xFF7F1B80), 5)
             );
         }
@@ -167,6 +172,10 @@ namespace DoomSurvivors.Entities.Factories
                     Animation.Speed.faster,
                     true,
                     false
+                ),
+                new ItemAction(
+                    player => { },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
                 ),
                 new Halo(transform.Clone(), new Color(0xFF000000), new Color(0xFF000080), 5)
             );
@@ -187,6 +196,10 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => { },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0x0000CB00), new Color(0x0000CB80), 5)
             );
         }
@@ -205,6 +218,10 @@ namespace DoomSurvivors.Entities.Factories
                     Animation.Speed.faster,
                     true,
                     false
+                ),
+                new ItemAction(
+                    player => { },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
                 ),
                 new Halo(transform.Clone(), new Color(0xD7BB4300), new Color(0xD7BB4380), 5)
             );
@@ -225,6 +242,10 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => { },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0xE3000000), new Color(0xE3000080), 5)
             );
         }
@@ -244,6 +265,10 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => { },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0x0000E300), new Color(0x0000E380), 5)
             );
         }
@@ -261,6 +286,10 @@ namespace DoomSurvivors.Entities.Factories
                     Animation.Speed.faster,
                     true,
                     false
+                ),
+                new ItemAction(
+                    player => { },
+                    new Sound("assets/Sounds/Items/DSGETPOW.wav")
                 ),
                 new Halo(transform.Clone(), new Color(0x73000000), new Color(0x73000080), 5)
             );
@@ -283,6 +312,10 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => { },
+                    new Sound("assets/Sounds/Items/DSGETPOW.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0x53AF4700), new Color(0x53AF4780), 5)
             );
         }
@@ -301,6 +334,10 @@ namespace DoomSurvivors.Entities.Factories
                     Animation.Speed.faster,
                     true,
                     false
+                ),
+                new ItemAction(
+                    player => { },
+                    new Sound("assets/Sounds/Items/DSGETPOW.wav")
                 ),
                 new Halo(transform.Clone(), new Color(0xFF1F1F00), new Color(0xFF1F1F60), 5)
             );
@@ -323,6 +360,10 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => { },
+                    new Sound("assets/Sounds/Items/DSGETPOW.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80),5)
             );
         }
@@ -343,6 +384,10 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => { },
+                    new Sound("assets/Sounds/Items/DSGETPOW.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0xFF000000), new Color(0xFF000080), 5)
             );
         }
@@ -360,6 +405,10 @@ namespace DoomSurvivors.Entities.Factories
                     Animation.Speed.faster,
                     true,
                     false
+                ),
+                new ItemAction(
+                    player => { },
+                    new Sound("assets/Sounds/Items/DSGETPOW.wav")
                 ),
                 new Halo(transform.Clone(), new Color(0x00FF0000), new Color(0x00FF0050), 5)
             );
@@ -381,6 +430,13 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => {
+                        player.AddLife(100);
+                        player.AddArmor(100);
+                    },
+                    new Sound("assets/Sounds/Items/DSGETPOW.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0xa78f7700), new Color(0xa78f7780), 5)
             );
         }
@@ -401,6 +457,12 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => {
+                        player.AddLife(100);
+                    },
+                    new Sound("assets/Sounds/Items/DSGETPOW.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0x00000000), new Color(0x0000FF80), 5)
             );
         }
@@ -419,6 +481,12 @@ namespace DoomSurvivors.Entities.Factories
                     Animation.Speed.slow,
                     true,
                     false
+                ),
+                new ItemAction(
+                    player => {
+                        player.AddArmor(100);
+                    },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
                 ),
                 new Halo(transform.Clone(), new Color(0x0000E300), new Color(0x0000E350), 5)
             );
@@ -439,6 +507,12 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => {
+                        player.AddArmor(50);
+                    },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0x67DF5F00), new Color(0x67DF5F80), 5)
             );
         }
@@ -457,6 +531,12 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => {
+                        player.AddLife(50);
+                    },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
@@ -474,6 +554,12 @@ namespace DoomSurvivors.Entities.Factories
                     Animation.Speed.faster,
                     true,
                     false
+                ),
+                new ItemAction(
+                    player => {
+                        player.AddLife(15);
+                    },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
                 ),
                 new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
@@ -496,10 +582,15 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => {
+                        player.AddArmor(5);
+                    },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0x4a9c3d00), new Color(0x4a9c3d80), 5)
             );
         }
-
         private static Item HealthPotion(int x, int y)
         {
             Transform transform = tileCenteredTransform(x, y, 14, 18, Scenes.Maps.Map.TileSize);
@@ -517,10 +608,15 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => {
+                        player.AddLife(5);
+                    },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0x3737FF00), new Color(0x0000FF60), 5)
             );
         }
-
         private static Item Backpack(int x, int y)
         {
             Transform transform = tileCenteredTransform(x, y, 22, 29, Scenes.Maps.Map.TileSize);
@@ -534,6 +630,15 @@ namespace DoomSurvivors.Entities.Factories
                     Animation.Speed.faster,
                     true,
                     false
+                ),
+                new ItemAction(
+                    player => {
+                        player.AddAmmo(Weapons.AmmoType.Bullet, 10);
+                        player.AddAmmo(Weapons.AmmoType.Shells, 4);
+                        player.AddAmmo(Weapons.AmmoType.Rocket, 1);
+                        player.AddAmmo(Weapons.AmmoType.Plasma, 20);
+                    },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
                 ),
                 new Halo(transform.Clone(), new Color(0x775F4B00), new Color(0x775F4B80), 5)
             );
@@ -553,6 +658,12 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => {
+                        player.AddAmmo(Weapons.AmmoType.Plasma, 100);
+                    },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
@@ -570,6 +681,12 @@ namespace DoomSurvivors.Entities.Factories
                     Animation.Speed.faster,
                     true,
                     false
+                ),
+                new ItemAction(
+                    player => {
+                        player.AddAmmo(Weapons.AmmoType.Plasma, 20);
+                    },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
                 ),
                 new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
@@ -589,6 +706,12 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => {
+                        player.AddAmmo(Weapons.AmmoType.Rocket, 5);
+                    },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
@@ -606,6 +729,12 @@ namespace DoomSurvivors.Entities.Factories
                     Animation.Speed.faster,
                     true,
                     false
+                ),
+                new ItemAction(
+                    player => {
+                        player.AddAmmo(Weapons.AmmoType.Rocket, 1);
+                    },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
                 ),
                 new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
@@ -625,6 +754,12 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => {
+                        player.AddAmmo(Weapons.AmmoType.Shells, 20);
+                    },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
@@ -642,6 +777,12 @@ namespace DoomSurvivors.Entities.Factories
                     Animation.Speed.faster,
                     true,
                     false
+                ),
+                new ItemAction(
+                    player => {
+                        player.AddAmmo(Weapons.AmmoType.Shells, 4);
+                    },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
                 ),
                 new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
@@ -661,6 +802,12 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => {
+                        player.AddAmmo(Weapons.AmmoType.Bullet, 10);
+                    },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
@@ -678,6 +825,12 @@ namespace DoomSurvivors.Entities.Factories
                     Animation.Speed.faster,
                     true,
                     false
+                ),
+                new ItemAction(
+                    player => {
+                        player.AddAmmo(Weapons.AmmoType.Bullet, 50);
+                    },
+                    new Sound("assets/Sounds/Items/DSITEMUP.wav")
                 ),
                 new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
@@ -697,6 +850,12 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => {
+                        player.AddWeapon(WeaponFactory.CreateWeapon(Weapons.WeaponID.BFG, player));
+                    },
+                    new Sound("assets/Sounds/weapons/DSWPNUP.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0xAAFF0000), new Color(0xAAFF0080), 5)
             );
         }
@@ -714,6 +873,12 @@ namespace DoomSurvivors.Entities.Factories
                     Animation.Speed.faster,
                     true,
                     false
+                ),
+                new ItemAction(
+                    player => {
+                        player.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.PlasmaRifle, player));
+                    },
+                    new Sound("assets/Sounds/weapons/DSWPNUP.wav")
                 ),
                 new Halo(transform.Clone(), new Color(0x00FFAA00), new Color(0x00FFAA80), 5)
             );
@@ -733,6 +898,12 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => {
+                        player.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.RocketLauncher, player));
+                    },
+                    new Sound("assets/Sounds/weapons/DSWPNUP.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
@@ -750,6 +921,12 @@ namespace DoomSurvivors.Entities.Factories
                     Animation.Speed.faster,
                     true,
                     false
+                ),
+                new ItemAction(
+                    player => {
+                        player.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.Chaingun, player));
+                    },
+                    new Sound("assets/Sounds/weapons/DSWPNUP.wav")
                 ),
                 new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
@@ -769,6 +946,12 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => {
+                        player.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.SuperShotgun, player));
+                    },
+                    new Sound("assets/Sounds/weapons/DSWPNUP.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
@@ -787,6 +970,12 @@ namespace DoomSurvivors.Entities.Factories
                     true,
                     false
                 ),
+                new ItemAction(
+                    player => {
+                        player.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.Shotgun, player));
+                    },
+                    new Sound("assets/Sounds/weapons/DSWPNUP.wav")
+                ),
                 new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );
         }
@@ -804,6 +993,12 @@ namespace DoomSurvivors.Entities.Factories
                     Animation.Speed.faster,
                     true,
                     false
+                ),
+                new ItemAction(
+                    player => {
+                        player.AddWeapon(WeaponFactory.CreateWeapon(WeaponID.Chainsaw, player));
+                    },
+                    new Sound("assets/Sounds/weapons/DSWPNUP.wav")
                 ),
                 new Halo(transform.Clone(), new Color(0xA7A7A700), new Color(0xA7A7A780), 5)
             );

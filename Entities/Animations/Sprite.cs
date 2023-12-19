@@ -42,7 +42,7 @@ namespace DoomSurvivors.Entities.Animations
             /*-------------------------------------------------------------------------------------*/
             { "Player", new SpriteReference("assets/Sprites/Player/DoomGuy.png", cyanColorKey)},
             /*-------------------------------------------------------------------------------------*/
-            { "Proyectiles&Effects", new SpriteReference("assets/Sprites/Proyectiles&Effects/Proyectiles&Effects.png", magentaColorKey)},
+            { "Proyectiles&Effects", new SpriteReference("assets/Sprites/Proyectiles&Effects/Proyectiles&Effects.png", cyanColorKey)},
             /*-------------------------------------------------------------------------------------*/
             { "Walls", new SpriteReference("assets/Sprites/Walls/wall_001.png", cyanColorKey)},
             { "ExitSwitch", new SpriteReference("assets/Sprites/ExitSwitch/Exit_Switch.png", cyanColorKey)},

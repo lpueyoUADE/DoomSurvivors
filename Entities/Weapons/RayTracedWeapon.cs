@@ -14,8 +14,9 @@ namespace DoomSurvivors.Entities.Weapons
         private int damage;
         private Tracer tracer;
         private float reach;
-        private int bulletsPerShot;
+        private int raysPerShot;
         private int accuaracy;
+
         public int Damage => damage;
         public Tracer Tracer { get { return this.tracer; } }
 
@@ -25,20 +26,21 @@ namespace DoomSurvivors.Entities.Weapons
         }
 
         public static event Action<RayTracedWeapon, Ray> RayTracedWeaponShotAction;
-        public RayTracedWeapon(WeaponID weaponID, Mechanism mechanism, AmmoType ammoType, int ammo, int maxAmmo, float cooldown,int bulletsPerShot, int damage, OffensiveEntity owner, Tracer tracer, float reach) :
-            base(weaponID, mechanism, ammoType, ammo, maxAmmo, cooldown, owner)
+        public RayTracedWeapon(WeaponID weaponID, Mechanism mechanism, AmmoType ammoType, int ammoPerShot, float cooldown,int raysPerShot, int damage, OffensiveEntity owner, Tracer tracer, float reach, Sound shootSound) :
+            base(weaponID, mechanism, ammoType, ammoPerShot, cooldown, owner, shootSound)
         {
             this.damage = damage;
             this.tracer = tracer;
             this.reach = reach;
-            this.bulletsPerShot = bulletsPerShot;
+            this.raysPerShot = raysPerShot;
             this.accuaracy = 5;
         }
 
         protected override void ShootAction(Vector target)
         {
             Random rnd = new Random();
-            for (int i = 0; i < bulletsPerShot; i++)
+
+            for (int i = 0; i < raysPerShot; i++)
             {
                 this.Tracer.Origin = this.Owner.WeaponPosition;
                 this.Tracer.End = target;

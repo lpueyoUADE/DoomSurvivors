@@ -27,6 +27,7 @@ namespace DoomSurvivors.Scenes.UI
         private Image selectedAmmoTypeImage;
         private AmmoType selectedAmmoType;
 
+        private Dictionary<WeaponID, AmmoType> ammoTypeByWeapon;
         public Player Player { 
             get { return player; } 
             set { player = value; }
@@ -113,13 +114,23 @@ namespace DoomSurvivors.Scenes.UI
             this.selectedWeaponID = WeaponID.Pistol;
             this.selectedWeaponImage = new Image(new Transform(this.Transform.X + 316, this.Transform.Y + 6, 74,22), weapons[selectedWeaponID]);
 
-
             this.ammoTypes = new Dictionary<AmmoType, Sprite>
             {
                 { AmmoType.Bullet, new Sprite("HUD", new Transform(1, 88, 9, 11)) },
                 { AmmoType.Shells, new Sprite("HUD", new Transform(12, 88, 15, 7)) },
                 { AmmoType.Plasma, new Sprite("HUD", new Transform(29, 88, 17, 12)) },
                 { AmmoType.Rocket, new Sprite("HUD", new Transform(48, 88, 12, 27)) },
+            };
+
+            ammoTypeByWeapon = new Dictionary<WeaponID, AmmoType> {
+                { WeaponID.Pistol, AmmoType.Bullet},
+                { WeaponID.Chainsaw, AmmoType.Bullet},
+                { WeaponID.Shotgun, AmmoType.Shells },
+                { WeaponID.SuperShotgun, AmmoType.Shells },
+                { WeaponID.Chaingun, AmmoType.Bullet},
+                { WeaponID.RocketLauncher, AmmoType.Rocket},
+                { WeaponID.PlasmaRifle, AmmoType.Plasma},
+                { WeaponID.BFG, AmmoType.Plasma}
             };
 
             this.selectedAmmoType = AmmoType.Bullet;
@@ -156,8 +167,12 @@ namespace DoomSurvivors.Scenes.UI
 
             coolDownBar.Fullness = (float)(DateTime.Now - player.CurrentWeapon.LastShotTime).TotalSeconds / player.CurrentWeapon.Cooldown;
 
-            ammoBar.Fullness = (float)player.CurrentWeapon.Ammo / player.CurrentWeapon.MaxAmmo;
-            ammoBar.DisplayValue = player.CurrentWeapon.Ammo.ToString();
+            AmmoType ammoType = ammoTypeByWeapon[player.CurrentWeapon.WeaponID];
+            ammoBar.Fullness = (float)player.GetAmmo(ammoType) / player.GetMaxAmmoCapacity(ammoType);
+            ammoBar.DisplayValue = player.GetAmmo(ammoType).ToString();
+
+            selectedWeaponImage.Sprite = weapons[player.CurrentWeapon.WeaponID];
+            selectedAmmoTypeImage.Sprite = ammoTypes[ammoTypeByWeapon[player.CurrentWeapon.WeaponID]];
         }
     }
 }

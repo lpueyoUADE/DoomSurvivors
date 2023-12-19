@@ -1,5 +1,6 @@
 ﻿using DoomSurvivors.Entities.Animations;
 using DoomSurvivors.Entities.Weapons;
+using System;
 using System.Windows;
 
 namespace DoomSurvivors.Entities
@@ -33,9 +34,12 @@ namespace DoomSurvivors.Entities
 
         public bool IsDying => this.State == State.Dying || this.State == State.Gibbing;
         public bool IsDeath => this.State == State.Death || this.State == State.GibDeath;
-
-        public bool GibCondition => true; // TODO Define a proper condition
         public Weapon CurrentWeapon => this.weaponController.CurrentWeapon;
+
+        public bool HasAmmo(AmmoType ammoType, int ammoPerShot)
+        {
+            return this.weaponController.HasAmmo(ammoType, ammoPerShot);
+        }
         public OffensiveEntity(Transform transform, double speed, int life, Vector weaponOffset, AnimationController animationController, WeaponController weaponController = null) :
             base(transform, speed, animationController)
         {
@@ -49,6 +53,11 @@ namespace DoomSurvivors.Entities
             this.IsRayCastCollidable = true;
         }
 
+        private bool GibCondition()
+        {
+            return this.life <= -this.maxLife;
+        }
+
         override protected void setState(Vector direction)
         {
             if (this.IsDeath)
@@ -58,7 +67,7 @@ namespace DoomSurvivors.Entities
             {
                 if (!this.IsDying)
                 {
-                    if (AnimationController.CanGib && GibCondition)
+                    if (AnimationController.CanGib && GibCondition())
                         this.State = State.Gibbing;
                     else
                         this.State = State.Dying;
@@ -84,7 +93,6 @@ namespace DoomSurvivors.Entities
                 }
             }
         }
-
         override public void Update()
         {
             if (this.IsDeath)
@@ -115,16 +123,20 @@ namespace DoomSurvivors.Entities
             this.weaponController.AddWeapon(weapon);
         }
 
-        protected void Die()
+        protected virtual void Die()
         {
             this.CollisionType = CollisionType.Disabled;
         }
 
-        public void ApplyDamage(int damage)
+        public virtual void ApplyDamage(int damage)
         {
             this.life -= damage;
             if (this.life <= 0)
                 Die();
+        }
+
+        public void ConsumeAmmo(AmmoType ammoType, int ammoPerShot) {
+            this.weaponController.ConsumeAmmo(ammoType, ammoPerShot);
         }
     }
 }
